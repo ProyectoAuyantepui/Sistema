@@ -2,9 +2,9 @@
     
       <!-- plantilla de la mañana -->
             <div class="card-panel col s12 m12 turno1 oculto" style="padding: 0px;">
-                    <table id="tablaTurno1"  class="highlight  centered" width="100%">
+                    <table id="tablaTurno1"  class="highlight  centered tabla_con_borde" width="100%">
 
-                              <tr class="teal white-text">
+                              <tr class="primario white-text">
                                 <td class="center-align" width="14%"  >HORA</td>
                                 <td class="center-align" width="12%">LUNES</td>
                                 <td class="center-align" width="12%">MARTES</td>
@@ -15,105 +15,145 @@
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">07:20 / 08:05 am</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-01" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-01" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 
                                     
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-19" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-19" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-37" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-37" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora"  ocupado="desocupado" width="12%" codTie="T-55" >
+                                <td class="center-align bloque-de-hora"" width="12%" codTie="T-55" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-73" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-73" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">08:05 / 08:50 am</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-02" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-02" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-20" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-20" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-38" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-38" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-56" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-56" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-74" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-74" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                 </td>
                                
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">08:55 / 09:40 am</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-03" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-03" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-21" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-21" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-39"  >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-39"  >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-57"  >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-57"  >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                   
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-75"  >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-75"  >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">09:40 / 10:25 am</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-04" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-04" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-22" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-22" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-40" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-40" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-58" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-58" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-76" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-76" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                 </td>
@@ -121,53 +161,73 @@
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">10:30 / 11:15 am</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-05" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-05" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-23" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-23" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                   
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-41" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-41" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-59" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-59" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-77" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-77" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td class="center-align grey lighten-2 "  width="14%">11:15 am / 12:00 m</td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-06" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-06" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                    
                                     
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-24" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-24" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                     
                                  
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-42" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-42" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                     
                                   
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-60" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-60" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                     
                                   
                                 </td>
-                                <td class="center-align bloque-de-hora" ocupado="desocupado" width="12%" codTie="T-78" >
+                                <td class="center-align bloque-de-hora" width="12%" codTie="T-78" >
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                    
                                  
                                 </td>
@@ -178,8 +238,8 @@
       <!-- plantilla de la tarde -->
             <div class="card-panel col s12 m12 turno2 oculto" style="padding: 0px;">
                     
-                            <table class="highlight bordered" id="tablaTurno2" width="100%">
-                              <tr class="teal white-text">
+                            <table class="highlight bordered tabla_con_borde" id="tablaTurno2" width="100%">
+                              <tr class="primario white-text">
                                 <td width="12%">HORA</td>
                                 <td width="12%">LUNES</td>
                                 <td width="12%">MARTES</td>
@@ -189,115 +249,175 @@
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">01:20 / 02:05 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-07" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-07" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-25" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-25" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-43" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-43" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora " ocupado="desocupado" codTie="T-61" >
+                                <td width="12%"  class="bloque-de-hora " codTie="T-61" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-79" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-79" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">02:05 / 02:50 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-08" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-08" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-26" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-26" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-44" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-44" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-62" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-62" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-80" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-80" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">02:55 / 03:40 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-09" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-09" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-27" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-27" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-45" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-45" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-63" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-63" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-81" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-81" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">03:40 / 04:25 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-10" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-10" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-28" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-28" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-46" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-46" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-64" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-64" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-82" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-82" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">04:30 / 05:15 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-11" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-11" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-29" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-29" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-47" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-47" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-65" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-65" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-83" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-83" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">05:15 / 06:00 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-12" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-12" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-30" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-30" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-48" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-48" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-66" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-66" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-84" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-84" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                                 
                               </tr>
@@ -305,162 +425,225 @@
                         
             </div>
       <!-- plantilla de la noche -->
-            <div class="card-panel col s12 m12 turno3 oculto" style="padding: 0px;">
+            <div class="card-panel col s12 m12 turno3 oculto " style="padding: 0px;">
                     
-                            <table class="highlight bordered" id="tablaTurno3" width="100%">
-                              <tr class="teal white-text">
+                            <table class="highlight bordered tabla_con_borde" id="tablaTurno3" width="100%">
+                              <tr class="primario white-text">
                                 <td width="12%">HORA</td>
                                 <td width="12%">LUNES</td>
                                 <td width="12%">MARTES</td>
                                 <td width="12%">MIERCOLES</td>
                                 <td width="12%">JUEVES</td>
                                 <td width="12%">VIERNES</td>
+                                <td width="12%">HORAS</td>
                                 <td width="12%">SABADO</td>
-                                <td width="12%">DOMINGO</td>
+
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">06:00 / 06:45 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-13" >
-                                <p>dfgdfgd</p>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-13" >
+                                <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                     
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-31" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-31" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-49" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-49" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-67" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-67" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-85" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-85" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-104" >
+                                <td class="center-align grey lighten-2 "  width="14%">07:20 / 08:05 am</td>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-104" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-122" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">06:45 / 07:30 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-14" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-14" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-32" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-32" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-50" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-50" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-68" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-68" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-86" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-86" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-105" >
+                                <td class="center-align grey lighten-2 "  width="14%">08:05 / 08:50 am</td>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-105" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-123" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">07:35 / 08:20 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-15" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-15" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-33" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-33" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-51" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-51" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-69" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-69" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-87" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-87" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-106" >
+                                <td class="center-align grey lighten-2 "  width="14%">08:55 / 09:40 am</td>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-106" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-124" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">08:20 / 09:05 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-16" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-16" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-34" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-34" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-52" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-52" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-70" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-70" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-88" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-88" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-107" >
+
+                                <td class="center-align grey lighten-2 "  width="14%">09:40 / 10:25 am</td>
+
+                                <td width="12%"  class="bloque-de-hora" codTie="T-107" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-125" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">09:10 / 09:55 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-17" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-17" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-35" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-35" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-53" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-53" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-71" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-71" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-89" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-89" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-108" >
+
+                                <td class="center-align grey lighten-2 "  width="14%">10:30 / 11:15 am</td>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-108" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-126" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                               <tr>
                                 <td width="12%" class="grey lighten-2">09:55 / 10:40 pm</td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-18" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-18" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-36" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-36" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-54" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-54" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-72" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-72" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-90" >
+                                <td width="12%"  class="bloque-de-hora" codTie="T-90" >
                                     
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-109" >
+                                <td class="center-align grey lighten-2 "  width="14%">11:15 am / 12:00 m</td>
+                                <td width="12%"  class="bloque-de-hora" codTie="T-109" >
                                     
-                                </td>
-                                <td width="12%"  class="bloque-de-hora" ocupado="desocupado" codTie="T-127" >
-                                    
+                                    <div class="ficha" draggable="true" ocupado="desocupado">
+                                    </div>
                                 </td>
                               </tr>
                             </table>

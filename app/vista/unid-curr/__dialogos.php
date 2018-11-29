@@ -14,21 +14,20 @@
 
           <div class="row">
             
-            <div class="col s12 m4 ">
+            <div class="col s12 m4 input-field ">
               <i class="material-icons prefix">code</i>
-                <label for="crear_alias">Código</label>
-                  <input  id="crear_codUniCur" name="codUniCur" type="text" name="codUniCur" class="validate" maxlength="10" rangelength=[2,10] placeholder="Código" required>
+                  <input  type="text" id="crear_codUniCur" name="codUniCur"  class="validate" maxlength="10" rangelength=[2,10] placeholder="Código" required>
+                <label data-success="Correcto..." for="crear_codUniCur">Código</label>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m4 input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="crear_nombre"  >Nombre</label>
-                  <input type="text" id="crear_nombre" name="nombre" class="validate" maxlength="60" placeholder="Nombre" required />
+                  <input type="text" id="crear_nombre" name="nombre" class="validate" rangelength=[3,60] placeholder="Nombre" required />
+                <label data-success="Correcto..." for="crear_nombre"  >Nombre</label>
             </div>
           
-            <div class="col s12 m4">
-              <label >Trayecto</label>
-              <select id="crear_trayecto" name="trayecto" >
+            <div class="col s12 m4 input-field">
+              <select id="crear_trayecto" name="trayecto" required>
                 <option value="" selected disabled>Seleccione el Trayecto</option>
                 <option value="1" >Trayecto Inicial</option>
                 <option value="2" >Trayecto 1</option>
@@ -36,67 +35,68 @@
                 <option value="4" >Trayecto 3</option>
                 <option value="5" >Trayecto 4</option>
               </select>
+              <label data-success="Correcto..." data-error="Select an option" for="crear_trayecto">Trayecto</label>
             </div>
           </div>
           <div class="row">
-            
-
 
              <div class="col s12 m4 ">
-              <label for="crear_fase">Fase</label>
               <p>
-                <input name="fase" class="with-gap" type="radio" id="crear_fase1" checked="checked" value="1" />
+                <input name="fase" class="with-gap" type="radio" id="crear_fase1" checked="checked" value="1"   />
                 <label for="crear_fase1">Fase 1</label>
+
                 <input name="fase" class="with-gap" type="radio" id="crear_fase2" value="2" />
                 <label for="crear_fase2">Fase 2</label>
+
                 <input name="fase" type="radio" id="crear_anual" value="3" />
                 <label for="crear_anual">Anual</label>
               </p>
+              <label for="crear_fase">Fase</label>
             </div>
-            <div class="col s12 m4">
-              <label>Eje</label>
-              <select class="browser-default" name="codEje" id="crear_eje">
-                <option value="" disabled selected>Seleccione un Eje</option>
+            <div class="col s12 m4 input-field ">
+              <i class="material-icons prefix">call_split</i>
+              <select  name="codEje" id="crear_eje" required>
+                <option value="" selected disabled>Seleccione el Eje</option>
               </select>
             </div>
 
-            <div class="col s12 m4">
-              <label>PNF</label>
-              <select class="browser-default" name="codPnf" id="crear_pnf">
+            <div class="col s12 m4 input-field ">
+              <select  name="codPnf" id="crear_pnf" required>
                 <option value="" disabled selected>Seleccione un PNF</option>
               </select>
+              <label>PNF</label>
             </div>
             
           </div>
           
           <div class="row">
-            <div class="col s12 m4">
+            <div class="col s12 m4 input-field">
               <i class="material-icons prefix">call_split</i>
+                  <input type="number" id="crear_uniCre" name="uniCre" placeholder="Unidades de Crédito" required />
                 <label for="crear_uniCre"  >Unidades de Crédito</label>
-                  <input type="number" id="crear_uniCre" name="uniCre" placeholder="Unidades de Crédito"/>
             </div>
             
-            <div class="col s12 m4 ">
+            <div class="col s12 m4 input-field ">
               <i class="material-icons prefix">code</i>
+                 <input  id="crear_htas" type="number" name="htas" placeholder="H.T.A.S" required>
                 <label for="crear_htas">H.T.A.S</label>
-                 <input  id="crear_htas" name="htas" type="number" name="htas" placeholder="H.T.A.S" >
               </p>
             </div>
 
-            <div class="col s12 m4 ">
+            <div class="col s12 m4 input-field ">
               <i class="material-icons prefix">code</i>
+                  <input  id="crear_htis"  type="number" name="htis" placeholder="H.T.I.S" required>
                 <label for="crear_htis">H.T.I.S</label>
-                  <input  id="crear_htis" name="htis" type="number" name="htis" placeholder="H.T.I.S" >
               </p>
             </div>
 
           </div>
           
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
                   <textarea id="crear_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
+                <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
             </div>
           </div>
 
@@ -126,24 +126,18 @@
           <form class="formEditarUnidadCurricular" >
           
             <div class="row">
-            
-            <div class=" col s12 m4 ">
-              <i class="material-icons prefix">code</i>
-                <label for="editar_codUniCur">Código</label>
-                  <input  id="editar_codUniCur" name="codUniCur" type="text" name="codUniCur" placeholder="Código" required/>
-              
-            </div>
+                  <input id="codUniCur" name="codUniCur" type="hidden"  >
 
-            <div class=" col s12 m4">
+            <div class=" col s12 m6 input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="editar_nombre"  >Nombre</label>
                   <input type="text" id="editar_nombre" name="nombre" class="validate" maxlength="60" placeholder="Nombre" required />
+                <label for="editar_nombre"  >Nombre</label>
               
             </div>
           
-            <div class="col s12 m4">
+            <div class="col s12 m6 input-field">
               <label >Trayecto</label>
-              <select id="editar_trayecto" name="trayecto" class="browser-default">
+              <select id="editar_trayecto" name="trayecto" >
 
                 <option value="1" >Trayecto Inicial</option>
                 <option value="2" >Trayecto 1</option>
@@ -155,61 +149,65 @@
           </div>
                     <div class="row">
 
-             <div class="col s12 m4 ">
-              <label for="editar_fase">Fase</label>
-
+              <div class="col s12 m4 ">
               <p>
-                <input name="fase" class="with-gap" type="radio" id="editar_fase1" checked="checked" value="1" />
+                <input name="fase" class="with-gap" type="radio" id="editar_fase1"  value="1"   />
                 <label for="editar_fase1">Fase 1</label>
+
                 <input name="fase" class="with-gap" type="radio" id="editar_fase2" value="2" />
                 <label for="editar_fase2">Fase 2</label>
+
                 <input name="fase" type="radio" id="editar_anual" value="3" />
                 <label for="editar_anual">Anual</label>
               </p>
+              <label for="editar_fase">Fase</label>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m4 input-field">
+              
+              <select  name="codEje" id="editar_eje">
+              </select>
               <label>Eje</label>
-              <select class="browser-default" name="codEje" id="editar_eje">
-              </select>
             </div>
 
-            <div class="col s12 m4">
-              <label>PNF</label>
-              <select class="browser-default" name="codPnf" id="editar_pnf">
+            <div class="col s12 m4 input-field">
+              
+              <select  name="codPnf" id="editar_pnf">
               </select>
+              <label>PNF</label>
             </div>
             
           </div>
           
           <div class="row">
-            <div class=" col s12 m4">
+            <div class=" col s12 m4 input-field">
               <i class="material-icons prefix">call_split</i>
+                  <input type="number" id="editar_uniCre" name="uniCre" placeholder="Unidades de Crédito" required />
                 <label for="editar_uniCre"  >Unidades de Crédito</label>
-                  <input type="number" id="editar_uniCre" name="uniCre" placeholder="Unidades de Crédito" required="" />
             </div>
 
-            <div class=" col s12 m4 ">
+            <div class=" col s12 m4 input-field ">
               <i class="material-icons prefix">code</i>
+                  <input  id="editar_htas" name="htas" type="number" name="htas" placeholder="H.T.A.S" required>
                 <label for="editar_htas">H.T.A.S</label>
-                  <input  id="editar_htas" name="htas" type="number" name="htas" placeholder="H.T.A.S">
             </div>
 
-            <div class=" col s12 m4 ">
+            <div class=" col s12 m4 input-field ">
               <i class="material-icons prefix">code</i>
+                  <input  id="editar_htis" name="htis" type="number" name="htis" placeholder="H.T.I.S" required>
                 <label for="editar_htis">H.T.I.S</label>
-                  <input  id="editar_htis" name="htis" type="number" name="htis" placeholder="H.T.I.S" >
             </div>
 
           </div>
           
           <div class="row">
-            <div class=" col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
                   <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
+                <label data-success="Correcto..."  for="editar_observaciones" >Observaciones</label>
               
             </div>
+
           </div>
 
           <div class="row"> 

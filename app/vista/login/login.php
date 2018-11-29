@@ -1,42 +1,45 @@
-<?php $titulo = "Login";?>
+<?php $titulo = "LOGIN";?>
 <!DOCTYPE html>
 <html>
-<?php require_once "app/vista/plantilla/__head.php";  ?>
-
-<style type="text/css">
-  body{
-  width: 100%;
-  height:100%;
-     background:url('public/img/fondo.jpg');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-main{
-  margin-top: 50px;
-}
-
-
-</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">>
+    <title>Auyantepui - <?= $titulo ?></title>
+    <style type="text/css">
+      body{
+        width: 100%;
+        height:100%;
+           background:url('public/img/fondo.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      main{
+        margin-top: 50px;
+      }
+    </style>
+</head>
 <body>
 <main>
   <section class="row">
-    <div class="col s12 m4 offset-m4 card ">
-      <div class="card-content " style="padding: 24px 0px 2px 0px;">
+    <div class="col s12 m4 offset-m4 card " style="margin-top: 50px; ">
+      <div class="card-content " style="padding: 35px 0px 2px 0px;">
         <div class="row">
           <div class="col m12 center-align">
             <img src="public/img/logo.png" alt="" class=" responsive-img " width="90px">
-            <p class="">SISTEMA AUYANTEPUI</p> 
+            <p class="titulo-proyecto">SISTEMA AUYANTEPUI</p> 
           </div>
           
           <div class="col m12">
-            <form class="form-login" method="POST">
+            <form class="form-login" novalidate="novalidate">
 
 
               <div class="row" >
                 <div class="input-field col m12 tooltipped" data-position="right"  data-tooltip="Ingrese su usuario para ingresar al sistema ">
                   <i class="material-icons prefix">account_circle</i>
-                  <input  id="usuario" name="usuario" type="text" class="validate" required>
+                  <input  id="usuario" name="usuario" type="text" class="validate" required aria-required="true">
                   <label for="usuario">Usuario</label>
                 </div>
               </div>
@@ -44,7 +47,7 @@ main{
               <div class="row" >
                 <div class="input-field col m12  tooltipped" data-position="right"  data-tooltip="Ingrese su contraseña para el ingreso al sistema">
                   <i class="material-icons prefix">lock_outline</i>
-                  <input id="clave" name="clave" type="password" class="validate" required>
+                  <input id="clave" name="clave" type="password" class="validate" required aria-required="true">
                   <label for="clave">Clave</label>
                 </div>
               </div>
@@ -60,9 +63,31 @@ main{
               <div class="row" style="margin: 0px;">
                 <div class="input-field col m12">
                   <p class="">
-                    <a href="#">¿Olvido su contraseña?</a>
+                    <a href="#" onclick="clickOlvidoPass()">¿Olvido su contraseña?</a>
                   </p>
                 </div>          
+              </div>
+
+            </form>
+
+            <form class="form-correo oculto" novalidate="novalidate" >
+
+
+              <div class="row" >
+                <div class="input-field col s12 ">
+                  <i class="material-icons prefix">email</i>
+                                  
+                  <input id="correo" name="correo" type="email" class="validate tooltipped" data-position="bottom"  data-tooltip="Ingrese su correo con el siguiente formato dominio@servidor.extensión"  required aria-required="true" >
+                  <label data-success="Correcto..."  for="correo" >Correo</label>
+                </div>
+              </div>
+                              
+
+
+              <div class="row">
+                <div class="input-field col m12">
+                  <button type="submit" class="btn btn-large waves-effect waves-light col s12 primario hoverable" >Enviar</button>
+                </div>
               </div>
 
             </form>
@@ -100,8 +125,86 @@ main{
 <script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
 <script src="public/vendor/jvalidate/additional-methods.min.js"></script>
 <script src="public/js/validaciones/config-default.js"></script>
-
 <script src="public/js/validaciones/login.js"></script>
 <script src="public/js/ajax/login.js"></script>
+
+<script type="text/javascript">
+  
+  function clickOlvidoPass(){
+
+    $(".form-login").hide()
+    $(".titulo-proyecto").html("REESTABLECER CONTRASEÑA")
+    
+    $(".form-correo").removeClass("oculto")
+  }
+
+  $(".form-correo").validate({
+
+    messages: {
+    
+      correo:{
+        required: "Por favor especifique su correo electronico",
+        email: "La sintaxis correcta deberia ser: nombre@dominio.com"
+      }
+    }        
+  })
+
+  $(".form-correo").on("submit",function(){
+    event.preventDefault()
+    if ( !$(this).valid() ) { return false; }
+
+    $.ajax({ 
+      dataType : 'json',
+      type:'POST',
+      url:'index.php?controlador=login&actividad=validar-correo',
+      data:{
+        "correo" : $(".form-correo input[name=correo]").val( )
+      } 
+    })                      
+    .done(function(respuesta){
+
+
+      if ( respuesta.operacion == true ) {
+
+        $.ajax({ 
+          dataType : 'json',
+          type:'POST',
+          url:'index.php?controlador=login&actividad=reestablecer-clave',
+          data:{
+            "correo" : respuesta.data.correo,
+            "cedDoc" : respuesta.data.cedDoc
+          } 
+        })                      
+        .done(function(respuesta_recuperacion){
+
+          if( respuesta_recuperacion.operacion == false ){
+            Materialize.toast( 'Error: No esta conectado a una red de internet </br> se cancelo la operacion', 1700)
+          }else if( respuesta_recuperacion.operacion == true ){
+
+            Materialize.toast( 
+                  'Listo, le hemos enviado un correo de recuperacion </br> a la direccion de correo : </br>' + respuesta_recuperacion.destinatario + '', 
+                  1700 , 
+                  '',
+                  function(){
+                    $(".form-correo input[name=correo]").val("")
+                    window.location.href = "index.php?controlador=login&actividad=index"
+                  }
+            )
+
+            localStorage.setItem( "cedDoc" , respuesta.data.cedDoc )
+          }
+
+
+        })
+      }else if(respuesta.operacion == false){
+
+        Materialize.toast( 'Error: El correo no existe...', 1700)
+        $("body").find("input[name='correo']").addClass("invalid").next("label").attr("data-error","Error: El correo no existe...")
+      }
+    })
+  })
+
+ 
+</script>
 </body>
 </html>

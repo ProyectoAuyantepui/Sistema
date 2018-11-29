@@ -11,35 +11,32 @@ require_once "app/modelo/CAmbiente.php";
 		break;
 
 		case 'crear': 
-		try {
-			$OAmbiente = new CAmbiente();
-
- 			$OAmbiente->setCodAmb( $_POST['codAmb'] );
- 			$OAmbiente->setUbicacion( $_POST['ubicacion'] );
- 			$OAmbiente->setTipo( $_POST['tipo'] );
- 			$OAmbiente->setObservaciones( $_POST['observaciones'] );
-
- 			if ( isset( $_POST['estado'] ) ) {
-
- 				$OAmbiente->setEstado( true );
- 			}else{
-
- 				$OAmbiente->setEstado( 'F' );
- 			}
 			
-			
+				$OAmbiente = new CAmbiente();
 
- 			$resultado = $OAmbiente->crearAmbiente(); 
+	 			$OAmbiente->setCodAmb( strtoupper($_POST['codAmb']) );
+	 			$validar = $OAmbiente->validarAmbiente();
 
- 				echo json_encode( ['operacion' => true] );
-		} catch (Exception $e) {
-			 	echo json_encode( ['operacion' => false] );
-		}
-			
+	 			if ( $validar["cantidad"] > 0 ) {
+	 				echo json_encode( [ "operacion" => false , "error" => "1" ] );
+	 				exit();
+	 			}
 
+	 			$OAmbiente->setUbicacion( $_POST['ubicacion'] );
+	 			$OAmbiente->setTipo( $_POST['tipo'] );
+	 			$OAmbiente->setObservaciones( $_POST['observaciones'] );
 
- 			
-			
+	 			if ( isset( $_POST['estado'] ) ) {
+
+	 				$OAmbiente->setEstado( true );
+	 			}else{
+
+	 				$OAmbiente->setEstado( 'F' );
+	 			}
+				
+	 			$resultado = $OAmbiente->crearAmbiente(); 
+	 			
+	 			echo json_encode( ['operacion' => true] );
 		break;
 
 		case 'modificar': 
@@ -123,7 +120,7 @@ require_once "app/modelo/CAmbiente.php";
 
  			$ambientes = $OAmbiente->listarAmbientes();
 
- 			echo json_encode( ['data' => $ambientes] );
+ 			echo json_encode( $ambientes );
 		break;
 
 		case 'cambiar-estado': 
@@ -167,23 +164,6 @@ require_once "app/modelo/CAmbiente.php";
 			}
 			
 		  		
-		break;
-
-		case 'reporte-general': 
-			$dompdf = new Dompdf();
-			// para imprimir una pagina html
-
-			$dompdf->loadHtml( file_get_contents( 'app/vista/ambientes/reportes/general.php' ) );
-			// $dompdf->loadHtml( 'hello world' );
-
-			// (Optional) Setup the paper size and orientation
-			$dompdf->setPaper('carta', 'landscape');
-
-			// Render the HTML as PDF
-			$dompdf->render();
-
-			// Output the generated PDF to Browser
-			$dompdf->stream("prueba",[ 'Attachment' => 1 ]);
 		break;
 	}
 

@@ -2,7 +2,6 @@
 
 require_once "app/modelo/CDocente.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -10,31 +9,44 @@ require_once "app/modelo/CDocente.php";
 			require_once "app/vista/docentes/index.php";
 		break;
 
+		case 'vista-crear': 
+			
+			require_once "app/vista/docentes/crear.php";
+		break;
+
+		case 'vista-editar': 
+			
+			require_once "app/vista/docentes/editar.php";
+		break;
+
 		case 'crear': 
+			
+			$cedula = strtoupper($_POST['nacionalidad'] . "-" .  $_POST['cedDoc']);
 			$ODocente = new CDocente();
-			$ODocente->setCedDoc( $_POST['cedDoc'] );
-			$ODocente->setCodCatDoc( $_POST['codCatDoc'] );
-			$ODocente->setCodRol( $_POST['rol'] );
-			$ODocente->setNombre( $_POST['nombre'] );
-			$ODocente->setApellido( $_POST['apellido'] );
-			$ODocente->setFecNac( $_POST['fecNac'] );
-			$ODocente->setSexo( $_POST['sexo'] );
-			$ODocente->setTelefono( $_POST['telefono'] );
-			$ODocente->setCorreo( $_POST['correo'] );
-			$ODocente->setDireccion( $_POST['direccion'] );
-			$ODocente->setFecIng( $_POST['fecIng'] );
-			$ODocente->setFecCon( $_POST['fecCon'] );
-			$ODocente->setDedicacion( $_POST['dedicacion'] );
-			$ODocente->setCondicion( $_POST['condicion'] );
-			$ODocente->setUsuario( $_POST['usuario'] );
-			$ODocente->setClave( $_POST['clave'] );
-			$ODocente->setEstado( TRUE );
-			$ODocente->setAvatar( $_POST['avatar']  );
-			$ODocente->setObservaciones( $_POST['observaciones'] );
+			$ODocente->setCedDoc( $cedula ); 
+			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
+			$ODocente->setCodRol( $_POST["codRol"] ); 
+			$ODocente->setNombre( $_POST['nombre'] ); 
+			$ODocente->setApellido( $_POST['apellido'] ); 
+			$ODocente->setFecNac( $_POST['fecNac'] ); 
+			$ODocente->setSexo( $_POST['sexo'] ); 
+			$ODocente->setTelefono( $_POST['telefono'] ); 
+			$ODocente->setCorreo( $_POST['correo'] ); 
+			$ODocente->setDireccion( $_POST['direccion'] ); 
+			$ODocente->setFecIng( $_POST['fecIng'] ); 
+			$ODocente->setFecCon( $_POST['fecCon']); 
+			$ODocente->setCodDed( $_POST['codDed'] ); 
+			$ODocente->setCondicion( $_POST['condicion'] ); 
+			$ODocente->setUsuario( $_POST['usuario'] ); 
+			$ODocente->setClave( $_POST['cedDoc'] );
+			$ODocente->setAvatar( $_POST['avatar'] ); 
+			$ODocente->setEstado( 'FALSE' );
+			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 			$resultado = $ODocente->crearDocente(); 
+
+
 			
 			if ($resultado) {
-
 				echo json_encode( ['operacion' => true] );
 			}else{
 
@@ -44,23 +56,26 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'modificar': 
+			
 			$ODocente = new CDocente();
-			$ODocente->setCedDoc( $_POST['cedDoc'] );
-			$ODocente->setCodCatDoc( $_POST['codCatDoc'] );
-			$ODocente->setCodRol( $_POST['rol'] );
-			$ODocente->setNombre( $_POST['nombre'] );
-			$ODocente->setApellido( $_POST['apellido'] );
-			$ODocente->setFecNac( $_POST['fecNac'] );
-			$ODocente->setSexo( $_POST['sexo'] );
-			$ODocente->setTelefono( $_POST['telefono'] );
-			$ODocente->setCorreo( $_POST['correo'] );
-			$ODocente->setDireccion( $_POST['direccion'] );
-			$ODocente->setFecIng( $_POST['fecIng'] );
-			$ODocente->setFecCon( $_POST['fecCon'] );
-			$ODocente->setDedicacion( $_POST['dedicacion'] );
-			$ODocente->setCondicion( $_POST['condicion'] );
-			$ODocente->setUsuario( $_POST['usuario'] );
-			$ODocente->setObservaciones( $_POST['observaciones'] );
+			$ODocente->setCedDoc( $_POST['cedDoc'] ); 
+			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
+			$ODocente->setCodRol( $_POST["codRol"] ); 
+			$ODocente->setNombre( $_POST['nombre'] ); 
+			$ODocente->setApellido( $_POST['apellido'] ); 
+			$ODocente->setFecNac( $_POST['fecNac'] ); 
+			$ODocente->setSexo( $_POST['sexo'] ); 
+			$ODocente->setTelefono( $_POST['telefono'] ); 
+			$ODocente->setCorreo( $_POST['correo'] ); 
+			$ODocente->setDireccion( $_POST['direccion'] ); 
+			$ODocente->setFecIng( $_POST['fecIng'] ); 
+			$ODocente->setFecCon( $_POST['fecCon']); 
+			$ODocente->setCodDed( $_POST['codDed'] ); 
+			$ODocente->setCondicion( $_POST['condicion'] ); 
+			$ODocente->setUsuario( $_POST['usuario'] ); 
+			$ODocente->setAvatar( $_POST['avatar'] ); 
+			$ODocente->setEstado( 'FALSE' );
+			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 			$resultado = $ODocente->modificarDocente(); 
 			
 			if ($resultado) {
@@ -74,6 +89,7 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'eliminar': 
+			
 			$docentes = new CDocente();
 			$docentes->setCedDoc( $_POST['cedDoc'] );
 			$resultado = $docentes->eliminarDocente(); 
@@ -106,59 +122,45 @@ require_once "app/modelo/CDocente.php";
 
 		break;
 
-		case 'perfil': 
-			if ( !$_SESSION ) { 
-				header("location: index.php?controlador=login&actividad=index"); 
-			}
-			require_once "app/vista/perfil/index.php";
-		break;
-
 		case 'listar':
 
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			
 
 			$ODocente = new CDocente();
 
 	 		$docentes = $ODocente->listarDocentes(); 
 				
-	 		echo json_encode(['data' => $docentes]);
-		break;
-
-		case 'buscar': 
-	
+	 		echo json_encode( $docentes );
 		break;
 
 		case 'dependencias':
 
 
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			
 
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
-	 		$docentes = $ODocente->dependencias(); 
+	 		$dependencias = $ODocente->dependencias(); 
 				
-	 		echo json_encode(['data' => $docentes]);
+	 		echo json_encode( ["data" => $dependencias] );
 		break;
 
 		case 'comisiones':
 
-
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			
 
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
-	 		$docentes = $ODocente->comisiones(); 
+	 		$comisiones = $ODocente->comisiones(); 
 				
-	 		echo json_encode(['data' => $docentes]);
+	 		echo json_encode( ["data" => $comisiones] );
 		break;
 
 		case 'cambiarRol':
 
-
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
-
+			
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
@@ -168,7 +170,7 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'cambiar-estado': 
-		
+			
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST['cedDoc'] );
@@ -193,10 +195,7 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'asignar-dependencia':
-
-
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
-
+			
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
@@ -204,22 +203,48 @@ require_once "app/modelo/CDocente.php";
 	 		$respuesta = $ODocente->asignarDependencia(); 
 				
 	 		echo json_encode(['data' => $respuesta]);
-	 		var_dump($respuesta);
 		break;
 
-		case 'desvincular-doc-dep':
+		case 'asignar-comision':
+			
+			$ODocente = new CDocente();
 
+			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
+			$ODocente->setCodCom( $_POST["codCom"] ); 
+	 		$respuesta = $ODocente->asignarComision(); 
+				
+	 		echo json_encode(['data' => $respuesta]);
+		break;
 
-			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+		case 'eliminar-dependencia-docente':
 
 			$ODocente = new CDocente();
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
 			$ODocente->setCodDep( $_POST["codDep"] ); 
-	 		$respuesta = $ODocente->desvincularDocDep(); 
+	 		$respuesta = $ODocente->eliminarDependenciaDocente(); 
 				
 	 		echo json_encode(['data' => $respuesta]);
-	 		var_dump($respuesta);
+		break;
+
+		case 'consultar-dependencias-disponibles':
+			
+			$ODocente = new CDocente();
+
+			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
+			$dependencias = $ODocente->consultarDependenciasDisponibles();
+				
+	 		echo json_encode(['data' => $dependencias]);
+		break;
+
+		case 'consultar-comisiones-disponibles':
+			
+			$ODocente = new CDocente();
+
+			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
+			$comisiones = $ODocente->consultarComisionesDisponibles();
+				
+	 		echo json_encode(['data' => $comisiones]);
 		break;
 	}
 

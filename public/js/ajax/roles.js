@@ -31,8 +31,8 @@ function listar(){
       if (respuesta.data.length > 0) {
 
         $(".mensaje").hide()
-        $("table").show()
-        $("table tbody").html('')
+        $("#tabla_roles").show()
+        $("#tabla_roles tbody").html('')
 
         var tabla_roles = $("#tabla_roles")
         var tbody = $("#tabla_roles tbody")
@@ -41,71 +41,51 @@ function listar(){
         $.each(respuesta.data, function(i, item) {
                   
           content = `<tr data-id="${item.codRol }">
-                                          <td width="15%" >${ item.nombre }</td>
-                                          <td width="75%" >${ item.observaciones }</td>
-                                          <td width="5%" >
+                                          <td  >${ item.nombre }</td>
+                                          <td  >${ item.observaciones }</td>
+                                          <td  >
                                               <a href="#" class="mostrarOperaciones">
                                                   <i class="material-icons black-text">more_vert</i>
                                               </a>
                                           </td>   
                                       </tr>`
 
-          $("table tbody").append(content)
+          $("#tabla_roles tbody").append(content)
 
               })
 
 
 
- $("table").paginationTdA({ elemPerPage: 4 })
+ $("#tabla_roles").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_roles").hide()
             $(".mensaje").show()
             
         }
     })
 }
 
-function editar( codRol ){ 
 
-    $.ajax({ dataType : 'json' , 
-             type:'POST' , 
-             url:'index.php?controlador=roles&actividad=modificar' ,
-            data:{ "codRol" : codRol} 
-    }) 
-    .done(function(respuesta){
 
-     $("#modal_operaciones").modal("close")
-
-                $(".formEditarRol #editar_codRol").val( respuesta.data.codRol)
-                $(".formEditarRol #editar_nombre").val( respuesta.data.nombre )
-                $(".formEditarRol #editar_observaciones").val( respuesta.data.observaciones )
-
-        if ( respuesta.data.estado == true ) {  
-            $(".formEditarRoles input[name=estado]").val( "1" ).click()
-        }
-
-                $("#editarRol").modal("open") 
-    }) 
-}
-
-function crear(formulario){
+function crear(data){
 
     $.ajax({ 
 
         dataType : 'json' ,
         type:'POST' ,
         url:'index.php?controlador=roles&actividad=crear',
-        data:formulario.serialize() 
+        data:data 
     }) 
-.done(function(respuesta){
+    .done(function(respuesta){
 
         if (respuesta.operacion == true) {
 
-            Materialize.toast('Listo...',997)
-            limpiarCasillas()
-            $("#crearRol").modal("close")
-            listar()
-                                   
+            Materialize.toast('Listo...',997,'',function(){
+                limpiarCasillas()
+                location.href = '?controlador=roles&actividad=index'
+            })
+            
+              
         }else{
 
             Materialize.toast('Error...',997)
@@ -124,20 +104,29 @@ function eliminar( codRol ){
 
     .done(function(respuesta){
 
-        if (respuesta.operacion == true) {
+        if (respuesta.operacion == false && respuesta.error == "1") {
 
-            $('#eliminarRol').modal('close')
-            Materialize.toast('Listo...',997)
-                    
-            listar()                   
-                                    
-        }else{
+            Materialize.toast(
 
-            Materialize.toast('Error...',997)
-                    
-            listar()
-        }
-    }) 
+               'No se puede eliminar el Rol porque posee permisos asignados', 4000, 'rounded'
+            );
+
+            $("#eliminarRol").modal("close")
+            listar()       
+            
+        }   
+        else if ( respuesta.operacion == true ){
+          Materialize.toast(
+
+                'Rol eliminado con éxito!',
+                
+                3000
+            );
+
+            $("#eliminarRol").modal("close")
+            listar()  
+        }   
+    })    
 }
 
 function modificar( formulario ){
@@ -150,14 +139,12 @@ function modificar( formulario ){
     })
     
     .done(function(respuesta){
-
         if (respuesta.operacion == true) {
 
 
             Materialize.toast('Listo...',997)
 
             $('#editarRol').modal('close')
-            limpiarCasillas()
             listar()
                                     
         }else{
@@ -167,12 +154,13 @@ function modificar( formulario ){
     })
 }
 
+
 /*
 
 DESCRIPCION : 
 
 */
-$(".crear-rol").on("click",function(){ $('#crearRol').modal("open")  })
+
 
 /*
 
@@ -188,7 +176,7 @@ $(".boton-refrescar").on("click",function(){ listar() })
 DESCRIPCION : 
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_roles").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -200,8 +188,19 @@ $("table").on("click","a.mostrarOperaciones",function(){
 $("body").on( "click", ".editar-roles", function(){ 
 
     var codRol = $("#modal_operaciones input[name=item_seleccionado]").val( )
+
+    $.ajax({ dataType : 'json' , 
+             type:'POST' , 
+             url:'index.php?controlador=roles&actividad=consultar' ,
+            data:{ "codRol" : codRol} 
+    }) 
+    .done(function(respuesta){
+
+        localStorage.setItem( "rol_seleccionado" , JSON.stringify( respuesta.data ) ) 
+
+        location.href = '?controlador=roles&actividad=vista-editar'
+    })
     
-    editar( codRol ) 
 })
 
 $("body").on("click", ".eliminar-rol", function(){
@@ -217,7 +216,22 @@ $('.formCrearRol').on("submit",function(evento){
 
     if( !$(this).valid() ) return false;
 
-    crear( $(this) )
+    
+
+    var permisos = new Array()
+
+    $("input[name=permiso]:checked").each(function(i,item){
+        permisos.push($(this).parents("tr").attr("codPer"))
+    })
+
+    var data = {
+
+        "nombre" : $("input[name=nombre]").val(),
+        "observaciones" : $("textarea[name=observaciones]").val(),
+        "permisos" : permisos
+    }
+    
+    crear( data )
 })
 
 $('.formEliminarRol').on("submit",function(evento){  
@@ -232,6 +246,6 @@ $('.formEditarRol').on("submit",function(evento){
     evento.preventDefault() 
         
     if( !$(this).valid() ) return false;       
-        
+       
     modificar( $(this) )
 })

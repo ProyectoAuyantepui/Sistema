@@ -3,8 +3,6 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CRol.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
-
 	switch($actividad){
 
 		case 'index': 
@@ -12,8 +10,21 @@ require_once "app/modelo/CRol.php";
 			require_once "app/vista/roles/index.php";
 		break;
 
-		case 'crear': 
+		case 'vista-crear': 
 		
+			require_once "app/vista/roles/crear.php";
+			
+		break;
+
+
+		case 'vista-editar': 
+		
+			require_once "app/vista/roles/editar.php";
+			
+		break;
+
+		case 'crear': 
+
 			$codigo = "R-".rand();
 
 			$ORol = new CRol();
@@ -26,12 +37,13 @@ require_once "app/modelo/CRol.php";
 				
 			if ($resultadoRol) {
 				
-				$resPermisologia = $ORol->asignarPermisologiaBasica(); 
-
-				if ( $resPermisologia ) {
-
-					echo json_encode( ['operacion' => true] );
+				for ($i=0; $i < count( $_POST["permisos"] ); $i++) { 
+					$ORol->setCodPer( $_POST["permisos"][$i] );
+					$ORol->asignarPermisos();
 				}
+
+				echo json_encode( ['operacion' => true] );
+				
 
 			}else{
 
@@ -52,10 +64,30 @@ require_once "app/modelo/CRol.php";
 			$resultado = $ORol->modificarRol(); 
 			
 			if ($resultado) {
-				
-				echo json_encode( ['operation' => true] );
+				echo json_encode( ['operacion' => true] );
 			}else{
-				echo json_encode( ['operation' => false] );
+				echo json_encode( ['operacion' => false] );
+			}
+			
+		break;
+
+		case 'modificar-permisos': 
+			
+			$ORol = new CRol();
+
+			$ORol->setCodRol( $_POST['codRol'] );
+			$ORol->setCodPer( $_POST['codPer'] );
+
+			if ( $_POST["operacion"] == "I" ) {
+				$resultado = $ORol->asignarPermisos( );
+			}elseif( $_POST["operacion"] == "D" ){
+				$resultado = $ORol->eliminarPermisos( );
+			}
+			
+			if ($resultado) {
+				echo json_encode( ['operacion' => true] );
+			}else{
+				echo json_encode( ['operacion' => false] );
 			}
 			
 		break;
@@ -67,12 +99,12 @@ require_once "app/modelo/CRol.php";
 			$ORol->setCodRol( $_POST['codRol'] );
 
 			$resultado = $ORol->eliminarRol(); 
-			
-			if ($resultado) {
-				echo json_encode( ['operation' => true] );
-			}else{
-				echo json_encode( ['operation' => false] );
+			if ( $resultado["operacion"] == false ) {
+				
+				echo json_encode([ "operacion" => false , "error" => $resultado["codigo_error"] ]);
+				exit;
 			}
+				echo json_encode( ['operacion' => true] );
 			
 		break;
 
@@ -93,6 +125,27 @@ require_once "app/modelo/CRol.php";
 
 			$roles = $ORol->listarRoles(); 
 				
-			echo json_encode(['data' => $roles]);
+			echo json_encode( $roles );
+		break;
+
+
+		case 'consultar-permisos': 
+		
+			$ORol = new CRol();
+			
+			$ORol->setCodRol( $_POST['codRol'] );
+
+			$permisos = $ORol->consultarPermisos();
+
+			echo json_encode( $permisos );
+		break;
+
+		case 'consultar-permisos-por-sesion': 
+		
+			$ORol = new CRol();
+			$ORol->setCodRol( $_SESSION['codRol'] );
+			$permisos = $ORol->consultarPermisos();
+			
+			echo json_encode( $permisos );
 		break;
 	}

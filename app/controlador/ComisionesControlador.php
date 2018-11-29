@@ -3,7 +3,10 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CComision.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
+require_once "app/modelo/CDocente.php";
+
+require_once "app/modelo/CDependencia.php";
+
 	switch($actividad){
 
 		case 'index': 
@@ -11,18 +14,43 @@ require_once "app/modelo/CComision.php";
 			require_once "app/vista/comisiones/index.php";
 		break;
 
+		case 'vista-crear': 
+			$ODocente = new CDocente();
+			$ODependencias = new CDependencia();
+
+			$listado_de_docentes = $ODocente->listarDocentes();
+			$listado_dependencias= $ODependencias->listarDependencias();
+			require_once "app/vista/comisiones/crear.php";
+		break;
+
+		case 'vista-editar': 
+
+			$OComision = new CComision();
+			$ODependencias = new CDependencia();
+			$OComision->setCodCom( $_GET['codCom'] );
+			$comision = $OComision->consultarComision(); 
+			$docentes_comision = $OComision->docentes();
+
+			$listado_dependencias= $ODependencias->listarDependencias();
+			$coordinador_comision = $OComision->coordinador();
+
+			require_once "app/vista/comisiones/editar.php";
+		break;
+
 		case 'crear': 
 		
 			$OComision = new CComision();
 
 			$OComision->setNombre( $_POST['nombre'] );
-			$OComision->setDependencia( $_POST['dependencia'] );
+			$OComision->setDependencia( $_POST['docente_dependencia'] );
 			$OComision->setDescripcion( $_POST['descripcion'] );
 			$resultado = $OComision->crearComision(); 
-			
-			if ($resultado) {
 
-				echo json_encode( ['operacion' => true] );
+			if ($resultado["result"]) {
+				$OComision->setCodCom( $resultado["last_id"] );
+				$OComision->setCedDoc( $_POST["docente_coordinador"] );
+				$resultado = $OComision->asignarCoordinador( );
+				echo json_encode( ['operacion' => $resultado] );
 			}else{
 
 
@@ -33,11 +61,11 @@ require_once "app/modelo/CComision.php";
 
 
 		case 'modificar': 
-		
+
 			$OComision = new CComision();
 			$OComision->setCodCom( $_POST['codCom'] );
 			$OComision->setNombre( $_POST['nombre'] );
-			$OComision->setDependencia( $_POST['dependencia'] );
+			$OComision->setDependencia( $_POST['editar_dependencia'] );
 			$OComision->setDescripcion( $_POST['descripcion'] );
 			$resultado = $OComision->modificarComision(); 
 			
@@ -117,24 +145,29 @@ require_once "app/modelo/CComision.php";
 			
 			$OComision = new CComision();
 			$OComision->setCodCom( $_POST['codCom'] );
-			$resultado = $OComision->desvincularDocente( $_POST['cedDoc'] ); 
+			$OComision->setCedDoc( $_POST['cedDoc'] );
 
-			if ($resultado) {
+			$resultado = $OComision->desvincularDocente( );
 
-				echo json_encode( ['operacion' => true] );
-			}else{
+				if ($resultado) {
+
+					echo json_encode( ['operacion' => true] );
+				}else{
 
 
-				echo json_encode(['operacion' => false]);
-			}
+					echo json_encode(['operacion' => false]);
+				}
+
+			
 
 		break;
 
-		case 'asignar-coordinador': 
+		case 'cambiar-coordinador': 
 			
 			$OComision = new CComision();
 			$OComision->setCodCom( $_POST['codCom'] );
-			$resultado = $OComision->asignarCoordinador( $_POST['cedDoc'] ); 
+			$OComision->setCedDoc( $_POST['cedDoc'] );
+			$resultado = $OComision->cambiarCoordinador(  ); 
 
 			if ($resultado) {
 
@@ -150,29 +183,33 @@ require_once "app/modelo/CComision.php";
 		case 'listar': 
 		
 			$OComision = new CComision();
-			$comision = $OComision->listarComisiones();
+			$comisiones = $OComision->listarComisiones();
 
-			echo json_encode([ 'data' => $comision ]);
+			echo json_encode( $comisiones );
 		break;
 
-		case 'add-doc-com': 
+		case 'docentes-disponibles': 
 		
 			$OComision = new CComision();
 			$OComision->setCodCom($_POST['codCom']);
-			$docentes = $OComision->addDocCom($_POST['cedDoc']);
+			$docentes = $OComision->docentesDisponiblesComision();
 
 			echo json_encode([ 'data' => $docentes ]);
 		break;
 
 
-		case 'listar-docentes-por-comision': 
+		case 'docentes-comision': 
 		
 			$OComision = new CComision();
 			$OComision->setCodCom($_POST['codCom']);
-			$docentes = $OComision->docentes();
+	
+			$docentes_comision = $OComision->docentes();
 
-			echo json_encode([ 'data' => $docentes ]);
+			$coordinador_comision = $OComision->coordinador();
+
+			echo json_encode( [ "docentes" => $docentes_comision , "coordinador" => $coordinador_comision] );
 		break;
+
 
 		}
 

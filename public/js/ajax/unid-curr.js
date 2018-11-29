@@ -7,17 +7,17 @@ $(function(){
 
 function cargarComboPnf(opcion){
     
-    var elemento = false
+    var combo = false
     
     if ( opcion == 'crear' ) {
-        elemento = $('.formCrearUnidadCurricular select#crear_pnf')
+        combo = $('.formCrearUnidadCurricular select#crear_pnf')
     }
 
     if ( opcion == 'editar' ) {
-        elemento = $('.formEditarUnidadCurricular select#editar_pnf')
+        combo = $('.formEditarUnidadCurricular select#editar_pnf')
     }
 
-    elemento.html("")
+    combo.html("")
     
     $.ajax({
 
@@ -27,7 +27,6 @@ function cargarComboPnf(opcion){
     })
 
     .done(function(respuesta){
-
         var contenidoHTML = $("")        
         $.each( respuesta.data, function(i,item){
 
@@ -35,8 +34,9 @@ function cargarComboPnf(opcion){
                                     ${item.codPnf}
                                 </option>`
         }) 
-
-        elemento.html(contenidoHTML)      
+        
+        combo.html(contenidoHTML)  
+        $('select').material_select()    
     })
     
 }
@@ -62,6 +62,7 @@ function cargarComboEjes(opcion){
 
     .done(function(respuesta){
 
+console.log(respuesta)
         var contenidoHTML = $("")        
         $.each( respuesta.data, function(i,item){
 
@@ -72,6 +73,7 @@ function cargarComboEjes(opcion){
             
         })
         combo.html(contenidoHTML)
+        $('select').material_select()
        
     })
 
@@ -96,8 +98,8 @@ function listar(){
         
         if (respuesta.data.length > 0) {
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_unidades_curriculares").show()
+            $("#tabla_unidades_curriculares tbody").html('')
               
             var content = $('')
             var switche 
@@ -118,22 +120,22 @@ function listar(){
 
                 content =  `<tr data-id="${item.codUniCur }">
                                        
-                                        <td width="10%">${ item.codUniCur }</td>
-                                        <td width="10%">${ item.nombre }</td>
-                                        <td width="10%">${ fase }</td>
-                                        <td width="5%" >
+                                        <td >${ item.codUniCur }</td>
+                                        <td >${ item.nombre }</td>
+                                        <td>${ fase }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-               $("table tbody").append(content)
+               $("#tabla_unidades_curriculares tbody").append(content)
               })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_unidades_curriculares").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_unidades_curriculares").hide()
             $(".mensaje").show()
             
         }
@@ -182,13 +184,13 @@ function editar( codUniCur ){
 
         $("#modal_operaciones").modal("close")
                 
-        $(".formEditarUnidadCurricular #editar_codUniCur").val( respuesta.data.codUniCur );
+        $(".formEditarUnidadCurricular #codUniCur").val( respuesta.data.codUniCur )
+
+        $(".formEditarUnidadCurricular #editar_codUniCur").val( respuesta.data.codUniCur )
 
         $(".formEditarUnidadCurricular #editar_nombre").val( respuesta.data.nombre )
 
         $(".formEditarUnidadCurricular #editar_uniCre").val( respuesta.data.uniCre )
-
-        $(".formEditarUnidadCurricular #editar_fase").val( respuesta.data.fase )
 
         $(".formEditarUnidadCurricular #editar_htas").val( respuesta.data.htas )
         
@@ -201,15 +203,12 @@ function editar( codUniCur ){
         $(".formEditarUnidadCurricular #editar_eje").val(respuesta.data.codEje)
 
 
-        if ( respuesta.data.estado == true ) {  
-        
-            $(".formEditarUnidadCurricular input[name=estado]").val( "1" ).click() 
-        }
-
-        if ( respuesta.data.tipo == 1 ) { $(".formEditarUnidadCurricular #editar_tipo1").attr("checked",true) }
-        if ( respuesta.data.tipo == 2 ) { $(".formEditarUnidadCurricular #editar_tipo2").attr("checked",true) }
+        if ( respuesta.data.fase == 1 ) { $(".formEditarUnidadCurricular #editar_fase1").attr("checked",true) }
+        if ( respuesta.data.fase == 2 ) { $(".formEditarUnidadCurricular #editar_fase2").attr("checked",true) }
+        if ( respuesta.data.fase == 3 ) { $(".formEditarUnidadCurricular #editar_anual").attr("checked",true) }
 
         $(".formEditarUnidadCurricular #editar_observaciones").val( respuesta.data.observaciones )
+            $('select').material_select()
     
         $("#editarUnidadCurricular").modal("open") 
     }) 
@@ -218,10 +217,10 @@ function editar( codUniCur ){
 function modificar( formulario ){
 
     $.ajax({    
-                dataType : 'json' , 
-                type:'POST' , 
-                url:'index.php?controlador=unidCurr&actividad=modificar' ,
-                data: formulario.serialize() 
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=unidCurr&actividad=modificar' ,
+        data: formulario.serialize() 
     })
     
     .done(function(respuesta){
@@ -246,7 +245,7 @@ function buscar( filtro ){
 
     var url = 'index.php?controlador=unidCurr&actividad=buscar'
     
-     $("table tbody").html('')
+     $("#tabla_unidades_curriculares tbody").html('')
     var content = $('')
     
     $.ajax({  url : url, type : 'POST', data : { "filtro" : filtro }, dataType : 'json' })
@@ -256,7 +255,7 @@ function buscar( filtro ){
         if (respuesta.operacion == true) {
 
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_unidades_curriculares").show()      
               
             var switche 
             var fase
@@ -276,24 +275,24 @@ function buscar( filtro ){
                 }
 
                 content += `<tr data-id="${item.codUniCur }">
-                                        <td width="20%">${ item.codUniCur }</td>
-                                        <td width="20%">${ item.nombre }</td>
-                                        <td width="20%">${ fase }</td>
-                                        <td width="5%" >
+                                        <td >${ item.codUniCur }</td>
+                                        <td >${ item.nombre }</td>
+                                        <td >${ fase }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").html( content )
+                $("#tabla_unidades_curriculares tbody").html( content )
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_unidades_curriculares").paginationTdA({ elemPerPage: 8 })
         }else{
 
             $(".mensaje").show()
-           $("table").hide() 
+           $("#tabla_unidades_curriculares").hide() 
         }
     })
 }
@@ -301,14 +300,13 @@ function buscar( filtro ){
 function eliminar( codUniCur ){ 
 
     $.ajax({ 
-                dataType : 'json', 
-                type:'POST' ,
-                url:'index.php?controlador=unidCurr&actividad=eliminar' ,
-                data:{ "codUniCur" : codUniCur }
+        dataType : 'json', 
+        type:'POST' ,
+        url:'index.php?controlador=unidCurr&actividad=eliminar' ,
+        data:{ "codUniCur" : codUniCur }
     })
 
     .done(function(respuesta){
-
         if (respuesta.operacion == true) {
 
             $('#eliminarUnidadCurricular').modal('close')
@@ -406,7 +404,7 @@ muestra un dialogo con las opciones basicas
 editar y eliminar
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_unidades_curriculares").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -464,7 +462,7 @@ se captura ese valor, y se envia en una
 consulta asincrona al controlador donde se le cambia el valor al estado de la seccion
 
 */
-$("table").on("change","input[name=switch]",function() {
+$("#tabla_unidades_curriculares").on("change","input[name=switch]",function() {
     var codUniCur = $(this).parents("tr").data("id")
     var estado = false
     if($(this).is(":checked")) {
@@ -490,9 +488,9 @@ al usuario si realmente desea eliminar ese item
 */
 $("body").on("click", ".eliminar-unidadcurricular", function(){
     var codUniCur = $("#modal_operaciones input[name=item_seleccionado]").val( )
-    $(".formEliminarunidadcurricular #codUniCur").val( codUniCur )
+    $(".formEliminarUnidadCurricular #codUniCur").val( codUniCur )
     $("#modal_operaciones").modal("close")
-    $("#eliminarunidadcurricular").modal("open")
+    $("#eliminarUnidadCurricular").modal("open")
 })
 
 /*
@@ -533,6 +531,8 @@ $('.formEliminarUnidadCurricular').on("submit",function(evento){
     eliminar( codUniCur )
 })
 
+
+
 /*
 
 DESCRIPCION : 
@@ -553,3 +553,4 @@ $('.formEditarUnidadCurricular').on("submit",function(evento){
         
     modificar( $(this) )
 })
+

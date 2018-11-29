@@ -11,17 +11,19 @@
       <div class="modal-content">
         <form class="formCrearEje" >
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="crear_nombre" >nombre</label>
+                
                   <input type="text" id="crear_nombre" name="nombre" class="validate" rangelength=[3,60] maxlength="65" required />
+                <label for="crear_nombre" data-success="Correcto..." >nombre</label>
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_descripcion" >Descripcion</label>
-                  <textarea id="crear_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
+                
+              <textarea id="crear_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
+              <label data-success="Correcto..."  for="crear_descripcion" >Descripcion</label>
             </div>
           </div>
           <div class="row"> 
@@ -49,17 +51,18 @@
           <form class="formEditarEje" >
             <input  id="editar_codEje"  type="hidden" name="codEje">
             <div class="row">
-            <div class=" col s12 m12">
-              <i class="material-icons prefix">call_split</i>
-                <label for="editar_nombre"  >nombre</label>
-                  <input type="text" id="editar_nombre" name="nombre" class="validate"  required />
+            <div class=" col s12 m12 input-field">
+              <i class="material-icons prefix">call_split</i>  
+              <input type="text" id="editar_nombre" name="nombre" class="validate"  required placeholder="" />
+              <label for="editar_nombre" data-success="Correcto.."  >nombre</label>
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label for="editar_descripcion" >Descripcion</label>
-                  <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
+                
+              <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required placeholder=""></textarea>
+              <label for="editar_descripcion" data-success="Correcto.." >Descripcion</label>
             </div>
           </div>
           <div class="row"> 

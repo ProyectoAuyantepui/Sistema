@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CUnidCurr 
-Sirve para gestionar toda la informacion referente a Unidad Curricular
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 
 class CUnidCurr extends Database{
@@ -127,21 +122,24 @@ class CUnidCurr extends Database{
 		$sql = 'SELECT * FROM "TUnidCurr"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearUnidCurr(){
 		
 		$this->conectarBD();
 		$sql = 'INSERT INTO "TUnidCurr" 
-					( "codUniCur",nombre,  "uniCre", trayecto, fase, htas, htis, observaciones)
+					( "codUniCur",nombre, "codPnf","codEje", "uniCre", trayecto, fase, htas, htis, observaciones)
 				VALUES
-					(:codUniCur, :nombre, :uniCre,:trayecto, :fase,:htas, :htis , :observaciones)';
+					(:codUniCur, :nombre, :codPnf, :codEje, :uniCre,:trayecto, :fase,:htas, :htis , :observaciones)';
 
 		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
+		$this->stmt->bindParam(':codEje',$this->codEje);
 		$this->stmt->bindParam(':nombre',$this->nombre);
 		$this->stmt->bindParam(':codUniCur',$this->codUniCur);
 		$this->stmt->bindParam(':uniCre',$this->uniCre);
@@ -155,6 +153,20 @@ class CUnidCurr extends Database{
        	$this->desconectarBD();
 
     	return $result;
+	}
+
+	public function validarUnidCurr(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TUnidCurr" WHERE "codUniCur" = :codUniCur';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':codUniCur',$this->codUniCur);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function consultarUnidCurr(){
@@ -171,30 +183,24 @@ class CUnidCurr extends Database{
 		return $result;
 	}
 
-
-
-	
-
 	public function modificarUnidCurr(){
 		
 		$this->conectarBD();
 		$sql = 'UPDATE "TUnidCurr"
-				SET 
-					"nombre" = :nombre,
-					"uniCre" = :uniCre,
-					"trayecto" = :trayecto,
-					"fase" = :fase,
-					"htas" = :htas,
-					"htis" = :htis,
-					"codPnf" = :codPnf,
-					"codEje" = :codEje, 
-					"observaciones" = :observaciones
-				WHERE 
-					"codUniCur" = :codUniCur';
+	   			SET 
+				   "codPnf"=:codPnf,
+				   "codEje"=:codEje,
+				   "nombre"=:nombre,
+				   "uniCre"=:uniCre, 
+				   "fase"=:fase,
+				   "trayecto"=:trayecto,
+				   "htas"=:htas,
+				   "htis"=:htis,
+				   "observaciones"=:observaciones
+	 			WHERE 
+ 					"codUniCur"=:codUniCur;';
 
 		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':codPnf',$this->codPnf);
-		$this->stmt->bindParam(':codEje',$this->codEje);
 		$this->stmt->bindParam(':codUniCur',$this->codUniCur);
 		$this->stmt->bindParam(':nombre',$this->nombre);
 		$this->stmt->bindParam(':uniCre',$this->uniCre);
@@ -202,6 +208,8 @@ class CUnidCurr extends Database{
 		$this->stmt->bindParam(':fase',$this->fase);
 		$this->stmt->bindParam(':htas',$this->htas);
 		$this->stmt->bindParam(':htis',$this->htis);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
+		$this->stmt->bindParam(':codEje',$this->codEje);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
      	
      	$result = $this->stmt->execute();
@@ -214,10 +222,8 @@ class CUnidCurr extends Database{
 		
 		$this->conectarBD();
 		$sql = 'DELETE FROM "TUnidCurr" WHERE "codUniCur" = :codUniCur';
-
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codUniCur',$this->codUniCur);
-     	
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
 

@@ -1,8 +1,9 @@
 <?php 
-if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+
+
+
 require_once "app/modelo/CCatDoc.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -11,11 +12,11 @@ require_once "app/modelo/CCatDoc.php";
 
 		case 'crear':
 
-			//if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 
 			$OCatDoc = new CCatDoc();
 
-	 		$OCatDoc->setNombre( $_POST["nombre"] );
+	 		$OCatDoc->setNombre( ucwords($_POST["nombre"] ));
 	 		$OCatDoc->setDescripcion( $_POST["descripcion"] );
 
 	 		$resultado = $OCatDoc->crearCatDoc(); 
@@ -29,7 +30,7 @@ require_once "app/modelo/CCatDoc.php";
 
 		case 'modificar':
 
-			//if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 
 			$OCatDoc = new CCatDoc();
 
@@ -49,7 +50,7 @@ require_once "app/modelo/CCatDoc.php";
 		
 		case 'eliminar':
 
-			//if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 
 			$OCatDoc = new CCatDoc();
 			$OCatDoc->setCodCatDoc( $_POST["codCatDoc"] );
@@ -80,10 +81,13 @@ require_once "app/modelo/CCatDoc.php";
 
 	 		$categorias = $OCatDoc->listarCatDoc(); 
 				
-	 		echo json_encode( ['data' => $categorias] );
+	 		echo json_encode( $categorias );
 		break;
 
 		case 'buscar': 
+
+			if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+			
 			$OCatDoc = new CCatDoc();
 
 			$resultado = $OCatDoc->buscarCatDoc( $_POST['filtro'] ); 

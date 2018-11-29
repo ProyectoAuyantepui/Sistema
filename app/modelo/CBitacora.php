@@ -1,17 +1,11 @@
 <?php  
-/*
-Modelo CCatDoc 
-Sirve para gestionar toda la informacion referente a Categorias de Docentes
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 
 class CBitacora extends Database{
 
 	private $codBit; 
 	private $cedDoc; 
-	private $modulo;
 	private $accion;
 	private $fecha;
 	private $hora;
@@ -25,11 +19,6 @@ class CBitacora extends Database{
 	public function setCedDoc( $cedDoc ){
 
 		$this->cedDoc = $cedDoc;
-	}
-
-	public function setModulo( $modulo ){
-
-		$this->modulo = $modulo;
 	}
 
 	public function setAccion( $accion ){
@@ -58,11 +47,6 @@ class CBitacora extends Database{
 		return $this->cedDoc;
 	}
 
-	public function getModulo(  ){
-
-		return $this->modulo;
-	}
-
 	public function getAccion(  ){
 
 		return $this->accion;
@@ -85,26 +69,29 @@ class CBitacora extends Database{
 		$sql = 'SELECT * FROM "TBitacora"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-		return $result;
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
-	public function crearBitacora(){
+	public function guardarTransaccion(){
 		
+		$hora_actual = date('h:i A');
+		$fecha_actual = date('d-m-Y');
+
 		$this->conectarBD();
 		
 		$sql = 'INSERT INTO "TBitacora" 
-					("codBit","cedDoc","modulo","accion","fecha","hora")
+					("codBit","cedDoc","accion","fecha","hora")
 				VALUES
-					(:codBit,:cedDoc,:modulo,:accion,:fecha,:hora)';
+					(default,:cedDoc,:accion,:fecha,:hora)';
 		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':codCatDoc',$this->codCatDoc);
-		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
-		$this->stmt->bindParam(':modulo',$this->modulo);
+		$this->stmt->bindParam(':cedDoc',$_SESSION["user"]["cedDoc"]);
 		$this->stmt->bindParam(':accion',$this->accion);
-		$this->stmt->bindParam(':fecha',$this->fecha);
-		$this->stmt->bindParam(':hora',$this->hora);
+		$this->stmt->bindParam(':fecha', $fecha_actual);
+		$this->stmt->bindParam(':hora',$hora_actual);
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
 		
@@ -124,7 +111,7 @@ class CBitacora extends Database{
 	}
 
 	public function consultarBitacoraPorCedula(){
-		
+
 		$this->conectarBD();
 		$sql = 'SELECT * FROM "TBitacora" WHERE "cedDoc" = :cedDoc';
 		$this->stmt = $this->conn->prepare($sql);
@@ -133,16 +120,5 @@ class CBitacora extends Database{
 		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 		return $result;
-	}
-
-	// public function docente( ){
-
-	// 	$ODocente =  new CDocente();
-	// 	$ODocente->setCedDoc( $this->cedDoc ); 
-
-	// 	return $ODocente->consultarDocente( );
-	// }
-
-
-	
+	}	
 }

@@ -1,8 +1,11 @@
-<!-- Editar Datos del Docentes 
+<!-- 
+
+Editar Datos del Docentes 
 Contenido en el Section llamado en docentes.js
 -->
 
 <section class="row oculto" id="editarDocentes">
+
   <div class="col s4">
       <div class="card">
         <div class="center-align deep-orange tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
@@ -12,19 +15,7 @@ Contenido en el Section llamado en docentes.js
         <div class="card-content" style="padding: 0px;" >
 
           <ul class="collection" >
-            <li class="collection-item avatar" style="">
-              <i class="material-icons circle deep-orange darken-1">phone</i>
-          
-              <span class="title">Ver horario</span>
-              
-              
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle cyan">person</i>
-              <span class="title">Descargar horario</span>
-              
-              
-            </li>
+            
             <li class="collection-item avatar">
               <i class="material-icons circle green">edit</i>
               <span class="title">Restablecer contraseña</span>
@@ -37,6 +28,7 @@ Contenido en el Section llamado en docentes.js
 
       <div class="card" id="TarjetaDependencias">
         <div class="card-content" style="padding: 0px;" >
+
           <ul class="collection dependencias" >
             <li class="collection-item avatar" style="">
               <i class="material-icons circle deep-orange darken-1">people_outline</i>
@@ -72,6 +64,7 @@ Contenido en el Section llamado en docentes.js
       </div>
 
       <div class="card" id="TarjetaComisiones">
+
         <div class="card-content" style="padding: 0px;" >
           <ul class="collection comisiones" >
             <li class="collection-item avatar" style="">
@@ -266,7 +259,12 @@ Contenido en el Section llamado en docentes.js
 
 </section>
 
-<!-- Registrar Datos del Docentes 
+
+
+
+<!-- 
+
+Registrar Datos del Docentes 
 Contenido en el Section llamado en docentes.js
 -->
 
@@ -351,13 +349,21 @@ Contenido en el Section llamado en docentes.js
             <div class="row">
 
               <div class="col s12 valign-wrapper">
-                <h5 class="valign">Informacion personal1</h5>
+                <h5 class="valign">Informacion personal</h5>
               </div>
 
             </div>
             <form class="form-registrar-docentes">
               <div class="row">
-                <div class="input-field col s12 m4 ">
+                <div class="col s12 m2 ">
+                  <label>Nacionalidad</label>
+                    <select class="browser-default" name="nacionalidad" id="crear_nacionalidad">
+                      <option value="venezolano" >Venezolano</option>
+                      <option value="extrajero-" >Extrajero</option>
+                    </select>
+                </div>
+
+                <div class="input-field col s12 m2 ">
                   <i class="material-icons prefix">account_box</i>
                   <label for="cedDoc">Cédula</label>
                   <input  id="crear_cedDoc"  type="text"  name="cedDoc" class="validate tooltipped" data-position="bottom"  data-tooltip="Ingrese la cédula, este campo solo debe contener números desde 8 hasta 10 carácteres" pattern="[0-9]{7,10}" rangelength=[7,10] required>
@@ -503,45 +509,6 @@ Contenido en el Section llamado en docentes.js
                     <label data-success="Correcto..."  for="telefono"  >Clave</label>
                   </div>
                 </div>
-<!-- 
-    <div class="row">
-                 <div class="input-field input-field col s12 m12">
-                    <select class="icons" id="crear_avatar" name="avatar" required>
-                      <option value="" disabled selected>Seleccione un avatar de usuario</option>
-                      
-                      <option value="public/img/avatar/user01.png" 
-                        data-icon="public/img/avatar/user01.png" class="circle">     
-                        Avatar 01
-                      </option>
-
-                      <option value="public/img/avatar/user02.png" 
-                        data-icon="public/img/avatar/user02.png" class="circle">     
-                        Avatar 02
-                      </option>
-
-                      <option value="public/img/avatar/user03.png" 
-                        data-icon="public/img/avatar/user03.png" class="circle">     
-                        Avatar 03
-                      </option>
-
-                      <option value="public/img/avatar/user04.png" 
-                        data-icon="public/img/avatar/user04.png" class="circle">     
-                        Avatar 04
-                      </option>
-
-                      <option value="public/img/avatar/user05.png" 
-                        data-icon="public/img/avatar/user05.png" class="circle">     
-                        Avatar 05
-                      </option>
-
-                      <option value="public/img/avatar/user06.png" 
-                        data-icon="public/img/avatar/user06.png" class="circle">     
-                        Avatar 06
-                      </option>
-                    </select>
-                    <label>Avatar de usuario</label>
-                  </div>
-                </div> -->
 
                  <div class="col s12 m12">
                     <select class="browser-default" id="crear_avatar" name="avatar" required>
@@ -626,10 +593,6 @@ Contenido en el Section llamado en docentes.js
               <i class="material-icons circle deep-orange">delete</i>
               <a href="#" class="eliminar-docente  deep-orange-text"> Eliminar </a>
             </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">access_alarms</i>
-              <a href="#" class="ver-horario red-text"> Ver horario </a>
-            </li>
         </ul>
     </div>
 
@@ -663,7 +626,7 @@ Contenido en el Section llamado en docentes.js
 
     </div>
 
-      <!--Eliminar Docente-->
+    <!--Eliminar Docente-->
 
     <div id="modal_eliminarDocente" class="modal">
 
@@ -759,3 +722,9 @@ Contenido en el Section llamado en docentes.js
       </div>
 
     </div>
+
+    <script>
+      
+
+    $(".form-datos-perfil #editar_cedDoc").prop('readonly', true);
+    </script>

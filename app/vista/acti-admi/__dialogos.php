@@ -13,24 +13,23 @@
 
           <div class="row">
       
-            <div class="col s12 m6">
+            <div class="col s12 m6 input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="crear_titulo"  >título</label>
                   <input type="text" id="crear_titulo" name="titulo" class="validate" rangelength=[3,60] maxlength="65" placeholder="título" required />
+                <label for="crear_titulo"  >título</label>
             </div>
 
           
-            <div class="col s12 m6">
-              <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_dependencia" >Dependencia</label>
-                  <input type="text" id="crear_dependencia" name="dependencia" class="validate" rangelength=[3,300] maxlength="305" placeholder="Dependencia" required />
+            <div class="col s12 m6 input-field">
+              <i class="material-icons prefix">call_split</i>
+                  <input type="text" id="crear_dependencia" name="dependencia" class="validate" rangelength=[3,60] maxlength="65" placeholder="título" required />
+                <label for="crear_dependencia"  >Dependencia</label>
             </div>
           </div>
           <div class="row">
 
-            <div class="col s12 m12">
-              <label >Tipo de Actividad</label>
-              <select id="crear_tipActAdm" name="tipActAdm" >
+            <div class="col s12 m12 input-field">
+              <select id="crear_tipActAdm" name="tipActAdm" required>
                 <option value="" selected disabled>Seleccione un tipo de act. administrativa</option>
                 <option value="CI" >Creación Intelectual (CI)</option>
                 <option value="IC" >Integración Comunidad (IC)</option>
@@ -38,15 +37,16 @@
                 <option value="GA" >Gestión Académica (GA)</option>
                 <option value="OAA" >Otras Act. Académicas (OAA)</option>
               </select>
+              <label >Tipo de Actividad</label>
             </div>
 
           </div>
 
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
                   <textarea id="crear_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
+                <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
             </div>
           </div>
           <div class="row"> 
@@ -76,24 +76,23 @@
             <input  id="editar_codActAdm" type="hidden" name="codActAdm">
           <div class="row">
       
-            <div class=" col s12 m6">
+            <div class=" col s12 m6 input-field">
               <i class="material-icons prefix">call_split</i>
                 <label for="editar_titulo"  >título</label>
                   <input type="text" id="editar_titulo" name="titulo" class="validate" placeholder="título" rangelength=[3,60] maxlength="65" required />
             </div>
-          
-            <div class=" col s12 m6">
-              <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="editar_dependencia" >Dependencia</label>
-                  <input type="text" id="editar_dependencia" name="dependencia" class="validate" placeholder="Dependencia" rangelength=[3,300] maxlength="305" required />
+      <div class="col s12 m6 input-field ">
+              <select  name="dependencia" id="editar_dependencia" required>
+                <option value="" disabled selected>Seleccione una Dependencia</option>
+              </select>
+              <label>Dependencia</label>
             </div>
 
           </div>
           <div class="row">
 
-            <div class="col s12 m12">
-              <label >Tipo de Actividad</label>
-              <select id="editar_tipActAdm" name="tipActAdm" >
+            <div class="col s12 m12 input-field">
+              <select id="editar_tipActAdm" name="tipActAdm" required>
                 <option value="" disabled>Seleccione un tipo de act. administrativa</option>
                 <option value="CI" >Creación Intelectual (CI)</option>
                 <option value="IC" >Integración Comunidad (IC)</option>
@@ -101,12 +100,13 @@
                 <option value="GA" >Gestión Académica (GA)</option>
                 <option value="OAA" >Otras Act. Académicas (OAA)</option>
               </select>
+              <label >Tipo de Actividad</label>
             </div>
 
           </div>
 
           <div class="row">
-            <div class=" col s12 m12">
+            <div class=" col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
                 <label data-success="Correcto..."  for="editar_observaciones" >Observaciones</label>
                   <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
@@ -176,3 +176,5 @@
     </div>
 
   </div>
+
+

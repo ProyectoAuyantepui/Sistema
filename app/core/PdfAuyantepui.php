@@ -1,5 +1,7 @@
 <?php 
 
+
+
 /**
 * Esta clase nos servira como helper para reportes pdf
 */
@@ -13,24 +15,26 @@ class PdfAuyantepui extends Dompdf {
 	public $titulo;
 	public $nombre_plantilla;
 	public $data;
-
+	public $fecha_actual;
 	public $plantilla;
 
 	public function cargarPlantilla(  ){
+		
 		ob_start();
-		require_once "public/pdf/" . $this->nombre_plantilla . ".php";
+			require_once "public/pdf/" . $this->nombre_plantilla . ".php"; 
 		$this->plantilla = ob_get_clean();
-		parent::loadHtml( $this->plantilla );
+		$this->loadHtml( $this->plantilla );
+		
 	}
 
+	public function cargarConfiguracion( $tipo = 'letter', $orientacion = 'portrait' ){
+		$this->setPaper( $tipo, $orientacion );
+	}
+	
 	public function generarPDF(  ){
 
-		self::cargarPlantilla();
-		// (Optional) Setup the paper size and orientation
-		parent::setPaper('letter', 'portrait');
-		// Render the HTML as PDF
-		parent::render();
-		// Output the generated PDF to Browser
-		parent::stream( $this->titulo , ['Attachment' => 1] );
+		$this->cargarPlantilla();							
+		$this->render();
+		$this->stream( $this->titulo , ['Attachment' => 0] );
 	}
 }

@@ -1,7 +1,28 @@
 $(function(){
 
     localStorage.clear();
+
+    cargarComboCategorias()
+    
+    cargarComboDedicaciones()
+
 })
+  $("#clave").on("focusout", function (e) {
+    if ($(this).val() != $("#cclave").val()) {
+        $("#cclave").removeClass("valid").addClass("invalid");
+    } else {
+        $("#cclave").removeClass("invalid").addClass("valid");
+    }
+});
+
+$("#cclave").on("keyup", function (e) {
+    if ($("#clave").val() != $(this).val()) {
+        $(this).removeClass("valid").addClass("invalid");
+    } else {
+        $(this).removeClass("invalid").addClass("valid");
+    }
+});
+
 
 $('#form-registro-1').on("submit",function(evento) {  
 
@@ -48,8 +69,7 @@ $('#form-registro-2').on("submit",function(evento) {
                       
     if(! $(this).valid()) return false;
 
-    localStorage.dependencia = $('select#dependencia').find("option:selected").val() 
-    localStorage.dedicacion = $('select#dedicacion').find("option:selected").val() 
+    localStorage.dedicacion = $('select#codDed').find("option:selected").val() 
     localStorage.condicion = $('select#condicion').find("option:selected").val() 
    
     localStorage.codCatDoc = $('select#codCatDoc').find("option:selected").val() 
@@ -87,8 +107,7 @@ $('#form-registro-3').on("submit",function(evento) {
                   "fecNac" : localStorage.fecNac,
                   "direccion" : localStorage.direccion,
                   "telefono" : localStorage.telefono,
-                  "dependencia" : localStorage.dependencia,
-                  "dedicacion" : localStorage.dedicacion,
+                  "codDed" : localStorage.dedicacion,
                   "condicion" : localStorage.condicion,
                   "codCatDoc" : localStorage.codCatDoc,
                   "fecIng" : localStorage.fecIng,
@@ -124,3 +143,60 @@ $('#form-registro-3').on("submit",function(evento) {
             })  
 
 })
+
+
+function cargarComboCategorias(){
+
+  var elemento = $('#form-registro-2 select#codCatDoc')
+
+
+  elemento.html("")
+  
+  $.ajax({
+
+      url:'?controlador=catDoc&actividad=listar',
+      type:'POST',
+      dataType:'json'
+  })
+
+  .done(function(respuesta){
+
+      elemento.html("")
+
+      $.each( respuesta.data, function( i,item ){
+        elemento.append(`
+          <option 
+            value="${item.codCatDoc}" 
+          > ${item.nombre} </option>
+        `)
+      })
+
+      elemento.material_select()
+  })
+}
+
+function cargarComboDedicaciones(){
+  var combo_dedicacion = $('#form-registro-2 select#codDed')
+
+  $.ajax({
+
+      url:'?controlador=dedicaciones&actividad=listar',
+      type:'POST',
+      dataType:'json'
+  })
+
+  .done(function(respuesta){
+
+      combo_dedicacion.html("")
+
+      $.each( respuesta.data, function( i,item ){
+        combo_dedicacion.append(`
+          <option 
+            value="${item.codDed}" 
+          > ${item.nombre} </option>
+        `)
+      })
+
+      combo_dedicacion.material_select()
+  })
+}

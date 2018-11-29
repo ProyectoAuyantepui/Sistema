@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CEje 
-Sirve para gestionar toda la informacion referente a Ejes de Formacion
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 class CEje extends Database{
 
@@ -49,10 +44,11 @@ class CEje extends Database{
 		$sql = 'SELECT * FROM "TEjes"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearEje(){
@@ -136,28 +132,4 @@ class CEje extends Database{
 
 		return $result;
 	}
-
-	// public function UnidadesCurriculares(){
-
-	// 	$OUnidCurr =  new CUnidCurr();
-
-	// 	$UCs = $OUnidCurr->listarUnidCurr( );
-
-	// 	$arregloUC = [];
-		
-	// 	foreach ($UCs as $UnidCurr) {
-	// 		if ( $UnidCurr->codEje == $this->codEje ) {
-	// 			$arregloUC[] = $UnidCurr;
-	// 		}
-	// 	}
-
-	// 	return $arregloUC;
-	// }
 }
-
-
-// $o = new CEje();
-
-// $o->setCodEje(1);
-
-// var_dump( $o->UnidadesCurriculares() );

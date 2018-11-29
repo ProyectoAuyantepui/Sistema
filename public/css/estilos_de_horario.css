@@ -1,0 +1,14 @@
+/*ESTILOS PARA ONER BORDES A LAS TABLAS*/
+table .tabla_con_borde th, td {
+  border-right: 1px solid #e1e1e1;
+}
+
+table .tabla_con_borde tr:last-of-type,
+table .tabla_con_borde td:last-of-type {
+  border-right: none;
+  border-bottom: none;
+}
+table .tabla_con_borde th, td {
+  text-align: center;
+  padding: 1rem 0.75rem;
+}

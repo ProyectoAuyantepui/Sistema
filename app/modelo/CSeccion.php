@@ -1,15 +1,11 @@
 <?php  
-/*
-Modelo CSeccion 
-Sirve para gestionar toda la informacion referente a Secciones
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 class CSeccion extends Database{
 	
 	private $codSec;
 	private $trayecto;
+	private $pnf;
 	private $matricula;
 	private $estado;
 	private $tipo;
@@ -29,6 +25,11 @@ class CSeccion extends Database{
 	public function setMatricula( $matricula ){
 
 		$this->matricula = $matricula;
+	}
+
+	public function setPnf( $pnf ){
+
+		$this->pnf = $pnf;
 	}
 
 	public function setEstado( $estado ){
@@ -60,6 +61,11 @@ class CSeccion extends Database{
 	public function getTrayecto(  ){
 
 		return $this->trayecto;
+	}
+
+	public function getPnf(  ){
+
+		return $this->pnf;
 	}
 
 	public function getMatricula( ){
@@ -95,10 +101,11 @@ class CSeccion extends Database{
 		$sql = 'SELECT * FROM "TSecciones"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearSeccion(){
@@ -106,19 +113,20 @@ class CSeccion extends Database{
 		
 		$sql = 'INSERT INTO "TSecciones"
 					(
-						"codSec", trayecto, 
+						"codSec",pnf, trayecto, 
 						matricula, "estado", 
 						tipo, turno, observaciones
 					)
 				VALUES
 					(
-						:codSec, :trayecto, 
+						:codSec, :pnf, :trayecto, 
 						:matricula, :estado, 
 						:tipo,:turno, :observaciones
 					)';
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codSec',$this->codSec);
+		$this->stmt->bindParam(':pnf',$this->pnf);
 		$this->stmt->bindParam(':trayecto',$this->trayecto);
 		$this->stmt->bindParam(':matricula',$this->matricula);
 		$this->stmt->bindParam(':estado',$this->estado);
@@ -169,6 +177,7 @@ class CSeccion extends Database{
 		$sql = 'UPDATE "TSecciones"
 				SET 
 					"trayecto" = :trayecto,
+					"pnf" = :pnf,
 					"matricula" = :matricula,
 					"estado" = :estado, 
 					"tipo" = :tipo,
@@ -179,6 +188,7 @@ class CSeccion extends Database{
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codSec',$this->codSec);
+		$this->stmt->bindParam(':pnf',$this->pnf);
 		$this->stmt->bindParam(':trayecto',$this->trayecto);
 		$this->stmt->bindParam(':matricula',$this->matricula);
 		$this->stmt->bindParam(':estado',$this->estado);

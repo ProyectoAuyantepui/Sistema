@@ -21,27 +21,27 @@ function listar(){
         if (respuesta.data.length > 0) {
             var content = $("")
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_ejes").show()
+            $("#tabla_ejes tbody").html('')
 
               $.each(respuesta.data, function(i, item) {
 
                 content = `<tr data-id="${item.codEje }">>
-                                        <td width="20%">${ item.nombre }</td>
-                                        <td width="20%">${ item.descripcion }</td>
-                                        <td width="5%" >
+                                        <td >${ item.nombre }</td>
+                                        <td >${ item.descripcion }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_ejes tbody").append(content)
               })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_ejes").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_ejes").hide()
             $(".mensaje").show()
             
         }
@@ -162,33 +162,33 @@ function buscar( filtro ){
     .done(function(respuesta){
         
         if (respuesta.operacion == true) {
-            $("table tbody").html('')
+            $("#tabla_ejes tbody").html('')
             var content = $('')
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_ejes").show()      
               
             
 
             $.each(respuesta.data, function(i, item) {
 
                 content = `<tr data-id="${item.codEje }">>
-                                        <td width="20%">${ item.nombre }</td>
-                                        <td width="20%">${ item.descripcion }</td>
-                                        <td width="5%" >
+                                        <td >${ item.nombre }</td>
+                                        <td >${ item.descripcion }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_ejes tbody").append(content)
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_ejes").paginationTdA({ elemPerPage: 8 })
         }else{
 
             $(".mensaje").show()
-           $("table").hide() 
+           $("#tabla_ejes").hide() 
         }
     })
 }
@@ -216,7 +216,7 @@ DESCRIPCION :
 r
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_ejes").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 

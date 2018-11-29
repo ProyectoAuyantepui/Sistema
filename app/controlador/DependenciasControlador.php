@@ -3,7 +3,6 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CDependencia.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -15,7 +14,7 @@ require_once "app/modelo/CDependencia.php";
 		
 			$ODependencia = new CDependencia();
 
-			$ODependencia->setNombre( $_POST['nombre'] );
+			$ODependencia->setNombre( ucwords($_POST['nombre'] ));
 			$ODependencia->setDescripcion( $_POST['descripcion'] );
 			$resultado = $ODependencia->crearDependencia(); 
 			
@@ -96,8 +95,8 @@ require_once "app/modelo/CDependencia.php";
 		case 'listar': 
 		
 			$ODependencia = new CDependencia();
-
-			echo json_encode([ 'data' => $ODependencia->listarDependencias() ]);
+			$dependencias = $ODependencia->listarDependencias();
+			echo json_encode( $dependencias );
 		break;
 
 		case 'listar-docentes-por-dependencias': 
@@ -106,7 +105,7 @@ require_once "app/modelo/CDependencia.php";
 			$ODependencia->setCedDoc( $_POST['cedDoc'] );
 			$docentes = $ODependencia->docentes();
 
-			echo json_encode([ 'data' => $docentes ]);
+			echo json_encode( $docentes );
 		break;
 
 		case 'desvincular-docente': 

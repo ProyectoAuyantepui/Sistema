@@ -1,5 +1,23 @@
 $(function(){ 
     listar()
+        $("#search").keyup(function(){
+        if( $(this).val() != "")
+        {
+            $("#tabla-docentes tbody>tr").hide();
+            $("#tabla-docentes td:buscar('" + $(this).val() + "')").parent("tr").show();
+        }
+        else
+        {
+            $("#tabla-docentes tbody>tr").show();
+        }
+    });
+});
+$.extend($.expr[":"], 
+{
+    "buscar": function(elem, i, match, array) 
+    {
+        return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
 })
 
 function limpiarCasillas(){
@@ -31,24 +49,11 @@ function listar(){
                     switche = '<input type="checkbox" name="switch">'
                 }
 
-                if ( item.dedicacion == 1 ) {
-                    dedicacion = 'DEDICACIÓN EXCLUSIVA'
-                }else if( item.dedicacion == 2 ){
-                    dedicacion = 'TIEMPO COMPLETO'
-                }else if( item.dedicacion === 3 ){
-                    dedicacion = 'MEDIO TIEMPO'
-                }else if( item.dedicacion == 4 ){
-                    dedicacion = 'TIEMPO COMVENCIONAL'
-                }else{
-                    dedicacion = item.dedicacion
-                }
-
                 content = `<tr data-id="${item.cedDoc }">
-                                    <td width="15%">${ item.cedDoc }</td>
-                                    <td width="15%">${ item.nombre }</td>
-                                    <td width="15%">${ item.apellido }</td>
-                                    <td width="15%">${ dedicacion }</td>
-                                    <td width="15%">
+                                    <td >${ item.cedDoc }</td>
+                                    <td >${ item.nombre }</td>
+                                    <td >${ item.apellido }</td>
+                                    <td >
                                         <div class="switch">
                                             <label>
                                                 ${switche}
@@ -56,7 +61,7 @@ function listar(){
                                             </label>
                                         </div>
                                     </td>
-                                    <td width="5%" >
+                                    <td  >
                                         <a href="#" class="mostrarOperaciones">
                                             <i class="material-icons black-text">more_vert</i>
                                         </a>
@@ -66,7 +71,7 @@ function listar(){
                 $("#tabla-docentes tbody").append(content)
               })
 
-            $("#tabla-docentes").paginationTdA({ elemPerPage: 4 })
+            $("#tabla-docentes").paginationTdA({ elemPerPage: 8 })
         }else{
             $("#tabla-docentes").hide()
             $(".mensaje").show()
@@ -86,12 +91,12 @@ function cambiarEstado( estado , cedDoc ){
     } 
   })
   .done(function(respuesta){
-console.log(respuesta)
+//console.log(respuesta)
       if (respuesta.operacion == true) {
 
 
         Materialize.toast('Listo...',997)
-        listar()
+
                                       
       }else{
                   
@@ -340,7 +345,7 @@ function cambiarRol(cedDoc){
     })
 
     .done(function(respuesta){
-        console.log(respuesta)
+        //console.log(respuesta)
 }
 )}
 
@@ -352,14 +357,14 @@ function cargarDependencias(cedDoc){
     .done(function(respuesta){
       if (respuesta.data.length > 0) {
             var content = $("")
-            $("#dependencias").show()
+            
             $("#dependencias tbody").html('')
 
               $.each(respuesta.data, function(i, item) {
 
                 content = `
                 <tr data-id="${item.cedDoc }">
-                                    <td width="95%">${ item.nombre }</td>
+                                    <td >${ item.nombre }</td>
                                 </tr>`
 
                 $("#dependencias tbody").append(content)
@@ -380,12 +385,12 @@ function cargarComisiones(cedDoc){
     .done(function(respuesta){
       if (respuesta.data.length > 0) {
         var content = $("")
-            $("#comisiones").show()
+
             $("#comisiones tbody").html('')
 
             $.each(respuesta.data, function(i, item) {
                 content = `<tr data-id="${item.cedDoc }">
-                                    <td width="90%">${ item.nombre }</td>
+                                    <td >${ item.nombre }</td>
                                 </tr>`
 
                 $("#comisiones tbody").append(content)
@@ -444,7 +449,7 @@ function añadirDependencia(){
     })
 
     .done(function(respuesta){
-        console.log(respuesta.data)
+        //console.log(respuesta.data)
         var contenidoHTML = $("")        
         $.each( respuesta.data, function(i,item){
 
@@ -613,7 +618,7 @@ $("body").on("click", ".eliminar-docente", function(){
 $("body").on("click", ".eliminarDependencia", function(evento){
     
     var cedDoc=$(".form-datos-perfil #editar_cedDoc").val();
-    console.log(cedDoc)
+    //console.log(cedDoc)
     $("#modalDesvincularDependencia").modal("open")
     evento.preventDefault() 
 })
@@ -636,10 +641,10 @@ $("#tabla-docentes").on("change","input[name=switch]",function() {
     var estado = false
     if($(this).is(":checked")) {
       estado = '1'
-      //console.log("Is checked");
+      ////console.log("Is checked");
     }else {
       estado = '2'
-      //console.log("Is Not checked");
+      ////console.log("Is Not checked");
     }
 
     cambiarEstado( estado , cedDoc )
@@ -656,10 +661,10 @@ $('.formEliminarDocenteDependencia').on("submit",function(evento){
     
     evento.preventDefault()    
     var cedDoc=$(".form-datos-perfil #editar_cedDoc").val();
-    console.log(cedDoc)
+    //console.log(cedDoc)
 
     var codDep=true//No se que Colocar;
-    console.log(codDep)
+    //console.log(codDep)
     eliminarDocDep( codDep,cedDoc )
 })
 
@@ -671,3 +676,4 @@ $("#tabla-docentes").on("click","a.mostrarOperaciones",function(){
 
     $("#modal_operaciones").modal("open")
 })
+

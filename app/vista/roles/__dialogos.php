@@ -115,7 +115,7 @@
         <ul class="collection">
             <li class="collection-item avatar">
               <i class="material-icons circle blue darken-3">edit</i>
-              <a href="#" class="editar-rol blue-text"> Editar </a>
+              <a href="#" class="editar-roles blue-text"> Editar </a>
             </li>
             <li class="collection-item avatar">
               <i class="material-icons circle deep-orange">delete</i>

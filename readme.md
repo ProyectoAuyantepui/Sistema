@@ -40,7 +40,7 @@ Tecnologias utilizadas :
 	<li>Postgresql 9.5</li>
 	<li>Materialize v0.100.1</li>
 	<li>jQuery v1.12.4</li>
-	<li>jQuery UI v1.11.4</li>
 	<li>JQuery Validation Plugin v1.17.0</li>
 	<li>PaginationTdA 1.0</li>
 </ul>
+

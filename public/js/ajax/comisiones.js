@@ -18,26 +18,26 @@ function listar(){
         if (respuesta.data.length > 0) {
             
             $(".mensaje").hide()
-            $(".tabla-comisiones").show()
-            $(".tabla-comisiones tbody").html('')
+            $("#tabla_comisiones").show()
+            $("#tabla_comisiones tbody").html('')
 
             var content = $("")
             $.each(respuesta.data, function(i, item) {
 
                 content = `<tr data-id="${item.codCom }">
-                                <td width="20%">${ item.nombre }</td>
-                                <td width="30%">${ item.dependencia }</td>                                        <td width="5%" >
+                                <td >${ item.nombre }</td>
+                                <td>${ item.dependencia }</td>                                        <td width="5%" >
                                     <a href="#" class="mostrarOperaciones">
                                         <i class="material-icons black-text">more_vert</i>
                                     </a>   
                             </tr>`
 
-                $(".tabla-comisiones tbody").append(content)
+                $("#tabla_comisiones tbody").append(content)
               })
 
-            $(".tabla-comisiones").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_comisiones").paginationTdA({ elemPerPage: 8 })
         }else{
-            $(".tabla-comisiones").hide()
+            $("#tabla_comisiones").hide()
             $(".mensaje").show()
             
         }
@@ -57,11 +57,10 @@ function crear(formulario){
     .done(function(respuesta){
 
         if (respuesta.operacion == true) {
-
-            Materialize.toast('Listo...',997)
             limpiarCasillas()
-            $("#crearComision").modal("close")
-            listar()
+            Materialize.toast('Listo...',997,'',function(){ location.href = '?controlador=comisiones&actividad=index' })
+            
+
                                    
         }else{
 
@@ -69,6 +68,7 @@ function crear(formulario){
         }
     })
 }
+
 function editar( codCom ){ 
 
     $.ajax({ 
@@ -136,10 +136,10 @@ function modificar( formulario ){
         if (respuesta.operacion == true) {
 
 
-            Materialize.toast('Listo...',997)
+            Materialize.toast('Listo...',997,'',function(){ location.href = '?controlador=comisiones&actividad=index' })
 
             $('#editarComision').modal('close')
-            listar()
+            
                                     
         }else{
                 
@@ -157,9 +157,9 @@ function buscar( filtro ){
     .done(function(respuesta){
         if (respuesta.operacion == true) {
             var content = $('')
-            $(".tabla-comisiones tbody").html('')
+            $("#tabla_comisiones tbody").html('')
             $(".mensaje").hide()
-            $(".tabla-comisiones").show()      
+            $("#tabla_comisiones").show()      
               
             var switche 
             var tipo
@@ -174,9 +174,9 @@ function buscar( filtro ){
 
 
                 content = `<tr data-id="${item.codCom }">
-                            <td width="20%">${ item.nombre }</td>
-                            <td width="30%">${ item.dependencia }</td>
-                            <td width="10%">
+                            <td >${ item.nombre }</td>
+                            <td >${ item.dependencia }</td>
+                            <td >
                                 <div class="switch">
                                     <label>
                                         ${switche}
@@ -184,19 +184,19 @@ function buscar( filtro ){
                                     </label>
                                 </div>
                             </td>
-                            <td width="5%" >
+                            <td >
                                 <a href="#" class="mostrarOperaciones">
                                     <i class="material-icons black-text">more_vert</i>
                                 </a>
                             </td>   
                                     </tr>`
 
-                $(".tabla-comisiones tbody").append(content)
+                $("#tabla_comisiones tbody").append(content)
             })
 
-            $(".tabla-comisiones").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_comisiones").paginationTdA({ elemPerPage: 8 })
         }else{
-            $(".tabla-comisiones").hide()
+            $("#tabla_comisiones").hide()
             $(".mensaje").show()
             
         }
@@ -204,13 +204,6 @@ function buscar( filtro ){
 }
 
 
-/*
-
-DESCRIPCION : 
-
-Acción que vincula a un docente de la tabla TDocente con una comisión de la tabla TComisiones a través de la tabla "TComDoc"
-
-*/
 function vincularDocCom(codCom,cedDoc){
 
     $.ajax({ 
@@ -228,7 +221,8 @@ function vincularDocCom(codCom,cedDoc){
 
                 Materialize.toast('Listo...',997)
                 
-                                   
+                listarDocentesComision( codCom )  
+                $("#agregarDocente").modal("close")           
             }else{
 
                 Materialize.toast('Error...',997)
@@ -249,18 +243,18 @@ function eliminarDocComision( codCom,cedDoc ){
         dataType : 'json', 
         type:'POST' ,
         url:'index.php?controlador=comisiones&actividad=desvincular-docente' ,
-        data:{ "codCom" : codCom,
-               "cedDoc":cedDoc 
-             }
+        data:{ 
+            "codCom" : codCom,
+            "cedDoc":cedDoc 
+        }
     })
 
     .done(function(respuesta){
 
         if (respuesta.operacion == true) {
-
-            $('#eliminarDocComision').modal('close')
+            listarDocentesComision(codCom)
             Materialize.toast('Listo...',997)         
-                                    
+                                      
         }else{
 
             Materialize.toast('Error...',997)
@@ -268,105 +262,18 @@ function eliminarDocComision( codCom,cedDoc ){
     }) 
 }
 
-/*
 
-DESCRIPCION : 
 
-Acción que sirve para carga todos los docentes que no estén presentes en la comisión actual
 
-*/
 
-function cargarComboDocentes(codCom,cedDoc){
 
-    var combo = false
 
-        combo = $('.formAsignarDocente select#add-ced-doc')
-
-    combo.html("")
-    $.ajax({
-
-        url:'?controlador=comisiones&actividad=add-doc-com',
-        type:'POST',
-        dataType:'json',
-        data:{"codCom":codCom,
-              "cedDoc":cedDoc}
-    })
-
-    .done(function(respuesta){
-        var contenidoHTML = $("")        
-        $.each( respuesta.data, function(i,item){
-
-            contenidoHTML += `<option value="${item.cedDoc}">
-                                ${item.nombre}
-                            </option>`
-
-            
-        })
-        combo.html(contenidoHTML)
-        combo.material_select()
-       
-    })
-
-}
-
-/*
-
-DESCRIPCION : 
-
-Acción que sirve para listar a los docentes de una comisión con la finalidad de 
-bien cambiar su coordinador o eliminar un docente en especifico dentro de esa comisión
-
-*/
-
-function cargarDocCom(opcion,codCom){
-
-    var combo = false
-    if ( opcion == 'coordinador' ) {
-
-        combo = $('.formCambiarCoordinador select#cambiar-coor-doc')
-    }if ( opcion == 'desvincular-docente' ) {
-
-        combo = $('.formEliminarDocenteComision select#desv-ced-doc')
-    }
-    combo.html("")
-    $.ajax({
-
-        url:'?controlador=comisiones&actividad=listar-docentes-por-comision',
-        type:'POST',
-        dataType:'json',
-        data:{"codCom":codCom}
-    })
-
-    .done(function(respuesta){
-        var contenidoHTML = $("")        
-        $.each( respuesta.data, function(i,item){
-
-            contenidoHTML += `<option value="${item.cedDoc}">
-                                ${item.nombre}
-                            </option>`
-
-            
-        })
-        combo.html(contenidoHTML)
-    })
-
-}
-
-/*
-
-DESCRIPCION : 
-
-Acción que sirve para listar a los docentes de una comisión con la finalidad de 
-bien cambiar su coordinador o eliminar un docente en especifico dentro de esa comisión
-
-*/
-
-function asignarCoordinador(cedDoc,codCom){
+function cambiarCoordinador(codCom,cedDoc){
     $.ajax({ 
 
             dataType : 'json' ,
             type:'POST' ,
-            url:'?controlador=comisiones&actividad=asignar-coordinador',
+            url:'?controlador=comisiones&actividad=cambiar-coordinador',
         data:{ 
                "cedDoc" : cedDoc,
                "codCom":codCom 
@@ -377,7 +284,7 @@ function asignarCoordinador(cedDoc,codCom){
           if (respuesta.operacion == true) {
 
                 Materialize.toast('Listo...',997)
-                
+                listarDocentesComision( codCom )
                                    
             }else{
 
@@ -386,18 +293,11 @@ function asignarCoordinador(cedDoc,codCom){
     })
 }
 
-/*
 
-DESCRIPCION : 
 
-Acción que sirve para listar a los docentes de una comisión En una tabla con el id tabla-docentes
-encontrada en app/vista/comisiones/index.php
-
-*/
-
-function listarDocCom(codCom){
+function listarDocentesComision(codCom){
      $.ajax({
-        url:'?controlador=comisiones&actividad=listar-docentes-por-comision',
+        url:'?controlador=comisiones&actividad=docentes-comision',
         
         type:'post',
         dataType:'json',
@@ -408,49 +308,67 @@ function listarDocCom(codCom){
 
     .done(function(respuesta){
 
-        $("#tabla-docentes tbody").html('')
+        $("#tabla_docentes tbody").html('')
 
         var content = $("")
+        var coordinador = false
+        var desvincular = false
 
-        var docente = false
-        $.each(respuesta.data, function(i, item) {
-            if( item.coordinador ){
-                docente = item.nombre + ' (Coordinador)' 
+        $.each(respuesta.docentes, function(i, item) {
+
+            if ( respuesta.coordinador.cedDoc == item.cedDoc ) { 
+
+                coordinador = `<strong>COORDINADOR</strong>`
+                desvincular = `
+                    <a 
+                      href="#" 
+                      class="btn red darken-1 disabled waves-effect " 
+                      codCom="${codCom}" 
+                      cedDoc="${item.cedDoc}"
+                    >
+                      <i class="material-icons">close</i>
+                    </a>
+                ` 
             }else{
-                docente = item.nombre 
+
+                coordinador = `<a 
+                                href="#" 
+                                class="btn btn-cambiar-coo waves-effect green darken-3"
+                                codCom="${codCom}" 
+                                cedDoc="${item.cedDoc}"
+                                >
+                                Convertir en coordinador
+                            </a>`
+                
+                desvincular = `
+                    <a 
+                      href="#" 
+                      class="btn waves-effect red darken-1 btn-desvincular" 
+                      codCom="${codCom}" 
+                      cedDoc="${item.cedDoc}"
+                    >
+                      <i class="material-icons">close</i>
+                    </a>
+                `
             }
-            content = `<tr data-id="${item.cedDoc }">
-                        <td width="25%">${ item.cedDoc }</td>
-                        <td width="25%">${ docente }</td>
-                        <td width="25%">${ item.apellido }</td>
+
+            content = `<tr cedDoc="${item.cedDoc }" codCom="${codCom}">
+                        <td >${ item.cedDoc }</td>
+                        <td>${ item.nombre }</td>
+                        <td >${ item.apellido }</td>
+                        <td >${ coordinador }</td>
+                        <td >${ desvincular }</td>
                        </tr>`
 
-            $("#tabla-docentes tbody").append(content)
+            $("#tabla_docentes tbody").append(content)
           })
 
-        $("#tabla-docentes").paginationTdA({ elemPerPage: 4 })
+        $("#tabla_docentes").paginationTdA({ elemPerPage: 8 })
     })
 }
 
-/*
 
-Fin de las funciones
 
-*/
-//---------------------------.............2018............-------------------------------------------------
-/*
-
-DESCRIPCION : 
-Evento on-click que abre un modal con el id crearComisión encontrado en vista/comisiones/__dialogos.php
-*/
-
-$(".crear-Comision").on("click",function(){ $('#crearComision').modal("open")  })
-
-/*
-
-DESCRIPCION : 
-Evento on-submit que antes de crear la comisión valida los campos y luego si todo está ok registra
-*/
 
 $('.formCrearComision').on("submit",function(evento){  
         
@@ -461,36 +379,16 @@ $('.formCrearComision').on("submit",function(evento){
     crear( $(this) )
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-click que oculta la vista principal del módulo comisiones y muestra la vista de edición, este
-botón es llamado desde vista/comisiones/__dialogos.php
-*/
 $("body").on( "click", ".editar-comision", function(){ 
 
     var codCom = $("#modal_operaciones input[name=item_seleccionado]").val( )
 
-    $("#tarjetaComisiones").hide() 
-
-    $("#tarjetaDocentes").show()
-
     $("#modal_operaciones").modal("close") 
-
-    $(".crear-Comision").hide()
-
-    $(".regresar").show()
-
-   
-    listarDocCom(codCom)
-    editar( codCom ) 
+    location.href = "?controlador=comisiones&actividad=vista-editar&codCom=" + codCom
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-submit que antes de modificar la comisión valida los campos y luego si todo está ok actualiza
-*/
 
 $('.formEditarComision').on("submit",function(evento){  
     
@@ -501,11 +399,7 @@ $('.formEditarComision').on("submit",function(evento){
     modificar( $(this) )
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-click que elimina una comisión, botón llamado desde cambiarCoordinador
-*/
 
 $("body").on("click", ".eliminar-comision", function(){
     var codCom = $("#modal_operaciones input[name=item_seleccionado]").val( )
@@ -514,11 +408,7 @@ $("body").on("click", ".eliminar-comision", function(){
     $("#eliminarComision").modal("open")
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-submit que elimina una comisión
-*/
 
 $('.formEliminarComision').on("submit",function(evento){  
     
@@ -527,113 +417,16 @@ $('.formEliminarComision').on("submit",function(evento){
     eliminar( codCom )
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-click que carga a los docentes pertenencientes a una comisión
-*/
-
-$("body").on( "click", ".add-doc", function(){ 
-var cedDoc=$('.formCambiarCoordinador #cambiar-coor-doc').val()
-var codCom=$('.formEditarComision #editar_codCom').val()
-cargarComboDocentes(codCom,cedDoc)
-$("#agregarDocente").modal("open")
-})
-
-/*
-
-DESCRIPCION : 
-Evento on-submit que vincula a un docente con una comisión y luego recarga la tabla
-*/
 
 $('.formAsignarDocente').on("submit",function(evento){
 //Obteniendo el código de la dependencia y la cedula del docente
-    var cedDoc=$('.formAsignarDocente select#add-ced-doc').val();
-    var codCom=$('.formEditarComision #editar_codCom').val()
+    var cedDoc=$('.formAsignarDocente select#docentes').val();
+    var codCom=$('.formEditarComision input[name=codCom]').val()
     evento.preventDefault() 
     vincularDocCom(codCom,cedDoc)
-    $("#agregarDocente").modal("close")
-    listarDocCom(codCom)
-
 })
 
-/*
-
-DESCRIPCION : 
-Evento on-click que llama al modal de id cambiarCoordinador encontrado en vista/comisiones/__dialogos.php
-*/
-
-$("body").on( "click", ".cambiar-coordinador", function(){  
-
-    var codCom=$('.formEditarComision #editar_codCom').val()
-    cargarDocCom('coordinador',codCom)
-$("#cambiarCoordinador").modal("open")
- 
-  })
-
-/*
-
-DESCRIPCION : 
-Evento on-click que llama a un modal para eliminar a un docente de una comisión en expecifico, este botón
-se encuentra en vista/comisiones/index.php
-*/
-
-$("body").on("click", ".eliminar-doc-com", function(){
-    var codCom = $("#modal_operaciones input[name=item_seleccionado]").val( )
-    $(".formEliminarDocenteComision #codCom").val( codCom )
-    $("#eliminarDocComision").modal("open")
-
-cargarDocCom('desvincular-docente',codCom)
-})
-
-/*
-
-DESCRIPCION : 
-Evento on-submit que cambia al coordinador de una comisión y luego actualiza la tabla
-*/
-
-$('.formCambiarCoordinador').on("submit",function(evento){  
-
-    var cedDoc=$('.formCambiarCoordinador select#cambiar-coor-doc').val();
-    console.log(cedDoc)
-    var codCom=$('.formEditarComision #editar_codCom').val()
-    console.log(codCom)
-    evento.preventDefault()
-    asignarCoordinador(cedDoc, codCom)
-    $("#cambiarCoordinador").modal("close")
-    listarDocCom(codCom)
-})
-
-/*
-
-DESCRIPCION : 
-Evento on-submit que desvincula a un docente de una comisión y luego recarga la tabla
-*/ 
-
-$('.formEliminarDocenteComision').on("submit",function(evento){  
-    
-    evento.preventDefault()    
-    var cedDoc = $(".formEliminarDocenteComision #desv-ced-doc").val()
-     console.log(cedDoc)
-    var codCom=$('.formEditarComision #editar_codCom').val()
-    console.log(codCom)
-    eliminarDocComision( codCom,cedDoc )
-    listarDocCom(codCom)
-})
-
-/*
-
-DESCRIPCION : 
-Evento on-click que
-*/
-
-$(".boton-refrescar").on("click",function(){ listar() })
-
-/*
-
-DESCRIPCION : 
-Evento on-keyuo que llama a la función buscar y realiza una consulta con el operador like
-*/
 
 $("body").on( "keyup", "input[name=filtro]", function(){ 
 
@@ -642,14 +435,9 @@ $("body").on( "keyup", "input[name=filtro]", function(){
     buscar( filtro ) 
 })
 
-/*
 
-DESCRIPCION : 
-Evento on-click que mustra un modal con 2 tipos de operaciones editar e liminar una comisión
-el botón que dispara esta acción se encuentra en este mismo archivo es decir en la función listar()
-*/ 
 
-$(".tabla-comisiones").on("click","a.mostrarOperaciones",function(){
+$("#tabla_comisiones").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -660,3 +448,14 @@ $(".tabla-comisiones").on("click","a.mostrarOperaciones",function(){
 
 
 
+$("body").on("click","a.btn-desvincular",function(){
+
+
+  eliminarDocComision( $(this).attr("codCom") , $(this).attr("cedDoc") )
+})
+
+$("body").on("click","a.btn-cambiar-coo",function(){
+
+
+  cambiarCoordinador( $(this).attr("codCom") , $(this).attr("cedDoc") )
+})

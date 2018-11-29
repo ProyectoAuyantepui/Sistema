@@ -1,0 +1,349 @@
+<!-- <!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Arrastrar y soltar un elemento por la pantalla con JavaScript</title>
+
+	<style>
+
+	#arrastrar {
+
+		text-align:center;
+
+		width:100px;
+
+		height:100px;
+
+		border:5px solid #808080;
+
+		color:red;
+
+		border-radius:5px;
+
+		position:relative;
+
+		cursor:pointer;
+
+	}
+
+	</style>
+
+</head>
+
+<body>
+
+	<h1>Arrastrar y soltar un elemento por la pantalla con JavaScript</h1>
+
+	<div id="arrastrar" style="left:0;top:0;">Arrastrame por la pantalla!!</div>
+
+</body>
+
+</html>
+
+ 
+
+<script>
+
+// Clase para gestionar el movimiento de cualquier elemento
+
+movimiento=function(div)
+
+{
+
+	// Estas variables obtienen la diferencia en pixels entre el punto del raton
+
+	// pulsado dentro del div y el top y left del elemento. Es para que cuando 
+
+	// realizemos el movimiento, el cursor del raton siempre este en la misma
+
+	// posición dentro del div que mueve.
+
+	difX=0;
+
+	difY=0;
+
+ 
+
+	// Creamos el evento en el div para controlar la pulsación sobre el elemento
+
+	// cuando se pulsa sobre el elemento se ejecuta la funcion inicio()
+
+	div.addEventListener('mousedown',inicio,false);
+
+ 
+
+	// Iniciamos el arrastre
+
+	function inicio(e)
+
+	{
+
+		// Obtenemos la posición del raton
+
+		var eX=e.pageX;
+
+		var eY=e.pageY;
+
+		// Obtenemos los valores de la posicion left y top del elemento
+
+		var oX=parseInt(div.style.left);
+
+		var oY=parseInt(div.style.top);
+
+		// Calculamos la diferencia entre la posicion del div con la del raton.
+
+		difX=oX-eX;
+
+		difY=oY-eY;
+
+ 
+
+		// Cremos los eventos mousemove y mouseup
+
+		document.addEventListener('mousemove',mover,false);
+
+		document.addEventListener('mouseup',soltar,false);
+
+	}
+
+ 
+
+	// Movemos el elemento por la pantalla cada vez que se mueve el cursor
+
+	function mover(e)
+
+	{
+
+		var tY=e.pageY+difY+'px';
+
+		var tX=e.pageX+difX+'px'
+
+		div.style.top=tY;
+
+		div.style.left=tX;
+
+	}
+
+ 
+
+	// Funcion que se ejecuta el botón del ratón
+
+	function soltar(e)
+
+	{
+
+		// Eliminamos los eventos creados en la funcion inicio
+
+		document.removeEventListener('mousemove',mover,false);
+
+		document.removeEventListener('mouseup',soltar,false);
+
+	}
+
+}
+
+ 
+
+// Inicializamos el movimiento del div con id "arrastrar"
+
+var recu1=new movimiento(document.getElementById("arrastrar"));
+
+</script>
+ -->
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drag and drop</title>
+  <style>
+  .ficha {
+    width: 100px;
+    height: 100px;
+    float: left;
+    background-color: gray;
+    color: white;
+    cursor: move;
+  }
+  .ficha.over {
+    border: 2px dashed #000;
+  }
+  </style>
+</head>
+<body>
+
+	<table>
+		
+		<tr>
+			<td>
+				<div >7/8</div>
+			</td>
+			<td codTie="T-08">
+				<div class="ficha" draggable="true" ocupado="ocupado" codunicur="PIMT236" codamb="G-24" codsec="PNFI-IN-2221" ceddoc="V-25627918" codhor="9"> 
+					<p>proyecto</p>
+					<p>soto</p>
+				</div>
+			</td>
+			<td>
+				<div class="ficha" draggable="true" ocupado="desocupado">
+	             </div>
+				 </div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div >8/9</div>
+			</td>
+			<td codTie="T-09">
+				<div class="ficha" draggable="true" ocupado="ocupado">
+					<p>io</p>
+					<p>nelson</p>
+				</div>
+			</td>
+			<td>
+				<div class="ficha" draggable="true" ocupado="desocupado"> </div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div >9/10</div>
+			</td>
+			<td codTie="T-10">
+				<div class="ficha" draggable="true" ocupado="ocupado">
+					<p>matematica</p>
+					<p>maria f</p>
+				</div>
+			</td>
+			<td>
+				<div class="ficha" draggable="true" ocupado="desocupado"> </div>
+			</td>
+		</tr>
+	</table>
+
+
+
+  <!-- <div class="ficha" draggable="true">1</div>
+  <div class="ficha" draggable="true">2</div>
+  <div class="ficha" draggable="true">3</div>
+  <div class="ficha" draggable="true">4</div>
+  <div class="ficha" draggable="true">5</div>
+  <div class="ficha" draggable="true">6</div>
+  <div class="ficha" draggable="true">7</div>
+  <div class="ficha" draggable="true">8</div> -->
+  <script>
+    /** Drag and drop **/
+var dragSrcEl = null;
+var cols = document.querySelectorAll('.ficha');
+console.log(cols)
+//guardamos el contenido que queremos cambiar para la transferencia al dejar de arrastrar
+function handleDragStart(e) {
+  dragSrcEl = this;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+  // e.target.innerHTML = 'En Blanco'
+  // console.log(e.target.innerHTML());
+  // this.HTML('En Blanco')
+  // console.log(this.innerHTML)
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+  e.dataTransfer.dropEffect = 'move';  //efecto al mover
+  return false;
+}
+function handleDragEnter(e) {
+  this.classList.add('over');//agregamos borde rojo en el estilo css
+}
+function handleDragLeave(e) {
+  this.classList.remove('over'); //eliminamos borde rojo en el estilo css
+}
+
+function handleDragEnd(e) {
+  [].forEach.call(cols, function (col) {
+  	e.dataTransfer.getData('');
+    col.classList.remove('over');//eliminamos el borde rojo de todas las columnas
+  });
+   // if ( e.target.getAttribute("ocupado") == 'ocupado' ) {
+   // 	// alert('Ocupado')
+   // } else if ( e.target.getAttribute("ocupado") == 'desocupado' ) {
+   // 	// alert('Desocupado')
+   // }
+
+// console.log( e.target.getAttribute("ocupado") )
+// console.log(e)
+}
+
+function handleDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation(); //evitamos abrir contenido en otra pagina al soltar
+  }
+  //hacemos el intercambio de contenido html de el elemento origne y destino
+  // dragSrcEl Es El Valor del bloque que estoy tomando
+  // this Es El Valor del bloque donde estoy soltando
+
+  // if (dragSrcEl != this) {
+
+  	// alert(dragSrcEl.innerHTML)
+    // dragSrcEl.innerHTML = this.innerHTML;
+    // this.innerHTML = dragSrcEl.innerHTML;
+    // e.dataTransfer.getData('text/html');
+    // this.innerHTML = e.dataTransfer.getData('text/html');
+    // this.classList.remove('over');
+  // }
+
+  	// console.log(e.target)
+
+	if ( e.target.getAttribute("ocupado") == 'ocupado' ) {
+   	alert('Este Bloque Esta Ocupado')
+   	  // e.target.innerHTML = ""
+   } else if ( e.target.getAttribute("ocupado") == 'desocupado' && dragSrcEl.getAttribute("ocupado") == 'ocupado') {
+   	// alert('Desocupado')
+
+ 	this.innerHTML = dragSrcEl.innerHTML;
+   	this.classList.remove('over');
+
+   	dragSrcEl.innerHTML = "";
+	dragSrcEl.removeAttribute('codunicur')
+	dragSrcEl.removeAttribute('codamb')
+	dragSrcEl.removeAttribute('codsec')
+	dragSrcEl.removeAttribute('ceddoc')
+	dragSrcEl.removeAttribute('codhor')
+   	dragSrcEl.setAttribute("ocupado", 'desocupado' )
+
+   	this.setAttribute("codunicur", 'IN3121' )
+   	this.setAttribute("ocupado", 'ocupado' )
+
+   } else if ( dragSrcEl.getAttribute("ocupado") == 'desocupado' ) {
+
+   	this.classList.remove('over');
+   	alert('No Puede Mover Un Bloque Desocupado')
+   }
+
+	console.log(dragSrcEl.getAttribute("ocupado"))
+	// console.log(e)
+	console.log(this.getAttribute("ocupado"))
+return false;
+}
+
+//agregamos todos los eventos anteriores a cada columna mediante un ciclo
+[].forEach.call(cols, function(col) {
+   col.addEventListener('dragstart', handleDragStart, false);
+  col.addEventListener('dragenter', handleDragEnter, false);
+  col.addEventListener('dragover', handleDragOver, false);
+  col.addEventListener('dragleave', handleDragLeave, false);
+  col.addEventListener('drop', handleDrop, false);
+  col.addEventListener('dragend', handleDragEnd, false);
+});
+  </script>
+</body>
+</html>

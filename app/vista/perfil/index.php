@@ -1,33 +1,16 @@
-<?php $titulo = "Perfil de usuario";?>
+<?php $titulo = "PERFIL DE USUARIO";?>
 <!DOCTYPE html>
 <html>
-<?php require_once "app/vista/plantilla/__head.php";  ?>
-<style type="text/css">
-  main{
-    margin-top: 35px;
-  }
-  div.tarjeta{
-    padding: 24px 0px 2px 0px;margin: 0px;
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
+    
+    
+    <title>Auyantepui - <?= $titulo ?></title>
+</head>
 
-  }
-  div.tarjeta .titulo-tarjeta{
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 22px;
-    margin-top: 4px;
-    margin-bottom: 8px;
-    color: #fff;
-  }
-  .collection .collection-item.avatar{
-    min-height: 64px;
-  }
-.collection{
-   margin: 0px; 
-}
-  .collection .collection-item{
-    line-height: 3rem;
-  }
-</style>
 
 <body>
 <?php  require_once "app/vista/plantilla/__navbar.php"; ?>
@@ -37,7 +20,7 @@
   <section class="row">
 
 
-    <div class="col s4">
+    <div class="col s3">
       <div class="card">
         <div class="center-align teal tarjeta" >
           <img src="<?= $_SESSION['user']['avatar'] ?>" alt="" class="responsive-img " width="90">
@@ -47,27 +30,17 @@
 
           <ul class="collection" >
             <li class="collection-item avatar" style="">
-              <i class="material-icons circle deep-orange darken-1">phone</i>
+              <i class="material-icons circle teal darken-2">perm_contact_calendar</i>
+              <a 
+                href="?controlador=reportes&actividad=reporte-horario-docente&cedDoc=<?php echo $_SESSION["user"]["cedDoc"]; ?>" 
+                target="__blank" 
+                class="title"
+                >VER MI HORARIO</a>
+            </li>
           
-              <span class="title">Ver mi horario</span>
-              
-              
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle cyan">person</i>
-              <span class="title">Descargar mi horario</span>
-              
-              
-            </li>
-            <li class="collection-item avatar">
+            <li class="collection-item avatar cambiar-clave">
               <i class="material-icons circle green">edit</i>
-              <span class="title">Cambiar contraseña</span>
-              
-              
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle primario">play_arrow</i>
-              <span class="title">Title</span>
+              <a href="#" class="title">CAMBIAR CONTRASEÑA</a>
               
               
             </li>
@@ -82,25 +55,10 @@
 
           <ul class="collection dependencias" >
             <li class="collection-item avatar" style="">
-              <i class="material-icons circle deep-orange darken-1">phone</i>
-          
-              <span class="title">Dependencias</span>
-              
-              
-            </li>
-           
-          </ul>
-                  
+              <i class="material-icons circle brown lighten-1">person_add</i>
+              <span class="title">DEPENDENCIAS</span>
+          </ul>                  
         </div>
-
-        <div class="card-action">
-          <div class="row">
-            <a href="#" class="btn teal col s12 waves-effect">
-              Ir a dependencias
-            </a>   
-          </div> 
-        </div>
-
       </div>
 
       <div class="card">
@@ -109,29 +67,16 @@
 
           <ul class="collection comisiones" >
             <li class="collection-item avatar" style="">
-              <i class="material-icons circle deep-orange darken-1">phone</i>
-          
-              <span class="title">Comisiones</span>
-              
-              
+              <i class="material-icons circle  blue darken-2">group</i>
+              <span class="title">COMISIONES</span>
             </li>
-          </ul>
-                  
+          </ul>                  
         </div>
-
-        <div class="card-action">
-          <div class="row">
-            <a href="#" class="btn teal col s12 waves-effect">
-              Ir a comisiones
-            </a>   
-          </div> 
-        </div>
-
       </div>
 
     </div>
 
-    <div class="col s8">
+    <div class="col s9">
       <div class="card">
 
         <div class="card-content" >
@@ -149,7 +94,11 @@
             <form id="form-datos-perfil" onsubmit="return console.log( $(this).serialize() )">
 
               <div class="row">
-
+                <div class="input-field col s12 col m4">
+                  <i class="material-icons prefix">account_circle</i>
+                  <label data-success="Correcto..."  for="cedula" >Cédula</label>
+                  <input  id="cedDoc" name="cedDoc" type="text" class="validate tooltipped" data-position="bottom"  data-delay="50" data-tooltip="Cédula"   required>
+                </div>
 
                 <div class="input-field  col s12  col m4">
                   <i class="material-icons prefix">account_circle</i>
@@ -163,7 +112,9 @@
                   <label data-success="Correcto..."  for="apellido" >Apellido</label>
                 </div>
 
-                <div class="col s12 m4">
+              <div class="row">
+                
+              <div class="col s12  col m4">
                   <label>Sexo</label>
                   <p>
                     <input disabled name="sexo" type="radio" id="crear_sexo1" checked="checked" value="1" />
@@ -172,18 +123,13 @@
                     <label for="crear_sexo2">Masculino</label>
                   </p>
                 </div>
-              </div>
-
-              <div class="row">
-                
-
-                <div class="input-field  col s12  col m6">
+                <div class="input-field  col s12  col m4">
                   <i class="material-icons prefix">assignment_ind</i>
                   <input disabled type="text" name="fecNac" id="fecNac" class="datepicker validate tooltipped" data-position="bottom"  data-tooltip="Ingrese su fecha de Nacimiento"   required />   
                   <label data-success="Correcto..."  for="fecNac">Fecha de Nacimiento:</label>
                 </div>
                 
-                <div class="input-field  col s12  col m6">
+                <div class="input-field  col s12  col m4">
                   <i class="material-icons prefix">phone</i>
                   <input disabled id="telefono" name="telefono" type="text" class="validate tooltipped" data-position="bottom"  data-tooltip="Ingrese su número telefónico, solo puede contener números con un rango entre 10 y 11 carácteres" pattern="[0-9]{10,11}" required>
                   <label data-success="Correcto..."  for="telefono"  >Telefono ej: 02511234567</label>
@@ -199,79 +145,10 @@
                 </div>
               </div>
 
-          </div>
-        
-                  
+          </div>    
         </div>
       </div>
-      <div class="card">
 
-        <div class="card-content" >
-
-          <div class="row">
-
-
-            <div class="row">
-
-              <div class="col s12 valign-wrapper">
-                <h5 class="valign">Informacion laboral</h5>
-              </div>
-            </div>
-
-                <div class="row">
-                  
-                  <div class="input-field  col s12  col m4 tooltipped" data-position="bottom"  data-tooltip="Ingrese la categoria a la cual pertenece actualmente">
-                    
-                    <select id="codCatDoc" name="codCatDoc" required disabled>
-                      <option value="" disabled selected>Seleccione una categoria de docente</option>
-                    </select>
-                    <label for="codCatDoc" >Categoria</label>
-                  </div>
-
-                  <div class="input-field  col s12  col m4 tooltipped" data-position="bottom"  data-tooltip="Ingrese la condición a la cual pertenece actualmente">
-                    
-                    <select id="condicion" name="condicion" required disabled>
-                      <option value="" selected>Seleccione una opcion...</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                    </select>
-                    <label for="condicion" >Condición</label>
-                  </div>
-
-                   
-                  <div class="input-field  col s12  col m4 tooltipped" data-position="bottom"  data-tooltip="Ingrese la Dedicación a la cual pertenece">
-                    
-                    <select id="dedicacion" name="dedicacion" required  disabled>
-                      <option value="" selected>Seleccione una opcion...</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                    </select>
-                    <label for="dedicacion" >Dedicación</label>
-                  </div> 
-                </div>
-
-                <div class="row">
-                  
-                  <div class="input-field  col s12  col m6">
-                    <i class="material-icons prefix">assignment_ind</i>
-                    <input type="text" name="fecCon" id="fecCon" class="datepicker validate tooltipped" data-position="bottom"  data-tooltip="Ingrese la fecha en la cual realizó el corcurso en la Universidad"   required disabled/>   
-                    <label data-success="Correcto..."  for="fecCon">Fecha de Concurso:
-                    </label>
-                  </div>
-
-                  <div class="input-field  col s12  col m6">
-                    <i class="material-icons prefix">assignment_ind</i>
-                    <input type="text" name="fecIng" id="fecIng" class="datepicker validate tooltipped" data-position="bottom"  data-tooltip="Ingrese la fecha en la cual ingresó en la Universidad"   required disabled/>   
-                    <label data-success="Correcto..."  for="fecIng">Fecha de Ingreso:
-                    </label>
-                  </div>
-                  
-                </div>
-          </div>
-        
-                  
-        </div>
-      </div>
       <div class="card">
 
         <div class="card-content" >
@@ -292,14 +169,12 @@
                     <input id="correo" name="correo" type="email" class="validate tooltipped" data-position="bottom"  data-tooltip="Ingrese su correo con el siguiente formato dominio@servidor.extensión" required  disabled>
                     <label data-success="Correcto..."  for="correo" >Correo</label>
                   </div>
-                        
-                
+
                   <div class="input-field  col s12  col m6 ">
                     <i class="material-icons prefix">person</i>
                     <input id="usuario" name="usuario" type="text" class="validate tooltipped" data-position="bottom"  data-tooltip="Indique cual será su usuario para poder igresar al sistema" required disabled>
                     <label data-success="Correcto..."  for="usuario" >Usuario</label>
                   </div>
-                </div>
 
                 <div class="row">
                    <div class="input-field col s12 m12">
@@ -347,8 +222,6 @@
       </div>
     </div>
 
-
-
   </section>
 
 </main>
@@ -382,6 +255,47 @@
 
 </div>
 </form>
+
+<section id="modalCambiarClave" class="oculto modal">
+
+      <div class="modal-header secundario">
+        <span class="white-text">
+          Actualizar Contraseña
+          <i class="modal-action modal-close material-icons right">close</i>
+        </span>
+      </div>
+      <div class="modal-content">
+            <form id="formCambiarClave">
+
+          <div class="row">
+                <div class="input-field col s12  col m12">
+                  <i class="material-icons prefix">screen_lock_portrait</i>  
+                  <input type="password" name="claveVieja" id="claveVieja" class="validate tooltipped"  data-position="bottom"  data-tooltip="Indique su clave Actual">
+                  <label data-success="Correcto..."  for="clave" >Clave Actual</label>
+                </div>
+          </div>
+
+          <div class="row">
+                <div class="input-field col s12  col m6">
+                  <i class="material-icons prefix">screen_lock_portrait</i>                  
+                  <input id="claveNueva" name="claveNueva" type="password" class="validate tooltipped"  data-position="bottom"  data-tooltip="Indique cual será su clave para poder igresar al sistema">
+                  <label data-success="Correcto..."  for="clave" >Clave</label>
+                </div>
+
+         <div class="input-field col s12  col m6 ">
+                  <i class="material-icons prefix">screen_lock_landscape</i>                  
+                  <input type="password" class="validate tooltipped" name="repetirClaveNueva" data-position="bottom"  data-tooltip="Repita su clave" name="cclave" id="cclave" equalTo='#claveNueva' placeholder="Confirmar Clave" required>
+                  <label data-error="Las claves no coinciden" data-success="Correcto..."  for="clave" >Confirmar Clave</label>
+                </div>
+          </div>
+          <div class="row"> 
+            <div class="col s12 m12 right">
+              <button type="reset" class="modal-action modal-close btn btn-large btn-flat waves-effect" >CANCELAR</button>
+              <button type="submit" class=" btn btn-large waves-effect waves-light primario" >GUARDAR</button>
+            </div>
+          </div>
+  </form>
+</section>
 <?php require_once "app/vista/plantilla/__scripts.php";  ?>
 
 <script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
@@ -391,6 +305,43 @@
 <script src="public/js/ajax/menu.js"></script>
 <script src="public/js/ajax/perfil.js"></script>
 
+<script>
 
+
+$(".cambiar-clave").on("click",function(){
+$("#modalCambiarClave").modal("open")
+})
+
+  $("#claveNueva").on("focusout", function (e) {
+    if ($(this).val() != $("#cclave").val()) {
+        $("#cclave").removeClass("valid").addClass("invalid");
+    } else {
+        $("#cclave").removeClass("invalid").addClass("valid");
+    }
+});
+
+$("#cclave").on("keyup", function (e) {
+    if ($("#claveNueva").val() != $(this).val()) {
+        $(this).removeClass("valid").addClass("invalid");
+    } else {
+        $(this).removeClass("invalid").addClass("valid");
+    }
+});
+
+
+$('#formCambiarClave').on("submit",function(evento){  
+    
+    evento.preventDefault()
+    
+    var OUser = JSON.parse( localStorage.getItem( "user" ) )
+
+    var cedDoc = OUser.cedDoc
+    var claveVieja = $('#formCambiarClave input[name="claveVieja"]').val()
+    var claveNueva = $('#formCambiarClave input[name="claveNueva"]').val()
+
+    actualizarClave( cedDoc, claveVieja, claveNueva )
+
+})
+</script>
 </body>
 </html>

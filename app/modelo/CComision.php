@@ -68,14 +68,28 @@ class CComision extends Database{
 		$sql = 'SELECT * FROM "TComisiones"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-		return $result;
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
-	public function addDocCom($cedDoc){
+	public function docentesDisponiblesComision(){
+
 		$this->conectarBD();
-		$sql = 'SELECT nombre, "cedDoc" from "TDocentes" as d where not exists (select * from "TComDoc" as cd where d."cedDoc"= cd."cedDoc" and cd."codCom"=:codCom) ';
+		$sql = 'SELECT 
+					nombre, "cedDoc" 
+				FROM 
+					"TDocentes" as d 
+				WHERE NOT EXISTS (
+					SELECT * FROM 
+						"TComDoc" as cd 
+					WHERE 
+						d."cedDoc"= cd."cedDoc" 
+					AND 
+						cd."codCom"=:codCom
+				)';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codCom',$this->codCom);
 		$this->stmt->execute(); 
@@ -98,11 +112,10 @@ class CComision extends Database{
 		$this->stmt->bindParam(':dependencia',$this->dependencia);
 		$this->stmt->bindParam(':descripcion',$this->descripcion);
      	$result = $this->stmt->execute();
+     	$last_id = $this->conn->lastInsertId();
        	$this->desconectarBD();
 		
-   
-
-    	return $result;
+    	return [ "result" => $result , "last_id" => $last_id ];
 	}
 
 	public function consultarComision(){
@@ -198,10 +211,11 @@ class CComision extends Database{
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codCom',$this->codCom);
 		$this->stmt->execute();
-     	$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
-       	$this->desconectarBD();
+     	$num_rows = $this->stmt->rowCount();
+     	$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+     	$this->desconectarBD();
 
-    	return $result;
+     	return $data;
 	}
 
 	public function coordinador(){
@@ -219,14 +233,14 @@ class CComision extends Database{
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codCom',$this->codCom);
 		$this->stmt->execute();
-     	$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+     	$result = $this->stmt->fetch(PDO::FETCH_OBJ);
        	$this->desconectarBD();
 
     	return $result;
 		
 	}
 
-	public function asignarCoordinador( $cedNewCoo ){
+	public function cambiarCoordinador(  ){
 		
 		$this->conectarBD();
 		$sql = 'UPDATE "TComDoc" SET "coordinador" = FALSE WHERE "codCom" = :codCom';
@@ -243,7 +257,7 @@ class CComision extends Database{
      					"cedDoc" = :cedDoc';
 			$this->stmt = $this->conn->prepare($sql);
 			$this->stmt->bindParam(':codCom',$this->codCom);
-			$this->stmt->bindParam(':cedDoc',$cedNewCoo);
+			$this->stmt->bindParam(':cedDoc',$this->cedDoc);
 	     	$result2 = $this->stmt->execute();
 	     	$this->desconectarBD();
 
@@ -255,7 +269,25 @@ class CComision extends Database{
     	return $result;
 	}
 
-	public function desvincularDocente( $cedDoc ){
+	public function asignarCoordinador( ){
+		
+		$this->conectarBD();
+		$sql = 'INSERT INTO 
+					"TComDoc"
+				("codCom", "cedDoc", coordinador)
+					VALUES 
+				(:codCom, :cedDoc, TRUE)';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':codCom',$this->codCom);
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+     	$result = $this->stmt->execute();
+  
+       	$this->desconectarBD();
+    	
+    	return $result;
+	}
+
+	public function desvincularDocente(  ){
 		
 		$this->conectarBD();
 
@@ -268,7 +300,7 @@ class CComision extends Database{
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codCom',$this->codCom);
-		$this->stmt->bindParam(':cedDoc',$cedDoc);
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
 	    $result = $this->stmt->execute();
 	    $this->desconectarBD();
 
@@ -276,20 +308,3 @@ class CComision extends Database{
 
 	}
 }
-
-
- // $o = new CComision();
- // $o->setCodCom(1);
-// $o->setNombre("dsfsf");
-// $o->setDependencia("Fdsfdf");
-// $o->setDescripcion("fdfs");
-
-// var_dump( $o->eliminarComision() );
-// var_dump( $o->docentes() );
-// var_dump( $o->coordinador() );
-// var_dump( $o->cambiarCoordinador( '1' ) );
-// var_dump( $o->desvincularDocente( '25627918' ) );
-//var_dump( $o->crearComision() );
-// var_dump( $o->modificarComision() );
-// var_dump( $o->consultarComision() );
-//var_dump( $o->listarComisiones() );

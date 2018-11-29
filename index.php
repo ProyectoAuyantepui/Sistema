@@ -1,7 +1,8 @@
 <?php
+
 /*
 ********  A U Y A N T E P U I  ********
-- Trayecto III - Fase I
+- Trayecto III - Fase II
 
 Proyecto : 
 
@@ -22,11 +23,14 @@ Tecnologias :
 - jQuery v1.12.4
 - JQuery Validation Plugin v1.17.0
 - PaginationTdA 1.0
-
 */
+date_default_timezone_set('America/Caracas');
+// echo date('d-m-Y');
+// exit();
+require_once "config/config.php";
 
-session_start();
-	
+
+  session_start();
 	if ( $_SESSION && empty( $_GET['controlador'] ) ) {
 
 		// si hay una sesion iniciada y pero la url esta vacia : 

@@ -2,7 +2,6 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CUnidCurr.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -13,10 +12,17 @@ require_once "app/modelo/CUnidCurr.php";
 		case 'crear': 
 		
 			$OUnidCurr = new CUnidCurr();
-			$OUnidCurr->setCodUniCur( $_POST['codUniCur'] );
-			$OUnidCurr->setCodEje( 1 );
-			$OUnidCurr->setCodPnf( 'PNFI' );
-			$OUnidCurr->setNombre( $_POST['nombre'] );
+			$OUnidCurr->setCodUniCur( strtoupper($_POST['codUniCur'] ));
+	 			$validar = $OUnidCurr->validarUnidCurr();
+
+	 			if ( $validar["cantidad"] > 0 ) {
+	 				echo json_encode( [ "operacion" => false , "error" => "1" ] );
+	 				exit();
+	 			}
+
+			$OUnidCurr->setCodEje($_POST['codEje'] );
+			$OUnidCurr->setCodPnf( $_POST['codPnf'] );
+			$OUnidCurr->setNombre( ucwords($_POST['nombre'] ));
 			
 			$OUnidCurr->setUniCre( $_POST['uniCre'] );
 			$OUnidCurr->setTrayecto( $_POST['trayecto'] );
@@ -35,12 +41,11 @@ require_once "app/modelo/CUnidCurr.php";
 		break;
 
 		case 'modificar': 
-		
 			$OUnidCurr = new CUnidCurr();
-			$OUnidCurr->setCodUniCur( $_POST['codUniCur'] );
+			$OUnidCurr->setCodUniCur( strtoupper($_POST['codUniCur'] ));
 			$OUnidCurr->setCodEje( $_POST['codEje']);
 			$OUnidCurr->setCodPnf( $_POST['codPnf']);
-			$OUnidCurr->setNombre( $_POST['nombre'] );
+			$OUnidCurr->setNombre( ucwords($_POST['nombre'] ));
 			
 			$OUnidCurr->setUniCre( $_POST['uniCre'] );
 			$OUnidCurr->setTrayecto( $_POST['trayecto'] );
@@ -63,7 +68,7 @@ require_once "app/modelo/CUnidCurr.php";
 		
 			$OUnidCurr = new CUnidCurr();
 
-			$OUnidCurr->setCodUniCur( $_POST['codUniCur'] );
+			$OUnidCurr->setCodUniCur($_POST['codUniCur'] );
 
 			$resultado = $OUnidCurr->eliminarUnidCurr(); 
 				
@@ -86,16 +91,13 @@ require_once "app/modelo/CUnidCurr.php";
 			echo json_encode( ['data' => $resultado] );
 		break;
 
-
-		
-
 		case 'listar': 
 		
 			$OUnidCurr = new CUnidCurr();
 
 			$uniCur = $OUnidCurr->listarUnidCurr();
 
-			echo json_encode(['data' => $uniCur]);
+			echo json_encode( $uniCur );
 		break;
 		
 			case 'buscar': 

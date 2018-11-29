@@ -7,8 +7,9 @@
 -- Estructura para la tabla(01) "TDocentes" : Almacena informacion acerca de docentes de la uptaeb
 
 create table "TDocentes"(
-"cedDoc" varchar(8),
+"cedDoc" varchar(10),
 "codCatDoc" int,
+"codDed" int,
 "codRol" varchar(50),
 "nombre" varchar(20),
 "apellido" varchar(20),
@@ -19,8 +20,10 @@ create table "TDocentes"(
 "direccion" varchar(120),
 "fecIng" date, 
 "fecCon" date,
-"dedicacion" int,
-"condicion" int,
+"condicion" varchar(120),
+"carrera" varchar(50),
+"pregrado" varchar(120),
+"postgrado" varchar (120),
 "usuario" varchar(12),
 "clave" varchar(88),
 "estado" boolean,
@@ -38,21 +41,31 @@ create table "TRoles"(
 primary key("codRol")
 );
 
--- Estructura para la tabla(03) "TModulos" : Almacena informacion acerca de los modulos del sistema a los que el rol despues podra acceder
+-- Estructura para la tabla(03) "TDedicaciones" : Almacena informacion de las dedicaciones de docentes 
 
-create table "TModulos"(
-"codMod" varchar(8),
+create table "TDedicaciones"(
+"codDed" serial,
+"nombre" varchar(50),
+"minHor" int,
+"maxHor" int,
+primary key("codDed")
+);
+
+-- Estructura para la tabla(04) "TPermisos" : Almacena informacion acerca de los modulos del sistema a los que el rol despues podra acceder
+
+create table "TPermisos"(
+"codPer" varchar(8),
 "nombre" varchar(90),
-primary key("codMod")
+primary key("codPer")
 );
 
 
--- Estructura para la tabla(05) "TRolMod" : Tabla detalles entre las tablas "TRoles" , "TModulos" que representa la permisologia de los roles del sistema
+-- Estructura para la tabla(05) "TRolPer" : Tabla detalles entre las tablas "TRoles" , "TPermisos" que representa la permisologia de los roles del sistema
 
-create table "TRolMod"(
+create table "TRolPer"(
 "codRol" varchar(50),
-"codMod" varchar(8),
-primary key("codRol" , "codMod")
+"codPer" varchar(8),
+primary key("codRol" , "codPer")
 );
 
 -- Estructura para la tabla(06) "TComisiones" : Almacena informacion acerca de comisiones de un docente
@@ -69,7 +82,7 @@ primary key("codCom")
 
 create table "TComDoc"(
 "codCom" int,
-"cedDoc" varchar(8),
+"cedDoc" varchar(10),
 "coordinador" boolean,
 primary key( "codCom" , "cedDoc" )
 );
@@ -95,7 +108,7 @@ primary key("codDep")
 -- Estructura para la tabla(10) "TDocDep" : Tabla detalles entre las tablas "TDocentes" y Tdependendencia
 
 create table "TDocDep"(
-"cedDoc" varchar(8),
+"cedDoc" varchar(10),
 "codDep" int,
 primary key("cedDoc" , "codDep")
 );
@@ -103,9 +116,9 @@ primary key("cedDoc" , "codDep")
 -- Estructura para la tabla(11) "TPnf" : Almacena la informacion sobre los PNF o carreras de la uptaeb y esta estrictamente relacionado con las unidades curriculares o materias osea con el pensum 
 
 create table "TPnf"(
-"alias" varchar(6),
+"codPnf" varchar(6),
 "descripcion" varchar(150),
-primary key("alias")
+primary key("codPnf")
 );
 
 -- Estructura para la tabla(12) "TEjes" : Almacena informacion acerca de los ejes de formacion a los que pertenecen las unidades curriculares por ejemplo eje epistemologico
@@ -155,6 +168,7 @@ primary key("codAmb")
 
 create table "TSecciones"(
 "codSec" varchar(15),
+"pnf" varchar(6),
 "trayecto" int,
 "matricula" int,
 "estado" boolean default 'F',
@@ -218,7 +232,7 @@ primary key("codTie")
 
 create table "THorarios"(
 "codHor" serial,
-"cedDoc" varchar(8),
+"cedDoc" varchar(10),
 "codSec" varchar(15),
 "codUniCur" varchar(10),
 "codActAdm" int,
@@ -239,12 +253,10 @@ primary key("codHor")
 
 create table "TBitacora"(
 "codBit" serial,
-"cedDoc" varchar(8),
-"modulo" varchar(60),
+"cedDoc" varchar(10),
 "accion" varchar(60),
 "fecha" date,
 "hora" time,
-"descripcion" varchar(120),
 primary key("codBit")
 );
 
@@ -279,6 +291,12 @@ foreign key("codRol")
 references "TRoles"("codRol")
 ON DELETE SET NULL ON UPDATE SET NULL;
 
+alter table "TDocentes"
+add constraint "fk_codDed_TDedicaciones"
+foreign key("codDed") 
+references "TDedicaciones"("codDed")
+ON DELETE SET NULL ON UPDATE SET NULL;
+
 -- Llaves Foraneas para la tabla(10) "TDocDep"
 
 alter table "TDocDep"
@@ -293,19 +311,19 @@ foreign key("codDep")
 references "TDependencias"("codDep")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
--- Llaves Foraneas para la tabla(05) "TRolMod"
+-- Llaves Foraneas para la tabla(05) "TRolPer"
 
-alter table "TRolMod"
+alter table "TRolPer"
 add constraint "fk_codRol_TRoles"
 foreign key("codRol") 
 references "TRoles"("codRol");
 
 
 
-alter table "TRolMod"
-add constraint "fk_codMod_TModulos"
-foreign key("codMod") 
-references "TModulos"("codMod");
+alter table "TRolPer"
+add constraint "fk_codPer_TPermisos"
+foreign key("codPer") 
+references "TPermisos"("codPer");
 
 
 
@@ -364,7 +382,7 @@ ON DELETE SET NULL ON UPDATE SET NULL;
 alter table "TUnidCurr"
 add constraint "fk_codPnf_TPnf"
 foreign key("codPnf") 
-references "TPnf"("alias")
+references "TPnf"("codPnf")
 ON DELETE SET NULL ON UPDATE SET NULL;
 
 alter table "TUnidCurr"
@@ -381,5 +399,121 @@ foreign key("cedDoc")
 references "TDocentes"("cedDoc")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
+------------------------------------------------------------------------------------------------------------
 
+-- Este STORED-PROCEDURED , retorna la cantidad de horas de clase de un docente
 
+-- Datos de entrada:
+
+-- cedula_docente text 
+
+CREATE OR REPLACE FUNCTION get_horas_de_clase( cedula_docente text ) RETURNS integer AS 
+$BODY$
+DECLARE
+	cantidad integer;
+BEGIN
+
+	SELECT 
+	  count( h.* ) INTO cantidad
+	FROM "THorarios" h 
+	INNER JOIN "TDocentes" d ON d."cedDoc" = h."cedDoc"
+	WHERE 
+	  h.tipo = 1
+	AND
+	d."cedDoc" = cedula_docente
+	GROUP BY d."cedDoc"; 	
+
+	RETURN coalesce( cantidad  , 0 );
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+--SELECT get_horas_de_clase( 'V-25627918' );
+
+------------------------------------------------------------------------------------------------------------
+-- Este STORED-PROCEDURED , retorna la cantidad de horas por tipo de actividad administrativa
+
+-- Datos de entrada:
+
+-- cedula_docente text , tipo_de_actividad text
+
+-- TIPOS DE ACTIVIDADES:
+
+-- 1). Creación Intelectual (CI)
+-- 2). Integración Comunidad (IC)
+-- 3). Asesoría Académica (AA)
+-- 4). Gestión Académica (GA)
+-- 5). Otras Act. Académicas (OAA)
+
+CREATE OR REPLACE FUNCTION get_horas_administrativas_por_tipo( cedula_docente text , tipo_actividad text ) RETURNS integer AS 
+$BODY$
+DECLARE
+	cantidad integer;
+BEGIN
+	SELECT 
+	   count( h."codHor" ) INTO cantidad
+	FROM "THorarios" h 
+	INNER JOIN "TDocentes" d ON d."cedDoc" = h."cedDoc"
+	INNER JOIN "TActiAdmi" aa ON aa."codActAdm" = h."codActAdm"
+	WHERE 
+	  h.tipo = 2
+	AND
+	  d."cedDoc" = cedula_docente
+	AND
+	  aa."tipActAdm" = tipo_actividad
+	GROUP BY d."cedDoc"; 	
+
+	
+	
+	RETURN coalesce( cantidad  , 0 );
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+--SELECT * FROM get_horas_administrativas_por_tipo( 'V-25627918' , 'OAA' );
+
+------------------------------------------------------------------------------------------------------------
+
+-- Este STORED-PROCEDURED , retorna la carga horaria academico-administrativa de un docente
+
+-- Datos de entrada:
+
+-- cedula_docente text
+
+-- EL REPORTE
+
+-- 1). Horas de CLase
+-- 2). Horas Creación Intelectual (CI)
+-- 3). Horas Integración Comunidad (IC)
+-- 4). Horas Asesoría Académica (AA)
+-- 5). Horas Gestión Académica (GA)
+-- 6). Horas Otras Act. Académicas (OAA)
+-- 7). Total de Horas Administrativas 
+-- 8). Total de Horas ()
+
+CREATE OR REPLACE FUNCTION get_carga_horaria_docente(cedula_docente text)
+  RETURNS TABLE(
+	horas_de_clase integer, 
+	horas_ci integer,
+	horas_ic integer,
+	horas_ase_aca integer,
+	horas_ga integer,
+	horas_oaa integer,
+	total_hadmin integer,
+	total_horas integer
+	) AS $$
+BEGIN
+	horas_de_clase := get_horas_de_clase( cedula_docente );
+	horas_ci := get_horas_administrativas_por_tipo( cedula_docente , 'CI' );
+	horas_ic := get_horas_administrativas_por_tipo( cedula_docente , 'IC' );
+	horas_ase_aca := get_horas_administrativas_por_tipo( cedula_docente , 'AA' );
+	horas_ga := get_horas_administrativas_por_tipo( cedula_docente , 'GA' );
+	horas_oaa := get_horas_administrativas_por_tipo( cedula_docente , 'OAA' );
+	total_hadmin := horas_ci + horas_ic + horas_ase_aca + horas_ga + horas_oaa;
+	
+	total_horas := horas_de_clase + total_hadmin;
+	RETURN NEXT;
+END;
+$$ LANGUAGE 'plpgsql' VOLATILE;
+
+--select * from get_carga_horaria_docente('V-25627918');

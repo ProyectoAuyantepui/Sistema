@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CDependencia
-Sirve para gestionar toda la informacion referente a Dependencias
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 
 class CDependencia extends Database{
@@ -51,7 +46,7 @@ class CDependencia extends Database{
 
 	public function getCedDoc(){
 
-		return $this->codCom;
+		return $this->cedDoc;
 	}
 
 	public function listarDependencias(){
@@ -60,9 +55,11 @@ class CDependencia extends Database{
 		$sql = 'SELECT * FROM "TDependencias"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-		return $result;
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearDependencia(){
@@ -159,10 +156,11 @@ class CDependencia extends Database{
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
 		$this->stmt->execute();
-     	$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
-       	$this->desconectarBD();
+     	$num_rows = $this->stmt->rowCount();
+     	$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+     	$this->desconectarBD();
 
-    	return $result;
+     	return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function desvincularDocDep( $cedDoc ){
@@ -185,18 +183,4 @@ class CDependencia extends Database{
     	return $result;
 
 	}
-
-
 }
-
-
-//  $o = new CDependencia();
-//  $o->setCodDep(1);
-// // $o->setNombre("fdfdf");
-// // $o->setDescripcion("fdfdf");
-// // //var_dump( $o->modificarDependencia() );
-// // //var_dump( $o->eliminarDependencia() );
-// // //var_dump( $o->crearDependencia() ); 
-// // // var_dump( $o->consultarDependencia() ); 
-// // var_dump( $o->listarDependencias() ); 
-// var_dump( $o->docentes() ); 

@@ -21,47 +21,47 @@ function listar(){
         if (respuesta.data.length > 0) {
             var content = $("")
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_pnf").show()
+            $("#tabla_pnf tbody").html('')
 
               $.each(respuesta.data, function(i, item) {
 
-                content = `<tr data-id="${item.alias }">>
-                                        <td width="20%">${ item.alias }</td>
-                                        <td width="20%">${ item.descripcion }</td>
-                                        <td width="5%" >
+                content = `<tr data-id="${item.codPnf }">>
+                                        <td >${ item.codPnf }</td>
+                                        <td >${ item.descripcion }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_pnf tbody").append(content)
               })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_pnf").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_pnf").hide()
             $(".mensaje").show()
             
         }
     })
 }
 
-function editar( alias ){ 
+function editar( codPnf ){ 
 
     $.ajax({ 
 
             dataType : 'json' ,
             type:'POST' , 
             url:'index.php?controlador=pnf&actividad=consultar',
-            data:{ "alias" : alias} 
+            data:{ "codPnf" : codPnf} 
     }) 
     .done(function(respuesta){
 
         $("#modal_operaciones").modal("close")
 
-        $(".formEditarPnf #editar_alias").val( respuesta.data.alias )
+        $(".formEditarPnf #editar_codPnf").val( respuesta.data.codPnf )
 
         $(".formEditarPnf #editar_descripcion").val( respuesta.data.descripcion )
 
@@ -72,7 +72,7 @@ function editar( alias ){
 
 function crear(){
     var datos = {
-        "alias" : $('.formCrearPnf #crear_alias').val(),
+        "codPnf" : $('.formCrearPnf #crear_codPnf').val(),
         "descripcion" : $('.formCrearPnf #crear_descripcion').val()
     }
 
@@ -100,13 +100,13 @@ console.log(respuesta)
     })
 }
 
-function eliminar( alias ){ 
+function eliminar( codPnf ){ 
 
     $.ajax({ 
                 dataType : 'json', 
                 type:'POST' ,
                 url:'index.php?controlador=pnf&actividad=eliminar' ,
-                data:{ "alias" : alias }
+                data:{ "codPnf" : codPnf }
     })
 
     .done(function(respuesta){
@@ -166,32 +166,32 @@ function buscar( filtro ){
         
         if (respuesta.operacion == true) {
             var content = $('')
-            $("table tbody").html('')
+            $("#tabla_pnf tbody").html('')
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_pnf").show()      
               
             
 
             $.each(respuesta.data, function(i, item) {
 
-              content = `<tr data-id="${item.alias }">
-                                        <td width="20%">${ item.alias }</td>
-                                        <td width="20%">${ item.descripcion }</td>
-                                        <td width="5%" >
+              content = `<tr data-id="${item.codPnf }">
+                                        <td >${ item.codPnf }</td>
+                                        <td >${ item.descripcion }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-              $("table tbody").append(content)
+              $("#tabla_pnf tbody").append(content)
             })
             
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_pnf").paginationTdA({ elemPerPage: 8 })
         }else{
 
             $(".mensaje").show()
-           $("table").hide() 
+           $("#tabla_pnf").hide() 
         }
     })
 }
@@ -219,7 +219,7 @@ DESCRIPCION :
 r
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_pnf").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -237,9 +237,9 @@ DESCRIPCION :
 */
 $("body").on( "click", ".editar-pnf", function(){ 
 
-    var alias = $("#modal_operaciones input[name=item_seleccionado]").val( )
+    var codPnf = $("#modal_operaciones input[name=item_seleccionado]").val( )
     
-    editar( alias ) 
+    editar( codPnf ) 
 })
 
 /*
@@ -263,8 +263,8 @@ DESCRIPCION :
 
 */
 $("body").on("click", ".eliminar-pnf", function(){
-    var alias = $("#modal_operaciones input[name=item_seleccionado]").val( )
-    $(".formEliminarPnf #alias").val( alias )
+    var codPnf = $("#modal_operaciones input[name=item_seleccionado]").val( )
+    $(".formEliminarPnf #codPnf").val( codPnf )
     $("#modal_operaciones").modal("close")
     $("#eliminarPnf").modal("open")
 })
@@ -287,13 +287,13 @@ $('.formCrearPnf').on("submit",function(evento){
         type:'POST',
         url:'index.php?controlador=pnf&actividad=consultar',
         data:{
-          "alias" : $('#crearPnf input[name=alias]').val()
+          "codPnf" : $('#crearPnf input[name=codPnf]').val()
         } 
     })                      
-    .done(function(respuesta_alias){
-        if (respuesta_alias.operacion == true) {
-            Materialize.toast('Ya existe un usuario usando ese numero de alias...',997,'rounded');
-            $('#crearPnf input[name=alias]').addClass("invalid")  
+    .done(function(respuesta_codPnf){
+        if (respuesta_codPnf.operacion == true) {
+            Materialize.toast('Ya existe un usuario usando ese numero de codPnf...',997,'rounded');
+            $('#crearPnf input[name=codPnf]').addClass("invalid")  
 
                               
         }else{
@@ -313,8 +313,8 @@ DESCRIPCION :
 $('.formEliminarPnf').on("submit",function(evento){  
     
     evento.preventDefault()    
-    var alias = $(".formEliminarPnf input[name=alias]").val()
-    eliminar( alias )
+    var codPnf = $(".formEliminarPnf input[name=codPnf]").val()
+    eliminar( codPnf )
 })
 
 

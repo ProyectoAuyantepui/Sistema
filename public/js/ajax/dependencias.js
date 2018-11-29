@@ -21,8 +21,8 @@ function listar(){
         if (respuesta.data.length > 0) {
             
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_dependencias").show()
+            $("#tabla_dependencias tbody").html('')
 
             var content = $('')
             var switche 
@@ -37,23 +37,23 @@ function listar(){
 
 
                 content = `<tr data-id="${item.codDep }">
-                            <td width="20%">${ item.nombre }</td>
-                            <td width="80%">${ item.descripcion }</td>
-                            <td width="10%">
+                            <td >${ item.nombre }</td>
+                            <td >${ item.descripcion }</td>
+                            <td >
                     </td>
-                                        <td width="5%" >
+                                        <td >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_dependencias tbody").append(content)
               })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_dependencias").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_dependencias").hide()
             $(".mensaje").show()
             
         }
@@ -177,9 +177,9 @@ function buscar( filtro ){
     .done(function(respuesta){
         if (respuesta.operacion == true) {
             var content = $('')
-            $("table tbody").html('')
+            $("#tabla_dependencias tbody").html('')
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_dependencias").show()      
               
             var switche 
             var tipo
@@ -196,21 +196,21 @@ function buscar( filtro ){
 
 
                 content = `<tr data-id="${item.codDep }">
-                            <td width="20%">${ item.nombre }</td>
-                            <td width="20%">${ item.descripcion }</td>
-                            <td width="5%" >
+                            <td >${ item.nombre }</td>
+                            <td >${ item.descripcion }</td>
+                            <td  >
                                 <a href="#" class="mostrarOperaciones">
                                     <i class="material-icons black-text">more_vert</i>
                                 </a>
                             </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_dependencias tbody").append(content)
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_dependencias").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_dependencias").hide()
             $(".mensaje").show()
             
         }
@@ -240,7 +240,7 @@ DESCRIPCION :
 r
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_dependencias").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 

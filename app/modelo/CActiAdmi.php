@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CActiAdmi 
-Sirve para gestionar toda la informacion referente a Actividades Administrtivas
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 class CActiAdmi extends Database{
 
@@ -71,10 +66,11 @@ class CActiAdmi extends Database{
 		$sql = 'SELECT * FROM "TActiAdmi"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearActiAdmi(){
@@ -160,32 +156,33 @@ class CActiAdmi extends Database{
 
     	return $result;
 	}
+
+	public function listarActiAdmiDistintos(){
+ 
+		$this->conectarBD();
+		$sql = ' SELECT DISTINCT ON ("tipActAdm") "codActAdm" ,"tipActAdm" FROM "TActiAdmi" ';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+		public function listarActiAdmiPorTipo(){
+ 
+		$this->conectarBD();
+		$sql = ' SELECT * FROM "TActiAdmi" WHERE "tipActAdm" = :tipActAdm ';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':tipActAdm',$this->tipActAdm);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
 }
 
 
-// $o = new CActiAdmi();
-
-// $o->setTitulo("gdgdfg");
-// $o->setDependencia("fdssdf");
-// $o->setTipActAdm("2");
-// $o->setObservaciones("dfdsfd");
-
-// var_dump( $o->crearActiAdmi() );
-
-
-// $o->setCodActAdm(2);
-
-// $o->setTitulo("sssss");
-// $o->setDependencia("sssss");
-// $o->setTipActAdm(2);
-// $o->setObservaciones("ssssss");
-
-// var_dump( $o->modificarActiAdmi() );
-
-
-// $o->setCodActAdm(2);
-
-// var_dump( $o->eliminarActiAdmi() );
-
-
-// var_dump( $o->listarActiAdmi() );

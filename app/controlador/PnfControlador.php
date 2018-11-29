@@ -1,9 +1,9 @@
 <?php 
 
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+
 require_once "app/modelo/CPnf.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -15,7 +15,13 @@ require_once "app/modelo/CPnf.php";
 		
 			$OPnf = new CPnf();
 
-			$OPnf->setAlias( $_POST['alias'] );
+			$OPnf->setCodPnf( strtoupper($_POST['codPnf'] ));
+	 			$validar = $OPnf->validarPnf();
+
+	 		if ( $validar["cantidad"] > 0 ) {
+	 			echo json_encode( [ "operacion" => false , "error" => "1" ] );
+	 			exit();
+	 		}
 			$OPnf->setDescripcion( $_POST['descripcion'] );
 
 			$resultado = $OPnf->crearPnf(); 
@@ -32,7 +38,7 @@ require_once "app/modelo/CPnf.php";
 		
 			$OPnf = new CPnf();
 
-			$OPnf->setAlias( $_POST['alias'] );
+			$OPnf->setCodPnf( strtoupper($_POST['codPnf'] ));
 			$OPnf->setDescripcion( $_POST['descripcion'] );
 			
 			$resultado = $OPnf->modificarPnf(); 
@@ -50,7 +56,7 @@ require_once "app/modelo/CPnf.php";
 		
 			$OPnf = new CPnf();
 
-			$OPnf->setAlias( $_POST['alias'] );
+			$OPnf->setCodPnf( $_POST['codPnf'] );
 
 			$resultado = $OPnf->eliminarPnf(); 
 			
@@ -66,7 +72,7 @@ require_once "app/modelo/CPnf.php";
 		
 			$OPnf = new CPnf();
 
-			$OPnf->setAlias( $_POST['alias'] );
+			$OPnf->setCodPnf( $_POST['codPnf'] );
 
 			$resultado = $OPnf->consultarPnf();
 			
@@ -79,7 +85,7 @@ require_once "app/modelo/CPnf.php";
 
 			$pnf = $OPnf->listarPnf();
 
-			echo json_encode(['data' => $pnf]);
+			echo json_encode( $pnf );
 		break;
 
 		case 'buscar': 

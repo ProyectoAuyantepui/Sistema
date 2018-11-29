@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CTiempo 
-Sirve para gestionar toda la informacion referente a Tiempo
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 class CTiempo extends Database{
 
@@ -38,7 +33,81 @@ class CTiempo extends Database{
 
 
 	public function listarTiempo(){
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TTiempo"';
 
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function listarHoras(){
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "THoras"';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function listarHorasDia(){
+		$this->conectarBD();
+		$sql = "SELECT * FROM \"THoras\" WHERE \"codHor\" BETWEEN 'H-01' AND 'H-06'";
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function listarHorasTarde(){
+		$this->conectarBD();
+		$sql = "SELECT * FROM \"THoras\" WHERE \"codHor\" BETWEEN 'H-07' AND 'H-12'";
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function listarHorasNoche(){
+		$this->conectarBD();
+		$sql = "SELECT * FROM \"THoras\" WHERE \"codHor\" BETWEEN 'H-13' AND 'H-18'";
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function listarDias(){
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TDias"';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function consultarTiempo(){

@@ -12,7 +12,7 @@ $(function(){
     $.ajax({ 
         dataType : 'json',
         type:'POST',
-        url:'index.php?controlador=permisologia&actividad=consultar',
+        url:'index.php?controlador=roles&actividad=consultar-permisos',
         data:{
           "codRol" : OUser.rol.codRol
         }
@@ -22,7 +22,7 @@ $(function(){
         
         $.each( respuesta.data , function (i,item) {
 
-            $("ul li[codMod="+item.codMod+"]").removeClass("oculto")
+            $("ul li[codPer="+item.codPer+"]").removeClass("oculto")
             
         })
      })

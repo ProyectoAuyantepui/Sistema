@@ -7,6 +7,10 @@ require 'src/Exception.php';
 require 'src/PHPMailer.php';
 require 'src/SMTP.php';
 
+
+
+
+
 // INSTANCIA
 $mail = new PHPMailer(true);                              // SE PONE TRUE PARA HABILITAR ERORES
 try {
@@ -39,7 +43,9 @@ try {
     // ASUNTO
     $mail->Subject = 'Here is the subject';
     // CUERPO
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    
+
+    $mail->Body    = "gdfgdf";
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     // enviar
     $mail->send();

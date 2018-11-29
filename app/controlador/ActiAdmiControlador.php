@@ -1,9 +1,10 @@
 <?php 
 
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
+
 require_once "app/modelo/CActiAdmi.php";
+require_once "app/modelo/CBitacora.php";
 	
-	// switch case a la variable actividad que recibimos en el index.php por get  
 	switch($actividad){
 
 		case 'index': 
@@ -15,7 +16,7 @@ require_once "app/modelo/CActiAdmi.php";
 		
 			$OActiAdmi = new CActiAdmi();
 			
-			$OActiAdmi->setTitulo( $_POST['titulo'] );
+			$OActiAdmi->setTitulo( ucfirst($_POST['titulo'] ));
 			$OActiAdmi->setObservaciones( $_POST['observaciones'] );
 			$OActiAdmi->setDependencia( $_POST['dependencia'] );
 			$OActiAdmi->setTipActAdm( $_POST['tipActAdm'] );
@@ -23,7 +24,9 @@ require_once "app/modelo/CActiAdmi.php";
 			$resultado = $OActiAdmi->crearActiAdmi(); 
 			
 			if ($resultado) {
-
+				$OBitacora = new CBitacora();
+				$OBitacora->setAccion("Insertar actividad administrativa : " . ucfirst($_POST['titulo'] ) . " ");
+				$OBitacora->guardarTransaccion(); 
 				echo json_encode( ['operacion' => true] );
 			}else{
 				
@@ -90,7 +93,7 @@ require_once "app/modelo/CActiAdmi.php";
 			$OActiAdmi = $OActiAdmi->listarActiAdmi();
 
 
-			echo json_encode(['data' => $OActiAdmi]);
+			echo json_encode( $OActiAdmi );
 		break;
 
 		case 'buscar': 

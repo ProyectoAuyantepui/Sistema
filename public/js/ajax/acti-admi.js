@@ -36,7 +36,7 @@ DESCRIPCION :
 
 */
 
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_ActAdm").on("click","a.mostrarOperaciones",function(){
 
     var codActAdm= $(this).parents("tr").data("id")
 
@@ -142,10 +142,10 @@ function listar(){
 
                 contenidoHTML += `<tr data-id="${respuesta.data[i].codActAdm }">
                                         
-                                        <td width="20%">${ respuesta.data[i].titulo }</td>
-                                        <td width="20%">${ respuesta.data[i].dependencia }</td>
-                                        <td width="20%">${ respuesta.data[i].tipActAdm }</td>
-                                        <td width="5%" >
+                                        <td >${ respuesta.data[i].titulo }</td>
+                                        <td >${ respuesta.data[i].dependencia }</td>
+                                        <td >${ respuesta.data[i].tipActAdm }</td>
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
@@ -155,7 +155,7 @@ function listar(){
                 tbody.html(contenidoHTML)
             }
 
-            tabla_ActAdm.paginationTdA({ elemPerPage: 4 })
+            tabla_ActAdm.paginationTdA({ elemPerPage: 8 })
         }else{
 
             tbody.html(`<div class="col s12">

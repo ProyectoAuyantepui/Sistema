@@ -1,6 +1,5 @@
 <?php 
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch( $actividad ){
 
 		case 'index':

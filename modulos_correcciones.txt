@@ -1,0 +1,8 @@
+mostrar cual es el tipo de actividad realmente en el select en editar en el modulo actividades administrativas
+
+validacion en el rol HTML5
+
+validacion de duplicados a : 
+
+SECCIONES , UC , AMBIENTES , DOCENTES , ROLES 
+

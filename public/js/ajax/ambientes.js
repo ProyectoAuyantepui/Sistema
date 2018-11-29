@@ -9,16 +9,6 @@ function limpiarCasillas(){
     
 }
 
-function generarPdfGeneral(){
-    var url = 'index.php?controlador=ambientes&actividad=reporte-general'    
-    $.ajax({  url : url, type : 'POST', dataType : 'json' })
-    .done(function(respuesta){
-        console.log("Hola")        
-    })
-}
-
-$(".generar-pdf").on("click",function(){ generarPdfGeneral() })
-
 function listar(){
 
     var url = 'index.php?controlador=ambientes&actividad=listar'
@@ -31,8 +21,8 @@ function listar(){
             
             var content = $("")
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_ambientes").show()
+            $("#tabla_ambientes tbody").html('')
 
             var content = $("")
             var switche 
@@ -53,10 +43,10 @@ function listar(){
 
 
                 content = `<tr data-id="${item.codAmb }">
-                            <td width="20%">${ item.codAmb }</td>
-                            <td width="30%">${ item.ubicacion }</td>
-                            <td width="20%">${ tipo }</td>
-                            <td width="10%">
+                            <td >${ item.codAmb }</td>
+                            <td >${ item.ubicacion }</td>
+                            <td >${ tipo }</td>
+                            <td >
                                 <div class="switch">
                                     <label>
                                         ${switche}
@@ -64,19 +54,19 @@ function listar(){
                                     </label>
                                 </div>
                             </td>
-                            <td width="5%" >
+                            <td >
                                 <a href="#" class="mostrarOperaciones">
                                     <i class="material-icons black-text">more_vert</i>
                                 </a>
                             </td>   
-                                    </tr>`
+                        </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_ambientes tbody").append(content)
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_ambientes").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_ambientes").hide()
             $(".mensaje").show()
             
         }
@@ -90,7 +80,7 @@ function editar( codAmb ){
             dataType : 'json' ,
             type:'POST' , 
             url:'index.php?controlador=ambientes&actividad=consultar',
-            data:{ "codAmb" : codAmb} 
+            data:{ "codAmb" : codAmb } 
     }) 
     .done(function(respuesta){
 
@@ -204,9 +194,9 @@ function buscar( filtro ){
     .done(function(respuesta){
         if (respuesta.operacion == true) {
             var content = $('')
-            $("table tbody").html('')
+            $("#tabla_ambientes tbody").html('')
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_ambientes").show()      
               
             var switche 
             var tipo
@@ -226,10 +216,10 @@ function buscar( filtro ){
 
 
                 content = `<tr data-id="${item.codAmb }">
-                            <td width="20%">${ item.codAmb }</td>
-                            <td width="30%">${ item.ubicacion }</td>
-                            <td width="20%">${ tipo }</td>
-                            <td width="10%">
+                            <td >${ item.codAmb }</td>
+                            <td >${ item.ubicacion }</td>
+                            <td >${ tipo }</td>
+                            <td >
                                 <div class="switch">
                                     <label>
                                         ${switche}
@@ -237,19 +227,19 @@ function buscar( filtro ){
                                     </label>
                                 </div>
                             </td>
-                            <td width="5%" >
+                            <td  >
                                 <a href="#" class="mostrarOperaciones">
                                     <i class="material-icons black-text">more_vert</i>
                                 </a>
                             </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_ambientes tbody").append(content)
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_ambientes").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_ambientes").hide()
             $(".mensaje").show()
             
         }
@@ -272,7 +262,7 @@ function cambiarEstado( estado , codAmb ){
 
 
         Materialize.toast('Listo...',997)
-        listar()
+
                                       
       }else{
                   
@@ -306,7 +296,7 @@ DESCRIPCION :
 r
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_ambientes").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -343,7 +333,7 @@ $("body").on( "keyup", "input[name=filtro]", function(){
     buscar( filtro ) 
 })
 
-$("table").on("change","input[name=switch]",function() {
+$("#tabla_ambientes").on("change","input[name=switch]",function() {
     var codAmb = $(this).parents("tr").data("id")
     var estado = false
     if($(this).is(":checked")) {
@@ -385,24 +375,7 @@ $('.formCrearAmbiente').on("submit",function(evento){
 
     if( !$(this).valid() ) return false;
 
-$.ajax({ 
-        dataType : 'json',
-        type:'POST',
-        url:'index.php?controlador=ambientes&actividad=validarAmbiente',
-        data:{
-          "codAmb" : $('#crearAmbiente input[name=codAmb]').val()
-        } 
-    })    
-    .done(function(respuesta){
-console.log(respuesta)
-if (respuesta.operacion==true) {
-    Materialize.toast('Ya existe ambiente con el mismo código...',2000,'rounded');
-            $('#crearAmbiente input[name=codAmb]').addClass("invalid")
-        }else{
-            console.log("hola1")
-                    crear( $(this) )
-        }
-})
+    crear( $(this) )
 })
 
 /*

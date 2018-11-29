@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CDocente 
-Sirve para gestionar toda la informacion referente a Docentes
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 
 class CDocente extends Database{
@@ -21,7 +16,7 @@ class CDocente extends Database{
     private $direccion; 
     private $fecIng; 
     private $fecCon; 
-    private $dedicacion; 
+    private $codDed; 
     private $condicion; 
     private $usuario; 
     private $clave; 
@@ -91,9 +86,9 @@ class CDocente extends Database{
 		$this->fecCon = $fecCon;
 	}
 	
-	public function setDedicacion( $dedicacion ){
+	public function setCodDed( $codDed ){
 
-		$this->dedicacion = $dedicacion;
+		$this->codDed = $codDed;
 	}
 	
 	public function setCondicion( $condicion ){
@@ -198,9 +193,9 @@ class CDocente extends Database{
 		return $this->fecCon;
 	}
 	
-	public function getDedicacion(  ){
+	public function getCodDed(  ){
 
-		return $this->dedicacion;
+		return $this->codDed;
 	}
 	
 	public function getCondicion(  ){
@@ -247,15 +242,16 @@ public function crearDocente(){
 
 		
 		$this->conectarBD();
+        $pass_encript = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO "TDocentes"
 			(
 	            "cedDoc", "codCatDoc", "codRol", nombre, apellido, "fecNac", 
-	            sexo, telefono, correo, direccion, "fecIng", "fecCon", dedicacion, 
+	            sexo, telefono, correo, direccion, "fecIng", "fecCon", "codDed", 
 	            condicion, usuario, clave, estado, avatar, observaciones
         	)
 		VALUES
 			(	:cedDoc, :codCatDoc, :codRol, :nombre, :apellido, :fecNac, 
-		        :sexo, :telefono, :correo, :direccion, :fecIng, :fecCon, :dedicacion, 
+		        :sexo, :telefono, :correo, :direccion, :fecIng, :fecCon, :codDed, 
 		        :condicion, :usuario, :clave, :estado, :avatar, :observaciones
             );
 ';
@@ -273,10 +269,10 @@ public function crearDocente(){
 		$this->stmt->bindParam(':direccion',$this->direccion);
 		$this->stmt->bindParam(':fecIng',$this->fecIng);
 		$this->stmt->bindParam(':fecCon',$this->fecCon);
-		$this->stmt->bindParam(':dedicacion',$this->dedicacion);
+		$this->stmt->bindParam(':codDed',$this->codDed);
 		$this->stmt->bindParam(':condicion',$this->condicion);
 		$this->stmt->bindParam(':usuario',$this->usuario);
-		$this->stmt->bindParam(':clave',$this->clave);
+		$this->stmt->bindParam(':clave',$pass_encript);
 		$this->stmt->bindParam(':estado',$this->estado);
 		$this->stmt->bindParam(':avatar',$this->avatar);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
@@ -286,19 +282,71 @@ public function crearDocente(){
     	return $result;
 	}
 
-	public function validarDocente(){
+	public function validarUsuario(){
 		
-		$this->conectarBD();
-		$sql = 'SELECT * FROM "TDocentes" WHERE usuario = :usuario and clave = :clave';
-
-		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':usuario', $this->usuario);
-        $this->stmt->bindParam(':clave', $this->clave);
+       	$this->conectarBD();
+       	$sql = 'SELECT * FROM "TDocentes" WHERE usuario = :usuario';
+       	$this->stmt = $this->conn->prepare($sql);
+       	$this->stmt->bindParam(':usuario', $this->usuario);
        	$this->stmt->execute(); 
-       	$respuesta = $this->stmt->fetch(PDO::FETCH_OBJ);
+       	$numero_usuarios = $this->stmt->rowCount();
+
+       		if ( $numero_usuarios == 0 ) {
+       		    	
+       		    $this->desconectarBD();
+       		    return [ 
+
+    	    		"operacion" => false,
+    	    		"codigo_error" => "1" 
+       		   ];   		
+       		}
+
+		$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            $password = $result['clave'];
+            if (password_verify($_POST["clave"], $password)) {
+                $r = true;
+            } else {
+                $r = false;
+            }
+        
+        if ($r) {
+
+            return [
+                "operacion" => true,
+                "data"      => $result
+            ];
+        } else {
+
+            return [
+                "operacion"    => false,
+                "codigo_error" => "2"
+            ];
+        }
+
+      /* 	$sql = 'SELECT * FROM "TDocentes" WHERE clave = :clave';
+
+       	$this->stmt = $this->conn->prepare($sql);
+       	$this->stmt->bindParam(':clave', $this->clave);
+       	$this->stmt->execute(); 
+       	$numero_usuarios = $this->stmt->rowCount();
+       	       	
+       	    if ( $numero_usuarios == 0 ) {
+
+       	    	$this->desconectarBD();
+       	    	return [ 
+
+       	       		"operacion" => false,
+       	       		"codigo_error" => "2" 
+       	   		];   
+       		}
+
+       	$result = $this->stmt->fetch(PDO::FETCH_OBJ);
        	$this->desconectarBD();
     	
-    	return $respuesta;
+    	return [
+    		"operacion" =>true,
+    		"data" => $result
+    	];*/
 	}
 
 	public function listarDocentes(){
@@ -308,9 +356,11 @@ public function crearDocente(){
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-		return $result;
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function consultarDocente(){
@@ -327,14 +377,28 @@ public function crearDocente(){
     	return $result;
 	}
 
+	public function consultarHorarioDocente(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT Doc.carrera,Doc.pregrado,Doc.postgrado,Doc.nombre AS "docNom",Doc.apellido,Doc."cedDoc",Ded.nombre as dedicacion, Doc.condicion, Cat.nombre as categoria FROM "TDocentes" as Doc INNER JOIN "TDedicaciones" as Ded ON Doc."codDed"=Ded."codDed" INNER JOIN "TCatDoc" as Cat ON Doc."codCatDoc"= Cat."codCatDoc" WHERE Doc."cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+       	$this->stmt->execute(); 
+       	$result = $this->stmt->fetch(PDO::FETCH_OBJ);
+       	$this->desconectarBD();
+
+    	return $result;
+	}
+
 	public function modificarDocente(){
 				$this->conectarBD();
 		$sql = 'UPDATE "TDocentes" 
 				SET 
 					"cedDoc"=:cedDoc, "codCatDoc"=:codCatDoc, "codRol"=:codRol, nombre=:nombre, apellido=:apellido, 
 			       	"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion, "fecIng"=:fecIng, 
-			       	"fecCon"=:fecCon, dedicacion=:dedicacion, condicion=:condicion, usuario=:usuario, estado=:estado, 
-			       	avatar=:avatar, observaciones=:observaciones
+			       	"fecCon"=:fecCon, "codDed"=:codDed, condicion=:condicion, usuario=:usuario, estado=:estado, 
+			       	"avatar"=:avatar
 				WHERE 
 					"cedDoc" = :cedDoc';
 
@@ -351,12 +415,93 @@ public function crearDocente(){
 		$this->stmt->bindParam(':direccion',$this->direccion);
 		$this->stmt->bindParam(':fecIng',$this->fecIng);
 		$this->stmt->bindParam(':fecCon',$this->fecCon);
-		$this->stmt->bindParam(':dedicacion',$this->dedicacion);
+		$this->stmt->bindParam(':codDed',$this->codDed);
 		$this->stmt->bindParam(':condicion',$this->condicion);
 		$this->stmt->bindParam(':usuario',$this->usuario);
 		$this->stmt->bindParam(':estado',$this->estado);
 		$this->stmt->bindParam(':avatar',$this->avatar);
-		$this->stmt->bindParam(':observaciones',$this->observaciones);
+     	$result = $this->stmt->execute();
+       	$this->desconectarBD();
+       	return $result;
+	}
+
+	public function modificarPerfil(){
+				$this->conectarBD();
+		$sql = 'UPDATE "TDocentes" 
+				SET 
+					"cedDoc"=:cedDoc, nombre=:nombre, apellido=:apellido, 
+			       	"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion, usuario=:usuario,"avatar"=:avatar
+				WHERE 
+					"cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+		$this->stmt->bindParam(':nombre',$this->nombre);
+		$this->stmt->bindParam(':apellido',$this->apellido);
+		$this->stmt->bindParam(':fecNac',$this->fecNac);
+		$this->stmt->bindParam(':sexo',$this->sexo);
+		$this->stmt->bindParam(':telefono',$this->telefono);
+		$this->stmt->bindParam(':correo',$this->correo);
+		$this->stmt->bindParam(':direccion',$this->direccion);
+		$this->stmt->bindParam(':usuario',$this->usuario);
+		$this->stmt->bindParam(':avatar',$this->avatar);
+     	$result = $this->stmt->execute();
+       	$this->desconectarBD();
+       	return $result;
+	}
+
+public function cambiarClavePerfil(){
+    
+    $this->conectarBD();
+    $sql = 'UPDATE "TDocentes" 
+        SET 
+          "clave" = :clave_nueva
+        WHERE 
+          "cedDoc" = :cedDoc
+        AND
+            "clave" = :clave_vieja';
+
+	    $this->stmt = $this->conn->prepare($sql);
+	    $this->stmt->bindParam(':cedDoc', $this->cedDoc);
+
+	    $this->stmt->bindParam(':clave_nueva', $this->clave['clave_nueva']);
+	    $this->stmt->bindParam(':clave_vieja', $this->clave['clave_vieja']);
+       	$this->stmt->execute(); 
+       	$clave = $this->stmt->rowCount();
+
+       		if ( $clave == 0 ) {
+       		    	
+       		    $this->desconectarBD();
+       		    return [ 
+
+    	    		"operacion" => false,
+    	    		"codigo_error" => "1" 
+       		   ];   		
+       		}
+		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
+       	$this->desconectarBD();
+    	
+    	return [
+    		"operacion" =>true,
+    		"data" => $result
+    	];
+	}
+
+
+
+	public function actualizarClave(){
+		
+		$this->conectarBD();
+		$sql = 'UPDATE "TDocentes" 
+				SET 
+					"clave" = :clave
+				WHERE 
+					"cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+
+		$this->stmt->bindParam(':clave', $this->clave);
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
        	return $result;
@@ -365,24 +510,6 @@ public function crearDocente(){
 	public function buscarDocente(){
 		
 	}
-
-	// public function rol( ){
-		
-	// 	$ORol =  new CRol();
-	// 	$ORol->setCodRol( $this->codRol ); 
-
-	// 	return $ORol->consultarRol( );
-	// }
-
-	// public function categoria( ){
-
-	// 	$OCatDoc =  new CCatDoc();
-	// 	$OCatDoc->setCodCatDoc( $this->codCatDoc ); 
-
-	// 	return $OCatDoc->consultarCatDoc( );
-	// }
-
-	
 
 	public function dependencias(  ){
 		$this->conectarBD();
@@ -398,10 +525,11 @@ public function crearDocente(){
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
 		$this->stmt->execute();
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return $data;
 	}
 
 	public function comisiones(  ){
@@ -419,13 +547,142 @@ public function crearDocente(){
 
 		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
 		$this->stmt->execute();
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $data;
+	}
+
+	public function secciones(  ){
+		$this->conectarBD();
+		$sql = 'SELECT 
+				  DISTINCT "TSecciones"."codSec" , 
+				  "TUnidCurr"."codUniCur", 
+				  "TUnidCurr".nombre
+				FROM 
+				 "TSecciones", 
+				 "TUnidCurr", 
+				 "THorarios", 
+				 "TDocentes"
+				WHERE 
+				  "TSecciones"."codSec" = "THorarios"."codSec" AND
+				  "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+				  "TDocentes"."cedDoc" = "THorarios"."cedDoc" AND
+				  "TDocentes"."cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+		$this->stmt->execute();
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $data;
+	}
+
+	public function acti_admi_doc(  ){
+		$this->conectarBD();
+		$sql = 'SELECT 
+				  DISTINCT "TSecciones"."codSec" , 
+				  "TUnidCurr"."codUniCur", 
+				  "TUnidCurr".nombre,
+				  "TUnidCurr".fase,
+				  "THorarios"."codAmb",
+				  "TEjes".nombre as eje
+				FROM 
+				 "TSecciones", 
+				 "TUnidCurr", 
+				 "THorarios", 
+				 "TDocentes",
+				 "TEjes"
+				WHERE 
+				  "TSecciones"."codSec" = "THorarios"."codSec" AND
+				  "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+				  "TDocentes"."cedDoc" = "THorarios"."cedDoc" AND
+				  "TDocentes"."cedDoc" = :cedDoc AND 
+				  "TEjes"."codEje"= "TUnidCurr"."codEje"';
+
+		$this->stmt = $this->conn->prepare($sql);
+
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+		$this->stmt->execute();
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $data;
+	}
+
+	public function oaa_doc(  ){
+		$this->conectarBD();
+		$sql = 'SELECT 
+				 "tipActAdm",observaciones,dependencia
+				FROM 
+				 "TActiAdmi" INNER JOIN "THorarios" ON "THorarios"."codActAdm"= "TActiAdmi"."codActAdm"
+				WHERE 
+				  "THorarios"."codActAdm"= "TActiAdmi"."codActAdm"';
+
+		$this->stmt = $this->conn->prepare($sql);
+
+		$this->stmt->execute();
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $data;
+	}
+
+	public function consultarDependenciasDisponibles(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT 
+					d.*					 
+				FROM 
+					"TDependencias" as d 
+				WHERE NOT EXISTS (
+					SELECT * FROM 
+						"TDocDep" as dd 
+					WHERE 
+						d."codDep"= dd."codDep" 
+					AND 
+						dd."cedDoc"=:cedDoc
+				)';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+		$this->stmt->execute(); 
 		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
 		return $result;
 	}
 
-		public function cambiarRol(  ){
+	public function consultarComisionesDisponibles(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT 
+					c.*					 
+				FROM 
+					"TComisiones" as c 
+				WHERE NOT EXISTS (
+					SELECT * FROM 
+						"TComDoc" as cd 
+					WHERE 
+						c."codCom"= cd."codCom" 
+					AND 
+						cd."cedDoc"=:cedDoc
+				)';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+		$this->stmt->execute(); 
+		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $result;
+	}
+	
+	public function cambiarRol(  ){
 		$this->conectarBD();
 		$sql = 'UPDATE "TDocentes" 
 				SET 
@@ -470,20 +727,51 @@ public function crearDocente(){
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
         $this->stmt->bindParam(':codDep', $this->codDep);
-       	$this->stmt->execute(); 
-       	$respuesta = $this->stmt->fetch(PDO::FETCH_OBJ);
+       	$respuesta = $this->stmt->execute(); 
+       	$this->desconectarBD();
+    	
+    	return $respuesta;
+	}
+
+	public function asignarComision(){
+		
+		$this->conectarBD();
+		$sql = 'INSERT INTO "TComDoc"
+					(
+						"cedDoc","codCom"
+					)
+				VALUES
+					(
+						:cedDoc,:codCom
+					)';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+        $this->stmt->bindParam(':codCom', $this->codCom);
+       	$respuesta = $this->stmt->execute(); 
        	$this->desconectarBD();
     	
     	return $respuesta;
 	}
 
 	public function validarCorreo(){
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TDocentes" d WHERE d."correo" = :correo';
 
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':correo', $this->correo);
+		$this->stmt->execute(); 
+		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$cantidad = $this->stmt->rowCount();
+		$this->desconectarBD();
+
+		return [
+			"cantidad" => $cantidad,
+			"data" => $result 
+		];
 	}
 
-	public function cambiarClave(){
 
-	}
 
 	public function cambiarEstadoDocente(){
 		$this->conectarBD();
@@ -506,7 +794,7 @@ public function crearDocente(){
     	return $result;
 	}
 
-	public function desvincularDocDep(){
+	public function eliminarDependenciaDocente(){
 		
 		$this->conectarBD();
 		$sql = 'DELETE FROM "TDocDep" WHERE "cedDoc" = :cedDoc AND "codDep" = :codDep';

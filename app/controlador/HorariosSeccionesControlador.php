@@ -1,23 +1,13 @@
 <?php 
-
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 	
-require_once "app/modelo/CHorarioAcademico.php";
-require_once "app/modelo/CHorarioAdministrativo.php";
+require_once "app/modelo/CHorario.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
-
-		
-		// HORARIOS DE SECCIONES
 
 		case 'index': 
 
 			require_once "app/vista/horarios/secciones/index.php";
-		break;
-
-		case 'editar': 
-
 		break;
 
 		case 'asignar': 
@@ -29,69 +19,196 @@ require_once "app/modelo/CHorarioAdministrativo.php";
 			require_once "app/vista/horarios/secciones/mostrar.php";
 		break;
 
+		case 'editar': 
+
+			require_once "app/vista/horarios/secciones/editar.php";
+		break;
+
+		case 'mover': 
+
+			require_once "app/vista/horarios/secciones/mover.php";
+		break;
+
 		case 'consultar': 
 
-			$OHorarioAcademico = new CHorarioAcademico();
+			$OHorario = new CHorario();
 
-			$OHorarioAcademico->setCodSec( $_POST['codSec'] );
 
-			$resultado = $OHorarioAcademico->consultarHorarioSeccion();
-
+			$resultado = $OHorario->consultarHorarioSeccion( $_POST['fase_seleccionada'] );
+			
 			echo json_encode( ["data"=>$resultado ] );
+
+		break;
+
+		case 'consultar-actividades-por-uc': 
+			
+			$OHorario = new CHorario();
+
+			$OHorario->setCodSec( $_POST['codSec'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
+
+			
+
+			$resultado = $OHorario->consultarActividadesPorUniCur();
+
+			echo json_encode( $resultado );
+
+		break;
+
+		case 'cambiar-docente-horario': 
+			
+			$OHorario = new CHorario();
+
+			$OHorario->setCedDoc( $_POST['cedDoc'] );
+			$OHorario->setCodSec( $_POST['codSec'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
+
+			
+
+			$resultado = $OHorario->cambiarDocenteHorarioSeccion();
+
+			echo json_encode( [ "operacion" => true ] );
+
+		break;
+
+		case 'cambiar-ambiente-horario':
+
+			$OHorario = new CHorario();
+
+			$OHorario->setCodAmb( $_POST['codAmb'] );
+			$OHorario->setCodSec( $_POST['codSec'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
+			$OHorario->setCodTie( $_POST['codTie'] );
+
+/*			$OHorario->setCodAmb( 'G-23 ' );
+			$OHorario->setCodSec( 'IN-2221' );
+			$OHorario->setCodUniCur( 'PIPT269' );
+			$OHorario->setCodTie( 'T-09 ' );*/
+
+			$resultado = $OHorario->cambiarAmbienteHorarioSeccion();
+
+			echo json_encode( [ "operacion" => true ] );
+
+		break;
+
+		case 'consultar-ambientes-disponibles':
+
+			$OHorario = new CHorario();
+			$valores = "";
+
+			foreach ( $_POST["array_bloques"] as $field){
+
+				$valores.="'".$field["codTie"]."'";
+				$valores.=',';
+			}
+
+			$valores = substr($valores, 0, -1);
+
+			$OHorario->setCodTie( $valores );
+			
+			$result = $OHorario->consultarAmbientesDisponibles();
+			
+			echo json_encode( [
+
+				"operacion" => true,
+				"data" => $result
+			] );
 
 		break;
 
 		case 'almacenar': 
 
-			$OHorarioAcademico = new CHorarioAcademico();
 
-			$OHorarioAcademico->setCodSec( $_POST['codSec'] );
+			$OHorario = new CHorario();
 
-			$OHorarioAcademico->setCodAmb( $_POST['codAmb'] );
+			$OHorario->setCodSec( $_POST['codSec'] );
 
-			$OHorarioAcademico->setCedDoc( $_POST['cedDoc'] );
+			// $OHorario->setCodAmb( $_POST['codAmb'] );
+			if ( $_POST["cedDoc"] == 'S/A' ) {
+				$OHorario->setCedDoc( NULL );
+			}else{
+				$OHorario->setCedDoc( $_POST['cedDoc'] );	
+			}
 
-			$OHorarioAcademico->setCodUniCur( $_POST['codUniCur'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
 
-			$OHorarioAcademico->setTipo( 1 );
+			$OHorario->setTipo( 1 );
 
-			$OHorarioAcademico->setEstado( TRUE );
+			$OHorario->setEstado( TRUE );
 
-			for ($i=0; $i < count($_POST['horas']); $i++) { 
+			for ($i=0; $i < count($_POST['array_bloques']); $i++) { 
 
-				$OHorarioAcademico->setCodTie( $_POST['horas'][$i] );
+				$OHorario->setCodTie( $_POST['array_bloques'][$i]['codTie'] );
+				
+				if ( $_POST['array_bloques'][$i]['codAmb'] == 'S/A' ) {
+					$OHorario->setCodAmb( NULL );
+				}else{
+					$OHorario->setCodAmb( $_POST['array_bloques'][$i]['codAmb'] );	
+				}
 
-				$OHorarioAcademico->crearHorario();
+				$resultado = $OHorario->asignarActividadHorario();
 
 			}
 
-			echo json_encode(["operation"=>true]);
+			echo json_encode($resultado);
+
 
 		break;
 
 		case 'consultar-unid-curr':
 
-			$OHorarioAcademico = new CHorarioAcademico();
-			$OHorarioAcademico->setCodSec( $_POST['codSec'] );
+			$OHorario = new CHorario();
+			$OHorario->setCodSec( $_POST['codSec'] );
 
-			$resultado = $OHorarioAcademico->unidCurrHorarioSeccion();
+			$resultado = $OHorario->unidCurrHorarioSeccion( $_POST["fase_seleccionada"] );
 
 			echo json_encode( ['data' => $resultado] );
 		break;
 
 		case 'consultar-unid-curr-asignadas':
 
-			$OHorarioAcademico = new CHorarioAcademico();
-			$OHorarioAcademico->setCodSec( $_POST['codSec'] );
+			$OHorario = new CHorario();
+			$OHorario->setCodSec( $_POST['codSec'] );
 
-			$resultado = $OHorarioAcademico->unidCurrAsignadas();
+			$resultado = $OHorario->unidCurrAsignadasHorarioSeccion( $_POST["fase_seleccionada"] );
 
 			echo json_encode( ['data' => $resultado] );
 			
 		break;
 
+		
+		case 'mover-bloques':
 
+			$OHorario = new CHorario();
+			$OHorario->setCodHor( $_POST['codHor'] );
+			$OHorario->setCodTie( $_POST['codTie'] );
+			$OHorario->setCodSec( $_POST['codSec'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
+			$resultado = $OHorario->MoverBloque();
 
+			echo json_encode( ['data' => $resultado] );
+
+		break;
+
+		case 'vaciar-horario':
+			
+			$OHorario = new CHorario();
+			$OHorario->setCodSec( $_POST['seccion_seleccionada'] );
+			$resultado = $OHorario->vaciarHorario();
+
+			echo json_encode( ['data' => $resultado] );
+
+		break;
+
+		case 'eliminar':
+
+			$OHorario = new CHorario();
+			$OHorario->setCodSec( $_POST['codSec'] );
+			$OHorario->setCodUniCur( $_POST['codUniCur'] );
+			$resultado = $OHorario->eliminar();
+
+			echo json_encode( ['data' => $resultado] );
+		break;
 		
 	}
 

@@ -1,19 +1,14 @@
 <?php  
-/*
-Modelo CPnf 
-Sirve para gestionar toda la informacion referente a PNF
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 class CPnf extends Database{
 
-	private $alias;  
+	private $codPnf;  
 	private $descripcion; 
 
-	public function setAlias( $alias ){
+	public function setCodPnf( $codPnf ){
 
-		$this->alias = $alias;
+		$this->codPnf = $codPnf;
 	}
 
 	public function setDescripcion( $descripcion ){
@@ -21,9 +16,9 @@ class CPnf extends Database{
 		$this->descripcion = $descripcion;
 	}
 
-	public function getAlias( ){
+	public function getCodPnf( ){
 
-		return $this->alias;
+		return $this->codPnf;
 	}
 
 	public function getDescripcion( ){
@@ -33,46 +28,56 @@ class CPnf extends Database{
 
 	public function listarPnf(){
 		
-		
 		$this->conectarBD();
 		$sql = 'SELECT * FROM "TPnf"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearPnf(){
 
-		
 		$this->conectarBD();
 
 		$sql = 'INSERT INTO "TPnf"
-					("alias", "descripcion")
+					("codPnf", "descripcion")
 				VALUES
-					(:alias,:descripcion)';
+					(:codPnf,:descripcion)';
 
 		$this->stmt = $this->conn->prepare($sql);
-		
-		$this->stmt->bindParam(':alias',$this->alias);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
 		$this->stmt->bindParam(':descripcion',$this->descripcion);
-     	
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
 
     	return $result;
 	}
 
-	public function consultarPnf(){
-		
+	public function validarPnf(){
 		
 		$this->conectarBD();
-		$sql = 'SELECT * FROM "TPnf" WHERE "alias" = :alias';
+		$sql = 'SELECT * FROM "TPnf" WHERE "codPnf" = :codPnf';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
+	public function consultarPnf(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TPnf" WHERE "codPnf" = :codPnf';
 
 		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':alias',$this->alias);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
 		$this->desconectarBD();
@@ -82,19 +87,17 @@ class CPnf extends Database{
 	
 	public function modificarPnf(){
 		
-		
 		$this->conectarBD();
 
 		$sql = 'UPDATE "TPnf" 
 				SET 
 					"descripcion" = :descripcion
 				WHERE 
-					"alias" = :alias';
+					"codPnf" = :codPnf';
 
 		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':alias',$this->alias);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
 		$this->stmt->bindParam(':descripcion',$this->descripcion);
-     	
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
 
@@ -104,10 +107,9 @@ class CPnf extends Database{
 	public function eliminarPnf(){
 		
 		$this->conectarBD();
-		$sql = 'DELETE FROM "TPnf" WHERE "alias" = :alias';
-
+		$sql = 'DELETE FROM "TPnf" WHERE "codPnf" = :codPnf';
 		$this->stmt = $this->conn->prepare($sql);
-		$this->stmt->bindParam(':alias',$this->alias);
+		$this->stmt->bindParam(':codPnf',$this->codPnf);
      	
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
@@ -116,10 +118,9 @@ class CPnf extends Database{
 	}
 
 	public function buscarPnf($filtro){
+
 		$this->conectarBD();
-		$sql = "SELECT * FROM \"TPnf\" WHERE \"alias\" LIKE '" . $filtro . "%' ";
-
-
+		$sql = "SELECT * FROM \"TPnf\" WHERE \"codPnf\" LIKE '" . $filtro . "%' ";
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
@@ -127,28 +128,4 @@ class CPnf extends Database{
 
 		return $result;
 	}
-
-	// public function UnidadesCurriculares(){
-
-	// 	$OUnidCurr =  new CUnidCurr();
-
-	// 	$UCs = $OUnidCurr->listarUnidCurr( );
-
-	// 	$arregloUC = [];
-			
-	// 	foreach ($UCs as $UnidCurr) {
-	// 		if ( $UnidCurr->alias == $this->alias ) {
-	// 			$arregloUC[] = $UnidCurr;
-	// 		}
-	// 	}
-
-	// 	return $arregloUC;
-	// }
 }
-
-
-$o = new CPnf();
-var_dump( $o->listarPnf() );
-// $o->setAlias(2);
-
-//var_dump( $o->UnidadesCurriculares() );

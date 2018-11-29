@@ -12,23 +12,44 @@ $(".form-login").on("submit",function(event){
         } 
     })                      
     .done(function(respuesta){
+        if (respuesta.operacion == false && respuesta.error == "1") {
 
-        if (respuesta.operacion == true) {
 
-            $("form input").val( "" )
+            Materialize.toast(
+
+                'Error, Usuario invalido',
+                
+                1700
+            );
+
+            $("body").find("input[name='usuario']").addClass("invalid").next("label").attr("data-error","Usuario invalido..")
+
+            
+            
+                                 
+        }else if (respuesta.operacion == false && respuesta.error == "2") {
+
+
+            Materialize.toast(
+
+                'Error, Contraseña invalida...',
+                
+                1700
+            );
+
+            $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Contraseña invalida..")
+            
+                                 
+        }else if ( respuesta.operacion == true ){
 
             localStorage.setItem( 'user' , JSON.stringify( respuesta.data ) )
-            //var o = JSON.parse( localStorage.getItem( 'user' ) )
-            //console.log('objetoObtenido: ', o.rol[0].nombre )
-            //console.log(  respuesta.data.rol.nombre )
-            //console.log(  respuesta )
-            
+            /*var o = JSON.parse( localStorage.getItem( 'user' ) )
+            console.log('objetoObtenido: ', o.rol[0].nombre )
+            console.log(  respuesta.data.rol.nombre )
+            console.log(  respuesta )*/
             
             Materialize.toast('Bienvenido '+ respuesta.data.nombre +'...',1700,'',function(){ location.href = '?controlador=home&actividad=index' });
-                                 
-        }else{
-          $("form input").addClass( "invalid" )
-          Materialize.toast('Error...',1997);
+          
             
         }
     })

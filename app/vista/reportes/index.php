@@ -1,78 +1,100 @@
-<?php $titulo = "Reportes";?>
+<?php $titulo = "GESTION DE REPORTES";?>
 <!DOCTYPE html>
 <html>
-<?php require_once "app/vista/plantilla/__head.php";  ?>
-<style type="text/css">
-  main{
-    margin-top: 35px;
-  }
-  div.tarjeta{
-    padding: 24px 0px 2px 0px;margin: 0px;
-
-  }
-  div.tarjeta .titulo-tarjeta{
-    font-size: 24px;
-    font-weight: 300;
-    line-height: 22px;
-    margin-top: 4px;
-    margin-bottom: 8px;
-    color: #fff;
-  }
-</style>
-<style type="text/css">
-.collection .collection-item.avatar{
-    min-height: 64px;
-  }
-.collection{
-   margin: 0px; 
-}
-  .collection .collection-item{
-    line-height: 3rem;
-  }
-</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
+    <title>Auyantepui - <?= $titulo ?></title>
+</head>
 <body>
 <?php  require_once "app/vista/plantilla/__navbar.php"; ?>
 
 <main >
   
-
-
-  <section class="row gestion-administrativa">
-
+  <section class="row ">
     <div class="col s12 valign-wrapper">
-      <h5 class="valign">Reportes</h5>
+      <h5 class="valign">Reportes de Horarios</h5>
     </div>
-  
-<div class="col s12 m3">
+    <div class="col s12 m4">
 
       <div class="card ">
 
-        <div class="center-align red tarjeta" >
-          <img src="public/img/pdf.png" alt="" class="responsive-img " width="90">
-          <p class="titulo-tarjeta" >Reportes Filtrados</p>
+        <div class="center-align cyan tarjeta" >
+          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >HORARIO DE DOCENTE</p>
         </div>
 
         <div class="card-content"  >
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio dolorum natus rerum tenetur modi dolorem facilis animi totam cumque ipsam, consequatur aspernatur reiciendis, praesentium in iste est atque temporibus cupiditate!
+            En este sub-modulo usted puede generar un reporte con el Horario de un Docente registrado en el sistema en formato PDF con opcion de descargar
           </p>
         </div>
 
         <div class="card-action">
-
           <div class="row">
-
-            <a href="#" class="btn btn-lg red col s12 waves-effect">
-              Generar Reporte
-            </a>    
-          </div>
-                  
+            <a href="#" target="__blank" class="btn btn-lg cyan col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>   
+          </div>      
         </div>
 
       </div>
 
     </div>
 
+    
+    <div class="col s12 m4">
+
+      <div class="card ">
+
+        <div class="center-align green  tarjeta" >
+          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >HORARIO DE SECCION</p>
+        </div>
+
+        <div class="card-content"  >
+          <p>
+            En este sub-modulo usted puede generar un reporte con el Horario de una Seccion registrada en el sistema en formato PDF con opcion de descargar
+          </p>
+        </div>
+
+        <div class="card-action">
+          <div class="row">
+            <a href="#" target="__blank" class="btn btn-lg cyan col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>   
+          </div>      
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col s12 m4">
+
+      <div class="card ">
+        <div class="center-align deep-orange tarjeta" >
+          <img src="public/img/institution.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >HORARIO DE AMBIENTE</p>
+        </div>
+
+        <div class="card-content"  >
+          <p>
+            En este sub-modulo usted puede generar un reporte con el Horario de un ambiente registrado en el sistema en formato PDF con opcion de descargar
+          </p>
+        </div>
+        <div class="card-action">
+          <div class="row">
+            <a href="#" target="__blank" class="btn btn-lg deep-orange col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>    
+          </div>
+                
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row ">
+    <div class="col s12 valign-wrapper">
+      <h5 class="valign">Otros Reportes</h5>
+    </div>
     <div class="col s12 m3">
 
       <div class="card ">
@@ -84,18 +106,66 @@
 
         <div class="card-content"  >
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit labore laborum perspiciatis natus harum, quos reiciendis vel quae ad voluptates soluta recusandae, rerum numquam error ex est accusantium dolorum, repellat.
+            En este sub-modulo usted puede generar un reporte con el listado total de los Docentes registrados en el sistema en formato PDF con opcion de descargar
           </p>
         </div>
 
         <div class="card-action">
           <div class="row">
-            <a href="#" class="btn btn-lg cyan col s12 waves-effect">Generar Reporte</a>   
+            <a href="?controlador=reportes&actividad=reporte-docentes" target="__blank" class="btn btn-lg cyan col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>   
           </div>      
         </div>
 
       </div>
 
+    </div>
+
+    
+    <div class="col s12 m3">
+
+      <div class="card ">
+
+        <div class="center-align cyan tarjeta" >
+          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >Dependencias</p>
+        </div>
+
+        <div class="card-content"  >
+          <p>
+            En este sub-modulo usted puede generar un reporte con el listado total de las Dependencias donde laboran los docentes registradas en el sistema en formato PDF con opcion de descargar
+          </p>
+        </div>
+
+        <div class="card-action">
+          <div class="row">
+            <a href="?controlador=reportes&actividad=reporte-dependencias" target="__blank" class="btn btn-lg cyan col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>   
+          </div>      
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col s12 m3">
+
+      <div class="card ">
+        <div class="center-align deep-orange tarjeta" >
+          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >Comisiones de docentes</p>
+        </div>
+
+        <div class="card-content"  >
+          <p>
+            En este sub-modulo usted puede generar un reporte con el listado total de las Comisiones de Docentes registradas en el sistema en formato PDF con opcion de descargar
+          </p>
+        </div>
+        <div class="card-action">
+          <div class="row">
+            <a href="#" target="__blank" class="btn btn-lg deep-orange col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>    
+          </div>
+                
+        </div>
+      </div>
     </div>
 
     <div class="col s12 m3">
@@ -107,18 +177,19 @@
 
         <div class="card-content"  >
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur nobis laudantium voluptate voluptas, odit ad earum possimus rerum quibusdam repellendus rem iusto nostrum sequi voluptates praesentium! Cum nesciunt quidem expedita!
+            En este sub-modulo usted puede generar un reporte con el listado total de las Secciones registradas en el sistema en formato PDF con opcion de descargar
           </p>
         </div>
         <div class="card-action">
           <div class="row">
-            <a href="#" class="btn btn-lg blue darken-4 col s12 waves-effect">Generar Reporte</a>    
+            <a href="?controlador=reportes&actividad=reporte-secciones" target="__blank" class="btn btn-lg blue darken-4 col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>    
           </div>
                 
         </div>
       </div>
     </div>
-
+  </section>
+  <section class="row">
     <div class="col s12 m3">
 
       <div class="card ">
@@ -129,21 +200,38 @@
 
         <div class="card-content"  >
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia cumque, quia similique nisi saepe veritatis, fugit vitae itaque doloribus repellat, porro aliquam magni beatae earum cum! Quasi delectus fugit ipsa.
+            En este sub-modulo usted puede generar un reporte con el listado total de los Ambientes registradas en el sistema en formato PDF con opcion de descargar
           </p>
         </div>
         <div class="card-action">
           <div class="row">
-            <a href="#" class="btn btn-lg deep-orange col s12 waves-effect">Generar Reporte</a>    
+            <a href="?controlador=reportes&actividad=reporte-ambientes" target="__blank" class="btn btn-lg deep-orange col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>    
           </div>
                 
         </div>
       </div>
     </div>
+    <div class="col s12 m3">
+      <div class="card ">
+        <div class="center-align blue darken-4 tarjeta" >
+          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <p class="titulo-tarjeta" >Unidades Curriculares</p>
+        </div>
 
+        <div class="card-content"  >
+          <p>
+            En este sub-modulo usted puede generar un reporte con el listado total de las UNidades Curriculares registradas en el sistema en formato PDF con opcion de descargar
+          </p>
+        </div>
+        <div class="card-action">
+          <div class="row">
+            <a href="?controlador=reportes&actividad=reporte-unidades-curriculares" target="__blank" class="btn btn-lg blue darken-4 col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>    
+          </div>
+                
+        </div>
+      </div>
+    </div>
   </section>
-
-  
 </main>
 
 <?php require_once "app/vista/plantilla/__scripts.php";  ?>

@@ -8,27 +8,25 @@
           <i class="modal-action modal-close material-icons right">close</i>
         </span>
       </div>
+
       <div class="modal-content">
         <form class="formCrearAmbiente" >
+
           <div class="row">
-            <div class="col s12 m2 ">
+            <div class="col s12 m2 input-field ">
               <i class="material-icons prefix">code</i>
-                <label for="crear_codAmb" id="codigo">Código</label>
-                  <input  id="crear_codAmb" name="codAmb" type="text" name="codAmb" rangelength=[3,4] class="validate" placeholder="Código" required>
-            </div>
-
-            <div class="col s12 m10">
-              <i class="material-icons prefix">call_split</i>
-                <label for="crear_ubicacion"  >Ubicación</label>
-                  <input type="text" id="crear_ubicacion" name="ubicacion" class="validate" maxlength="60" rangelength=[5,60] placeholder="Ubicación" required />  
-            </div>
-      </div>
-
-<!--               <div class=" col s12 m10">
-                <label for="ubicacion"  >ubicación</label>
-                <input type="text" id="editar_ubicacion" name="ubicacion" class="validate" maxlength="60" rangelength=[5,60] required />
                 
-              </div> -->
+              <input  id="crear_codAmb" name="codAmb" type="text" name="codAmb" rangelength=[3,4] class="validate"  required>
+              <label for="crear_codAmb" data-success="Correcto...">Código</label>
+            </div>
+
+            <div class="col s12 m10 input-field">
+              <i class="material-icons prefix">call_split</i>
+                
+              <input type="text" id="crear_ubicacion" name="ubicacion" class="validate" maxlength="60" rangelength=[5,60]  required />  
+              <label for="crear_ubicacion"  data-success="Correcto...">Ubicación</label>
+            </div>
+          </div>
 
           <div class="row">
             <div class="col s12 m6">
@@ -61,9 +59,10 @@
             </div>
             <div class="row">
             
-              <div class="input field col s12 m12">
+              <div class="input-field col s12 m12">
+                
+                <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
                 <label data-success="Correcto..."  for="observaciones" >Observaciones</label>
-                <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
               </div>
             
             </div>
@@ -94,13 +93,14 @@
             <div class="row">
               
               <div class=" col s12 m2 ">
-                  <label for="codAmb">Código</label>
+                  <label for="editar_codAmb">Código</label>
                   <input  id="editar_codAmb"  type="text" readonly="readonly" name="codAmb" >
 
               </div>
-              <div class=" col s12 m10">
-                <label for="ubicacion"  >ubicación</label>
-                <input type="text" id="editar_ubicacion" name="ubicacion" class="validate" maxlength="60" rangelength=[5,60] placeholder="ubicación" required />
+              <div class=" col s12 m10 input-field">
+                
+                <input type="text" id="editar_ubicacion" name="ubicacion" class="validate" maxlength="60" placeholder="" rangelength=[5,60]  required />
+                <label for="editar_ubicacion"  >ubicación</label>
                 
               </div>
             
@@ -137,9 +137,11 @@
             </div>
             <div class="row">
             
-              <div class=" col s12 m12">
-                <label data-success="Correcto..."  for="observaciones" >Observaciones</label>
-                <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Observaciones" required></textarea>
+              <div class=" col s12 m12 input-field">
+                
+                <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" placeholder="" maxlength="150" rangelength=[10,150]  required></textarea>
+
+                <label data-success="Correcto..."  for="editar_observaciones" >Observaciones</label>
               </div>
             
             </div>
@@ -203,10 +205,6 @@
             <li class="collection-item avatar">
               <i class="material-icons circle deep-orange">delete</i>
               <a href="#" class="eliminar-ambiente  deep-orange-text"> Eliminar </a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">access_alarms</i>
-              <a href="#" class="ver-horario red-text"> Ver horario </a>
             </li>
         </ul>
     </div>

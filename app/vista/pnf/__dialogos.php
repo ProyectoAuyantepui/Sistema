@@ -4,24 +4,24 @@
 
       <div class="modal-header secundario">
         <span class="white-text">
-          Crear Pnf 
+          Crear PNF 
           <i class="modal-action modal-close material-icons right">close</i>
         </span>
       </div>
       <div class="modal-content">
-        <form class="formCrearPnf" id="form" >
+        <form class="formCrearPnf" >
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="crear_alias"  >Alias</label>
-                  <input type="text" id="crear_alias" name="alias" class="validate" placeholder="Alias" required />
+                  <input type="text" id="crear_codPnf" name="codPnf" class="validate" placeholder="" maxlength="6" required />
+                <label for="crear_codPnf"  data-success="Correcto...">Codigo</label>
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12 input-field">
               <i class="material-icons prefix">remove_red_eye</i>
+                  <textarea id="crear_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="" required></textarea>
                 <label data-success="Correcto..."  for="crear_descripcion" >Descripción</label>
-                  <textarea id="crear_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Descripción" required></textarea>
             </div>
           </div>
           <div class="row"> 
@@ -40,29 +40,29 @@
       
       <div class="modal-header secundario">
         <span class="white-text">
-          Editar Pnf <i class="modal-action modal-close material-icons right">close</i>
+          Editar PNF <i class="modal-action modal-close material-icons right">close</i>
         </span>
       </div>
 
       <div class="modal-content">
           
           <form class="formEditarPnf" >
-           <input  id="editar_alias" type="hidden" name="alias" >
+           <input  id="editar_codPnf" type="hidden" name="codPnf" >
             <div class="row">
-              <div class=" col s12 m12">
+              <div class="col s12 m12 input-field">
                 <i class="material-icons prefix">call_split</i>
-                  <label for="alias"  >alias</label>
-                    <input type="text" id="editar_alias" name="alias" class="validate" maxlength="60" rangelength=[5,60] placeholder="alias" required />
+                    <input type="text" id="editar_codPnf" name="codPnf" disabled placeholder=""  />
+                  <label for="editar_codPnf"  >Codigo</label>
                 
               </div>
             
             </div>
             <div class="row">
             
-              <div class=" col s12 m12">
+              <div class="col s12 m12 input-field">
                 <i class="material-icons prefix">remove_red_eye</i>
-                  <label data-success="Correcto..."  for="descripcion" >Descripción</label>
-                    <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Descripción" required></textarea>
+                    <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="" required></textarea>
+                  <label data-success="Correcto..."  for="editar_descripcion" >Descripción</label>
               </div>
             
             </div>
@@ -87,14 +87,14 @@
 
       <div class="modal-header secundario">
         <span class="white-text">
-          Eliminar Pnf <i class="modal-action modal-close material-icons right">close</i>
+          Eliminar PNF <i class="modal-action modal-close material-icons right">close</i>
         </span>
       </div>
     
       <div class="modal-content">
         <p class="black-text">¿Realmente desea <span class="red-text">Eliminar</span> este Pnf?</p>
         <form class="formEliminarPnf" >
-            <input type="hidden" id="alias" name="alias"/>
+            <input type="hidden" id="codPnf" name="codPnf"/>
 
             <div class="row"> 
                 <div class="col s12 left">

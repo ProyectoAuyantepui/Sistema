@@ -2,11 +2,15 @@
 <?php $titulo = "Comisiones";?>
 <!DOCTYPE html>
 <html>
-<?php require_once "app/vista/plantilla/__head.php";  ?>
-
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
+    <title>Auyantepui - <?= $titulo ?></title>
+</head>
 <body>
 <?php require_once "app/vista/plantilla/__navbar.php";  ?>
-
 <main>
   <section class="row" id="tarjetaComisiones">
    <div class="col s12 m3">
@@ -14,17 +18,41 @@
         
         <div class="center-align purple tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
           <img src="public/img/section.png" alt="" class="responsive-img " width="90">
-          <p class="titulo-tarjeta"  >Comisiones</p>
+          <p class="titulo-tarjeta"  >COMISIONES</p>
         </div>
-
-        <div class="card-content"  >
-
-          <p>
-            We hope you have enjoyed using Materialize and if you feel like it has helped you out and want to support the team you can help us by donating or backing us on Patreon. Any amount would help support and continue development on this project and is greatly appreciated. 
+        <div class="card-content row">
+          <p class="col s12" style="padding: 10px 1px 1px 1px;">
+            <a class="btn-floating btn pulse  waves-effect  primario">
+              <i class="material-icons left">settings</i>
+            </a>
+            Este módulo corresponde a la gestion de Comisiones en el sistema 
           </p>
-                  
-        </div>
 
+          <p class="col s12" style="padding: 10px 1px 1px 1px;">
+            
+            <a class="btn-floating btn waves-effect  cyan">
+              <i class="material-icons left">add</i>
+            </a>
+            Atraves de este modulo puede crear nuevas Comisiones.
+          </p>
+
+          <p class="col s12" style="padding: 10px 1px 1px 1px;">
+            <a class="btn-floating btn waves-effect  green">
+              <i class="material-icons left">search</i>
+            </a>
+
+            <a class="btn-floating btn waves-effect pink darken-1">
+              <i class="material-icons left">edit</i>
+            </a>
+
+            <a class="btn-floating btn waves-effect  red">
+              <i class="material-icons left">delete</i> 
+            </a>
+
+            Así como también consultar , modificar los datos o eliminar las Comisiones existentes en el sistema
+          </p>
+
+        </div>
       </div>
     </div>
 
@@ -45,28 +73,22 @@
               </form>
             </div>
           </nav>
-
         </div>
 
         <div class="card-content" >
-
-
-          
-          <table class="tabla-comisiones bordered highlight">
+          <table class=" bordered highlight" id="tabla_comisiones">
             <thead id="thead">
               <tr id="thead">
-                <th width="50%">
+                <th >
                   <p><strong>Nombre</strong></p>
                 </th>
-                <th width="40%">
+                <th >
                   <p><strong>Descripcion</strong></p>
                 </th>
-
-                <th width="10%"></th>
+                <th ></th>
               </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
           </table> 
 
           <div class="mensaje valign-wrapper grey-text">
@@ -91,7 +113,7 @@
 
           <a href="#"  class="right btn-large tooltipped red darken-3 eliminar-doc-com" data-position="top"  data-delay="50" data-tooltip="Eliminar docente de esta dependencia"><i class="material-icons">sentiment_dissatisfied</i></a>
 
-          <table id="tabla-docentes" class="bordered highlight ss">
+          <table id="tabla_docentes" class="bordered highlight ss">
             <thead id="thead">
               <tr id="thead">
                 <th width="25%">
@@ -107,8 +129,7 @@
                 <th width="5%"></th>
               </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
           </table>
                   
         </div>
@@ -126,24 +147,24 @@
             <input  id="editar_codCom"  type="hidden" name="codCom">
             <div class="row">
              <div class="row">
-             <div class=" col s12 m12">
+             <div class=" col s12 m12 input-field">
                <i class="material-icons prefix">call_split</i>
+                   <input type="text" id="editar_nombre" name="nombre" class="validate" rangelength=[3,60] maxlength="65" required placeholder="" />
                  <label for="editar_nombre"  >nombre</label>
-                   <input type="text" id="editar_nombre" name="nombre" class="validate" rangelength=[3,60] maxlength="65" required />
              </div>
            </div>
            <div class="row">
-             <div class="col s12 m12">
+             <div class="col s12 m12 input-field">
                <i class="material-icons prefix">call_split</i>
+               <input type="text" id="editar_dependencia" name="dependencia" class="validate" maxlength="220" rangelength=[2,220] required placeholder="" />
                <label for="editar_dependencia"  >Dependencia</label>
-               <input type="text" id="editar_dependencia" name="dependencia" class="validate" maxlength="220" rangelength=[2,220] required />
              </div>
            </div>
            <div class="row">
-             <div class="col s12 m12">
+             <div class="col s12 m12 input-field">
                <i class="material-icons prefix">call_split</i>
-                 <label for="editar_descripcion" >Descripción</label>
                    <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Descripción" required></textarea>
+                 <label for="editar_descripcion" >Descripción</label>
              </div>
            </div>
            <div class="row"> 
@@ -158,48 +179,28 @@
          </div>
 
        </div>
-     </div>
-
-    
+     </div> 
   </section>
 
+  <div class="fixed-action-btn">
+    <a href="?controlador=comisiones&actividad=vista-crear" class="btn-floating btn-large pulse waves-effect waves-light  secundario " >
+      <i class="material-icons">add</i>
+    </a>
+  </div>
 </main>
 
 
-<div class="fixed-action-btn">
-  <a  class="btn-floating btn-large pulse waves-effect waves-light  secundario  crear-Comision" >
-    <i class="material-icons">add</i>
-  </a>
-
-  <a href="?controlador=comisiones&actividad=index" class="btn-floating btn-large waves-effect waves-light  deep-orange  regresar oculto" onclick='
-
-    $(".regresar").hide()
-    $(".crear-Comision").show()
-
-  '>
-    <i class="material-icons ">arrow_back</i>
-  </a>
-</div>
 
 
-
-    
-    <!--
-      VENTANAS DE DIALOGOS DE REGISTRAR EDITAR ELIMINAR Y OPERACIONES 
-    -->
-    <?php require_once "__dialogos.php"; ?>
-
-    <?php require_once "app/vista/plantilla/__scripts.php";  ?> 
-    
-    <script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
-    <script src="public/vendor/jvalidate/additional-methods.min.js"></script>
-    <script src="public/js/validaciones/config-default.js"></script>
-    <script src="public/js/validaciones/comisiones.js"></script>
-    
-    <script src="public/js/ajax/menu.js"></script>
-    <script src="public/vendor/paginacion.js"></script>
-
-    <script src="public/js/ajax/comisiones.js"></script>
-
+<!-- VENTANAS DE DIALOGO -->
+<?php require_once "__dialogos.php"; ?>
+<?php require_once "app/vista/plantilla/__scripts.php";  ?> 
+<script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
+<script src="public/vendor/jvalidate/additional-methods.min.js"></script>
+<script src="public/js/validaciones/config-default.js"></script>
+<script src="public/js/validaciones/comisiones.js"></script>
+<script src="public/js/ajax/menu.js"></script>
+<script src="public/vendor/paginacion.js"></script>
+<script src="public/js/ajax/comisiones.js"></script>
 </body>
 </html>

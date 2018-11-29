@@ -21,8 +21,8 @@ function listar(){
         if (respuesta.data.length > 0) {
 
             $(".mensaje").hide()
-            $("table").show()
-            $("table tbody").html('')
+            $("#tabla_secciones").show()
+            $("#tabla_secciones tbody").html('')
               
               var content = $('')
               var switche 
@@ -51,10 +51,10 @@ function listar(){
                 }
 
                 content = `<tr data-id="${item.codSec }">
-                                        <td width="20%">${ item.codSec }</td>
-                                        <td width="20%">${ trayecto }</td>
-                                        <td width="20%">${ turno }</td>
-                                        <td width="10%">
+                                        <td >${ item.codSec }</td>
+                                        <td >${ trayecto }</td>
+                                        <td >${ turno }</td>
+                                        <td >
                                             <div class="switch">
                                                 <label>
                                                   ${switche}
@@ -62,19 +62,19 @@ function listar(){
                                                 </label>
                                             </div>
                                         </td>
-                                        <td width="5%" >
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").append(content)
+                $("#tabla_secciones tbody").append(content)
               })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_secciones").paginationTdA({ elemPerPage: 8 })
         }else{
-            $("table").hide()
+            $("#tabla_secciones").hide()
             $(".mensaje").show()
             
         }
@@ -98,6 +98,8 @@ function editar( codSec ){
                 
         $(".formEditarSeccion #editar_trayecto").val( respuesta.data.trayecto );
 
+        $(".formEditarSeccion select#editar_pnf").val( respuesta.data.pnf );
+
         $(".formEditarSeccion #editar_matricula").val( respuesta.data.matricula )
         $(".formEditarSeccion #editar_turno").val( respuesta.data.turno )
 
@@ -110,28 +112,20 @@ function editar( codSec ){
         if ( respuesta.data.tipo == 2 ) { $(".formEditarSeccion #editar_tipo2").attr("checked",true) }
 
         $(".formEditarSeccion #editar_observaciones").val( respuesta.data.observaciones )
-    
+        $('select').material_select()
         $("#editarSeccion").modal("open") 
     }) 
 }
 
 function crear(){
-    var datos = {
-        "codSec" : $('.formCrearSeccion #prefijo-codigo').val() + "-" + $('.formCrearSeccion #crear_codSec').val().toUpperCase(),
-        "trayecto" : $('.formCrearSeccion #crear_trayecto').val(),
-        "matricula" : $('.formCrearSeccion #crear_matricula').val(),
-        "turno" : $('.formCrearSeccion #crear_turno').val(),
-        "estado" : $('.formCrearSeccion #crear_estado').val(),
-        "tipo" : $('.formCrearSeccion input[name=tipo]').val(),
-        "observaciones" : $('.formCrearSeccion #crear_observaciones').val()
-    }
+
 
     $.ajax({ 
 
             dataType : 'json' ,
             type:'POST' ,
             url:'index.php?controlador=secciones&actividad=crear',
-            data:datos 
+            data:$('.formCrearSeccion').serialize()
     }) 
         
     .done(function(respuesta){
@@ -208,7 +202,7 @@ function buscar( filtro ){
 
     var url = 'index.php?controlador=secciones&actividad=buscar'
     
-    $("table tbody").html('')
+    $("#tabla_secciones tbody").html('')
     var content = $('')
     
     $.ajax({  url : url, type : 'POST', data : { "filtro" : filtro }, dataType : 'json' })
@@ -218,7 +212,7 @@ function buscar( filtro ){
         if (respuesta.operacion == true) {
 
             $(".mensaje").hide()
-            $("table").show()      
+            $("#tabla_secciones").show()      
               
             var switche 
             var turno
@@ -246,10 +240,10 @@ function buscar( filtro ){
                 }
 
                 content += `<tr data-id="${item.codSec }">>
-                                        <td width="20%">${ item.codSec }</td>
-                                        <td width="20%">${ trayecto }</td>
-                                        <td width="20%">${ turno }</td>
-                                        <td width="10%">
+                                        <td >${ item.codSec }</td>
+                                        <td >${ trayecto }</td>
+                                        <td >${ turno }</td>
+                                        <td >
                                             <div class="switch">
                                                 <label>
                                                   ${switche}
@@ -257,21 +251,21 @@ function buscar( filtro ){
                                                 </label>
                                             </div>
                                         </td>
-                                        <td width="5%" >
+                                        <td  >
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   
                                     </tr>`
 
-                $("table tbody").html( content )
+                $("#tabla_secciones tbody").html( content )
             })
 
-            $("table").paginationTdA({ elemPerPage: 4 })
+            $("#tabla_secciones").paginationTdA({ elemPerPage: 8 })
         }else{
 
             $(".mensaje").show()
-           $("table").hide() 
+           $("#tabla_secciones").hide() 
         }
     })
 }
@@ -293,7 +287,7 @@ function cambiarEstado( estado , codSec ){
 
 
         Materialize.toast('Listo...',997)
-        listar()
+ 
                                       
       }else{
                   
@@ -301,6 +295,37 @@ function cambiarEstado( estado , codSec ){
 
       }
   })
+}
+
+function cargarComboPrefijo(){
+ 
+    var elemento = $('.formCrearUnidadCurricular select#prefijo_codigo')
+
+
+    elemento.html("")
+    
+    $.ajax({
+
+        url:'?controlador=pnf&actividad=listar',
+        type:'POST',
+        dataType:'json'
+    })
+
+    .done(function(respuesta){
+
+        elemento.html("")
+
+                        $.each( respuesta.data, function( i,item ){
+                          elemento.append(`
+                            <option class="left"
+                              value="${item.codPnf}" 
+                            > ${item.alias} </option>
+                          `)
+                        })
+
+                        elemento.material_select()
+    })
+    
 }
 
 /*
@@ -312,7 +337,32 @@ al boton de crear , muestra un dialogo
 con el formulario de creacion.
 
 */
-$(".crear-Seccion").on("click",function(){ $('#crearSeccion').modal("open")  })
+$(".crear-Seccion").on("click",function(){ 
+    
+    $(".formCrearSeccion select#crear_pnf").html("") 
+    $.ajax({
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=pnf&actividad=listar' 
+    })
+
+    .done(function(respuesta){
+
+        var contenidoHTML = $("")       
+        $.each( respuesta.data, function(i,item){
+
+            contenidoHTML += `<option value="${item.codPnf}">
+                                ${item.codPnf}
+                            </option>`
+        }) 
+        
+        $(".formCrearSeccion select#crear_pnf").html(contenidoHTML)  
+        $('select').material_select()      
+    })
+
+    $('#crearSeccion').modal("open")
+
+})
 
 /*
 
@@ -337,7 +387,7 @@ muestra un dialogo con las opciones basicas
 editar y eliminar
 
 */
-$("table").on("click","a.mostrarOperaciones",function(){
+$("#tabla_secciones").on("click","a.mostrarOperaciones",function(){
 
     var codigo_item_seleccionado= $(this).parents("tr").data("id")
 
@@ -363,7 +413,26 @@ para poder editarlo
 $("body").on( "click", ".editar-Seccion", function(){ 
 
     var codSec = $("#modal_operaciones input[name=item_seleccionado]").val( )
-    
+    $(".formEditarSeccion select#editar_pnf").html("") 
+    $.ajax({
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=pnf&actividad=listar' 
+    })
+
+    .done(function(respuesta){
+
+        var contenidoHTML = $("")       
+        $.each( respuesta.data, function(i,item){
+
+            contenidoHTML += `<option value="${item.codPnf}">
+                                ${item.codPnf}
+                            </option>`
+        }) 
+        
+        $(".formEditarSeccion select#editar_pnf").html(contenidoHTML)  
+        $('select').material_select()      
+    })
     editar( codSec ) 
 })
 
@@ -395,7 +464,7 @@ se captura ese valor, y se envia en una
 consulta asincrona al controlador donde se le cambia el valor al estado de la seccion
 
 */
-$("table").on("change","input[name=switch]",function() {
+$("#tabla_secciones").on("change","input[name=switch]",function() {
     var codSec = $(this).parents("tr").data("id")
     var estado = false
     if($(this).is(":checked")) {

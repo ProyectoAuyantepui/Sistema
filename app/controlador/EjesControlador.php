@@ -3,7 +3,6 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CEje.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -15,7 +14,7 @@ require_once "app/modelo/CEje.php";
 		
 			$OEje = new CEje();
 
-			$OEje->setNombre( $_POST['nombre'] );
+			$OEje->setNombre( ucwords($_POST['nombre'] ));
 			$OEje->setDescripcion( $_POST['descripcion'] );
 
 			$resultado = $OEje->crearEje(); 
@@ -35,7 +34,7 @@ require_once "app/modelo/CEje.php";
 			$OEje = new CEje();
 
 			$OEje->setCodEje( $_POST['codEje'] );
-			$OEje->setNombre( $_POST['nombre'] );
+			$OEje->setNombre(ucwords( $_POST['nombre'] ));
 			$OEje->setDescripcion( $_POST['descripcion'] );
 			
 			$resultado = $OEje->modificarEje(); 
@@ -81,7 +80,7 @@ require_once "app/modelo/CEje.php";
 
 			$ejes = $OEje->listarEjes();
 
-			echo json_encode(['data' => $ejes]);
+			echo json_encode(  $ejes );
 		break;
 
 		case 'buscar': 

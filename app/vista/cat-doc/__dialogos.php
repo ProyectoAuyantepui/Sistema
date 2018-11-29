@@ -11,17 +11,17 @@
       <div class="modal-content">
         <form class="formCrearCatDoc" >
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12  input-field">
               <i class="material-icons prefix">call_split</i>
-                <label for="crear_nombre"  >nombre</label>
                   <input type="text" id="crear_nombre" name="nombre" class="validate" placeholder="nombre" required />
+                <label for="crear_nombre"  >nombre</label>
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12  input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label data-success="Correcto..."  for="crear_descripcion" >Descripción</label>
                   <textarea id="crear_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Descripción" required></textarea>
+                <label data-success="Correcto..."  for="crear_descripcion" >Descripción</label>
             </div>
           </div>
           <div class="row"> 
@@ -50,17 +50,17 @@
             <input  id="editar_codCatDoc"  type="hidden" name="codCatDoc">
 
           <div class="row">
-            <div class=" col s12 m12">
+            <div class=" col s12 m12  input-field">
               <i class="material-icons prefix">call_split</i>
+                  <input type="text" id="editar_nombre" name="nombre" class="validate" placeholder="" required />
                 <label for="editar_nombre"  >nombre</label>
-                  <input type="text" id="editar_nombre" name="nombre" class="validate"  required />
             </div>
           </div>
           <div class="row">
-            <div class="col s12 m12">
+            <div class="col s12 m12  input-field">
               <i class="material-icons prefix">remove_red_eye</i>
-                <label for="editar_descripcion" >Descripción</label>
                   <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] placeholder="Descripción" required></textarea>
+                <label for="editar_descripcion" >Descripción</label>
             </div>
           </div>
           <div class="row"> 

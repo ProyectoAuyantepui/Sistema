@@ -10,24 +10,22 @@
         </span>
       </div>
       <div class="modal-content">
-        <form class="formCrearSeccion" >
+        <form class="formCrearSeccion" novalidate="novalidate">
 
           <div class="row">
-
-            <div class="input-field col s1">
-                <select id="prefijo-codigo">
-                  <option value="PNFI">PNFI</option>
-                  <option value="PNFA">PNFA</option>
-                </select>
-            </div>
-
-            <div class="input-field col s11 m3 ">
+        
+            <div class="input-field col s12 m4 ">
               <input  id="crear_codSec" name="codSec" type="text" name="codSec" class="validate" required>
-              <label for="crear_codSec">Código</label>
+              <label for="crear_codSec" data-success="Correcto...">Código</label>
+            </div>
+            
+            <div class="input-field col s12 m4 ">
+              <select  name="pnf" id="crear_pnf" ></select>
+              <label >PNF</label>
             </div>
 
-            <div class="col s12 m4">
-              <label>Trayecto</label>
+            <div class="col s12 m4 input-field">
+              
               <select name="trayecto" id="crear_trayecto">
                 <option value="" disabled selected>Seleccione un Trayecto</option>
                 <option value="0">Trayecto Inicial</option>
@@ -36,19 +34,21 @@
                 <option value="3">Trayecto 3</option>
                 <option value="4">Trayecto 4</option>
               </select>
-            </div>
-          
-            <div class="input-field col s12 m4 ">
-              <i class="material-icons prefix">code</i> 
-              <input  id="crear_matricula" name="matricula" type="number" min="1" max="120"  name="matricula" class="validate" required>
-              <label for="crear_matricula">Matricula</label>
-              </p>
+
+              <label>Trayecto</label>
             </div>
           
           </div>
           <div class="row">
+
+            <div class=" col s12 m3 input-field">
+              <i class="material-icons prefix">code</i> 
+              <input  id="crear_matricula" name="matricula" type="number" min="1" max="120"  name="matricula" class="validate" required>
+              <label for="crear_matricula" data-success="Correcto...">Matricula</label>
+            </div>
+          
             
-            <div class=" col s12 m4">
+            <div class=" col s12 m3 ">
               <label>Tipo</label>
               <p>
                 <input name="tipo" type="radio" id="crear_tipo1" checked="checked" value="1" />
@@ -56,20 +56,23 @@
                 <input name="tipo" type="radio" id="crear_tipo2" value="2" />
                 <label for="crear_tipo2">Repitientes</label>
               </p>
+              
             </div>
             
-            <div class="col s12 m4 ">
-              <label>Turno</label>
+            <div class="col s12 m3 input-field ">
+              
               <select name="turno" id="crear_turno">
                 <option value="" disabled selected>Seleccione un turno</option>
                 <option value="1">Mañana</option>
                 <option value="2">Tarde</option>
                 <option value="3">Noche</option>
               </select>
+
+              <label>Turno</label>
               
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m3 ">
               <label>Estado inicial</label>
               <p>
                 <div class="switch">
@@ -81,13 +84,17 @@
                   </label>
                 </div>
               </p>
+              
             </div>
           
           </div>
 
-          <div class="input-field col s12 m12">
+          <div class=" col s12 m12 input-field">
+              
               <i class="material-icons prefix">remove_red_eye</i>
-              <textarea id="crear_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
+
+              <textarea id="crear_observaciones" name="observaciones" class="materialize-textarea validate"  required></textarea>
+              
               <label data-success="Correcto..."  for="crear_observaciones" >Observaciones</label>
           </div>
 
@@ -113,38 +120,45 @@
 
       <div class="modal-content">
           
-          <form class="formEditarSeccion" >
+          <form class="formEditarSeccion" novalidate="novalidate">
             
-            <div class="row">
-            
-            <div class="col s12 m4 ">
-              <label for="editar_codSec">Código</label>
-              <input  id="editar_codSec" name="codSec" type="text" readonly="readonly" name="codSec" >
-              
-            </div>
-            <div class="col s12 m4">
-               <label>Trayecto</label>
-              <select name="trayecto" id="editar_trayecto" class="browser-default">
-                <option value="0">Trayecto Inicial</option>
-                <option value="1">Trayecto 1</option>
-                <option value="2">Trayecto 2</option>
-                <option value="3">Trayecto 3</option>
-                <option value="4">Trayecto 4</option>
-              </select>
-             
-            </div> 
-          
-            <div class="col s12 m4 ">
-
-              <label for="editar_matricula">Matricula</label>
-              <input  id="editar_matricula" name="matricula" type="number" min="1" max="120"  name="matricula" class="validate" required>
-              </p>
-            </div>
-          
-          </div>
           <div class="row">
             
-            <div class=" col s12 m4">
+              <div class="col s12 m4 ">
+                <label for="editar_codSec">Código</label>
+                <input  id="editar_codSec" name="codSec" type="text" readonly="readonly" name="codSec" >
+                
+              </div>
+
+              <div class="input-field col s12 m4 ">
+                <select  name="pnf" id="editar_pnf" ></select>
+                <label >PNF</label>
+              </div>
+
+              <div class="col s12 m4 input-field">
+                 
+                <select name="trayecto" id="editar_trayecto"  >
+                  <option value="0">Trayecto Inicial</option>
+                  <option value="1">Trayecto 1</option>
+                  <option value="2">Trayecto 2</option>
+                  <option value="3">Trayecto 3</option>
+                  <option value="4">Trayecto 4</option>
+                </select>
+               <label>Trayecto</label>
+              </div> 
+          </div>
+          <div class="row">
+              <div class="col s12 m3  input-field">
+
+                
+                <input  id="editar_matricula" name="matricula" type="number" pattern="[0-9]{1,40}"  name="matricula" class="validate" placeholder="" required>
+                <label for="editar_matricula">Matricula</label>
+                
+              </div>
+          
+          
+            
+            <div class=" col s12 m3 ">
               <label>Tipo</label>
               <p>
                 <input name="tipo" type="radio" id="editar_tipo1" value="1" />
@@ -154,17 +168,17 @@
               </p>
             </div>
             
-            <div class="col s12 m4 ">
-              <label>Turno</label>
-              <select name="turno" id="editar_turno" class="browser-default">
+            <div class="col s12 m3  input-field">
+              
+              <select name="turno" id="editar_turno" >
                 <option value="1">Mañana</option>
                 <option value="2">Tarde</option>
                 <option value="3">Noche</option>
               </select>
-              
+              <label>Turno</label>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m3 ">
               <label>Estado </label>
               <p>
                 <div class="switch">
@@ -180,10 +194,10 @@
           
           </div>
 
-          <div class="col s12 m12">
-              <label data-success="Correcto..."  for="editar_observaciones" >Observaciones</label>
-              <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" maxlength="150" rangelength=[10,150] required></textarea>
-              
+          <div class="col s12 m12 input-field">
+             
+              <textarea id="editar_observaciones" name="observaciones" class="materialize-textarea validate" placeholder="" required></textarea>
+               <label data-success="Correcto..."  for="editar_observaciones" >Observaciones</label>
           </div>
 
           <div class="row"> 
@@ -244,10 +258,6 @@
             <li class="collection-item avatar">
               <i class="material-icons circle deep-orange">delete</i>
               <a href="#" class="eliminar-Seccion  deep-orange-text"> Eliminar </a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">access_alarms</i>
-              <a href="#" class="ver-horario red-text"> Ver horario </a>
             </li>
         </ul>
     </div>

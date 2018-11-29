@@ -1,10 +1,5 @@
 <?php  
-/*
-Modelo CCatDoc 
-Sirve para gestionar toda la informacion referente a Categorias de Docentes
 
-Instancia en 
-*/
 require_once "app/core/Database.php";
 
 class CCatDoc extends Database{
@@ -49,9 +44,11 @@ class CCatDoc extends Database{
 		$sql = 'SELECT * FROM "TCatDoc"'; 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-		return $result;
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function crearCatDoc(){
@@ -131,31 +128,6 @@ class CCatDoc extends Database{
 
 		return $result;
 	}
-
-	// public function docentes(){
-
-	// 	$ODocente =  new CDocente();
-
-	// 	$docentes = $ODocente->listarDocentes( );
-		
-	// 	$arregloDocentes = array();
-	// 	foreach ($docentes as $docente) {
-	// 		if ( $docente->codCatDoc == $this->codCatDoc ) {
-	// 			$arregloDocentes[] = $docente;
-	// 		}
-	// 	}		
-
-	// 	return $arregloDocentes;
-	// }
 }
 
-//  $o = new CCatDoc();
-//  $o->setCodCatDoc("C-001");
-// // $o->setNombre("fdsfds");
-// // $o->setDescripcion("fdsfdsf");
-
-// // var_dump( $o->modificarCatDoc() );
-
-// // var_dump( $o->listarCatDoc() );
-//  var_dump( $o->docentes() );
 

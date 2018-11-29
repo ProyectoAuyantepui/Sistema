@@ -3,7 +3,6 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 require_once "app/modelo/CSeccion.php";
 
-// switch case a la variable actividad que recibimos en el index.php por get
 	switch($actividad){
 
 		case 'index': 
@@ -12,12 +11,14 @@ require_once "app/modelo/CSeccion.php";
 		break;
 
 		case 'crear': 
-		
-			$OSeccion = new CSeccion();
 
-			$OSeccion->setCodSec( $_POST['codSec'] );
+			$OSeccion = new CSeccion();
+			$codigo = strtoupper( $_POST['codSec'] );
+			$OSeccion->setCodSec( $codigo );
+			$OSeccion->setPnf( $_POST['pnf'] );
 			$OSeccion->setTrayecto( $_POST['trayecto'] );
 			$OSeccion->setMatricula( $_POST['matricula'] );
+
 			if ( isset( $_POST['estado'] ) ) {
 
 				$OSeccion->setEstado( true );
@@ -25,6 +26,7 @@ require_once "app/modelo/CSeccion.php";
 
 				$OSeccion->setEstado( 'F' );
 			}
+			
 			$OSeccion->setTipo( $_POST['tipo'] );
 			$OSeccion->setTurno( $_POST['turno'] );
 			$OSeccion->setObservaciones( $_POST['observaciones'] );
@@ -46,6 +48,7 @@ require_once "app/modelo/CSeccion.php";
 			$OSeccion = new CSeccion();
 
 			$OSeccion->setCodSec( $_POST['codSec'] );
+			$OSeccion->setPnf( $_POST['pnf'] );
 			$OSeccion->setTrayecto( $_POST['trayecto'] );
 			$OSeccion->setMatricula( $_POST['matricula'] );
 			if ( isset( $_POST['estado'] ) ) {
@@ -146,9 +149,9 @@ require_once "app/modelo/CSeccion.php";
 		
 			$OSeccion = new CSeccion();
 
-			$Seccion = $OSeccion->listarSecciones();
+			$secciones = $OSeccion->listarSecciones();
 
-			echo json_encode(['data' => $Seccion]);
+			echo json_encode( $secciones );
 		break;
 	}
 

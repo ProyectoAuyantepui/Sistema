@@ -1,8 +1,5 @@
 <?php  
-/*
-Modelo CAmbiente 
-Sirve para gestionar toda la informacion referente a Ambientes
-*/
+
 require_once "app/core/Database.php";
 class CAmbiente extends Database{
 
@@ -70,7 +67,7 @@ class CAmbiente extends Database{
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
 		$this->stmt->bindParam(':estado',$this->estado);
      	$result = $this->stmt->execute();
-       	$this->deconectarBD();
+       	$this->desconectarBD();
 		
    
 
@@ -96,7 +93,7 @@ class CAmbiente extends Database{
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
 		$this->stmt->bindParam(':estado',$this->estado);
      	$result = $this->stmt->execute();
-       	$this->deconectarBD();
+       	$this->desconectarBD();
 
     	return $result;
 	}
@@ -108,7 +105,7 @@ class CAmbiente extends Database{
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codAmb',$this->codAmb);
      	$result = $this->stmt->execute();
-       	$this->deconectarBD();
+       	$this->desconectarBD();
 
     	return $result;
 	}
@@ -120,9 +117,11 @@ class CAmbiente extends Database{
 		$sql = 'SELECT * FROM "TAmbientes"';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
-		$this->deconectarBD();
-		return $result;
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 	
 	
@@ -134,22 +133,23 @@ class CAmbiente extends Database{
 		$this->stmt->bindParam(':codAmb',$this->codAmb);
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
-		$this->deconectarBD();
+		$this->desconectarBD();
 
 		return $result;
 	}
 
-		public function validarAmbiente(){
+	public function validarAmbiente(){
 		
 		$this->conectarBD();
 		$sql = 'SELECT * FROM "TAmbientes" WHERE "codAmb" = :codAmb';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codAmb',$this->codAmb);
 		$this->stmt->execute(); 
-		$result = $this->stmt->rowCount();
-		$this->deconectarBD();
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$this->desconectarBD();
 
-		return $result;
+		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
 	public function buscarAmbiente($filtro){
@@ -160,7 +160,7 @@ class CAmbiente extends Database{
 		$this->stmt = $this->conn->prepare($sql);	
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
-		$this->deconectarBD();
+		$this->desconectarBD();
 
 		return $result;
 	}
@@ -181,30 +181,9 @@ class CAmbiente extends Database{
 		
      	
      	$result = $this->stmt->execute();
-       	$this->deconectarBD();
+       	$this->desconectarBD();
 
     	return $result;
 	}
 }
 
-
-
-//  $o = new CAmbiente();
-//  $o->setCodAmb("dsd4g");
-//  $o->setUbicacion("gdgdfg");
-//  $o->setTipo(2);
-//  $o->setEstado( true );
-//  $o->setObservaciones("dfdsfd");
-
-//  var_dump( $o->crearAmbiente() );
-
-
-
-//  var_dump( $o->modificarAmbiente() );
-
-
-
-// var_dump( $o->eliminarAmbiente() );
-
-
-//  var_dump( $o->listarAmbientes() );

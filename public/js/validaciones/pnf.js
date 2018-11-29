@@ -3,7 +3,8 @@ $(".formCrearPnf").validate({
   messages: {
     
     codPnf:{
-      required:"Introduzca un código"
+      required:"Introduzca un código",
+      maxlength:"introduzca un valor valido entre 4 y 6 caracteres"
     },
     
     alias:{
