@@ -36,7 +36,7 @@ Tecnologias utilizadas :
 
 <ul>
     <li>HTML5</li>
-	<li>PHP >= 7.0</li>
+	<li>PHP >= 7.2</li>
 	<li>Postgresql 9.5</li>
 	<li>Materialize v0.100.1</li>
 	<li>jQuery v1.12.4</li>
