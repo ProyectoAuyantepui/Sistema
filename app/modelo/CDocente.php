@@ -100,11 +100,6 @@ class CDocente extends Database{
 
 		$this->usuario = $usuario;
 	}
-
-	public function setCarrera( $carrera ){
-
-		$this->carrera = $carrera;
-	}
 	
 	public function setClave( $clave ){
 
@@ -182,11 +177,6 @@ class CDocente extends Database{
 
 		return $this->correo;
 	}
-
-	public function getCarrera(  ){
-
-		return $this->carrera;
-	}
 	
 	public function getDireccion(  ){
 
@@ -257,12 +247,12 @@ public function crearDocente(){
 			(
 	            "cedDoc", "codCatDoc", "codRol", nombre, apellido, "fecNac", 
 	            sexo, telefono, correo, direccion, "fecIng", "fecCon", "codDed", 
-	            condicion, usuario, clave, estado, avatar, observaciones,carrera
+	            condicion, usuario, clave, estado, avatar, observaciones
         	)
 		VALUES
 			(	:cedDoc, :codCatDoc, :codRol, :nombre, :apellido, :fecNac, 
 		        :sexo, :telefono, :correo, :direccion, :fecIng, :fecCon, :codDed, 
-		        :condicion, :usuario, :clave, :estado, :avatar, :observaciones, :carrera
+		        :condicion, :usuario, :clave, :estado, :avatar, :observaciones
             );
 ';
 
@@ -286,7 +276,6 @@ public function crearDocente(){
 		$this->stmt->bindParam(':estado',$this->estado);
 		$this->stmt->bindParam(':avatar',$this->avatar);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
-		$this->stmt->bindParam(':carrera',$this->carrera);
      	$result = $this->stmt->execute();
      	$this->desconectarBD();
 
@@ -312,33 +301,29 @@ public function crearDocente(){
        		   ];   		
        		}
 
-
-
-
-		$respuesta = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($respuesta as $val => $item) {
-            $password = $item['password'];
-            if (password_verify($datosModel['pass'], $password)) {
+		$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            $password = $result['clave'];
+            if (password_verify($_POST["clave"], $password)) {
                 $r = true;
             } else {
                 $r = false;
             }
-        }
+        
         if ($r) {
 
             return [
                 "operacion" => true,
-                "data"      => $respuesta,
+                "data"      => $result
             ];
         } else {
 
             return [
                 "operacion"    => false,
-                "codigo_error" => "2",
+                "codigo_error" => "2"
             ];
         }
 
-/*       	$sql = 'SELECT * FROM "TDocentes" WHERE clave = :clave';
+      /* 	$sql = 'SELECT * FROM "TDocentes" WHERE clave = :clave';
 
        	$this->stmt = $this->conn->prepare($sql);
        	$this->stmt->bindParam(':clave', $this->clave);
@@ -392,7 +377,7 @@ public function crearDocente(){
     	return $result;
 	}
 
-		public function consultarHorarioDocente(){
+	public function consultarHorarioDocente(){
 		
 		$this->conectarBD();
 		$sql = 'SELECT Doc.carrera,Doc.pregrado,Doc.postgrado,Doc.nombre AS "docNom",Doc.apellido,Doc."cedDoc",Ded.nombre as dedicacion, Doc.condicion, Cat.nombre as categoria FROM "TDocentes" as Doc INNER JOIN "TDedicaciones" as Ded ON Doc."codDed"=Ded."codDed" INNER JOIN "TCatDoc" as Cat ON Doc."codCatDoc"= Cat."codCatDoc" WHERE Doc."cedDoc" = :cedDoc';
@@ -413,7 +398,7 @@ public function crearDocente(){
 					"cedDoc"=:cedDoc, "codCatDoc"=:codCatDoc, "codRol"=:codRol, nombre=:nombre, apellido=:apellido, 
 			       	"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion, "fecIng"=:fecIng, 
 			       	"fecCon"=:fecCon, "codDed"=:codDed, condicion=:condicion, usuario=:usuario, estado=:estado, 
-			       	"avatar"=:avatar, "carrera"=:carrera
+			       	"avatar"=:avatar
 				WHERE 
 					"cedDoc" = :cedDoc';
 
@@ -435,7 +420,6 @@ public function crearDocente(){
 		$this->stmt->bindParam(':usuario',$this->usuario);
 		$this->stmt->bindParam(':estado',$this->estado);
 		$this->stmt->bindParam(':avatar',$this->avatar);
-		$this->stmt->bindParam(':carrera',$this->carrera);
      	$result = $this->stmt->execute();
        	$this->desconectarBD();
        	return $result;
@@ -523,30 +507,8 @@ public function cambiarClavePerfil(){
        	return $result;
 	}
 
-	public function buscarDocente( $filtro ){
-		$this->conectarBD();
-
-		$sql = "SELECT 
-				* 
-				FROM 
-				\"TDocentes\" 
-				WHERE 
-				\"cedDoc\" LIKE '" . $filtro . "%' 
-				OR
-				\"nombre\" LIKE '" . $filtro . "%'
-				OR
-				\"apellido\" LIKE '" . $filtro . "%'
-				OR
-				\"usuario\" LIKE '" . $filtro . "%'
-				";
-
-		$this->stmt = $this->conn->prepare($sql);
+	public function buscarDocente(){
 		
-		$this->stmt->execute(); 
-		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);
-		$this->desconectarBD();
-
-		return $result;
 	}
 
 	public function dependencias(  ){
@@ -671,6 +633,7 @@ public function cambiarClavePerfil(){
 
 		return $data;
 	}
+
 	public function consultarDependenciasDisponibles(){
 		
 		$this->conectarBD();

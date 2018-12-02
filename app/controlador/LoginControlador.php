@@ -22,11 +22,8 @@ require_once "app/modelo/CDocente.php";
 		
 
 			$ODocente = new CDocente();
-			$_POST['cedDoc'] = str_pad($_POST['cedDoc'], 8, "0", STR_PAD_LEFT);
 
-			$cedula = strtoupper($_POST['nacionalidad'] . "-" .  $_POST['cedDoc']);
-			
-			$ODocente->setCedDoc( $cedula ); 
+			$ODocente->setCedDoc( $_POST['cedDoc'] ); 
 			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
 			$ODocente->setCodRol( "R-003" ); 
 			$ODocente->setNombre( $_POST['nombre'] ); 
@@ -93,8 +90,8 @@ require_once "app/modelo/CDocente.php";
 		
 			$ODocente = new CDocente();
 
-			$ODocente->setUsuario( $_POST["usuario"] ); 
-	    	$ODocente->setClave( $_POST["clave"] ); 
+			$ODocente->setUsuario( $_POST['usuario'] ); 
+	    	$ODocente->setClave( $_POST['clave'] ); 
 
 			$respuesta = $ODocente->validarUsuario();
 			
@@ -105,38 +102,38 @@ require_once "app/modelo/CDocente.php";
 			}
 
 
-			$ODocente->setCedDoc( $respuesta["data"]->cedDoc );
+			$ODocente->setCedDoc($respuesta['data']['cedDoc'] );
 						
 			$OCatDoc = new CCatDoc();
 			$ORol = new CRol();
 
-			$OCatDoc->setCodCatDoc( $respuesta["data"]->codCatDoc );
-			$ORol->setCodRol( $respuesta["data"]->codRol );
+			$OCatDoc->setCodCatDoc( $respuesta['data']['codCatDoc'] );
+			$ORol->setCodRol( $respuesta['data']['codRol'] );
 
 			$_SESSION['user'] = [
 
-				'cedDoc' => $respuesta["data"]->cedDoc,
-				'nombre' => $respuesta["data"]->nombre,
-				'apellido' => $respuesta["data"]->apellido,
-				'usuario' => $respuesta["data"]->usuario,
-				'correo' => $respuesta["data"]->correo,
+				'cedDoc' =>$respuesta['data']['cedDoc'],
+				'nombre' => $respuesta['data']['nombre'],
+				'apellido' => $respuesta['data']['apellido'],
+				'usuario' => $respuesta['data']['usuario'],
+				'correo' => $respuesta['data']['correo'],
 				'rol' =>  $ORol->consultarRol(  ),
 				'comisiones' =>   $ODocente->comisiones( ),
 				'dependencias' =>   $ODocente->dependencias( ),
 				'categoria' =>  $OCatDoc->consultarCatDoc( ),
-				'fecNac' => $respuesta["data"]->fecNac, 
-				'sexo' => $respuesta["data"]->sexo, 
-				'telefono' => $respuesta["data"]->telefono, 
-				'direccion' => $respuesta["data"]->direccion, 
-				'fecCon' => $respuesta["data"]->fecCon, 
-				'fecIng' => $respuesta["data"]->fecIng, 
-				'codDed' => $respuesta["data"]->codDed, 
-				'condicion' => $respuesta["data"]->condicion,
-				'estado' => $respuesta["data"]->estado,
-				'avatar' => $respuesta["data"]->avatar 
+				'fecNac' => $respuesta['data']['fecNac'], 
+				'sexo' => $respuesta['data']['sexo'], 
+				'telefono' => $respuesta['data']['telefono'], 
+				'direccion' => $respuesta['data']['direccion'], 
+				'fecCon' => $respuesta['data']['fecCon'], 
+				'fecIng' => $respuesta['data']['fecIng'], 
+				'codDed' => $respuesta['data']['codDed'], 
+				'condicion' => $respuesta['data']['condicion'],
+				'estado' => $respuesta['data']['estado'],
+				'avatar' => $respuesta['data']['avatar'] 
 			];
 
-			echo json_encode([  "operacion" => true, "data" => $_SESSION['user']  ]);
+			echo json_encode([  'operacion' => true, 'data' => $_SESSION['user']  ]);
 		break;
 
 		case 'cerrar-sesion': 
