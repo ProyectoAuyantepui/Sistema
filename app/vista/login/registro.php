@@ -54,8 +54,8 @@
                 
                 <div class="col s1 input-field">
                   <select name="nacionalidad" id="nacionalidad">
-                    <option value="V-" >V</option>
-                    <option value="E-" >E</option>
+                    <option value="V" >V</option>
+                    <option value="E" >E</option>
                   </select>
                 </div>
                 <div class="col s3 input-field">
@@ -66,9 +66,9 @@
                     name="cedDoc" 
                     class="validate tooltipped" 
                     data-position="bottom"  
-                    data-tooltip="Ingrese la cédula, este campo solo debe contener números desde 8 hasta 10 carácteres" 
-                    pattern="[0-9]{7,10}" 
-                    rangelength=[7,10] 
+                    data-tooltip="Ingrese la cédula, este campo solo debe contener números desde 6 hasta 8 carácteres" 
+                    pattern="[0-9]{6,8}" 
+                    rangelength=[6,8] 
                     required
                     placeholder="Cedula" 
                   >

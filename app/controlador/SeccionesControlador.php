@@ -12,7 +12,16 @@ require_once "app/modelo/CSeccion.php";
 
 		case 'crear': 
 
+
 			$OSeccion = new CSeccion();
+			$codigo = strtoupper( $_POST['codSec'] );
+			$OSeccion->setCodSec( $codigo );
+			$validar = $OSeccion->validarSeccion();
+			
+			if ( $validar["cantidad"] > 0 ) {
+	 				echo json_encode( [ "operacion" => false , "error" => "1" ] );
+	 				exit();
+	 			}
 			$codigo = strtoupper( $_POST['codSec'] );
 			$OSeccion->setCodSec( $codigo );
 			$OSeccion->setPnf( $_POST['pnf'] );
@@ -31,15 +40,8 @@ require_once "app/modelo/CSeccion.php";
 			$OSeccion->setTurno( $_POST['turno'] );
 			$OSeccion->setObservaciones( $_POST['observaciones'] );
 			$resultado = $OSeccion->crearSeccion(); 
-			
-			if ($resultado) {
 
 				echo json_encode( ['operacion' => true] );
-			}else{
-
-
-				echo json_encode(['operacion' => false]);
-			}
 		
 		break;
 
@@ -100,7 +102,7 @@ require_once "app/modelo/CSeccion.php";
 		break;
 
 		case 'buscar': 
-		
+			
 			$OSeccion = new CSeccion();
 
 			$resultado = $OSeccion->buscarSeccion( $_POST['filtro'] ); 

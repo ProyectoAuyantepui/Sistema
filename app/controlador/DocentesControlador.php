@@ -20,8 +20,11 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'crear': 
-			
+
+			$_POST['cedDoc'] = str_pad($_POST['cedDoc'], 8, "0", STR_PAD_LEFT);
+
 			$cedula = strtoupper($_POST['nacionalidad'] . "-" .  $_POST['cedDoc']);
+			
 			$ODocente = new CDocente();
 			$ODocente->setCedDoc( $cedula ); 
 			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
@@ -38,7 +41,8 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCodDed( $_POST['codDed'] ); 
 			$ODocente->setCondicion( $_POST['condicion'] ); 
 			$ODocente->setUsuario( $_POST['usuario'] ); 
-			$ODocente->setClave( $_POST['cedDoc'] );
+			$ODocente->setCarrera( $_POST['carrera'] ); 
+			$ODocente->setClave( $cedula );
 			$ODocente->setAvatar( $_POST['avatar'] ); 
 			$ODocente->setEstado( 'FALSE' );
 			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  

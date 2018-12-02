@@ -27,17 +27,13 @@
          </div>
          <div class="card-content row">
            <p class="col s12" style="padding: 10px 1px 1px 1px;">
-             <a class="btn-floating btn pulse  waves-effect  primario">
                <i class="material-icons left">settings</i>
-             </a>
              Este módulo corresponde a la gestion de Comisiones de dcentes en el sistema 
            </p>
 
            <p class="col s12" style="padding: 10px 1px 1px 1px;">
              
-             <a class="btn-floating btn waves-effect deep-orange darken-1">
                <i class="material-icons left">edit</i>
-             </a>
              Atraves de este modulo puede modificar la informacion de una comision.
            </p>
 
@@ -69,20 +65,20 @@
                 <label for="editar_nombre"  >Nombre</label>
               </div>
            
-              <div class="input-field col s12 m4">
-                <select required  id="editar_dependencia" name="editar_dependencia">
-                  <option value="" selected disabled>Seleccione una opcion...</option>
-                  <?php foreach ($listado_dependencias["data"] as $dependencia): ?>
-                    <option selected value="<?=  $dependencia->codDep ?>"> <?php echo $dependencia->nombre; ?> </option>
-                  <?php endforeach ?>
-                </select>
-                <label for="editar_dependencia" >Dependencia</label>
+              <div class="input-field col s12 m6">
+                <i class="material-icons prefix">call_split</i>
+                <input type="text" id="editar_dependencia" name="dependencia" class="validate"  value="<?= $comision->dependencia ?>" required />
+                <label for="editar_dependencia"  >Dependencia</label>
               </div>
+            </div>
 
             <div class="row">
               <div class="input-field col s12 m12">
                 <i class="material-icons prefix">remove_red_eye</i>
-                <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate"  maxlength="150" rangelength=[10,150] required><?php echo $comision->descripcion ?></textarea>
+                <textarea id="editar_descripcion" name="descripcion" class="materialize-textarea validate"  maxlength="150" rangelength=[10,150] required>
+                  <?= $comision->descripcion ?>
+
+                </textarea>
                 <label data-success="Correcto..."  for="editar_descripcion" >Descripcion</label>
               </div>
             </div>

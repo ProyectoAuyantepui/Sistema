@@ -18,8 +18,8 @@ $config = [
       "host"     => "localhost",
       "port"     => "5432",
       "dbname"   => "horarios",
-      "username" => "horarios",
-      "password" => "123456"
+      "username" => "postgres",
+      "password" => "543217"
     ],
     
     "mailer" => [

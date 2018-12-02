@@ -22,16 +22,12 @@
         </div>
         <div class="card-content row">
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
-            </a>
             Este módulo corresponde a la gestion y configuracion de Dedicaciones de Docentes en el sistema 
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn waves-effect  green">
               <i class="material-icons left">access_time</i>
-            </a>
 
             A traves de este modulo puede modificar el rango de horas de una de dicacion de docente.
           </p>

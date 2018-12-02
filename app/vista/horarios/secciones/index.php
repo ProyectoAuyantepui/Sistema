@@ -23,29 +23,24 @@
               </div>
               <div class="card-content row">
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
-                  <a class="btn-floating btn pulse  waves-effect  primario">
                     <i class="material-icons left">settings</i>
-                  </a>
                   Este módulo corresponde a la gestion de Horarios de Secciones en el sistema 
                 </p>
 
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
                   
-                  <a class="btn-floating btn waves-effect  cyan">
+
                     <i class="material-icons left">add</i>
-                  </a>
                   Atraves de este modulo de Horarios de Secciones puede asignar actividades en al horario de la seccion
                 </p>
 
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
                   
-                  <a class="btn-floating btn waves-effect  red">
-                    <i class="material-icons left">delete</i> 
-                  </a>
 
-                  <a class="btn-floating btn waves-effect  green">
+                    <i class="material-icons left">delete</i> 
+
+
                     <i class="material-icons left">edit</i>
-                  </a>
 
                   Así como también modificar los datos de actividades o eliminar las actividades existentes en el horario de la seccion
                 </p>
@@ -257,7 +252,6 @@
 
 
       seccion_seleccionada["fase_seleccionada"] = fase_seleccionada 
-
 
       localStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
       $(location).attr('href', '?controlador=horariosSecciones&actividad=mostrar')

@@ -230,6 +230,7 @@ require_once "app/modelo/CTiempo.php";
 			$OPdf->fecha_actual = $config["fecha_completa"];
 			$OPdf->titulo = "Horario del Personal Docente";
 			$OPdf->nombre_plantilla = "horario_docente";
+
 			$OPdf->data = [
 
 				"datos_docente" => $datos_docente,

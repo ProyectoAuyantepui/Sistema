@@ -5,8 +5,6 @@ require_once "app/modelo/CComision.php";
 
 require_once "app/modelo/CDocente.php";
 
-require_once "app/modelo/CDependencia.php";
-
 	switch($actividad){
 
 		case 'index': 
@@ -16,22 +14,18 @@ require_once "app/modelo/CDependencia.php";
 
 		case 'vista-crear': 
 			$ODocente = new CDocente();
-			$ODependencias = new CDependencia();
 
 			$listado_de_docentes = $ODocente->listarDocentes();
-			$listado_dependencias= $ODependencias->listarDependencias();
 			require_once "app/vista/comisiones/crear.php";
 		break;
 
 		case 'vista-editar': 
 
 			$OComision = new CComision();
-			$ODependencias = new CDependencia();
 			$OComision->setCodCom( $_GET['codCom'] );
 			$comision = $OComision->consultarComision(); 
 			$docentes_comision = $OComision->docentes();
 
-			$listado_dependencias= $ODependencias->listarDependencias();
 			$coordinador_comision = $OComision->coordinador();
 
 			require_once "app/vista/comisiones/editar.php";
@@ -42,7 +36,7 @@ require_once "app/modelo/CDependencia.php";
 			$OComision = new CComision();
 
 			$OComision->setNombre( $_POST['nombre'] );
-			$OComision->setDependencia( $_POST['docente_dependencia'] );
+			$OComision->setDependencia( $_POST['dependencia'] );
 			$OComision->setDescripcion( $_POST['descripcion'] );
 			$resultado = $OComision->crearComision(); 
 
@@ -65,7 +59,7 @@ require_once "app/modelo/CDependencia.php";
 			$OComision = new CComision();
 			$OComision->setCodCom( $_POST['codCom'] );
 			$OComision->setNombre( $_POST['nombre'] );
-			$OComision->setDependencia( $_POST['editar_dependencia'] );
+			$OComision->setDependencia( $_POST['dependencia'] );
 			$OComision->setDescripcion( $_POST['descripcion'] );
 			$resultado = $OComision->modificarComision(); 
 			

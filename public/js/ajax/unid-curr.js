@@ -208,7 +208,9 @@ function editar( codUniCur ){
         if ( respuesta.data.fase == 3 ) { $(".formEditarUnidadCurricular #editar_anual").attr("checked",true) }
 
         $(".formEditarUnidadCurricular #editar_observaciones").val( respuesta.data.observaciones )
-            $('select').material_select()
+            $('select#editar_trayecto').material_select()
+            $('select#editar_codPnf').material_select()
+            $('select#editar_codEje').material_select()
     
         $("#editarUnidadCurricular").modal("open") 
     }) 

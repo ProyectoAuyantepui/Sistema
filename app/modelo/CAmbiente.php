@@ -156,7 +156,14 @@ class CAmbiente extends Database{
 
 		$this->conectarBD();
 
-		$sql = "SELECT * FROM \"TAmbientes\" WHERE \"codAmb\" LIKE '" . $filtro . "%' ";
+		$sql = "SELECT 
+				* 
+				FROM 
+				\"TAmbientes\" 
+				WHERE 
+				\"codAmb\" LIKE '" . $filtro . "%'
+				OR
+				\"ubicacion\" LIKE '" . $filtro . "%' ";
 		$this->stmt = $this->conn->prepare($sql);	
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);

@@ -34,7 +34,7 @@ require_once "app/modelo/CDependencia.php";
 		
 			$ODependencia = new CDependencia();
 			$ODependencia->setCodDep( $_POST['codDep'] );
-			$ODependencia->setNombre( $_POST['nombre'] );
+			$ODependencia->setNombre( ucwords($_POST['nombre'] )  );
 			$ODependencia->setDescripcion( $_POST['descripcion'] );
 			$resultado = $ODependencia->modificarDependencia(); 
 			

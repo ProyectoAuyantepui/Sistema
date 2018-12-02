@@ -27,17 +27,13 @@
          </div>
          <div class="card-content row">
            <p class="col s12" style="padding: 10px 1px 1px 1px;">
-             <a class="btn-floating btn pulse  waves-effect  primario">
                <i class="material-icons left">settings</i>
-             </a>
              Este módulo corresponde a la gestion de Comisiones de dcentes en el sistema 
            </p>
 
            <p class="col s12" style="padding: 10px 1px 1px 1px;">
              
-             <a class="btn-floating btn waves-effect  cyan">
                <i class="material-icons left">add</i>
-             </a>
              Atraves de este modulo puede crear nuevas Comisiones.
            </p>
 
@@ -65,13 +61,9 @@
               </div>
            
               <div class="input-field col s12 m4">
-                <select required  id="docente_dependencia" name="docente_dependencia">
-                  <option value="" selected disabled>Seleccione una opcion...</option>
-                  <?php foreach ($listado_dependencias["data"] as $dependencia): ?>
-                    <option value="<?=  $dependencia->codDep ?>"> <?php echo $dependencia->nombre; ?> </option>
-                  <?php endforeach ?>
-                </select>
-                <label for="docente_dependencia" >Dependencia</label>
+                <i class="material-icons prefix">call_split</i>
+                <input type="text" id="crear_dependencia" name="dependencia" class="validate"  required />
+                <label for="crear_dependencia"  >Dependencia</label>
               </div>
 
               <div class="input-field col s12 m4">

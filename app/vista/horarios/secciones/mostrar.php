@@ -202,32 +202,69 @@
       }
     })
     .done(function(respuesta){
+      var ambiente = ""
+      var cedula_docente = ""
+      var nombre_docente = ""
 
       $.each( respuesta.data , function (i,item) {
-
-        if ( item.nombredocente == null ) {
-
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").html(` <h6> ${item.codUniCur} <br>
-                                                                                ${item.nombremateria} <br>
-                                                                            </h6> `)
-        } else {
-
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").html(` <h6> ${item.codUniCur} <br>
-                                                                                ${item.nombremateria} <br>
-                                                                                ${item.nombredocente} <br>
-                                                                                ${item.codAmb} <br>
-                                                                            </h6> `)
+        
+        if ( item.codAmb == null ) {
+          ambiente = "sin ambiente"
+        }else{
+          ambiente = item.codAmb
         }
 
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("ocupado","ocupado")
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codUniCur",item.codUniCur)
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codAmb",item.codAmb)
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codSec",item.codSec)
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("cedDoc",item.cedDoc)
-          $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codHor",item.codHor)
+        if ( item.cedDoc == null ) {
+          nombre_docente = "sin docente"
+          cedula_docente = null
+        }else{
+          cedula_docente = item.cedDoc
+          nombre_docente = item.nombredocente
+        }
+
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").html("")
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div")
+        .append(`
+                  <h6>
+                    ${item.codUniCur} <br>
+                    ${item.nombremateria} <br>
+                    ${nombre_docente} <br>
+                    ${ambiente} <br>
+                  </h6>
+        `)
+
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("ocupado","ocupado")
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codUniCur",item.codUniCur)
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codAmb",ambiente)
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codSec",item.codSec)
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("cedDoc",cedula_docente)
+        $(""+ tabla_a_usar +" tr td[codTie="+item.codTie+"] div").attr("codHor",item.codHor)
       })
     })            
   }
+
+  /*function pintarUnidadesCurricularesAsignadas(){
+
+    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    $.ajax({ 
+            
+      dataType : 'json' ,
+      type:'POST' , 
+      url:'?controlador=horariosSecciones&actividad=consultar-unid-curr-asignadas',
+      data: { 
+          "codSec" : seccion_seleccionada.codSec, 
+          "fase_seleccionada" : seccion_seleccionada.fase_seleccionada
+      }
+    })
+    .done(function(respuesta){
+      $.each( respuesta.data , function(i,item){
+
+        $("ul.unidadesCurriculares a[codUniCur=" + item.codUniCur + "]")
+        .addClass( "pink darken-1 white-text" )
+        .attr("asignada","asignada")
+      })
+    })
+  }*/
 
   function pintarUnidadesCurricularesAsignadas(){
 
@@ -244,7 +281,7 @@
     })
     .done(function(respuesta){
       $.each( respuesta.data , function(i,item){
-
+console.log(respuesta)
         $("ul.unidadesCurriculares a[codUniCur=" + item.codUniCur + "]")
         .addClass( "pink darken-1 white-text" )
         .attr("asignada","asignada")
@@ -337,7 +374,7 @@
     $("table tr td[ocupado=desocupado] ").html("")      
   }
 
-function moverBloque(codHor, codTie) {
+function moverBloque(codHor,codTie ,codSec, codUniCur) {
 
   $.ajax({ 
 
@@ -346,13 +383,15 @@ function moverBloque(codHor, codTie) {
   url:'?controlador=horariosSecciones&actividad=mover-bloques',
   data: { 
     "codHor" : codHor,
-    "codTie" : codTie
+    "codTie" : codTie,
+    "codSec" : codSec, 
+    "codUniCur" : codUniCur
   }
   })
   .done(function(respuesta){
 
     Materialize.toast('Bloque Movido Exitosamente ', 1000,"",function(){
-      location.href = "?controlador=horariosSecciones&actividad=mostrar"
+      cargarUnidadesCurriculares()
     });
   })
 }
@@ -444,8 +483,7 @@ function handleDrop(e) {
     this.setAttribute("codhor", codHor )
     this.setAttribute("codsec", codsec )
     this.setAttribute("codunicur", codunicur )
-
-    moverBloque( codHor, codTie)
+    moverBloque( codHor, codTie ,codsec, codunicur )
    } else if ( dragSrcEl.getAttribute("ocupado") == 'desocupado' ) {
 
     alert('No Puede Mover Un Bloque Desocupado')

@@ -140,6 +140,20 @@ class CSeccion extends Database{
     	return $result;
 	}
 
+	public function validarSeccion(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT * FROM "TSecciones" WHERE "codSec" = :codSec';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':codSec',$this->codSec);
+		$this->stmt->execute(); 
+		$num_rows = $this->stmt->rowCount();
+		$data = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return [ "cantidad" => $num_rows , "data" => $data ];
+	}
+
 	public function consultarSeccion(){
 
 		$this->conectarBD();
@@ -159,7 +173,14 @@ class CSeccion extends Database{
 
 		$this->conectarBD();
 
-		$sql = "SELECT * FROM \"TSecciones\" WHERE \"codSec\" LIKE '" . $filtro . "%' ";
+		$sql = "SELECT 
+				* 
+				FROM 
+				\"TSecciones\" 
+				WHERE 
+				\"codSec\" LIKE '" . $filtro . "%'
+				OR
+				\"pnf\" LIKE '" . $filtro . "%' ";
 
 		$this->stmt = $this->conn->prepare($sql);
 		

@@ -147,16 +147,30 @@
     })
     .done(function(respuesta){
 
-      console.log(respuesta)
+      var ambiente = ""
 
       $.each( respuesta.data , function (i,item) {
 
         if ( item.tipo == 1 ) {
 
-          $("table tr td[codTie="+item.codTie+"] div").html(`<h6> ${item.codUniCur} <br>
-                                                                  ${item.nombremateria} <br>
-                                                                  ${item.codAmb} <br>
-                                                             </h6>`)
+          
+
+          if ( item.codAmb == null ) {
+            ambiente = "sin ambiente"
+          }else{
+            ambiente = item.codAmb
+          }
+          
+          $("table tr td[codTie="+item.codTie+"] div").html("")
+          $("table tr td[codTie="+item.codTie+"] div")
+          .append(`
+            <h6> ${item.codUniCur} <br>
+                    ${item.nombremateria} <br>
+                    ${item.codSec} <br>
+                    ${ambiente} <br>
+            </h6>`)
+
+
           $("table tr td[codTie="+item.codTie+"] div").attr("ocupado","ocupado")
           $("table tr td[codTie="+item.codTie+"] div").attr("codUniCur",item.codUniCur)
           $("table tr td[codTie="+item.codTie+"] div").attr("codAmb",item.codAmb)
@@ -165,6 +179,7 @@
           $("table tr td[codTie="+item.codTie+"] div").attr("codHor",item.codHor)
           $("table tr td[codTie="+item.codTie+"] div").removeAttr('draggable')
           $("table tr td[codTie="+item.codTie+"] div").removeAttr('class')
+
         } else if( item.tipo == 2) {
 
           $("table tr td[codTie="+item.codTie+"] div").html(`<h6>${item.titulo} <br> Tipo: ${item.tipActAdm}</h6>`)
@@ -183,25 +198,20 @@
 function mostrarInformacionDocente() {
 
 var docente_seleccionado = JSON.parse( localStorage.getItem( 'docente_seleccionado' ) )
-var estadoDelDocente
 
-if (docente_seleccionado.estado == true) {
+$("ul.docente").html("")
+var content = $("")
 
-  estadoDelDocente = 'Activo'
-} else {
-
-  estadoDelDocente = 'Inactivo'
-}
 
     content = `<h5> Cedula: ${docente_seleccionado.cedDoc} </h5>
                 <h5> Nombre: ${docente_seleccionado.nombre} </h5>
                 <h5> Apellido: ${docente_seleccionado.apellido} </h5>
                 <h5> Telefono: ${docente_seleccionado.telefono} </h5>
                 <h5> Correo: ${docente_seleccionado.correo} </h5>
-                <h5> Estado: ${estadoDelDocente} </h5>
                 <h5> Observaciones: ${docente_seleccionado.observaciones} </h5>`
 
   $("ul.docente").append(content)
+
 } // Fin Funcion mostrarInformacionDocente
 
 
@@ -220,7 +230,6 @@ $('#agregarActAdm').click(function() {
 
   .done(function(respuesta){
 
-    console.log( respuesta )
 
     if (respuesta.data.cantidad > 0) {
 
@@ -468,7 +477,9 @@ function moverBloque(codHor, codTie) {
   })
   .done(function(respuesta){
 
-    Materialize.toast('Bloque Movido Exitosamente ', 1000);
+    Materialize.toast('Bloque Movido Exitosamente ', 1000 , "",function(){
+      mostrarBloques()
+    });
   })
 }
 

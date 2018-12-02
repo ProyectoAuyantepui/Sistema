@@ -23,17 +23,13 @@
 
               <div class="card-content row">
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
-                  <a class="btn-floating btn pulse  waves-effect  primario">
                     <i class="material-icons left">settings</i>
-                  </a>
                   Este módulo corresponde a la gestion de Horarios de Ambientes en el sistema. 
                 </p>
 
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
                           
-                  <a class="btn-floating btn waves-effect green">
                     <i class="material-icons left">search</i>
-                  </a>
                   Atraves de este modulo de Horarios de Ambientes puede consultar el horario de un ambiente existente en el sistema, siempre y cuando este tenga actividades.
                 </p>
 

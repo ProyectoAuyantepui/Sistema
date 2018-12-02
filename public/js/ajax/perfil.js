@@ -81,7 +81,7 @@ function actualizarClave( cedDoc, claveVieja, claveNueva ){
 
                 'Error, La contraseña no coincide con nuestra base de datos',
                 
-                5000
+                2200
             );
 
             $("body").find("input[name='claveVieja']").addClass("invalid").next("label").attr("data-error","La contraseña no es correcta..")

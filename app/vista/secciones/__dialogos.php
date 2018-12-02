@@ -14,21 +14,20 @@
 
           <div class="row">
         
-            <div class="input-field col s12 m4 ">
+            <div class="input-field col s12 m3 ">
               <input  id="crear_codSec" name="codSec" type="text" name="codSec" class="validate" required>
               <label for="crear_codSec" data-success="Correcto...">Código</label>
             </div>
-            
-            <div class="input-field col s12 m4 ">
+            <div class="input-field col s12 m3 ">
               <select  name="pnf" id="crear_pnf" ></select>
               <label >PNF</label>
             </div>
 
-            <div class="col s12 m4 input-field">
+            <div class="col s12 m3 input-field">
               
               <select name="trayecto" id="crear_trayecto">
                 <option value="" disabled selected>Seleccione un Trayecto</option>
-                <option value="0">Trayecto Inicial</option>
+                <option value="5">Trayecto Inicial</option>
                 <option value="1">Trayecto 1</option>
                 <option value="2">Trayecto 2</option>
                 <option value="3">Trayecto 3</option>
@@ -37,10 +36,21 @@
 
               <label>Trayecto</label>
             </div>
+
+            <div class="col s12 m3 input-field">
+              
+              <select name="grupo" id="crear_grupo">
+                <option value="" disabled selected>Seleccione Grupo</option>
+                <option value="">Sección Completa</option>
+                <option value="-A">Grupo A</option>
+                <option value="-B">Grupo B</option>
+              </select>
+
+              <label>GRUPO</label>
+            </div>
           
           </div>
           <div class="row">
-
             <div class=" col s12 m3 input-field">
               <i class="material-icons prefix">code</i> 
               <input  id="crear_matricula" name="matricula" type="number" min="1" max="120"  name="matricula" class="validate" required>
@@ -138,7 +148,7 @@
               <div class="col s12 m4 input-field">
                  
                 <select name="trayecto" id="editar_trayecto"  >
-                  <option value="0">Trayecto Inicial</option>
+                  <option value="5">Trayecto Inicial</option>
                   <option value="1">Trayecto 1</option>
                   <option value="2">Trayecto 2</option>
                   <option value="3">Trayecto 3</option>

@@ -24,32 +24,22 @@
         </div>
         <div class="card-content row">
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
-            </a>
             Este módulo corresponde a la gestion de Dependencias en el sistema 
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
             
-            <a class="btn-floating btn waves-effect  cyan">
               <i class="material-icons left">add</i>
-            </a>
             Atraves de este modulo puede crear nuevas Dependencias.
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn waves-effect  green">
               <i class="material-icons left">search</i>
-            </a>
 
-            <a class="btn-floating btn waves-effect pink darken-1">
               <i class="material-icons left">edit</i>
-            </a>
 
-            <a class="btn-floating btn waves-effect  red">
               <i class="material-icons left">delete</i> 
-            </a>
 
             Así como también consultar , modificar los datos o eliminar las Dependencias existentes en el sistema
           </p>
