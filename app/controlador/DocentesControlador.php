@@ -248,14 +248,41 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'obbImgSte':
-			$ODocente = new CDocente();
+		if (isset($_FILES)) {
 
+			echo json_encode(['respuesta' => 'success']);
+			$ODocente = new CDocente();
 			$ODocente->setCedDoc( $_POST["cedDocLinkSte"] ); 
 			$ODocente->setImgSte( $_FILES["imgSteUpload"] ); 
 			$linkDataImgSte = $ODocente->linkDataImgSte();
-				
-	 		echo json_encode(['data' => $linkDataImgSte]);
+		}
+			
 		break;
 
+		case 'compararTextSte':
+		if (isset($_FILES)) {
+
+			$ODocente = new CDocente();
+			$ODocente->setCedDoc( $_POST["cedDocComparedSte"] ); 
+			$claveDoc=$ODocente->obbPassUserSte();
+			$file=$_FILES['imgSteCompared'];		
+			$ext=strtolower(substr($file['name'],strrpos($file['name'],'.')));
+			if(strtoupper($ext)=='.PNG'){
+					$img = imagecreatefrompng($file['tmp_name']);
+					$msg = $ODocente::unlinkDataImgSte($img);
+					$cadena_de_texto = $msg;
+					$cadena_buscada='$2y';
+					$posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
+					if ($posicion_coincidencia === false) {
+					  	echo json_encode(['codError' => '1']);
+					  	exit();
+    				}
+					  
+					imagedestroy($img);
+					echo json_encode(['data' => $msg, 'clave' =>$claveDoc['clave']]);
+			}
+		}
+			
+		break;
 	}
 

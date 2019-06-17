@@ -295,7 +295,7 @@ public function crearDocente(){
 	}
 
 	public function validarUsuario(){
-
+		
        	$this->conectarBD();
        	$sql = 'SELECT * FROM "TDocentes" WHERE usuario = :usuario';
        	$this->stmt = $this->conn->prepare($sql);
@@ -314,7 +314,6 @@ public function crearDocente(){
        		}
 
 		$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
-
             $password = $result['clave'];
             if (password_verify($_POST["clave"], $password)) {
                 $r = true;
@@ -831,5 +830,29 @@ public function cambiarClavePerfil(){
        	$textoEncriptPosition=$textoEncript['clave'];
        	$img=$this->imgSte;
 		$linkDataImgSte = $OSte->obtenerDatos($textoEncriptPosition,$img);
+	}
+
+	function unlinkDataImgSte($img){
+		$data='';
+		$OSte = new Esteganografia();
+		 $nx=imagesx($img);	$ny=imagesy($img);
+		  for($x=0; $x<$nx; $x++ )
+		  { for($y=0; $y<$ny; $y++)
+			 { 	
+				$pix = $OSte->obtenerColor($img,$x,$y);
+				$data.=($pix['R']&1).($pix['G']&1).($pix['B']&1);
+			 }
+		  }
+		  $respuesta=$OSte->extraerDataBinario($data);
+		  return $respuesta;
+	}
+
+	public function obbPassUserSte (){
+		$this->conectarBD();
+		$sql = 'SELECT clave FROM "TDocentes" d WHERE d."cedDoc" = :cedDoc';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+       	$this->stmt->execute(); 
+       	return $textoEncript=$this->stmt->fetch(PDO::FETCH_ASSOC);
 	}
 }

@@ -175,7 +175,7 @@
        <div class="row"> 
            <div class="col s12 left">
              <button type="button" class="modal-action modal-close btn btn-flat waves-effect waves-light " >CANCELAR</button>
-             <button type="submit" class="btn waves-effect waves-light primario" >ADELANTE</button>
+             <button type="submit" class="btn waves-effect waves-light primario">ADELANTE</button>
            </div>
        </div>
 
@@ -186,8 +186,6 @@
 
 
 <!-- MODAL ESTEGANOGRAFÍA SELECCIÓN DE IMAGEN -->
-  
-
 
 <div id="modal_solImgSte" class="modal">
 
@@ -195,12 +193,15 @@
    <span class="white-text">Seleccione Una imagen:<i class="modal-action modal-close material-icons right">close</i></span>
  </div>
 
+
  <div class="modal-content">
      <ul class="collection">
          <li class="collection-item avatar">
+          <span>Seleccionar imagen:</span>
            <input type="file" id="imgSteSubmit">
          </li>
      </ul>
+
 
      <ul>
        <li>
@@ -211,6 +212,35 @@
 
 </div>
 
+
+<!-- MODAL ESTEGANOGRAFÍA SUBIR IMAGEN CON ESTEGANOGRAFIA-->
+  
+
+
+<div id="modal_upImgSte" class="modal">
+
+ <div class="modal-header secundario">
+   <span class="white-text">Seleccione la imagen que le fue enviada al correo:<i class="modal-action modal-close material-icons right">close</i></span>
+ </div>
+
+
+ <div class="modal-content">
+     <ul class="collection">
+         <li class="collection-item avatar">
+          <span>Seleccionar imagen:</span>
+           <input type="file" id="imgUpSubmit">
+         </li>
+     </ul>
+
+
+     <ul>
+       <li>
+         <button type="button" class="btn btn-primary btn-block" id="upImgSte">Acceder</button>
+       </li>
+     </ul>
+ </div>
+
+</div>
 
   <?php require_once "app/vista/plantilla/__scripts.php";  ?>
     
@@ -425,8 +455,40 @@
             processData:false
         })                      
         .done(function(respuesta){
-            /*alert('Usuario Registrado')
-            $("#registerForm").clear()     */
+          Materialize.toast('Revise la bandeja de su correo y suba la imagen que le fue enviada!',4000)
+          $("#modal_solImgSte").modal("close")
+          $("#modal_upImgSte").modal("open")
+        })                 
+
+      })
+
+      $("#upImgSte").on("click",function(){
+        var OUser = JSON.parse( localStorage.getItem( "user" ) )
+        var cedDoc = OUser.cedDoc
+        var imgSte= $('#imgUpSubmit').prop('files')[0];
+        var datos = new FormData();
+
+        datos.append("cedDocComparedSte",cedDoc);
+        datos.append("imgSteCompared",imgSte);
+        $.ajax({ 
+            dataType : 'json',
+            url:'index.php?controlador=docentes&actividad=compararTextSte',
+            method:"POST",
+            data:datos,
+            cache: false,
+            contentType:false,
+            processData:false
+        })                      
+        .done(function(respuesta){
+          if (respuesta.codError==1) {
+            Materialize.toast('La imagen seleccionada no coincide con la enviada a su correo!',4000)
+            return false;
+          }
+          else if (respuesta.data===respuesta.clave) {
+            $(location).attr('href','?controlador=docentes&actividad=vista-crear');
+          }else{
+            Materialize.toast('La imagen seleccionada no coincide con la enviada a su correo!',4000)
+          }
         })                 
 
       })

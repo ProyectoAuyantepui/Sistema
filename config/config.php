@@ -19,7 +19,7 @@ $config = [
       "port"     => "5432",
       "dbname"   => "horarios",
       "username" => "postgres",
-      "password" => "5432"
+      "password" => "543217"
     ],
     
     "mailer" => [

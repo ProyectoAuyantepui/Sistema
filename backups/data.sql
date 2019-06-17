@@ -464,14 +464,14 @@ INSERT INTO "TDocentes"
 
 VALUES 
 
-	('V-25627918',1, 'R-001', 'admin','Juancho','now()',2,'04260000000','admin@admin.com','calle1','now()','now()',2, 'admin','admin',TRUE,'public/img/avatar/user01.png','ninguna'),
+	('V-25627918',1, 'R-001', 'admin','Juancho','now()',2,'04260000000','admin@admin.com','calle1','now()','now()',2, 'admin','$2y$10$CX7f558d32z.RULyvewVbu745tjs56OyaBqknf0Jvq1ZO2Oyq7VcW',TRUE,'public/img/avatar/user01.png','ninguna'),
 	('V-01235433',1,'R-003', 'maria','Linares','now()',1,'04260000000','admin@admin1.com','calle1','now()','now()',1, 'admin','admin1',TRUE,'public/img/avatar/user02.png','ninguna'),
 	('V-07776665',1,'R-003', 'nelson','Campos','now()',2,'04260000000','admin@admin2.com','calle1','now()','now()',3, 'admin','admin2',TRUE,'public/img/avatar/user03.png','ninguna'),
 	('V-00987654',1,'R-003', 'rutmary','Castillo','now()',1,'04260000000','admin@admin3.com','calle1','now()','now()',2, 'admin','admin3',TRUE,'public/img/avatar/user02.png','ninguna'),
 	('V-06789543',1,'R-003', 'iris','Daza','now()',1,'04260000000','admin@admin4.com','calle1','now()','now()',1, 'admin','admin4',TRUE,'public/img/avatar/user01.png','ninguna'),
 	('V-86783425',1,'R-003', 'hermes','Gordillo','now()',2,'04260000000','admin@admin5.com','calle1','now()','now()',2, 'admin','admin5',TRUE,'public/img/avatar/user03.png','ninguna'),
 	('V-09856423',1,'R-003', 'gloria','Castillo','now()',1,'04260000000','admin@admin6.com','calle1','now()','now()',1, 'admin','admin6',TRUE,'public/img/avatar/user02.png','ninguna'),
-	('V-26136890',1,'R-001', 'Yordy','Jimenez','now()',2,'04269353639','y@y.com','calle1','now()','now()',2, 'yordy','$2y$10$2tPaMVgsusQtmuklf20ncu8xHVzeovZzBnmsp4ywEBoPRxfxuroJC',TRUE,'public/img/avatar/user02.png','nada');
+	('V-26136890',1,'R-001', 'Yordy','Jimenez','now()',2,'04269353639','y@y.com','calle1','now()','now()',2, 'yordy','$2y$10$CX7f558d32z.RULyvewVbu745tjs56OyaBqknf0Jvq1ZO2Oyq7VcW',TRUE,'public/img/avatar/user02.png','nada');
 
 INSERT INTO "TSecciones"
 

@@ -17,7 +17,7 @@ class Esteganografia
 				$contents = ob_get_contents();//aqui te captura el string de la foto
                	ob_end_clean();//este libera el almacenamiento en buffer
 				imagedestroy($img);//Destruye la imagen del buffer
-				$fh = fopen("public/img/steganografy/up/".$file['name'], "a+" );//abre la carpeta 
+				$fh = fopen("public/img/steganografy/ste/".$file['name'], "a+" );//abre la carpeta 
     			fwrite( $fh, $contents );//le mete el archivo con el nombre del img.png
 				fclose( $fh );//cierra la carpeta
 				exit;//termina el proceso
@@ -41,7 +41,7 @@ class Esteganografia
 		$data=''; 
 		$len = strlen($str);
 		for($i=0;$i<$len;$i++)$data.=str_pad(decbin(ord($str[$i])),8,'0',STR_PAD_LEFT);	  
-		   return $data.'00000000';
+		return $data.'00000000';
 	}
 
 	function obtenerColor($img,$x,$y){ 	
@@ -54,5 +54,12 @@ class Esteganografia
 	  $c=imagecolorallocate($img,$r,$g,$b); if($c!=-1)return $c;
 	  return imagecolorclosest($img,$r,$g,$b); 
 	} 
+
+	function extraerDataBinario($str){
+		$data='';
+		$len = strlen($str); 
+		for ($i=0;$i<$len;$i+=8){ $ch=chr(bindec(substr($str,$i,8))); if(!ord($ch))break; $data.=$ch; }
+		return $data; 
+	}
 }
  ?>

@@ -22,7 +22,7 @@ create table "TDocentes"(
 "fecCon" date,
 "condicion" varchar(120),
 "usuario" varchar(12),
-"clave" varchar(300),
+"clave" varchar(88),
 "estado" boolean,
 "avatar" varchar(120),
 "observaciones" varchar(120),
