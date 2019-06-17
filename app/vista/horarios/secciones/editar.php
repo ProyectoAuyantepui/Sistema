@@ -192,12 +192,12 @@
     })
     .done(function(respuesta){
 
-console.log(respuesta)
       var docente = respuesta.docente
       var actividades_horario = respuesta.actividades
       var contenido_tabla_ambientes = $("")
 
       localStorage.setItem( 'actividades_horario' , JSON.stringify( actividades_horario ) )
+
       if ( docente == false ) {
 
         $(".div-botones").html(`
@@ -237,6 +237,7 @@ console.log(respuesta)
       var ambiente = false
       
       $.each(actividades_horario, function(i,item){
+
             if ( item.codAmb == null ) {
               btn_ambiente = `<a  href="#" 
                                   class="btn green btn-large right waves-effect"

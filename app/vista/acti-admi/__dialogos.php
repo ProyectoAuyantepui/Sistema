@@ -20,9 +20,10 @@
             </div>
 
           
-            <div class="col s12 m6 input-field ">
-              <input type="text" id="crear_dependencia" name="dependencia" class="validate" rangelength=[3,120] maxlength="65" placeholder="" required />
-              <label for="crear_dependencia"  >Dependencia</label>
+            <div class="col s12 m6 input-field">
+              <i class="material-icons prefix">call_split</i>
+                  <input type="text" id="crear_dependencia" name="dependencia" class="validate" rangelength=[3,60] maxlength="65" placeholder="título" required />
+                <label for="crear_dependencia"  >Dependencia</label>
             </div>
           </div>
           <div class="row">
@@ -81,8 +82,9 @@
                   <input type="text" id="editar_titulo" name="titulo" class="validate" placeholder="título" rangelength=[3,60] maxlength="65" required />
             </div>
       <div class="col s12 m6 input-field ">
-              <input type="text" id="editar_dependencia" name="dependencia" class="validate" rangelength=[3,120] maxlength="65" placeholder="" required />
-              <label for="editar_dependencia"  >Dependencia</label>
+              <select  name="dependencia" id="editar_dependencia" required>
+                <option value="" disabled selected>Seleccione una Dependencia</option>
+              </select>
               <label>Dependencia</label>
             </div>
 

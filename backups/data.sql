@@ -88,8 +88,7 @@ INSERT INTO "TPermisos"("codPer","nombre") VALUES
 -- MANTENIMIENTO
 ('P-68','mantenimiento'),
 ('P-69','respaldo de base de datos'),
-('P-70','restauracion de base de datos'),
-('P-72','gestionar dedicaciones de docentes');
+('P-70','restauracion de base de datos');
 
 
 -- CARGA DE PERMISOLOGIA POR ROLES DEL SISTEMA
@@ -169,7 +168,6 @@ INSERT INTO "TRolPer"( "codRol" , "codPer" ) VALUES
 ( 'R-001' , 'P-69' ),
 ( 'R-001' , 'P-70' ),
 ( 'R-001' , 'P-71' ),
-( 'R-001' , 'P-72' ),
 
 -- PERMISOLOGIA PARA EL ROL "ADMINISTRADOR"
 
@@ -234,7 +232,6 @@ INSERT INTO "TRolPer"( "codRol" , "codPer" ) VALUES
 ( 'R-002' , 'P-59' ),
 ( 'R-002' , 'P-60' ),
 ( 'R-002' , 'P-71' ),
-( 'R-002' , 'P-72' ),
 
 -- PERMISOLOGIA PARA EL ROL "DOCENTE"
 
@@ -375,70 +372,70 @@ INSERT INTO "TTiempo"( "codTie", "codDia", "codHor") VALUES
 ('T-85','D-005','H-13'),
 ('T-86','D-005','H-14'),
 ('T-87','D-005','H-15'),
-('T-88','D-005','H-16'),
-('T-89','D-005','H-17'),
-('T-90','D-005','H-18'),
+('T-89','D-005','H-16'),
+('T-90','D-005','H-17'),
+('T-91','D-005','H-18'),
 --DIA SABADO
-('T-91','D-006','H-01'),
-('T-92','D-006','H-02'),
-('T-93','D-006','H-03'),
-('T-94','D-006','H-04'),
-('T-95','D-006','H-05'),
-('T-96','D-006','H-06'),
-('T-97','D-006','H-07'),
-('T-98','D-006','H-08'),
-('T-99','D-006','H-09'),
-('T-100','D-006','H-10'),
-('T-101','D-006','H-11'),
-('T-102','D-006','H-12'),
-('T-103','D-006','H-13'),
-('T-104','D-006','H-14'),
-('T-105','D-006','H-15'),
-('T-106','D-006','H-16'),
-('T-107','D-006','H-17'),
-('T-108','D-006','H-18'),
+('T-92','D-006','H-01'),
+('T-93','D-006','H-02'),
+('T-94','D-006','H-03'),
+('T-95','D-006','H-04'),
+('T-96','D-006','H-05'),
+('T-97','D-006','H-06'),
+('T-98','D-006','H-07'),
+('T-99','D-006','H-08'),
+('T-100','D-006','H-09'),
+('T-101','D-006','H-10'),
+('T-102','D-006','H-11'),
+('T-103','D-006','H-12'),
+('T-104','D-006','H-13'),
+('T-105','D-006','H-14'),
+('T-106','D-006','H-15'),
+('T-107','D-006','H-16'),
+('T-108','D-006','H-17'),
+('T-109','D-006','H-18'),
 --DIA DOMINGO
-('T-109','D-007','H-01'),
-('T-110','D-007','H-02'),
-('T-111','D-007','H-03'),
-('T-112','D-007','H-04'),
-('T-113','D-007','H-05'),
-('T-114','D-007','H-06'),
-('T-115','D-007','H-07'),
-('T-116','D-007','H-08'),
-('T-117','D-007','H-09'),
-('T-118','D-007','H-10'),
-('T-119','D-007','H-11'),
-('T-120','D-007','H-12'),
-('T-121','D-007','H-13'),
-('T-122','D-007','H-14'),
-('T-123','D-007','H-15'),
-('T-124','D-007','H-16'),
-('T-125','D-007','H-17'),
-('T-126','D-007','H-18');
+('T-110','D-007','H-01'),
+('T-111','D-007','H-02'),
+('T-112','D-007','H-03'),
+('T-113','D-007','H-04'),
+('T-114','D-007','H-05'),
+('T-115','D-007','H-06'),
+('T-116','D-007','H-07'),
+('T-117','D-007','H-08'),
+('T-118','D-007','H-09'),
+('T-119','D-007','H-10'),
+('T-120','D-007','H-11'),
+('T-121','D-007','H-12'),
+('T-122','D-007','H-13'),
+('T-123','D-007','H-14'),
+('T-124','D-007','H-15'),
+('T-125','D-007','H-16'),
+('T-126','D-007','H-17'),
+('T-127','D-007','H-18');
 
 -- CREACION DE UNA ACTIVIDAD ADMINISTRATIVA
 
 INSERT INTO "TActiAdmi"
 	( "codActAdm", "titulo", "observaciones", "dependencia", "tipActAdm")
 VALUES 
-	( default ,'taller de pedagogia', 'actividad de creacion intelecual', 'sala de postgrado', 'CI'),
-	( default ,'proyectos sociotecnologicos en iribarren', 'actividad de integracion comunidad', 'sala territorial', 'IC'),
-	( default ,'reunion de docentes', 'asesorias a estudiantes', 'departamento del pnfi', 'AA'),
-	( default ,'reunion docentes en vice-rectorado', 'actividad de gestion academica', 'vice-rectorado academico', 'GA'),
-	( default ,'taller #2 en sala territorial', 'otras actividades', 'sala territorial', 'OAA'),
-	( default ,'reunion de docentes eje socio-critico', 'otras actividades', 'rectorado', 'OAA');
+	( default ,'visita al departamento', 'actividad que es de prueba', 'pnfi', 'CI'),
+	( default ,'actividad  #2', 'actividad admi', 'pnfa', 'IC'),
+	( default ,'acti #3', 'acti admi', 'pnfa', 'AA'),
+	( default ,'buscar #4', 'actividad que es de prueba', 'pnfa', 'GA'),
+	( default ,'acti de campo #5', 'actividad que es de prueba', 'pnfi', 'OAA'),
+	( default ,'reunion #6', 'actividad que es de prueba', 'pnfa', 'OAA'),
+	( default ,'accessoria #7', 'actividad que es de prueba', 'pnfi', 'AA'),
+	( default ,'viaje', 'actividad que es de prueba', 'pnfa', 'CI'),
+	( default ,'actividad de campo', 'actividad que es de prueba', 'pnfi', 'CI'),
+	( default ,'ir a la comunidad', 'actividad que es de prueba', 'pnfi', 'IC');
 
 -- CREACION DE UNA CATEGORIA
 
 INSERT INTO "TCatDoc"
 	( "codCatDoc" , "nombre" , "descripcion" )
 VALUES 
-   	( default , 'Sin Categoria', 'Sin categoria de docente' ),
-   	( default , 'Instructor', 'Categoria de instructor' ),
-   	( default , 'Asociado', 'Categoria de asociado' ),
-   	( default , 'Agregado', 'Categoria de agregado' ),
-   	( default , 'Titular', 'Categoria de titular' );
+   	( 1, 'Sin Categoria', 'Sin categoria de docente' );
 
 
 INSERT INTO "TPnf"
@@ -447,14 +444,8 @@ INSERT INTO "TPnf"
 
 VALUES 
 
-	('PNFI', 'PNF en informática'),
-	('PNFA', 'PNF en administración'),
-	('PNFCP', 'PNF en contaduria pública'),
-	('PNFT', 'PNF en turismo'),
-	('PNFCI', 'PNF en ciencias de la información'),
-	('PNFED', 'PNF en entrenamiento deportivo'),
-	('PNFHSL', 'PNF en higiene y seguridad laboral'),
-	('PNFSCA', 'PNF en sistemas de calidad y ambiente');
+	('PNFI', 'Pnf en informatica'),
+	('PNFA', 'Pnf en administracion');
 
 INSERT INTO "TEjes"
 
@@ -462,11 +453,8 @@ INSERT INTO "TEjes"
 
 VALUES 
 
-	(default, 'ESTETICO-LUDICO', 'Eje de formación Estetico-ludico'),
-	(default, 'EPISTEMOLOGICO', 'Eje de formación Epistemologico'),
-	(default, 'ETICO-POLITICO', 'Eje de formación Etico-politico'),
-	(default, 'TRABAJO PRODUCTIVO', 'Eje de formación Trabajo Productivo'),
-	(default, 'SOCIO-AMBIENTAL', 'Eje de formación Socio-ambiental');
+	(default, 'estetico ludico', 'eje que ayuda a la recreacion del estudiante'),
+	(default, 'epistemologico', 'eje de prueba');
 
 -- CREACION DE DOCENTES 
 
@@ -476,9 +464,22 @@ INSERT INTO "TDocentes"
 
 VALUES 
 
-	('V-25627918',1, 'R-001', 'admin','admin','now()',2,'04260000000','admin@admin.com','calle1','now()','now()',2, 'admin','admin',TRUE,'public/img/avatar/user01.png','ninguna'),
+	('V-25627918',1, 'R-001', 'admin','Juancho','now()',2,'04260000000','admin@admin.com','calle1','now()','now()',2, 'admin','admin',TRUE,'public/img/avatar/user01.png','ninguna'),
 	('V-01235433',1,'R-003', 'maria','Linares','now()',1,'04260000000','admin@admin1.com','calle1','now()','now()',1, 'admin','admin1',TRUE,'public/img/avatar/user02.png','ninguna'),
-	('V-07776665',1,'R-003', 'nelson','Campos','now()',2,'04260000000','admin@admin2.com','calle1','now()','now()',3, 'admin','admin2',TRUE,'public/img/avatar/user03.png','ninguna');
+	('V-07776665',1,'R-003', 'nelson','Campos','now()',2,'04260000000','admin@admin2.com','calle1','now()','now()',3, 'admin','admin2',TRUE,'public/img/avatar/user03.png','ninguna'),
+	('V-00987654',1,'R-003', 'rutmary','Castillo','now()',1,'04260000000','admin@admin3.com','calle1','now()','now()',2, 'admin','admin3',TRUE,'public/img/avatar/user02.png','ninguna'),
+	('V-06789543',1,'R-003', 'iris','Daza','now()',1,'04260000000','admin@admin4.com','calle1','now()','now()',1, 'admin','admin4',TRUE,'public/img/avatar/user01.png','ninguna'),
+	('V-86783425',1,'R-003', 'hermes','Gordillo','now()',2,'04260000000','admin@admin5.com','calle1','now()','now()',2, 'admin','admin5',TRUE,'public/img/avatar/user03.png','ninguna'),
+	('V-09856423',1,'R-003', 'gloria','Castillo','now()',1,'04260000000','admin@admin6.com','calle1','now()','now()',1, 'admin','admin6',TRUE,'public/img/avatar/user02.png','ninguna'),
+	('V-26136890',1,'R-001', 'Yordy','Jimenez','now()',2,'04269353639','y@y.com','calle1','now()','now()',2, 'yordy','$2y$10$2tPaMVgsusQtmuklf20ncu8xHVzeovZzBnmsp4ywEBoPRxfxuroJC',TRUE,'public/img/avatar/user02.png','nada');
+
+INSERT INTO "TSecciones"
+
+	( "codSec", pnf, trayecto, fase, matricula, estado, tipo, turno,  observaciones) 
+
+VALUES 
+
+	( 'IN-2221', 'PNFI', 2, 1, 12, TRUE, 1, 2, 'SECCION DE INFORMATICA');
 
 
 INSERT INTO "TUnidCurr"
@@ -487,21 +488,79 @@ INSERT INTO "TUnidCurr"
 
 VALUES 
 
-	('PIMT236', 'PNFI', 2, 'MATEMÁTICA II',  				3, 	2, 3, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIPP2512','PNFI', 2, 'PROGRAMACIÓN II',  				12,	2, 2, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIEL233', 'PNFI', 2, 'ELECTIVA II',  					3, 	2, 2, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIAA223', 'PNFI', 2, 'ACTIVIDADES ACREDITABLES II',  	3, 	2, 3, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIFC223', 'PNFI', 2, 'FORMACIÓN CRITICA II',  		3, 	2, 3, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIIS233', 'PNFI', 2, 'INGENIERIA DE SOFTWARE',  		3, 	2, 2, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIPT269', 'PNFI', 2, 'PROYECTO II',  					9, 	2, 3, 2, 4, 'Unidad curricular de PNF en informática'),
-	('PIRC233', 'PNFI', 2, 'REDES DE COMPUTADORAS',  		6, 	2, 3, 2, 4, 'Unidad curricular de PNF en informática');
+	('PIMT236', 'PNFI', 1, 'MATEMÁTICA II',  				3, 	2, 3, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIPP2512','PNFI', 1, 'PROGRAMACIÓN II',  				12,	2, 2, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIEL233', 'PNFI', 1, 'ELECTIVA II',  					3, 	2, 2, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIAA223', 'PNFI', 1, 'ACTIVIDADES ACREDITABLES II',  	3, 	2, 3, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIFC223', 'PNFI', 1, 'FORMACIÓN CRITICA II',  		3, 	2, 3, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIIS233', 'PNFI', 1, 'INGENIERIA DE SOFTWARE',  		3, 	2, 2, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIPT269', 'PNFI', 1, 'PROYECTO II',  					9, 	2, 3, 2, 4, 'gdfgdfg dfsdfsdf'),
+	('PIRC233', 'PNFI', 1, 'REDES DE COMPUTADORAS',  		6, 	2, 3, 2, 4, 'gdfgdfg dfsdfsdf');
+
+
+INSERT INTO "TAmbientes"
+
+	("codAmb", ubicacion, tipo, observaciones, estado)
+
+VALUES 
+
+	('G-23', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE),
+	('G-24', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE),
+	('G-25', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE),
+	('G-30', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE),
+	('G-29', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE),
+	('G-03', 'edificio giraluna pasillo : 5 ', 2, 'salon operativo al 100%', TRUE);
+
+-- Asignando actividades administrativas a docentes 
+
+INSERT INTO "THorarios"
+
+	("codHor", "cedDoc", "codActAdm","codTie", tipo, estado)
+
+VALUES 
+	-- ActiAdmi para el docente Iris
+	(default, 'V-06789543',1,'T-66',  2, TRUE),
+	(default, 'V-06789543',3,'T-68',  2, TRUE),
+	(default, 'V-06789543',1,'T-70',  2, TRUE),
+
+	-- ActiAdmi para el docente Maria
+	(default, 'V-01235433',2,'T-72',  2, TRUE),
+	(default, 'V-01235433',4,'T-64',  2, TRUE),
+	(default, 'V-01235433',1,'T-75',  2, TRUE);
+
+
+INSERT INTO "THorarios"
+
+	("codHor", "cedDoc", "codSec", "codUniCur", "codTie", "codAmb", tipo, estado)
+
+VALUES 
+	-- Horas de programacion
+
+	(default, 'V-25627918', 'IN-2221', 'PIPP2512', 'T-43', 'G-03',  1, TRUE),
+	(default, 'V-25627918', 'IN-2221', 'PIPP2512', 'T-44', 'G-03',  1, TRUE),
+
+	-- horas de proyecto
+	(default, 'V-25627918', 'IN-2221', 'PIPT269', 'T-79', 'G-24',  1, TRUE),
+	(default, 'V-25627918', 'IN-2221', 'PIPT269', 'T-80', 'G-24',  1, TRUE),
+	(default, 'V-25627918', 'IN-2221', 'PIPT269', 'T-81', 'G-24',  1, TRUE),
+
+	-- horas de formacion critica
+
+	(default, 'V-25627918', 'IN-2221', 'PIFC223', 'T-46', 'G-24',  1, TRUE),
+
+	-- horas de actividades acreditables
+
+	(default, 'V-25627918', 'IN-2221', 'PIAA223', 'T-28', 'G-24',  1, TRUE),
+
+	-- electiva
+
+	(default, 'V-25627918', 'IN-2221', 'PIEL233', 'T-10', 'G-24',  1, TRUE);
+
 
 
 INSERT INTO "TDedicaciones"
 	( "codDed", nombre, "minHor", "maxHor")
 VALUES 
-	(default,'EXCLUSIVA',1,16),
-	(default,'TIEMPO COMPLETO',8,16),
-	(default,'MEDIO TIEMPO',1,8),
-	(default,'TIEMPO CONVENCIONAL',1,16);
+	(default,'Tiempo completo',1,16),
+	(default,'Exclusiva',1,16);
 

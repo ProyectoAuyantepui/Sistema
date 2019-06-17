@@ -48,7 +48,6 @@ $('#form-registro-1').on("submit",function(evento) {
         }else{
 
 
-            localStorage.nacionalidad = $("#form-registro-1 select#nacionalidad option:selected").val()
             localStorage.cedDoc = $('#form-registro-1 input[name=cedDoc]').val()
             localStorage.nombre = $('#form-registro-1 input[name=nombre]').val()
             localStorage.apellido = $('#form-registro-1 input[name=apellido]').val()
@@ -101,7 +100,6 @@ $('#form-registro-3').on("submit",function(evento) {
                 url:'index.php?controlador=login&actividad=post-registro', 
                 data:{
 
-                  "nacionalidad" : localStorage.nacionalidad,
                   "cedDoc" : localStorage.cedDoc,
                   "nombre" : localStorage.nombre,
                   "apellido" : localStorage.apellido,

@@ -71,8 +71,8 @@
               class="validate tooltipped" 
               data-position="bottom"  
               data-tooltip="Ingrese la cédula, este campo solo debe contener números desde 8 hasta 10 carácteres" 
-              pattern="[0-9]{6,8}" 
-              rangelength=[6,8] 
+              pattern="[0-9]{7,10}" 
+              rangelength=[7,10] 
               required
             >
           </div>
@@ -205,7 +205,7 @@
         </div>
         <div class="row">
           
-          <div class="col s4 input-field">
+          <div class="col s6 input-field">
             <i class="material-icons prefix">assignment_ind</i>
             <input 
               type="text" 
@@ -222,7 +222,7 @@
             >Fecha de Concurso:
             </label>
           </div>
-          <div class="col s4 input-field">
+          <div class="col s6 input-field">
             <i class="material-icons prefix">assignment_ind</i>
             <input 
               type="text" 
@@ -237,21 +237,6 @@
               for="fecIng"
             >Fecha de Ingreso:
             </label>
-          </div>
-           <div class="col s4 input-field">
-               
-            <select name="carrera" id="carrera">
-              <option value="INFORMÁTICA">PNFI</option>
-              <option value="ADMINISTRACIÓN">ADMINISTRACIÓN</option>
-              <option value="CONTADURÍA PÚBLICA">CONTADURÍA</option>
-              <option value="TURISMO">TURISMO</option>
-              <option value="AGROALIMENTACIÓN">AGROALIMENTACIÓN</option>
-              <option value="SISTEMAS DE CALIDAD Y AMBIENTE">SISTEMAS DE CALIDAD Y AMBIENTE</option>
-              <option value="HIGIENE Y SEGURIDAD LABORAL">HSL</option>
-              <option value="DEPORTE">DEPORTE</option>
-              <option value="CIENCIAS DE LA INFORMACIÓN">CIENCIAS DE LA INFORMACIÓN</option>
-              <option value="LOGÍSTICA Y DISTRIBUCIÓN">LOGÍSTICA Y DISTRIBUCIÓN</option>
-            </select>
           </div>
         </div>
 

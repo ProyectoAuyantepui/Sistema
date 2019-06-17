@@ -104,16 +104,12 @@ div#modal_operaciones .collection { margin: 0px; }
 div#modal_operaciones .collection .collection-item {  line-height: 3rem; }
 
 
-/*.tabs .indicator{
-  background-color: rgb(1, 79, 187) !important;
-  padding: 1.3px;
+/*    .tabs .indicator{
+  background-color: red !important;
+  padding: 3px;
 }
+*/
 
-li.tab a {
-  color:rgb(1, 79, 187) !important;
-}*/
-
- 
 div.card-header { 
     padding: 20px;
     margin: 0px;

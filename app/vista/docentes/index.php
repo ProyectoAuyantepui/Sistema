@@ -26,22 +26,32 @@
         </div>
         <div class="card-content row">
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
+            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
+            </a>
             Este módulo corresponde a la gestion de Docentes en el sistema 
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
             
+            <a class="btn-floating btn waves-effect  cyan">
               <i class="material-icons left">add</i>
+            </a>
             Atraves de este modulo puede crear nuevos Docentes.
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
+            <a class="btn-floating btn waves-effect  green">
               <i class="material-icons left">search</i>
+            </a>
 
+            <a class="btn-floating btn waves-effect pink darken-1">
               <i class="material-icons left">edit</i>
+            </a>
 
+            <a class="btn-floating btn waves-effect  red">
               <i class="material-icons left">delete</i> 
+            </a>
 
             Así como también consultar , modificar los datos o eliminar los Docentes existentes en el sistema
           </p>
@@ -115,7 +125,7 @@
 <div class="fixed-action-btn" id="registrar">
 
   <input type="hidden" name="item_seleccionado">
-  <a href="?controlador=docentes&actividad=vista-crear" class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
+    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente" id="registrarDoc">
     <i class="material-icons">add</i>
   </a>
 </div>
@@ -173,6 +183,34 @@
  </div>
 
 </div>
+
+
+<!-- MODAL ESTEGANOGRAFÍA SELECCIÓN DE IMAGEN -->
+  
+
+
+<div id="modal_solImgSte" class="modal">
+
+ <div class="modal-header secundario">
+   <span class="white-text">Seleccione Una imagen:<i class="modal-action modal-close material-icons right">close</i></span>
+ </div>
+
+ <div class="modal-content">
+     <ul class="collection">
+         <li class="collection-item avatar">
+           <input type="file" id="imgSteSubmit">
+         </li>
+     </ul>
+
+     <ul>
+       <li>
+         <button type="button" class="btn btn-primary btn-block" id="submitImgSte">Subir Imagen</button>
+       </li>
+     </ul>
+ </div>
+
+</div>
+
 
   <?php require_once "app/vista/plantilla/__scripts.php";  ?>
     
@@ -363,6 +401,34 @@
           }
 
           cambiarEstado( estado , cedDoc )
+      })
+
+      $("#registrarDoc").on("click",function() {
+        $("#modal_solImgSte").modal("open")
+      })
+
+      $("#submitImgSte").on("click",function(){
+        var OUser = JSON.parse( localStorage.getItem( "user" ) )
+        var cedDoc = OUser.cedDoc
+        var imgSte= $('#imgSteSubmit').prop('files')[0];
+        var datos = new FormData();
+
+        datos.append("cedDocLinkSte",cedDoc);
+        datos.append("imgSteUpload",imgSte);
+        $.ajax({ 
+            dataType : 'json',
+            url:'index.php?controlador=docentes&actividad=obbImgSte',
+            method:"POST",
+            data:datos,
+            cache: false,
+            contentType:false,
+            processData:false
+        })                      
+        .done(function(respuesta){
+            /*alert('Usuario Registrado')
+            $("#registerForm").clear()     */
+        })                 
+
       })
     </script>
 </script>

@@ -13,7 +13,7 @@
 
 <main >
   
-<!--   <section class="row ">
+  <section class="row ">
     <div class="col s12 valign-wrapper">
       <h5 class="valign">Reportes de Horarios</h5>
     </div>
@@ -89,11 +89,11 @@
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <section class="row ">
     <div class="col s12 valign-wrapper">
-      <h5 class="valign"><?= $titulo ?></h5>
+      <h5 class="valign">Otros Reportes</h5>
     </div>
     <div class="col s12 m3">
 

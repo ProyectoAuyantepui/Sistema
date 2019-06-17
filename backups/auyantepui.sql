@@ -21,11 +21,8 @@ create table "TDocentes"(
 "fecIng" date, 
 "fecCon" date,
 "condicion" varchar(120),
-"carrera" varchar(50),
-"pregrado" varchar(120),
-"postgrado" varchar (120),
 "usuario" varchar(12),
-"clave" varchar(88),
+"clave" varchar(300),
 "estado" boolean,
 "avatar" varchar(120),
 "observaciones" varchar(120),
@@ -170,6 +167,7 @@ create table "TSecciones"(
 "codSec" varchar(15),
 "pnf" varchar(6),
 "trayecto" int,
+"fase" int,
 "matricula" int,
 "estado" boolean default 'F',
 "tipo" int,
@@ -257,6 +255,7 @@ create table "TBitacora"(
 "accion" varchar(60),
 "fecha" date,
 "hora" time,
+"descripcion" varchar(120),
 primary key("codBit")
 );
 

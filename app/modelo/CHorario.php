@@ -170,6 +170,12 @@ class CHorario extends Database{
   }
 
   public function cambiarAmbienteHorarioSeccion(){
+
+    // var_dump($this->codAmb);
+    // var_dump($this->codSec);
+    // var_dump($this->codTie);
+    // var_dump($this->codUniCur);
+    // exit();
     
       $this->conectarBD();
       $sql = 'UPDATE 
@@ -207,8 +213,22 @@ class CHorario extends Database{
               ON "TDocentes"."cedDoc" = "THorarios"."cedDoc"
               LEFT JOIN "TAmbientes"
               ON "TAmbientes"."codAmb" = "THorarios"."codAmb"
-              WHERE "THorarios"."codSec" = :codSec
-              OR "TUnidCurr".fase in (:fase_seleccionada,3)';
+              WHERE "TUnidCurr".fase = 3
+              AND "THorarios"."codSec" = :codSec
+              UNION ( 
+              SELECT "THorarios".*, "TUnidCurr"."codUniCur", 
+              "TUnidCurr".nombre as nombreMateria, 
+              "TDocentes".nombre as nombreDocente, "TActiAdmi".*
+              FROM "THorarios" LEFT JOIN "TActiAdmi" 
+              ON "TActiAdmi"."codActAdm" = "THorarios"."codActAdm" 
+              LEFT JOIN "TUnidCurr"
+              ON "THorarios"."codUniCur" = "TUnidCurr"."codUniCur"
+              LEFT JOIN "TDocentes"
+              ON "TDocentes"."cedDoc" = "THorarios"."cedDoc"
+              LEFT JOIN "TAmbientes"
+              ON "TAmbientes"."codAmb" = "THorarios"."codAmb"
+              WHERE "TUnidCurr".fase = :fase_seleccionada
+              AND "THorarios"."codSec" = :codSec )';
     $this->stmt = $this->conn->prepare($sql);
     $this->stmt->bindParam(':codSec',$this->codSec);
     $this->stmt->bindParam(':fase_seleccionada',$fase_seleccionada);
@@ -221,7 +241,48 @@ class CHorario extends Database{
 
 
   public function consultarActividadesPorUniCur(){
+    /*
 
+SELECT 
+  DISTINCT( "TDocentes".* )
+FROM 
+  "THorarios", 
+  "TDocentes", 
+  "TSecciones", 
+  "TUnidCurr", 
+  "TAmbientes"
+WHERE 
+  "TDocentes"."cedDoc" = "THorarios"."cedDoc" AND
+  "TSecciones"."codSec" = "THorarios"."codSec" AND
+  "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+  "TAmbientes"."codAmb" = "THorarios"."codAmb" AND
+  "TUnidCurr"."codUniCur" = 'PIIS233'
+
+
+
+
+SELECT 
+  DISTINCT( "TAmbientes".* )
+FROM 
+  "THorarios", 
+  "TDocentes", 
+  "TSecciones", 
+  "TUnidCurr", 
+  "TAmbientes"
+WHERE 
+  "TDocentes"."cedDoc" = "THorarios"."cedDoc" AND
+  "TSecciones"."codSec" = "THorarios"."codSec" AND
+  "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+  "TAmbientes"."codAmb" = "THorarios"."codAmb" AND
+  "TUnidCurr"."codUniCur" = 'PIIS233'
+
+
+
+
+
+
+
+    */
     $this->conectarBD();
     $sql = 'SELECT 
               *
@@ -307,6 +368,49 @@ class CHorario extends Database{
     return $result;
   }
 
+/*  public function consultarCargaHorariaDocente(){
+
+    $this->conectarBD();
+    $sql = 'SELECT 
+              aa."tipActAdm" as tipo_aa,
+              count( h.* ) as cantidad
+            FROM 
+            "THorarios" h 
+            INNER JOIN "TActiAdmi" aa ON aa."codActAdm" = h."codActAdm"
+            INNER JOIN "TDocentes" d ON d."cedDoc" = h."cedDoc"
+            WHERE 
+              h."tipo" = 2 
+            AND
+              d."cedDoc" = :cedDoc
+            GROUP BY tipo_aa';
+    $this->stmt = $this->conn->prepare($sql);
+    $this->stmt->bindParam(':cedDoc',$this->cedDoc);
+    $this->stmt->execute(); 
+    $horas_administrativas = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+
+    $sql = 'SELECT 
+              count( h.* ) as cantidad
+            FROM 
+            "THorarios" h 
+            INNER JOIN "TDocentes" d ON d."cedDoc" = h."cedDoc"
+            WHERE 
+              h."tipo" = 1 
+            AND
+              d."cedDoc" = :cedDoc
+            GROUP BY d."cedDoc"';
+    $this->stmt = $this->conn->prepare($sql);
+    $this->stmt->bindParam(':cedDoc',$this->cedDoc);
+    $this->stmt->execute(); 
+    $horas_academicas = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+
+    $this->desconectarBD();
+
+    return [ 
+        "horas_administrativas" => $horas_administrativas , 
+        "horas_academicas" => $horas_academicas 
+    ];
+  }*/
+  
   public function consultarCargaHorariaDocente(){
 
     $this->conectarBD();
@@ -374,17 +478,18 @@ class CHorario extends Database{
             FROM 
               "TUnidCurr" as uc,
               "TSecciones" as s 
-            WHERE
-            uc.trayecto=s.trayecto and
-             uc.fase= any
-             (
-            SELECT 
-              uc.fase
+              WHERE uc.trayecto = s.trayecto 
+              AND uc.fase = 3
+              AND s."codSec" = :codSec
+              UNION ( SELECT 
+              uc.*
             FROM 
-              "TUnidCurr" as uc
-              WHERE uc.fase = :fase_seleccionada or fase=3 )
-              AND 
-              s."codSec" = :codSec';
+              "TUnidCurr" as uc,
+              "TSecciones" as s 
+              WHERE uc.trayecto = s.trayecto 
+              AND uc.fase = :fase_seleccionada
+              AND s."codSec" = :codSec)';
+
     $this->stmt = $this->conn->prepare($sql);
     $this->stmt->bindParam(':codSec',$this->codSec);
     $this->stmt->bindParam(':fase_seleccionada',$fase_seleccionada);
@@ -393,34 +498,52 @@ class CHorario extends Database{
     $this->desconectarBD();
 
     return $result;
-
-
   }
 
   public function unidCurrAsignadasHorarioSeccion( $fase_seleccionada ){
     
     $this->conectarBD();
-    $sql = 'SELECT 
-            uc.* 
+    /*$sql = 'SELECT 
+        uc.* 
+        FROM 
+        "TUnidCurr" AS uc
+        WHERE 
+        EXISTS(
+            SELECT 
+            * 
             FROM 
-            "TUnidCurr" AS uc
+            "THorarios" AS h 
             WHERE 
-            EXISTS(
-                SELECT 
-                * 
-                FROM 
-                "THorarios" AS h , "TSecciones" AS s 
-                WHERE 
-                uc."codUniCur" =  h."codUniCur"
-                AND 
-                uc."codPnf" = s."pnf"
-                AND 
-                uc."trayecto" = s."trayecto"
-                and
-                fase in (3,:fase_seleccionada)
-                AND 
-                h."codSec" = :codSec
-            )';
+            uc."codUniCur" =  h."codUniCur"
+            AND 
+            h."codSec" = :codSec
+        )';
+
+        */
+    $sql = 'SELECT 
+              "THorarios".* 
+            FROM 
+              "TUnidCurr", 
+              "THorarios", 
+              "TSecciones"
+            WHERE 
+              "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+              "THorarios"."codSec" = "TSecciones"."codSec" AND
+              "TUnidCurr".fase = 3 AND
+              "TUnidCurr".trayecto = "TSecciones".trayecto AND
+              "THorarios"."codSec" = :codSec 
+              UNION (SELECT 
+              "THorarios".* 
+            FROM 
+              "TUnidCurr", 
+              "THorarios", 
+              "TSecciones"
+            WHERE 
+              "TUnidCurr"."codUniCur" = "THorarios"."codUniCur" AND
+              "THorarios"."codSec" = "TSecciones"."codSec" AND
+              "TUnidCurr".fase = :fase_seleccionada AND
+              "TUnidCurr".trayecto = "TSecciones".trayecto AND
+              "THorarios"."codSec" = :codSec )';
 
     $this->stmt = $this->conn->prepare($sql);
     $this->stmt->bindParam(':codSec',$this->codSec);
@@ -477,33 +600,16 @@ public function MoverBloque() {
 
     $this->conectarBD();
     $sql = 'UPDATE "THorarios"
-             SET "codTie"= :codTie
+             SET "cedDoc"= null, "codAmb"= null, "codTie"= :codTie
              WHERE "codHor" = :codHor';
 
     $this->stmt = $this->conn->prepare($sql);
     $this->stmt->bindParam(':codTie',$this->codTie);
     $this->stmt->bindParam(':codHor',$this->codHor);
-    $result = $this->stmt->execute();
-
-    if ( $result ) {
-       $sql = 'UPDATE 
-               "THorarios"
-               SET 
-               "cedDoc"= null, "codAmb"= null
-               WHERE 
-               "codUniCur" = :codUniCur
-               AND
-               "codSec" = :codSec';
-        
-           $this->stmt = $this->conn->prepare($sql);
-           $this->stmt->bindParam(':codUniCur',$this->codUniCur);
-           $this->stmt->bindParam(':codSec',$this->codSec);
-           $result2 = $this->stmt->execute();
-    } 
-    
+    $result = $this->stmt->execute(); 
     $this->desconectarBD();
 
-    return $result2;
+    return $result;
 }
 
 public function moverBloqueDocente() {

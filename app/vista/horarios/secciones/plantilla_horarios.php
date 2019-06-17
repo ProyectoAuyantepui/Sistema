@@ -2,7 +2,7 @@
     
       <!-- plantilla de la mañana -->
             <div class="card-panel col s12 m12 turno1 oculto" style="padding: 0px;">
-                    <table id="tablaTurno1"  class="highlight  bordered centered tabla_con_borde" width="100%">
+                    <table id="tablaTurno1"  class="highlight  centered tabla_con_borde" width="100%">
 
                               <tr class="primario white-text">
                                 <td class="center-align" width="14%"  >HORA</td>
@@ -36,7 +36,7 @@
                                    
                                    
                                 </td>
-                                <td class="center-align bloque-de-hora" width="12%" codTie="T-55" >
+                                <td class="center-align bloque-de-hora"" width="12%" codTie="T-55" >
                                     <div class="ficha" draggable="true" ocupado="desocupado">
                                     </div>
                                    
@@ -238,7 +238,7 @@
       <!-- plantilla de la tarde -->
             <div class="card-panel col s12 m12 turno2 oculto" style="padding: 0px;">
                     
-                            <table class="highlight bordered centered tabla_con_borde" id="tablaTurno2" width="100%">
+                            <table class="highlight bordered tabla_con_borde" id="tablaTurno2" width="100%">
                               <tr class="primario white-text">
                                 <td width="12%">HORA</td>
                                 <td width="12%">LUNES</td>
@@ -427,7 +427,7 @@
       <!-- plantilla de la noche -->
             <div class="card-panel col s12 m12 turno3 oculto " style="padding: 0px;">
                     
-                            <table class="highlight bordered centered tabla_con_borde" id="tablaTurno3" width="100%">
+                            <table class="highlight bordered tabla_con_borde" id="tablaTurno3" width="100%">
                               <tr class="primario white-text">
                                 <td width="12%">HORA</td>
                                 <td width="12%">LUNES</td>

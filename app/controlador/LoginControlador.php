@@ -90,8 +90,8 @@ require_once "app/modelo/CDocente.php";
 		
 			$ODocente = new CDocente();
 
-			$ODocente->setUsuario( $_POST['usuario'] ); 
-	    	$ODocente->setClave( $_POST['clave'] ); 
+			$ODocente->setUsuario( $_POST["usuario"] ); 
+	    	$ODocente->setClave( $_POST["clave"] ); 
 
 			$respuesta = $ODocente->validarUsuario();
 			

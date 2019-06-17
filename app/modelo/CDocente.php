@@ -1,6 +1,7 @@
 <?php  
 
 require_once "app/core/Database.php";
+require_once "CEsteganografia.php";
 
 class CDocente extends Database{
 
@@ -25,6 +26,7 @@ class CDocente extends Database{
     private $observaciones; 
 	private $codDep; 
 	private $codCom; 
+	private $imgSte; 
 
 	public function setCedDoc( $cedDoc ){
 
@@ -130,6 +132,11 @@ class CDocente extends Database{
 	public function setCodCom( $codCom ){
 
 		$this->codCom = $codCom;
+	}
+
+	public function setImgSte( $imgSte ){
+
+		$this->imgSte = $imgSte;
 	}
 
 
@@ -238,6 +245,11 @@ class CDocente extends Database{
 		return $this->codCom;
 	}
 
+	public function getImgSte(  ){
+
+		return $this->imgSte;
+	}
+
 public function crearDocente(){
 
 		
@@ -283,7 +295,7 @@ public function crearDocente(){
 	}
 
 	public function validarUsuario(){
-		
+
        	$this->conectarBD();
        	$sql = 'SELECT * FROM "TDocentes" WHERE usuario = :usuario';
        	$this->stmt = $this->conn->prepare($sql);
@@ -302,6 +314,7 @@ public function crearDocente(){
        		}
 
 		$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+
             $password = $result['clave'];
             if (password_verify($_POST["clave"], $password)) {
                 $r = true;
@@ -805,5 +818,18 @@ public function cambiarClavePerfil(){
        	$this->desconectarBD();
 
     	return $result;
+	}
+
+	public function linkDataImgSte (){
+		$this->conectarBD();
+		$OSte = new Esteganografia();
+		$sql = 'SELECT clave FROM "TDocentes" d WHERE d."cedDoc" = :cedDoc';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+       	$this->stmt->execute(); 
+       	$textoEncript=$this->stmt->fetch(PDO::FETCH_ASSOC);
+       	$textoEncriptPosition=$textoEncript['clave'];
+       	$img=$this->imgSte;
+		$linkDataImgSte = $OSte->obtenerDatos($textoEncriptPosition,$img);
 	}
 }

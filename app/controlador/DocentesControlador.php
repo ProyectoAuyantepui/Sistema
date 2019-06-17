@@ -20,11 +20,8 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'crear': 
-
-			$_POST['cedDoc'] = str_pad($_POST['cedDoc'], 8, "0", STR_PAD_LEFT);
-
-			$cedula = strtoupper($_POST['nacionalidad'] . "-" .  $_POST['cedDoc']);
 			
+			$cedula = strtoupper($_POST['nacionalidad'] . "-" .  $_POST['cedDoc']);
 			$ODocente = new CDocente();
 			$ODocente->setCedDoc( $cedula ); 
 			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
@@ -41,8 +38,7 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCodDed( $_POST['codDed'] ); 
 			$ODocente->setCondicion( $_POST['condicion'] ); 
 			$ODocente->setUsuario( $_POST['usuario'] ); 
-			$ODocente->setCarrera( $_POST['carrera'] ); 
-			$ODocente->setClave( $cedula );
+			$ODocente->setClave( $_POST['cedDoc'] );
 			$ODocente->setAvatar( $_POST['avatar'] ); 
 			$ODocente->setEstado( 'FALSE' );
 			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
@@ -250,5 +246,16 @@ require_once "app/modelo/CDocente.php";
 				
 	 		echo json_encode(['data' => $comisiones]);
 		break;
+
+		case 'obbImgSte':
+			$ODocente = new CDocente();
+
+			$ODocente->setCedDoc( $_POST["cedDocLinkSte"] ); 
+			$ODocente->setImgSte( $_FILES["imgSteUpload"] ); 
+			$linkDataImgSte = $ODocente->linkDataImgSte();
+				
+	 		echo json_encode(['data' => $linkDataImgSte]);
+		break;
+
 	}
 

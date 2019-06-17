@@ -43,12 +43,12 @@
       <a  href="index.php?controlador=ambientes&actividad=index" class="waves-effect waves-light"><i class="material-icons">home</i>Ambientes</a>
   </li>
 
-  <li class="oculto"  id="gestionBasica" codPer="P-24">
+  <!-- <li class="oculto"  id="gestionBasica" codPer="P-24">
       <ul class="collapsible collapsible-accordion">
           <li>
               <a  class="collapsible-header" ><i class="material-icons">settings</i> Gestion basica </a>
               <div class="collapsible-body">
-                <ul>
+                <ul> -->
                   
                   <li class="oculto"  id="Ejes" codPer="P-35">
                       <a  href="index.php?controlador=ejes&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Ejes de Formacion</a>
@@ -75,48 +75,49 @@
                   <li class="oculto"  id="UnidCurr" codPer="P-40">
                       <a  href="index.php?controlador=unidCurr&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Unidades Curriculares</a>
                   </li>
-                </ul>
+                <!-- </ul>
               </div>
           </li>
       </ul>
-  </li>
+  </li> -->
   <li class="oculto"  id="Reportes" codPer="P-60">
       <a  href="index.php?controlador=reportes&actividad=index" class="waves-effect waves-light"><i class="material-icons">print</i>Reportes</a>
   </li>
-  <li class="oculto"  id="seguridad" codPer="P-61"> 
+<!--   <li class="oculto"  id="seguridad" codPer="P-61"> 
       <ul class="collapsible collapsible-accordion">
           <li >
                   <a  class="collapsible-header" ><i class="material-icons">settings</i> Seguridad </a>
                   <div class="collapsible-body">
-                    <ul class="miClase">
+                    <ul class="miClase"> -->
                       <li class="oculto"  id="Roles" codPer="P-62">
                           <a  href="index.php?controlador=roles&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Roles de Usuario</a>
                       </li>       
                       <li class="oculto"  id="Bitacora" codPer="P-67">
                           <a  href="index.php?controlador=bitacora&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Bitacora</a>
                       </li>
-                    </ul>
+                   <!--  </ul>
                   </div>
           </li>
       </ul>
-  </li>
-  <li class="oculto"  id="Mantenimiento" codPer="P-68" > 
+  </li> -->
+
+<!--   <li class="oculto"  id="Mantenimiento" codPer="P-68" > 
       <ul class="collapsible collapsible-accordion">
           <li >
                   <a  class="collapsible-header" ><i class="material-icons">settings</i> Mantenimiento </a>
                   <div class="collapsible-body">
-                    <ul class="miClase"> 
-                      <li class="oculto"  id="respaldarDb" codPer="P-69">
+                    <ul class="miClase"> -->
+                     <!--  <li class="oculto"  id="respaldarDb" codPer="P-69">
                           <a  href="index.php?controlador=respaldarDb&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Respaldar Base de Datos</a>
                       </li>
                       <li class="oculto"  id="reestablecerDb" codPer="P-70">
                           <a  href="index.php?controlador=reestablecerDb&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Reestablecer Base de Datos</a>
-                      </li>
-                    </ul>
+                      </li> -->
+                    <!-- </ul>
                   </div>
           </li>
       </ul>
-  </li> 
+  </li> -->
   <li>
       <div class="divider"></div>
   </li>

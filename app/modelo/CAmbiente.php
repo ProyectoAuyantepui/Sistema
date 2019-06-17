@@ -52,21 +52,28 @@ class CAmbiente extends Database{
 
 	public function crearAmbiente(){
 
-		
 		$this->conectarBD();
-		
+
+	try {
 		$sql = 'INSERT INTO "TAmbientes" 
 					("codAmb","ubicacion","tipo","observaciones","estado")
 				VALUES
 					(:codAmb,:ubicacion,:tipo,:observaciones,:estado)';
-
-		$this->stmt = $this->conn->prepare($sql);
+	    $this->conn->beginTransaction();    
+	    $this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':codAmb',$this->codAmb);
 		$this->stmt->bindParam(':ubicacion',$this->ubicacion);
 		$this->stmt->bindParam(':tipo',$this->tipo);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
 		$this->stmt->bindParam(':estado',$this->estado);
+	    $this->conn->commit();              
+	} catch(PDOException $ex) {      
+	    $this->conn->rollBack();           
+	    echo $ex->getMessage();      
+	}	
+
      	$result = $this->stmt->execute();
+		
        	$this->desconectarBD();
 		
    
@@ -156,14 +163,7 @@ class CAmbiente extends Database{
 
 		$this->conectarBD();
 
-		$sql = "SELECT 
-				* 
-				FROM 
-				\"TAmbientes\" 
-				WHERE 
-				\"codAmb\" LIKE '" . $filtro . "%'
-				OR
-				\"ubicacion\" LIKE '" . $filtro . "%' ";
+		$sql = "SELECT * FROM \"TAmbientes\" WHERE \"codAmb\" LIKE '" . $filtro . "%' ";
 		$this->stmt = $this->conn->prepare($sql);	
 		$this->stmt->execute(); 
 		$result = $this->stmt->fetchAll(PDO::FETCH_OBJ);

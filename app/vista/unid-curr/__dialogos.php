@@ -29,11 +29,11 @@
             <div class="col s12 m4 input-field">
               <select id="crear_trayecto" name="trayecto" required>
                 <option value="" selected disabled>Seleccione el Trayecto</option>
-                <option value="5" >Trayecto Inicial</option>
-                <option value="1" >Trayecto 1</option>
-                <option value="2" >Trayecto 2</option>
-                <option value="3" >Trayecto 3</option>
-                <option value="4" >Trayecto 4</option>
+                <option value="1" >Trayecto Inicial</option>
+                <option value="2" >Trayecto 1</option>
+                <option value="3" >Trayecto 2</option>
+                <option value="4" >Trayecto 3</option>
+                <option value="5" >Trayecto 4</option>
               </select>
               <label data-success="Correcto..." data-error="Select an option" for="crear_trayecto">Trayecto</label>
             </div>
@@ -139,11 +139,11 @@
               <label >Trayecto</label>
               <select id="editar_trayecto" name="trayecto" >
 
-                <option value="5" >Trayecto Inicial</option>
-                <option value="1" >Trayecto 1</option>
-                <option value="2" >Trayecto 2</option>
-                <option value="3" >Trayecto 3</option>
-                <option value="4" >Trayecto 4</option>
+                <option value="1" >Trayecto Inicial</option>
+                <option value="2" >Trayecto 1</option>
+                <option value="3" >Trayecto 2</option>
+                <option value="4" >Trayecto 3</option>
+                <option value="5" >Trayecto 4</option>
               </select>
             </div>
           </div>

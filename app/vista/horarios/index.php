@@ -1,4 +1,4 @@
-<?php $titulo = "Gestión de horarios";?>
+<?php $titulo = "Gestion de horarios";?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,29 +11,15 @@
 <body>
 <?php  require_once "app/vista/plantilla/__navbar.php"; ?>
 <main >
-           
-  <section class="row titulo">
 
-    <div class="col s6  ">
-      <h5 class="valign ">Gestión de horarios</h5>
-    </div>
+  <section class="row">
 
-    <div class="col s6 right-align ">
-      <h5 class="valign ">
-        Consulta rapida
-        <a 
-          class="btn-floating btn-large waves-effect waves-light pulse primario" 
-          href="?controlador=horarios&actividad=consulta-rapida-horarios" 
-          
-        >
-          <i class="material-icons">search</i>
-        </a>
-      </h5>
+    <div class="col s12 valign-wrapper">
+      <h5 class="valign">Gestion de horarios</h5>
     </div>
   
-  </section>
 
-  <section class="row modulos">
+
     <div class="col s12 m4">
 
       <div class="card ">
@@ -45,22 +31,30 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
+            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
-            Este módulo corresponde a la gestión de horarios de Docentes en el sistema. 
+            </a>
+            Este módulo corresponde a la gestion de Horarios de Docentes en el sistema. 
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-
+                    
+            <a class="btn-floating btn waves-effect  cyan">
               <i class="material-icons left">add</i>
-            
+            </a>
             Atraves de este modulo de Horarios de Docentes puede asignar actividades administrativas en al horario del docente.
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
                     
+            <a class="btn-floating btn waves-effect  red">
               <i class="material-icons left">delete</i> 
+            </a>
 
+            <a class="btn-floating btn waves-effect  green">
               <i class="material-icons left">edit</i>
+            </a>
+
             Así como también modificar los datos de actividades o eliminar las actividades administrativas existentes en el horario del docente.
           </p>
         </div>
@@ -84,23 +78,29 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
+            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
-            
-            Este módulo corresponde a la gestión de horarios de Secciones en el sistema 
+            </a>
+            Este módulo corresponde a la gestion de Horarios de Secciones en el sistema 
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
             
-
+            <a class="btn-floating btn waves-effect  cyan">
               <i class="material-icons left">add</i>
-            
+            </a>
             Atraves de este modulo de Horarios de Secciones puede asignar actividades en al horario de la seccion
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
             
+            <a class="btn-floating btn waves-effect  red">
               <i class="material-icons left">delete</i> 
+            </a>
+
+            <a class="btn-floating btn waves-effect  green">
               <i class="material-icons left">edit</i>
+            </a>
 
             Así como también modificar los datos de actividades o eliminar las actividades existentes en el horario de la seccion
           </p>
@@ -128,13 +128,17 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
+            <a class="btn-floating btn pulse  waves-effect  primario">
               <i class="material-icons left">settings</i>
-            
-            Este módulo corresponde a la gestión de horarios de Ambientes en el sistema. 
+            </a>
+            Este módulo corresponde a la gestion de Horarios de Ambientes en el sistema. 
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
+                    
+            <a class="btn-floating btn waves-effect green">
               <i class="material-icons left">search</i>
+            </a>
             Atraves de este modulo de Horarios de Ambientes puede consultar el horario de un ambiente existente en el sistema, siempre y cuando este tenga actividades.
           </p>
         </div>
@@ -148,8 +152,14 @@
         </div>
       </div>
     </div>
+
   </section>
 
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario ">
+      <i class="material-icons">help</i>
+    </a>
+  </div>
 </main>
 
 <?php require_once "app/vista/plantilla/__scripts.php";  ?>

@@ -1,5 +1,7 @@
 <?php 
 
+
+
 /**
 * Esta clase nos servira como helper para reportes pdf
 */
