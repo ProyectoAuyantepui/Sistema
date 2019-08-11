@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <link rel="stylesheet" type="text/css" href="public/css/estilos_de_horario.css">    
     <title>Auyantepui - <?= $titulo ?></title>
@@ -234,20 +235,20 @@
   $(function(){
       
     mostrarBloques(  )
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
     var objeto_actividad = {
       "codUniCur" : uc_seleccionada.codUniCur,
       "codSec" : seccion_seleccionada.codSec,
       "cedDoc" : "S/A",
       "array_bloques" : []
     }          
-    localStorage.setItem( 'obj_actividad' , JSON.stringify( objeto_actividad ) )                    
+    sessionStorage.setItem( 'obj_actividad' , JSON.stringify( objeto_actividad ) )                    
   })
 
   function mostrarBloques(  ){
           
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
     var tablaAUsar = false
     if ( seccion_seleccionada.turno == 1 ) {
       tablaAUsar = "table#tablaTurno1" 
@@ -281,7 +282,7 @@
         $(""+ tablaAUsar +" tr td[codTie="+item.codTie+"] div").attr("codHor",item.codHor)   
       })
       
-      var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
+      var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
 
       $("table tr td div[ocupado=desocupado]")
       .append(`<div class="switch">
@@ -317,26 +318,26 @@
   function clickSwitchAsignarBloque( elemento ) {
 
     var codTie = elemento.parents("td").attr("codTie")
-    var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+    var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
 
     if(elemento.is(":checked")) {
             
       elemento.parents("td")
       .addClass("grey lighten-2")
       obj_actividad.array_bloques.push( { "codTie" : codTie, "codAmb" : "S/A" } )
-      localStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
+      sessionStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
     }else {
 
       elemento.parents("td").removeClass("grey lighten-2") 
       var indice = obj_actividad.array_bloques.indexOf(codTie); // obtenemos el indice
       obj_actividad.array_bloques.splice(indice, 1); // 1 es la cantidad de elemento a eliminar
-      localStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
+      sessionStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
     }
   }
 
   // click boton paso 2
   function mostrarPaso2(  ){
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
 
     if ( $("input[name=switchAsignarBloque]:checked").length == 0 ){
 
@@ -352,7 +353,7 @@
       return false;
     }else if ( $("input[name=switchAsignarBloque]:checked").length == uc_seleccionada.htas ) {
 
-      var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+      var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
               
       $.ajax({           
         dataType : 'json' ,
@@ -394,9 +395,9 @@ function asignarDocente(){
   var cedDoc = $(".card-asignar-docente select#docente option:selected").attr("cedDoc")
   var nombre = $(".card-asignar-docente select#docente option:selected").attr("nombre")
   var apellido = $(".card-asignar-docente select#docente option:selected").attr("apellido") 
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   obj_actividad.cedDoc = cedDoc
-  localStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
+  sessionStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))
   $(".card-asignar-docente .tabla-docente-asignado table tbody")
   .append(`
     <tr>
@@ -412,7 +413,7 @@ function asignarDocente(){
 
 function clickAsignarAmbientes( elemento ){
 
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   $("select#bloques").html("")
 
   $.each( obj_actividad.array_bloques , function( i,item ){
@@ -434,7 +435,7 @@ function clickAsignarAmbientes( elemento ){
 function asignarAmbiente(){
 
   var codAmb = $("select#ambiente option:selected").val( )
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   var array_bloques_seleccionados=[]
   var $el=$("select#bloques")              
   $el.find("option:selected").each(function(){
@@ -453,7 +454,7 @@ function asignarAmbiente(){
     }        
   }
 
-  localStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))               
+  sessionStorage.setItem("obj_actividad", JSON.stringify( obj_actividad ))               
   mostrarBloquesAmbientes()
   $(".select_ambientes").hide()
   $(".btn-click-asignar-ambiente").show()
@@ -464,7 +465,7 @@ function asignarAmbiente(){
 
 function mostrarBloquesAmbientes(){
 
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   $(".card-asignar-ambientes .tabla-ambientes-asignados table tbody").html("")
   $.each( obj_actividad.array_bloques,function(i,item){
 
@@ -487,7 +488,7 @@ function mostrarBloquesAmbientes(){
 // click boton paso 2
 function guardarTodo(  ){
 
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   $.ajax({           
     dataType : 'json' ,
     type:'POST' , 

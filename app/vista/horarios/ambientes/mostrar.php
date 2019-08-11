@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <link rel="stylesheet" type="text/css" href="public/css/estilos_de_horario.css">
     <title>Auyantepui - <?= $titulo ?></title>
@@ -107,7 +108,7 @@
   
   function mostrarBloques(  ){
                 
-    var ambiente_seleccionado = JSON.parse( localStorage.getItem( 'ambiente_seleccionado' ) )
+    var ambiente_seleccionado = JSON.parse( sessionStorage.getItem( 'ambiente_seleccionado' ) )
     $.ajax({ 
                   
       dataType : 'json' ,
@@ -140,7 +141,7 @@
 
 function mostrarInformacionAmbiente() {
 
-  var ambiente_seleccionado = JSON.parse( localStorage.getItem( 'ambiente_seleccionado' ) )
+  var ambiente_seleccionado = JSON.parse( sessionStorage.getItem( 'ambiente_seleccionado' ) )
   var estadoDelDocente
 
   console.log(ambiente_seleccionado)

@@ -81,14 +81,14 @@ function listar(){
     })
 }
 
-function editar( codSec ){ 
+function editar( codSec, nombreImg){ 
 
     $.ajax({ 
 
             dataType : 'json' ,
             type:'POST' , 
             url:'index.php?controlador=secciones&actividad=consultar',
-            data:{ "codSec" : codSec} 
+            data:{ "codSec" : codSec,"nombreImagen": nombreImg } 
     }) 
     .done(function(respuesta){
 
@@ -410,31 +410,12 @@ dialogo dentro de un formulario ,
 para poder editarlo
 
 */
-$("body").on( "click", ".editar-Seccion", function(){ 
+function postEsteganografia(nombreImg){
 
+    $('#modal_upImgSte').modal('close')
     var codSec = $("#modal_operaciones input[name=item_seleccionado]").val( )
-    $(".formEditarSeccion select#editar_pnf").html("") 
-    $.ajax({
-        dataType : 'json' , 
-        type:'POST' , 
-        url:'index.php?controlador=pnf&actividad=listar' 
-    })
-
-    .done(function(respuesta){
-
-        var contenidoHTML = $("")       
-        $.each( respuesta.data, function(i,item){
-
-            contenidoHTML += `<option value="${item.codPnf}">
-                                ${item.codPnf}
-                            </option>`
-        }) 
-        
-        $(".formEditarSeccion select#editar_pnf").html(contenidoHTML)  
-        $('select').material_select()      
-    })
-    editar( codSec ) 
-})
+    editar( codSec,nombreImg ) 
+}
 
 /*
 
@@ -498,7 +479,7 @@ $("body").on("click", ".eliminar-Seccion", function(){
 
 DESCRIPCION : 
 
-Evento que lo quehace es verificar 
+Evento que lo que hace es verificar 
 si el formulario de creacion esta 
 realmente validado y si ya esta validado 
 correctamente procede a hacer 
@@ -533,6 +514,10 @@ $('.formEliminarSeccion').on("submit",function(evento){
 })
 
 
+
+
+
+
 /*
 
 DESCRIPCION : 
@@ -553,6 +538,7 @@ $('.formEditarSeccion').on("submit",function(evento){
         
     modificar( $(this) )
 })
+
 
 
 

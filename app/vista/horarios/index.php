@@ -5,12 +5,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
 </head>
 <body>
 <?php  require_once "app/vista/plantilla/__navbar.php"; ?>
 <main >
+
+  <section class="row titulo">
+
+    <div class="col s6  ">
+      <h5 class="valign ">Gestión de horarios</h5>
+    </div>
+
+    <div class="col s6 right-align ">
+      <h5 class="valign ">
+        Consulta rapida
+        <a 
+          class="btn-floating btn-large waves-effect waves-light  primario" 
+          href="?controlador=horarios&actividad=consulta-rapida-horarios" 
+          
+        >
+          <i class="material-icons">search</i>
+        </a>
+      </h5>
+    </div>
+  
+  </section>
 
   <section class="row">
 
@@ -31,7 +53,7 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
+            <a class="btn-floating btn  waves-effect  primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Docentes en el sistema. 
@@ -78,7 +100,7 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
+            <a class="btn-floating btn  waves-effect  primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Secciones en el sistema 
@@ -128,7 +150,7 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
+            <a class="btn-floating btn  waves-effect  primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Ambientes en el sistema. 
@@ -155,11 +177,6 @@
 
   </section>
 
-  <div class="fixed-action-btn">
-    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario ">
-      <i class="material-icons">help</i>
-    </a>
-  </div>
 </main>
 
 <?php require_once "app/vista/plantilla/__scripts.php";  ?>

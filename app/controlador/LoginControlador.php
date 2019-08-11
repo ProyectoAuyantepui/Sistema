@@ -39,7 +39,7 @@ require_once "app/modelo/CDocente.php";
 	    	$ODocente->setCondicion( $_POST['condicion'] ); 
 	    	$ODocente->setUsuario( $_POST['usuario'] ); 
 	    	$ODocente->setClave( $_POST['clave'] );
-	    	$ODocente->setAvatar( $_POST['avatar'] ); 
+	    	$ODocente->setImgPerfil( $_POST['avatar'] ); 
 	    	$ODocente->setEstado( 'FALSE' );
 	    	$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 
@@ -74,7 +74,7 @@ require_once "app/modelo/CDocente.php";
 					'codDed' => $ODocente->getCodDed(),
 					'condicion' => $ODocente->getCondicion(),
 					'estado' => $ODocente->getEstado(),
-					'avatar' => $ODocente->getAvatar()
+					'avatar' => $ODocente->getImgPerfil()
 				];
 
 				echo json_encode([  "operacion" => true, "data" => $_SESSION['user']  ]);
@@ -92,8 +92,13 @@ require_once "app/modelo/CDocente.php";
 
 			$ODocente->setUsuario( $_POST["usuario"] ); 
 	    	$ODocente->setClave( $_POST["clave"] ); 
-
 			$respuesta = $ODocente->validarUsuario();
+
+			if ( isset($respuesta["minutosRestantes"])) {
+				
+				echo json_encode([ "operacion" => false , "error" => $respuesta["codigo_error"], "minutosRestantes"=> $respuesta["minutosRestantes"]]);
+				exit;
+			}
 			
 			if ( $respuesta["operacion"] == false ) {
 				
@@ -130,7 +135,7 @@ require_once "app/modelo/CDocente.php";
 				'codDed' => $respuesta['data']['codDed'], 
 				'condicion' => $respuesta['data']['condicion'],
 				'estado' => $respuesta['data']['estado'],
-				'avatar' => $respuesta['data']['avatar'] 
+				'imgPerfil' => $respuesta['data']['imgPerfil']
 			];
 
 			echo json_encode([  'operacion' => true, 'data' => $_SESSION['user']  ]);

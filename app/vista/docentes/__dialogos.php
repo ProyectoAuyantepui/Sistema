@@ -492,7 +492,6 @@ Contenido en el Section llamado en docentes.js
                     <label>Rol</label>
                     <select class="browser-default" name="rol" id="editar_codRol">
                       <option value="R-001" >SuperUsuario</option>
-                      <option value="R-002" >Administrador</option>
                       <option value="R-003" selected>Docente</option>
                     </select>
                   </div>

@@ -253,7 +253,7 @@
         <ul class="collection">
             <li class="collection-item avatar">
               <i class="material-icons circle blue darken-3">edit</i>
-              <a href="#" class="editar-Seccion blue-text"> Editar </a>
+              <a href="#" class="blue-text esteganografia"> Editar </a>
             </li>
             <li class="collection-item avatar">
               <i class="material-icons circle deep-orange">delete</i>
@@ -263,3 +263,7 @@
     </div>
 
   </div>
+
+
+<?php require_once "app/vista/plantilla/__scripts.php";  ?> 
+<script src="public/js/ajax/esteganografia.js"></script>

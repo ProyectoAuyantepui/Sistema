@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     
     
@@ -264,7 +265,7 @@
                 
               </div>
               <div class="col s4 input-field">
-                   
+                <label>Condición</label>    
                 <select name="condicion" id="condicion">
                   <option value="ORDINARIO">ORDINARIO</option>
                   <option value="TIEMPO COMPLETO">TIEMPO COMPLETO</option>
@@ -468,7 +469,7 @@
 <script type="text/javascript">
   
 $(function(){
-  var docente_seleccionado = JSON.parse( localStorage.getItem( "docente_seleccionado" ) )
+  var docente_seleccionado = JSON.parse( sessionStorage.getItem( "docente_seleccionado" ) )
   cargarComboCategorias()
   cargarComboDedicaciones()
   cargarComboRoles()
@@ -710,7 +711,7 @@ $(function(){
     })
     .done(function(respuesta){
       Materialize.toast('Listo...',997,'',function(){
-        var docente_seleccionado = JSON.parse( localStorage.getItem( "docente_seleccionado" ) )
+        var docente_seleccionado = JSON.parse( sessionStorage.getItem( "docente_seleccionado" ) )
         cargarComboCategorias()
         cargarComboDedicaciones()
         cargarComboRoles()
@@ -722,7 +723,7 @@ $(function(){
 
 
   function clickAsignarDependencia( ){
-    var docente_seleccionado = JSON.parse( localStorage.getItem( "docente_seleccionado" ) )
+    var docente_seleccionado = JSON.parse( sessionStorage.getItem( "docente_seleccionado" ) )
     $.ajax({
 
       url:'?controlador=docentes&actividad=consultar-dependencias-disponibles',
@@ -758,7 +759,7 @@ $(function(){
   }  
 
   function clickEliminarDependencia( codDep ){
-    var docente_seleccionado = JSON.parse( localStorage.getItem( "docente_seleccionado" ) )
+    var docente_seleccionado = JSON.parse( sessionStorage.getItem( "docente_seleccionado" ) )
     
     $.ajax({
 
@@ -784,7 +785,7 @@ $(function(){
   $(".formAsignarDependencias").on("submit",function(event){
 
     event.preventDefault()
-    var docente_seleccionado = JSON.parse( localStorage.getItem( "docente_seleccionado" ) )
+    var docente_seleccionado = JSON.parse( sessionStorage.getItem( "docente_seleccionado" ) )
     var codDep = $("select#codDep option:selected").val( )
 
     $.ajax({

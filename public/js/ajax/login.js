@@ -40,10 +40,23 @@ $(".form-login").on("submit",function(event){
             $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Contraseña invalida..")
             
                                  
+        }else if (respuesta.operacion == false && respuesta.error == "3") {
+
+
+            Materialize.toast(
+
+                'Intente de Nuevo en ' +respuesta.minutosRestantes +' minutos...',
+                
+                3500
+            );
+
+            $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Debe esperar "+ respuesta.minutosRestantes+ " minutos para reintentar..")
+            
+                                 
         }else if ( respuesta.operacion == true ){
 
-            localStorage.setItem( 'user' , JSON.stringify( respuesta.data ) )
-            /*var o = JSON.parse( localStorage.getItem( 'user' ) )
+            sessionStorage.setItem( 'user' , JSON.stringify( respuesta.data ) )
+            /*var o = JSON.parse( sessionStorage.getItem( 'user' ) )
             console.log('objetoObtenido: ', o.rol[0].nombre )
             console.log(  respuesta.data.rol.nombre )
             console.log(  respuesta )*/

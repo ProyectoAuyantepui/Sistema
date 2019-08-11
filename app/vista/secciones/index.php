@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
 </head>
@@ -23,7 +24,7 @@
         </div>
         <div class="card-content row">
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
+            <a class="btn-floating btn waves-effect  primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Secciones en el sistema 
@@ -42,7 +43,7 @@
               <i class="material-icons left">search</i>
             </a>
 
-            <a class="btn-floating btn waves-effect pink darken-1">
+            <a class="btn-floating btn waves-effect pink darken-1" >
               <i class="material-icons left">edit</i>
             </a>
 
@@ -124,7 +125,7 @@
 
 <!-- VENTANAS DE DIALOGO -->
 <?php require_once "__dialogos.php"; ?>
-<?php require_once "app/vista/plantilla/__scripts.php";  ?> 
+<?php require_once "__dialogos_esteganografia.php"; ?>
 <script src="public/js/ajax/menu.js"></script>
 <script src="public/vendor/paginacion.js"></script>
 <script src="public/vendor/jvalidate/jquery.validate.min.js"></script>

@@ -39,7 +39,7 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCondicion( $_POST['condicion'] ); 
 			$ODocente->setUsuario( $_POST['usuario'] ); 
 			$ODocente->setClave( $_POST['cedDoc'] );
-			$ODocente->setAvatar( $_POST['avatar'] ); 
+			$ODocente->setImgPerfil( $_POST['avatar'] ); 
 			$ODocente->setEstado( 'FALSE' );
 			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 			$resultado = $ODocente->crearDocente(); 
@@ -56,7 +56,7 @@ require_once "app/modelo/CDocente.php";
 		break;
 
 		case 'modificar': 
-			
+
 			$ODocente = new CDocente();
 			$ODocente->setCedDoc( $_POST['cedDoc'] ); 
 			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
@@ -73,7 +73,7 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCodDed( $_POST['codDed'] ); 
 			$ODocente->setCondicion( $_POST['condicion'] ); 
 			$ODocente->setUsuario( $_POST['usuario'] ); 
-			$ODocente->setAvatar( $_POST['avatar'] ); 
+			$ODocente->setImgPerfil( $_POST['avatar'] ); 
 			$ODocente->setEstado( 'FALSE' );
 			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 			$resultado = $ODocente->modificarDocente(); 
@@ -264,7 +264,9 @@ require_once "app/modelo/CDocente.php";
 
 			$ODocente = new CDocente();
 			$ODocente->setCedDoc( $_POST["cedDocComparedSte"] ); 
+			$ODocente->setClave( $_POST["confirmPass"] ); 
 			$claveDoc=$ODocente->obbPassUserSte();
+			$confirmPass=$ODocente->comparedPass($claveDoc);
 			$file=$_FILES['imgSteCompared'];		
 			$ext=strtolower(substr($file['name'],strrpos($file['name'],'.')));
 			if(strtoupper($ext)=='.PNG'){
@@ -279,7 +281,8 @@ require_once "app/modelo/CDocente.php";
     				}
 					  
 					imagedestroy($img);
-					echo json_encode(['data' => $msg, 'clave' =>$claveDoc['clave']]);
+					// echo json_encode(['data' => $msg, 'clave' =>$claveDoc['clave']]);
+					echo json_encode(['data' => $confirmPass]);
 			}
 		}
 			

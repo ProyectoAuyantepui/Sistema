@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     
     
@@ -29,7 +30,7 @@
          <div class="card-content"  >
 
            <p>
-             We hope you have enjoyed using Materialize and if you feel like it has helped you out and want to support the team you can help us by donating or backing us on Patreon. Any amount would help support and continue development on this project and is greatly appreciated. 
+             En este apartado usted puede. 
            </p>
                    
          </div>
@@ -78,7 +79,7 @@
                   class="btn btn-large waves-effect waves-light teal" 
                   onclick='
                     $("input:checkbox").removeAttr("checked")
-                    var rol_permisos = JSON.parse( localStorage.getItem( "rol_seleccionado_permisos" ) )
+                    var rol_permisos = JSON.parse( sessionStorage.getItem( "rol_seleccionado_permisos" ) )
                     
                     $.each(rol_permisos,function(i,item){
 
@@ -130,7 +131,7 @@
   
   $(function(){
 
-    var rol =  JSON.parse( localStorage.getItem( 'rol_seleccionado' ) )
+    var rol =  JSON.parse( sessionStorage.getItem( 'rol_seleccionado' ) )
     
     $(".formEditarRol input[name=codRol]").val( rol.codRol )
     $(".formEditarRol input[name=nombre]").val( rol.nombre )
@@ -143,14 +144,14 @@
     }) 
     .done(function(respuesta){
 
-        localStorage.setItem( "rol_seleccionado_permisos" , JSON.stringify( respuesta.data ) ) 
+        sessionStorage.setItem( "rol_seleccionado_permisos" , JSON.stringify( respuesta.data ) ) 
     })
 
   })
 
   $("table tr td div input[type=checkbox]").change(function(){
     
-    var rol =  JSON.parse( localStorage.getItem( 'rol_seleccionado' ) )
+    var rol =  JSON.parse( sessionStorage.getItem( 'rol_seleccionado' ) )
     var operacion =  false
     if ( $(this).is(":checked") ) {
 

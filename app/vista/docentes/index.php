@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     
     
@@ -26,7 +27,7 @@
         </div>
         <div class="card-content row">
           <p class="col s12" style="padding: 10px 1px 1px 1px;">
-            <a class="btn-floating btn pulse  waves-effect  primario">
+            <a class="btn-floating btn waves-effect  primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Docentes en el sistema 
@@ -125,7 +126,7 @@
 <div class="fixed-action-btn" id="registrar">
 
   <input type="hidden" name="item_seleccionado">
-    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente" id="registrarDoc">
+    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
     <i class="material-icons">add</i>
   </a>
 </div>
@@ -185,62 +186,7 @@
 </div>
 
 
-<!-- MODAL ESTEGANOGRAFÍA SELECCIÓN DE IMAGEN -->
 
-<div id="modal_solImgSte" class="modal">
-
- <div class="modal-header secundario">
-   <span class="white-text">Seleccione Una imagen:<i class="modal-action modal-close material-icons right">close</i></span>
- </div>
-
-
- <div class="modal-content">
-     <ul class="collection">
-         <li class="collection-item avatar">
-          <span>Seleccionar imagen:</span>
-           <input type="file" id="imgSteSubmit">
-         </li>
-     </ul>
-
-
-     <ul>
-       <li>
-         <button type="button" class="btn btn-primary btn-block" id="submitImgSte">Subir Imagen</button>
-       </li>
-     </ul>
- </div>
-
-</div>
-
-
-<!-- MODAL ESTEGANOGRAFÍA SUBIR IMAGEN CON ESTEGANOGRAFIA-->
-  
-
-
-<div id="modal_upImgSte" class="modal">
-
- <div class="modal-header secundario">
-   <span class="white-text">Seleccione la imagen que le fue enviada al correo:<i class="modal-action modal-close material-icons right">close</i></span>
- </div>
-
-
- <div class="modal-content">
-     <ul class="collection">
-         <li class="collection-item avatar">
-          <span>Seleccionar imagen:</span>
-           <input type="file" id="imgUpSubmit">
-         </li>
-     </ul>
-
-
-     <ul>
-       <li>
-         <button type="button" class="btn btn-primary btn-block" id="upImgSte">Acceder</button>
-       </li>
-     </ul>
- </div>
-
-</div>
 
   <?php require_once "app/vista/plantilla/__scripts.php";  ?>
     
@@ -334,7 +280,7 @@
       $("body").on( "click", ".editar-docente", function(){ 
         
         var cedDoc = $("#modal_operaciones input[name=item_seleccionado]").val( )
-        localStorage.setItem( "docente_seleccionado" , JSON.stringify( cedDoc ) )  
+        sessionStorage.setItem( "docente_seleccionado" , JSON.stringify( cedDoc ) )  
         location.href = "?controlador=docentes&actividad=vista-editar"
       })
 
@@ -431,66 +377,6 @@
           }
 
           cambiarEstado( estado , cedDoc )
-      })
-
-      $("#registrarDoc").on("click",function() {
-        $("#modal_solImgSte").modal("open")
-      })
-
-      $("#submitImgSte").on("click",function(){
-        var OUser = JSON.parse( localStorage.getItem( "user" ) )
-        var cedDoc = OUser.cedDoc
-        var imgSte= $('#imgSteSubmit').prop('files')[0];
-        var datos = new FormData();
-
-        datos.append("cedDocLinkSte",cedDoc);
-        datos.append("imgSteUpload",imgSte);
-        $.ajax({ 
-            dataType : 'json',
-            url:'index.php?controlador=docentes&actividad=obbImgSte',
-            method:"POST",
-            data:datos,
-            cache: false,
-            contentType:false,
-            processData:false
-        })                      
-        .done(function(respuesta){
-          Materialize.toast('Revise la bandeja de su correo y suba la imagen que le fue enviada!',4000)
-          $("#modal_solImgSte").modal("close")
-          $("#modal_upImgSte").modal("open")
-        })                 
-
-      })
-
-      $("#upImgSte").on("click",function(){
-        var OUser = JSON.parse( localStorage.getItem( "user" ) )
-        var cedDoc = OUser.cedDoc
-        var imgSte= $('#imgUpSubmit').prop('files')[0];
-        var datos = new FormData();
-
-        datos.append("cedDocComparedSte",cedDoc);
-        datos.append("imgSteCompared",imgSte);
-        $.ajax({ 
-            dataType : 'json',
-            url:'index.php?controlador=docentes&actividad=compararTextSte',
-            method:"POST",
-            data:datos,
-            cache: false,
-            contentType:false,
-            processData:false
-        })                      
-        .done(function(respuesta){
-          if (respuesta.codError==1) {
-            Materialize.toast('La imagen seleccionada no coincide con la enviada a su correo!',4000)
-            return false;
-          }
-          else if (respuesta.data===respuesta.clave) {
-            $(location).attr('href','?controlador=docentes&actividad=vista-crear');
-          }else{
-            Materialize.toast('La imagen seleccionada no coincide con la enviada a su correo!',4000)
-          }
-        })                 
-
       })
     </script>
 </script>

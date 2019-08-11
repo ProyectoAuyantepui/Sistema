@@ -196,7 +196,7 @@ $("body").on( "click", ".editar-roles", function(){
     }) 
     .done(function(respuesta){
 
-        localStorage.setItem( "rol_seleccionado" , JSON.stringify( respuesta.data ) ) 
+        sessionStorage.setItem( "rol_seleccionado" , JSON.stringify( respuesta.data ) ) 
 
         location.href = '?controlador=roles&actividad=vista-editar'
     })

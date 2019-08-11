@@ -5,7 +5,7 @@
     
     <script type="text/javascript">
         $("body").on("click",".btn-salir",function(){
-            localStorage.clear()
+            sessionStorage.clear()
             Materialize.toast('Hasta pronto!',1400,'',function(){ location.href = '?controlador=login&actividad=cerrar-sesion' });
         })
     </script>

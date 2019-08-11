@@ -33,7 +33,7 @@ require_once "app/modelo/CHorario.php";
 
 			$OHorario = new CHorario();
 
-
+			$OHorario->setCodSec( $_POST['codSec'] );
 			$resultado = $OHorario->consultarHorarioSeccion( $_POST['fase_seleccionada'] );
 			
 			echo json_encode( ["data"=>$resultado ] );
@@ -195,7 +195,9 @@ require_once "app/modelo/CHorario.php";
 			$OHorario = new CHorario();
 			$OHorario->setCodSec( $_POST['seccion_seleccionada'] );
 			$resultado = $OHorario->vaciarHorario();
-
+			if (isset($_POST["nombreImagen"])) {
+  			 unlink("public/img/steganografy/ste/".$_POST["nombreImagen"]);
+			}
 			echo json_encode( ['data' => $resultado] );
 
 		break;

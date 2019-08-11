@@ -1,7 +1,8 @@
 $(function(){
-  var OUser = JSON.parse( localStorage.getItem( 'user' ) )
+  var OUser = JSON.parse( sessionStorage.getItem( 'user' ) )
  
   $.getJSON('?controlador=categorias&actividad=listar',function(respuesta){
+
     $.each( respuesta.data, function( i , item ){
 
       $(".input-field select#codCatDoc").append(`<option value="${item.codCatDoc}">${item.nombre}</option>`)
@@ -19,7 +20,7 @@ $(function(){
   $("input[name=direccion]").val( OUser.direccion )
   $("input[name=correo]").val( OUser.correo )
   $("input[name=usuario]").val( OUser.usuario )
-  $("select[name=avatar]").val( OUser.avatar )
+  $("select[name=avatar]").val( 'public/img/perfil/'+OUser.imgPerfil )
 
   var contentDependencias = $("")
   $.each( OUser.dependencias ,function( i , item ){
@@ -28,15 +29,40 @@ $(function(){
                             </li>`
       $("ul.dependencias").append( contentDependencias )
   })
-
-  var contentComisiones = $("")
-  $.each( OUser.comisiones ,function( i , item ){
-      contentComisiones = `<li class="collection-item">
-                            <span class="card-content">${item.nombre}</span>
-                          </li>`
-      $("ul.comisiones").append( contentComisiones )
-  })
+  comisionesDelDocente()
 })
+
+
+
+function comisionesDelDocente(){
+    var OUser = JSON.parse( sessionStorage.getItem( 'user' ) )
+    var datos = new FormData();
+    datos.append("cedDoc",OUser.cedDoc);
+    $.ajax({    
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=comisiones&actividad=listarComisionesXDocente' ,
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false
+    })
+    
+    .done(function(respuesta){
+      console.log(respuesta)
+      var contentComisiones = $("")
+      var coordinador=''
+      $.each( respuesta ,function( i , item ){
+        if (item['coordinador']==true) {
+          coordinador=' (COORDINADOR)'
+        }
+          contentComisiones = `<li class="collection-item">
+                                <span class="card-content">${item.nombre}</span><span class="red-text">${coordinador}</span>
+                              </li>`
+          $("ul.comisiones").append( contentComisiones )
+      })
+    })
+}
 
 function modificar( formulario ){
 
@@ -55,6 +81,28 @@ function modificar( formulario ){
         }else{   
             Materialize.toast('Error...',997)
         }
+    })
+}
+
+function actualizarImgPerfil( usuario, imgPerfil ){
+
+    $.ajax({    
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=perfil&actividad=actualizarImgPerfil' ,
+        data: { 
+          "usuario" : usuario,
+          "imgPerfil" : imgPerfil 
+        }
+    })
+    
+    .done(function(respuesta){
+          Materialize.toast(
+
+                'Hemos actualizado su Imagen de Perfil!',
+                
+                2200
+            );  
     })
 }
 

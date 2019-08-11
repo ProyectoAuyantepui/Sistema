@@ -180,6 +180,15 @@ require_once "app/modelo/CDependencia.php";
 			
 		break;
 
+		case 'listarComisionesXDocente': 
+		
+			$OComision = new CComision();
+			$OComision->setCedDoc( $_POST['cedDoc'] );
+			$comisiones = $OComision->listarComisionesXDocente();
+
+			echo json_encode( $comisiones );
+		break;
+
 		case 'listar': 
 		
 			$OComision = new CComision();

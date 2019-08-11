@@ -7,7 +7,7 @@ DESCRIPCION :
 */
 $(function(){
     
-    var OUser = JSON.parse( localStorage.getItem( 'user' ) )
+    var OUser = JSON.parse( sessionStorage.getItem( 'user' ) )
 
     $.ajax({ 
         dataType : 'json',

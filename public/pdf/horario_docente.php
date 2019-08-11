@@ -19,8 +19,8 @@ table tbody tr td{
 <table border="0" cellspacing="0" cellpadding="0" style="margin-top: -15px" >
  <thead>
    <tr>
-     <th style='background-color:rgb(1, 79, 187);color:white;'>PNF/CARRERA</th>
-      <tH><?php echo strtoupper($this->data["datos_docente"]->carrera); ?></tH>
+<!--      <th style='background-color:rgb(1, 79, 187);color:white;'>PNF/CARRERA</th>
+      <tH><?php //echo strtoupper($this->data["datos_docente"]->carrera); ?></tH> -->
       <th style='background-color:rgb(1, 79, 187);color:white;'>DOCENTE</th>
       <tH><?php echo strtoupper($this->data["datos_docente"]->docNom), " " ,strtoupper($this->data["datos_docente"]->apellido); ?></tH>
       <th style='background-color:rgb(1, 79, 187);color:white;'>CÉDULA</th>
@@ -37,10 +37,10 @@ table tbody tr td{
       <td ><?php echo $this->data["datos_docente"]->categoria; ?></td>
     </tr>
     <tr>
-      <td style='background-color:rgb(1, 79, 187);color:white;'>PREGRADO</td>
-      <td ><?php echo $this->data["datos_docente"]->pregrado; ?></td>
+<!--       <td style='background-color:rgb(1, 79, 187);color:white;'>PREGRADO</td>
+      <td ><?php //echo $this->data["datos_docente"]->pregrado; ?></td>
       <td style='background-color:rgb(1, 79, 187);color:white;' >POSTGRADO</td>
-      <td colspan="3"><?php echo $this->data["datos_docente"]->postgrado; ?></td>
+      <td colspan="3"><?php //echo $this->data["datos_docente"]->postgrado; ?></td> -->
     </tr>
  </tbody>
 </table>

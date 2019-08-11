@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">  
     <title>Auyantepui - <?= $titulo ?></title>
 </head>
@@ -154,8 +155,8 @@
           
   $(function(){
     
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
 
     $(".card-unidad-curricular ul.collection")
     .append(`<li class="collection-item">
@@ -177,8 +178,8 @@
 
   function cargarDatosHorario(){
 
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
 
     $.ajax({ 
             
@@ -196,7 +197,7 @@
       var actividades_horario = respuesta.actividades
       var contenido_tabla_ambientes = $("")
 
-      localStorage.setItem( 'actividades_horario' , JSON.stringify( actividades_horario ) )
+      sessionStorage.setItem( 'actividades_horario' , JSON.stringify( actividades_horario ) )
 
       if ( docente == false ) {
 
@@ -273,7 +274,7 @@
   }
 
   function clickCambiarDocente(  ){
-    var actividades_horario = JSON.parse( localStorage.getItem('actividades_horario') )
+    var actividades_horario = JSON.parse( sessionStorage.getItem('actividades_horario') )
     var array_bloques = []
 
 
@@ -332,8 +333,8 @@
 
   function cambiarAmbiente(  ){
 
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
     var codAmb = $("select#ambientes option:selected").val( )
     var codTie = $("select#ambientes option:selected").attr("codTie")
 
@@ -382,8 +383,8 @@
   function asignarDocente(){
 
     var cedDoc = $("select#docente option:selected").val( )
-    var uc_seleccionada = JSON.parse( localStorage.getItem( 'uc_seleccionada' ) )
-    var seccion_seleccionada = JSON.parse( localStorage.getItem( 'seccion_seleccionada' ) )
+    var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
   
 
     $.ajax({ 

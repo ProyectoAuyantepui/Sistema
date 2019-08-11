@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <link rel="stylesheet" type="text/css" href="public/css/estilos_de_horario.css">
     <title>Auyantepui - <?= $titulo ?></title>
@@ -137,7 +138,7 @@
 
   function mostrarBloques(  ){
                 
-    var docente_seleccionado = JSON.parse( localStorage.getItem( 'docente_seleccionado' ) )
+    var docente_seleccionado = JSON.parse( sessionStorage.getItem( 'docente_seleccionado' ) )
         
     $.ajax({           
       dataType : 'json' ,
@@ -182,7 +183,7 @@
 
 function mostrarInformacionDocente() {
 
-var docente_seleccionado = JSON.parse( localStorage.getItem( 'docente_seleccionado' ) )
+var docente_seleccionado = JSON.parse( sessionStorage.getItem( 'docente_seleccionado' ) )
 var estadoDelDocente
 
 if (docente_seleccionado.estado == true) {
@@ -207,7 +208,7 @@ if (docente_seleccionado.estado == true) {
 
 $('#agregarActAdm').click(function() {
 
-  var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
 
   $('#titulo').val("0")
 
@@ -296,7 +297,7 @@ function quitarBotonAsignarActividades() {
 function clickSwitchRemoverBloque( elemento ) {
 
   var codTie = elemento.parents("td").attr("codTie")
-  // var obj_actividad = JSON.parse( localStorage.getItem("obj_actividad") )
+  // var obj_actividad = JSON.parse( sessionStorage.getItem("obj_actividad") )
   var bloques_A_Eliminar = []
 
   if(elemento.is(":checked")) {
@@ -308,7 +309,7 @@ function clickSwitchRemoverBloque( elemento ) {
     bloques_A_Eliminar.push( elemento.attr('codHor') )
 
     elemento.parents("td").removeClass("grey lighten-2")
-    localStorage.setItem("RemoverBloques", JSON.stringify( bloques_A_Eliminar ))
+    sessionStorage.setItem("RemoverBloques", JSON.stringify( bloques_A_Eliminar ))
   }
 }
 
@@ -337,7 +338,7 @@ function guardarTodo(){
 
   var tipo = $('#tipoActAdm').val()
   var titulo = $('#titulo').val()
-  var docente = JSON.parse( localStorage.getItem("docente_seleccionado") )
+  var docente = JSON.parse( sessionStorage.getItem("docente_seleccionado") )
 
   $.ajax({           
     dataType : 'json' ,

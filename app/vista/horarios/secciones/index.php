@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
 </head>
@@ -162,11 +163,11 @@
       data:{ "codSec" : codigo_item_seleccionado } 
     }) 
     .done(function(respuesta){
-      localStorage.setItem( 'seccion_seleccionada' , JSON.stringify( respuesta.data ) )
-      var seccion_seleccionada = JSON.parse( localStorage.getItem('seccion_seleccionada') )
+      sessionStorage.setItem( 'seccion_seleccionada' , JSON.stringify( respuesta.data ) )
+      var seccion_seleccionada = JSON.parse( sessionStorage.getItem('seccion_seleccionada') )
       seccion_seleccionada["operacion_horario"] = 'consulta_de_horario'
 
-      localStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
+      sessionStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
       $(".modal_fases_secciones").modal("open")
     })        
   })  
@@ -183,13 +184,13 @@
       data:{ "codSec" : codigo_item_seleccionado } 
     }) 
     .done(function(respuesta){
-      localStorage.setItem( 'seccion_seleccionada' , JSON.stringify( respuesta.data ) )
+      sessionStorage.setItem( 'seccion_seleccionada' , JSON.stringify( respuesta.data ) )
 
-      var seccion_seleccionada = JSON.parse( localStorage.getItem('seccion_seleccionada') )
+      var seccion_seleccionada = JSON.parse( sessionStorage.getItem('seccion_seleccionada') )
       seccion_seleccionada["operacion_horario"] = 'reporte_en_pdf' 
 
 
-      localStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
+      sessionStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
       $(".modal_fases_secciones").modal("open")
     })        
   })
@@ -247,7 +248,7 @@
   })
 
   function consultarPorFase( fase_seleccionada ) {
-    var seccion_seleccionada = JSON.parse( localStorage.getItem('seccion_seleccionada') )
+    var seccion_seleccionada = JSON.parse( sessionStorage.getItem('seccion_seleccionada') )
 
     if ( seccion_seleccionada.operacion_horario == 'reporte_en_pdf' ) {
 
@@ -259,7 +260,7 @@
       seccion_seleccionada["fase_seleccionada"] = fase_seleccionada 
 
 
-      localStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
+      sessionStorage.setItem('seccion_seleccionada' , JSON.stringify(seccion_seleccionada) )
       $(location).attr('href', '?controlador=horariosSecciones&actividad=mostrar')
       
     }

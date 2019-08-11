@@ -5,7 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">>
+    <link rel="icon" type="image/png" href="public/img/logo.png">
+    <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
     <style type="text/css">
       body{
@@ -56,7 +57,7 @@
 
               <div class="row">
                 <div class="input-field col m12">
-                  <button type="submit" class="btn btn-large waves-effect waves-light col s12 primario hoverable" >Acceder</button>
+                  <button type="submit" class="btn btn-large waves-effect waves-light col s12 primario hoverable" id="acceder">Acceder</button>
                 </div>
               </div>
 
@@ -105,9 +106,13 @@
         <i class="material-icons">person_add</i>
       </a>
 
-      <a class="btn btn-floating  btn-small waves-effect waves-light pink darken-1  tooltipped" data-position="top"  data-tooltip="¿Necesita de nuestra Ayuda?">
+      <!--<a class="btn btn-floating  btn-small waves-effect waves-light pink darken-1  tooltipped" data-position="top"  data-tooltip="¿Necesita de nuestra Ayuda?">
         <i class="material-icons ">help</i>
-      </a>
+      </a> -->
+
+      <a class="btn btn-floating  btn-small waves-effect waves-light green darken-1  tooltipped" data-position="top"  data-tooltip="Sobre Nosotros" href="app/vista/about.auyantepui.php">
+        <i class="material-icons ">info</i>
+      </a> 
 
       <a class="btn btn-floating  btn-small waves-effect waves-light blue darken-4 tooltipped" data-position="top"  data-tooltip="Acerca de nuestra institucion y <br> del grupo de desarrollo ">
         <i class="material-icons ">account_balance</i>
@@ -191,7 +196,7 @@
                   }
             )
 
-            localStorage.setItem( "cedDoc" , respuesta.data.cedDoc )
+            sessionStorage.setItem( "cedDoc" , respuesta.data.cedDoc )
           }
 
 

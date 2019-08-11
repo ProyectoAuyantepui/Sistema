@@ -62,7 +62,6 @@ require_once "app/modelo/CSeccion.php";
 			$OSeccion->setTurno( $_POST['turno'] );
 			$OSeccion->setObservaciones( $_POST['observaciones'] );
 			$resultado = $OSeccion->modificarSeccion(); 
-			
 			if ($resultado) {
 
 				echo json_encode( ['operacion' => true] );
@@ -141,6 +140,10 @@ require_once "app/modelo/CSeccion.php";
 			$OSeccion->setCodSec( $_POST['codSec'] );
 
 			$resultado = $OSeccion->consultarSeccion();
+			
+			if (isset($_POST["nombreImagen"])) {
+  			 unlink("public/img/steganografy/ste/".$_POST["nombreImagen"]);
+			}
 			
 			echo json_encode( ['data' => $resultado] );
 		break;

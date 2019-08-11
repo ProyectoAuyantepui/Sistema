@@ -62,6 +62,29 @@ class CComision extends Database{
 		return $this->codCom;
 	}
 
+	public function listarComisionesXDocente(){
+		
+		$this->conectarBD();
+		$sql = 'SELECT 
+		c.*,cd.*
+		FROM 
+		"TComDoc" cd 
+		INNER JOIN "TDocentes" d ON d."cedDoc" = cd."cedDoc" 
+		INNER JOIN "TComisiones" c ON c."codCom" = cd."codCom" 
+		WHERE 
+		d."cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+
+		$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+		$this->stmt->execute();
+
+		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $data;
+	}
+
 	public function listarComisiones(){
 		
 		$this->conectarBD();

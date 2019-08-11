@@ -136,10 +136,24 @@
         <table class="tabla_permisos_por_rol">
             <tbody>
 
-
-
               <tr codPer="P-35">
                 <td>GESTIONAR EJES DE FORMACION</td>
+                <td>
+                  <div class="switch">
+                    <label>
+                      <input 
+                        type="checkbox" 
+                        name="permiso" 
+                        onchange="" 
+                      >
+                      <span class="lever"></span>
+                    </label>
+                  </div>
+                </td>
+              </tr>
+
+              <tr codPer="P-72">
+                <td>GESTIONAR DEDICACIONES DE DOCENTES</td>
                 <td>
                   <div class="switch">
                     <label>
