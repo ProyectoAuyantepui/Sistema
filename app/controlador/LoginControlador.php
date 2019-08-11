@@ -93,19 +93,27 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setUsuario( $_POST["usuario"] ); 
 	    	$ODocente->setClave( $_POST["clave"] ); 
 			$respuesta = $ODocente->validarUsuario();
-
-			if ( isset($respuesta["minutosRestantes"])) {
-				
-				echo json_encode([ "operacion" => false , "error" => $respuesta["codigo_error"], "minutosRestantes"=> $respuesta["minutosRestantes"]]);
-				exit;
-			}
-			
 			if ( $respuesta["operacion"] == false ) {
-				
+				if (!isset($_SESSION['intentos'] )) {
+					$_SESSION['intentos'] = 0; 
+				}if($respuesta["codigo_error"]==4){
+					echo json_encode([ "operacion" => false , "error" => 3 ]);
+					exit();
+				}else if($respuesta["codigo_error"]==2){
+					if ($_SESSION['intentos']>=2) {
+						$respuesta = $ODocente->bloquearUsuario();
+						echo json_encode([ "operacion" => false , "error" => 3 ]);
+						exit();
+					}else{
+						$_SESSION['intentos'] += 1;
+						echo json_encode([ "operacion" => false , "error" => 2 ]);
+						exit();
+					}
+				}else if ($respuesta["codigo_error"]) {				
 				echo json_encode([ "operacion" => false , "error" => $respuesta["codigo_error"] ]);
 				exit;
 			}
-
+			}
 
 			$ODocente->setCedDoc($respuesta['data']['cedDoc'] );
 						
@@ -197,11 +205,10 @@ require_once "app/modelo/CDocente.php";
 			$o->asunto = "Auyantepui - Recuperar Cuenta";
 
 			$o->data = [
-				"link" => "http://localhost/PROYECTO/SISTEMA-REPOSITORIO/index.php?controlador=login&actividad=vista-nueva-clave&token=" . $token . ""
+				"link" => "http://localhost/auyantepui-git/index.php?controlador=login&actividad=vista-nueva-clave&token=" . $token . ""
 			];
 
 			$respuesta = $o->enviarEmail();
-
 			if ( $respuesta["operacion"] == true ) {
 
 
@@ -223,7 +230,6 @@ require_once "app/modelo/CDocente.php";
 
 			if ( isset( $_GET["token"] ) ) {
 				//echo "token valido";
-
 				if( isset( $_COOKIE['token_recuperacion']) ){
 
 					//echo "<p>La cookie esta activa</p>";
@@ -253,9 +259,8 @@ require_once "app/modelo/CDocente.php";
 
 			$ODocente->setCedDoc( $_POST["cedDoc"] );
 			$ODocente->setClave( $_POST["clave"] );
-
 			$respuesta = $ODocente->actualizarClave();
-			
+			session_destroy();
 			if ( $respuesta ) {
 							
 				echo json_encode([ "operacion" => true , "data" => $respuesta ]);

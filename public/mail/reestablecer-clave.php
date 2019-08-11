@@ -1,9 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- 
+<html> 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>A Simple Responsive HTML Email</title>
   <style type="text/css">
   body {margin: 0; padding: 0; min-width: 100%!important;}
   img {height: auto;}
@@ -30,24 +27,13 @@
   body[yahoo] .unsubscribe {display: block; margin-top: 20px; padding: 10px 50px; background: #2f3942; border-radius: 5px; text-decoration: none!important; font-weight: bold;}
   }
 
-  /*@media only screen and (min-device-width: 601px) {
-    .content {width: 600px !important;}
-    .col425 {width: 425px!important;}
-    .col380 {width: 380px!important;}
-    }*/
-
   </style>
 </head>
 
 <body yahoo bgcolor="#f6f8f1">
 <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
 <tr>
-  <td>
-    <!--[if (gte mso 9)|(IE)]>
-      <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td>
-    <![endif]-->     
+  <td>   
     <table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td bgcolor="#c7d8a7" class="header">
@@ -58,11 +44,6 @@
               </td>
             </tr>
           </table>
-          <!--[if (gte mso 9)|(IE)]>
-            <table width="425" align="left" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td>
-          <![endif]-->
           <table class="col425" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 425px;">  
             <tr>
               <td height="70">
@@ -81,11 +62,6 @@
               </td>
             </tr>
           </table>
-          <!--[if (gte mso 9)|(IE)]>
-                </td>
-              </tr>
-          </table>
-          <![endif]-->
         </td>
       </tr>
       <tr>
@@ -98,7 +74,7 @@
             </tr>
             <tr>
               <td class="bodycopy">
-                Hola, Iris Daza, hemos enviado este correo para tí porque solicitastes actualizar tu contraseña por olvido de la misma, debemos informarte que cuentas con 10 minutos para pulsar el botón
+                Hemos enviado este correo para tí porque solicitastes actualizar tu contraseña por olvido de la misma, debemos informarte que cuentas con 10 minutos para pulsar el botón
                 "Actualizar Contraseña"
                 debajo de este apartado, esto con la finalidad de hacer más seguro el proceso, Gracias por usar nuestro Sistema.
               </td>
@@ -111,26 +87,14 @@
           <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
             <tr>
               <td height="115" style="padding: 0 20px 20px 0;">
-                <img class="fix" src="http://tutsplus.github.io/a-simple-responsive-html-email/HTML/images/article1.png" width="115" height="115" border="0" alt="" />
+                <img class="fix" src="https://www.shareicon.net/data/128x128/2015/06/24/58970_system_512x512.png" width="115" height="115" border="0" alt="" />
               </td>
             </tr>
           </table>
-          <!--[if (gte mso 9)|(IE)]>
-            <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td>
-          <![endif]-->
           <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
             <tr>
               <td>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td class="bodycopy">
-                      Hola, Iris Daza, hemos enviado este correo para tí porque solicitastes actualizar tu contraseña por olvido de la misma, debemos informarte que cuentas con 10 minutos para pulsar el botón
-                      "Reestablecer Contraseña"
-                      debajo de este apartado, esto con la finalidad de hacer más seguro el proceso, Gracias por usar nuestro Sistema.
-                    </td>
-                  </tr>
                   <tr>
                     <td style="padding: 20px 0 0 0;">
                       <table class="buttonwrapper" bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
@@ -148,21 +112,16 @@
               </td>
             </tr>
           </table>
-          <!--[if (gte mso 9)|(IE)]>
-                </td>
-              </tr>
-          </table>
-          <![endif]-->
         </td>
       </tr>
       <tr>
         <td class="innerpadding borderbottom">
-          <img class="fix" src="http://tutsplus.github.io/a-simple-responsive-html-email/HTML/images/wide.png" width="100%" border="0" alt="" />
+          <img class="fix" src="https://raw.githubusercontent.com/ProyectoAuyantepui/Sistema/master/public/img/PNF.jpg" width="100%" border="0" alt="" />
         </td>
       </tr>
       <tr>
-        <td class="innerpadding bodycopy">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
+        <td class="bodycopy">
+          El sistema Auyantepui fue desarollado con esmero, dedicación y mucho compromiso para el departamente del Programa Nacional de Formación en Informática dentro de la Universidad Politécnica Territorial "Andrés Eloy Blanco".
         </td>
       </tr>
       <tr>
@@ -170,38 +129,16 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td align="center" class="footercopy">
-                &reg; Someone, somewhere 2013<br/>
-                <a href="#" class="unsubscribe"><font color="#ffffff">Unsubscribe</font></a> 
-                <span class="hide">from this newsletter instantly</span>
+                &reg; Auyantepui, 2019<br/>
+                <span class="hide">Todos los derechos Reservados</span>
               </td>
             </tr>
             <tr>
-              <td align="center" style="padding: 20px 0 0 0;">
-                <table border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
-                      <a href="http://www.facebook.com/">
-                        <img src="http://tutsplus.github.io/a-simple-responsive-html-email/HTML/images/facebook.png" width="37" height="37" alt="Facebook" border="0" />
-                      </a>
-                    </td>
-                    <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
-                      <a href="http://www.twitter.com/">
-                        <img src="http://tutsplus.github.io/a-simple-responsive-html-email/HTML/images/twitter.png" width="37" height="37" alt="Twitter" border="0" />
-                      </a>
-                    </td>
-                  </tr>
-                </table>
-              </td>
             </tr>
           </table>
         </td>
       </tr>
     </table>
-    <!--[if (gte mso 9)|(IE)]>
-          </td>
-        </tr>
-    </table>
-    <![endif]-->
     </td>
   </tr>
 </table>

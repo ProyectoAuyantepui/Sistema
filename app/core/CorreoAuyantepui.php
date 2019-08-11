@@ -1,10 +1,12 @@
 <?php 
-require 'libs/php-mailer/src/Exception.php';
-require 'libs/php-mailer/src/PHPMailer.php';
-require 'libs/php-mailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+require 'public/vendor/autoload.php';
+require 'libs/php-mailer/src/Exception.php';
+require 'libs/php-mailer/src/PHPMailer.php';
+require 'libs/php-mailer/src/SMTP.php';
 
 class CorreoAuyantepui extends PHPMailer{
 
@@ -21,19 +23,19 @@ class CorreoAuyantepui extends PHPMailer{
 		$this->isSMTP();                             
 		$this->Host = 'smtp.gmail.com';  			 
 		$this->SMTPAuth = true;                      
-		$this->Username = 'juaneliezer13@gmail.com'; 
-		$this->Password = '25627918';                
+		$this->Username = 'yordyalejandro13@gmail.com'; 
+		$this->Password = 'Neflix#1!!';                
 		$this->SMTPSecure = 'tls';                   
 		$this->Port = 587;                           
-		$this->addReplyTo('juaneliezer13@gmail.com', 'Sistema Auyantepui');
+		$this->addReplyTo('uptaebauyantepui@gmail.com', 'Sistema Auyantepui');
 		$this->isHTML(true); 										
-		$this->setFrom('juaneliezer13@gmail.com', 'Sistema Auyantepui'); 		
+		$this->setFrom('uptaebauyantepui@gmail.com', 'Sistema Auyantepui'); 		
 	}
 
 	public function construirCuerpoEmail(  ){
 
 		ob_start();
-			require_once "public/mail/" . $this->nombre_plantilla . ".php";
+		require_once "public/mail/" . $this->nombre_plantilla . ".php";
 		$this->plantilla = ob_get_clean();
 		$this->Subject = $this->asunto; 
 		$this->Body    = $this->plantilla;
@@ -43,13 +45,13 @@ class CorreoAuyantepui extends PHPMailer{
 	public function enviarEmail(){
 
 		$this->cargarConfiguracion(); 
-		
 		$this->addAddress( 
 		    $this->destinatario["correo"], 
 		    $this->destinatario["nombre"]
 		); 	
 		    
 		$this->construirCuerpoEmail();	
+
 
 		if ( $this->send() ) {
 

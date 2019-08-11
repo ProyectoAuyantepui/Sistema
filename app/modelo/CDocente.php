@@ -344,92 +344,31 @@ class CDocente extends Database{
 		if (password_verify($_POST["clave"], $password)) {
 			$comprobacion = true;
 		} else {
-			$comprobacion = false;
+				return [ 
+					"operacion" => false,
+					"codigo_error" => "2" 
+				]; 
+			exit();
 		}
 		$cedula=$result["cedDoc"];   
 		if ($comprobacion) {
-			return [
-				"operacion" => true,
-				"data"      => $result
-			];
-		}else{   	
-			if ( $result['intentos'] > 1 ) {
-				$sql = 'SELECT "horaIntentos" FROM "TUsuarios" 
-				WHERE 
-				"cedDoc" = :cedDoc
-				AND "horaIntentos" IS NOT NULL';
-
-				$this->stmt = $this->conn->prepare($sql);
-				$this->stmt->bindParam(':cedDoc', $result["cedDoc"]);
-				$this->stmt->execute();
-				$compHora = $this->stmt->rowCount();
-				$result2 = $this->stmt->fetch(PDO::FETCH_ASSOC);
-				$horaLocal=date("H");
-				$minutosLocales=date("i");
-				if ($compHora==0) {
-					$sql = 'UPDATE "TUsuarios" 
-					SET 
-					"horaIntentos"= now()
-					WHERE 
-					"cedDoc" = :cedDoc';
-					$this->stmt = $this->conn->prepare($sql);
-					$this->stmt->bindParam(':cedDoc', $result["cedDoc"]);
-					$this->stmt->execute();
-					return [ 
-							"operacion" => false,
-							"codigo_error" => "3",
-							"minutosRestantes"=>5
-					];   
-				}else{
-					$horaIntentos=substr($result2['horaIntentos'],0, -13);
-					$minutosIntentos=substr($result2['horaIntentos'],3, -10);
-					$diferenciaMin=$minutosLocales-$minutosIntentos;
-					if ($horaIntentos!=$horaLocal) {
-						$sql = 'UPDATE "TUsuarios" 
-						SET 
-						intentos=DEFAULT ,"horaIntentos"= DEFAULT
-						WHERE 
-						"cedDoc" = :cedDoc';
-						$this->stmt = $this->conn->prepare($sql);
-						$this->stmt->bindParam(':cedDoc', $result["cedDoc"]);
-						$this->stmt->execute();
-						$this->desconectarBD();
-					}
-					else if ($horaIntentos==$horaLocal && $diferenciaMin>=5) {
-						$sql = 'UPDATE "TUsuarios" 
-						SET 
-						intentos=DEFAULT ,"horaIntentos"= DEFAULT
-						WHERE 
-						"cedDoc" = :cedDoc';
-						$this->stmt = $this->conn->prepare($sql);
-						$this->stmt->bindParam(':cedDoc', $result["cedDoc"]);
-						$this->stmt->execute();
-						$this->desconectarBD();
-					}else{
-					$diferenciaMin=$minutosIntentos+5-$minutosLocales;
-						return [ 
-							"operacion" => false,
-							"codigo_error" => "3",
-							"minutosRestantes"=>$diferenciaMin
-						];   
-					}
-				}
+		$sql = 'SELECT status FROM "TUsuarios" U WHERE U."usuario" = :usuario';
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':usuario', $this->usuario);
+		$this->stmt->execute(); 
+		$resultStatus = $this->stmt->fetch(PDO::FETCH_ASSOC);
+			if ($resultStatus["status"]==false) {   	
+				$this->desconectarBD();
+				return [ 
+					"operacion" => false,
+					"codigo_error" => "4" 
+				];   
+				exit();
 			}else{
-			$fallo=$result["intentos"]+1;
-            $sql = 'UPDATE "TUsuarios" 
-				SET 
-					"intentos"= :intentos
-				WHERE 
-					"cedDoc" = :cedDoc';
-			$this->stmt = $this->conn->prepare($sql);
-			$this->stmt->bindParam(':intentos', $fallo);
-			$this->stmt->bindParam(':cedDoc', $result["cedDoc"]);
-	     	$this->stmt->execute();
-			$this->desconectarBD();
-			return [
-				"operacion"    => false,
-				"codigo_error" => "2"
-			];
+				return [
+					"operacion" => true,
+					"data"      => $result
+				];
 			}
 		}
 	}
@@ -518,6 +457,23 @@ class CDocente extends Database{
 		return $result;
 	}
 
+
+
+	public function bloquearUsuario(){
+		$this->conectarBD();
+		$sql = 'UPDATE "TUsuarios" 
+		SET 
+		status=false
+		WHERE 
+		usuario = :usuario';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':usuario', $this->usuario);
+		$result = $this->stmt->execute();
+		$this->desconectarBD();
+		return $result;
+	}
+
 	public function modificarPerfil(){
 		$this->conectarBD();
 		$sql = 'UPDATE "TDocentes" 
@@ -573,6 +529,7 @@ class CDocente extends Database{
 
 	public function cambiarClavePerfil(){
 
+		$pass_encript = password_hash($this->clave, PASSWORD_DEFAULT);
 		$this->conectarBD();
 		$sql = 'UPDATE "TUsuarios" 
 		SET 
@@ -580,12 +537,13 @@ class CDocente extends Database{
 		WHERE 
 		"cedDoc" = :cedDoc
 		AND
-		"clave" = :clave_vieja';
+		"clave" = :clave_vieja'
+		;
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
 
-		$this->stmt->bindParam(':clave_nueva', $this->clave['clave_nueva']);
+		$this->stmt->bindParam(':clave_nueva', $pass_encript);
 		$this->stmt->bindParam(':clave_vieja', $this->clave['clave_vieja']);
 		$this->stmt->execute(); 
 		$clave = $this->stmt->rowCount();
@@ -611,18 +569,19 @@ class CDocente extends Database{
 
 
 	public function actualizarClave(){
-		
+
+		$pass_encript = password_hash($this->clave, PASSWORD_DEFAULT);
 		$this->conectarBD();
 		$sql = 'UPDATE "TUsuarios" 
 		SET 
-		"clave" = :clave
+		"clave" = :clave,
+		"status" = TRUE
 		WHERE 
 		"cedDoc" = :cedDoc';
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
-
-		$this->stmt->bindParam(':clave', $this->clave);
+		$this->stmt->bindParam(':clave', $pass_encript);
 		$result = $this->stmt->execute();
 		$this->desconectarBD();
 		return $result;

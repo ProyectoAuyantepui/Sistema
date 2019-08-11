@@ -44,13 +44,11 @@ $(".form-login").on("submit",function(event){
 
 
             Materialize.toast(
-
-                'Intente de Nuevo en ' +respuesta.minutosRestantes +' minutos...',
-                
+                'Usuario Bloqueado ',
                 3500
             );
 
-            $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Debe esperar "+ respuesta.minutosRestantes+ " minutos para reintentar..")
+            $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Usuario Bloqueado, haga click en ¿Olvidó su contraseña?")
             
                                  
         }else if ( respuesta.operacion == true ){

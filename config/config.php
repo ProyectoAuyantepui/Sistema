@@ -28,13 +28,13 @@ $config = [
       "smtp_debug"      => false,                            
       "host"            => "smtp.gmail.com",        
       "smtp_auth"       => true,                      
-      "username"        => "juaneliezer13@gmail.com", 
-      "password"        => "25627918",               
+      "username"        => "uptaebauyantepui@gmail.com", 
+      "password"        => "auyantepuiSystem2019",               
       "smtp_secure"     => "tls",                  
       "port"            => 587,
-      "reply_to_email"  => "juaneliezer13@gmail.com",
+      "reply_to_email"  => "yordyalejandro13@gmail.com",
       "reply_to_name"   => "Information",           
-      "from_email"      => "juaneliezer13@gmail.com",
+      "from_email"      => "yordyalejandro13@gmail.com",
       "from_name"       => "Mailer"
     ],
 

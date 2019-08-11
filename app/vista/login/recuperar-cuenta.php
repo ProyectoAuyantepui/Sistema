@@ -29,7 +29,7 @@
       <div class="card-content " style="padding: 35px 0px 2px 0px;">
         <div class="row">
           <div class="col m12 center-align">
-            <img src="public/img/logo.png" alt="" class=" responsive-img " width="90px">
+            <img src="logo.png" alt="" class=" responsive-img " width="90px">
             <p class="titulo-proyecto">RECUPERAR CUENTA</p> 
           </div>
           
@@ -39,8 +39,12 @@
 
               <div class="row" >
                <div class="input-field col s12">
+                 <i class="material-icons prefix">person</i>
+                 <input type="text" name="cedDoc" id="cedDoc" class="validate tooltipped" data-position="bottom"  data-tooltip="Ingrese su Cedula"  required>
+                 <label data-success="Correcto..."  for="cedDoc" >Ingrese su Cédula</label>
+               </div>
+               <div class="input-field col s12">
                  <i class="material-icons prefix">screen_lock_portrait</i>
-                 
                  <input type="password" name="clave" id="clave" class="validate tooltipped" data-position="bottom"  data-tooltip="Indique cual será la contraseña que utilizará para ingresar al sistema"  required>
                  <label data-success="Correcto..."  for="clave" >Clave</label>
                </div>
@@ -123,14 +127,12 @@
       url:'index.php?controlador=login&actividad=recuperar-cuenta',
       data:{
         "clave" : $(".form-recuperar input[name=clave]").val( ),
-        "cedDoc" : sessionStorage.getItem( "cedDoc" )
+        "cedDoc" : $(".form-recuperar input[name=cedDoc]").val( )
       } 
     })                      
     .done(function(respuesta){
 
       if ( respuesta.operacion == true ) {
-
-        sessionStorage.removeItem( "cedDoc" )
 
         Materialize.toast( 
               'Listo, cuenta recuperada! </br> le invitamos a iniciar sesion con su nueva contraseña...', 
