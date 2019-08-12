@@ -22,7 +22,7 @@
       <div class="card ">
         
         <div class="center-align purple tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
-          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/teacher.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta"  >DOCENTES</p>
         </div>
         <div class="card-content row">
@@ -38,7 +38,7 @@
             <a class="btn-floating btn waves-effect  cyan">
               <i class="material-icons left">add</i>
             </a>
-            Atraves de este modulo puede crear nuevos Docentes.
+            Atraves de este modulo puedes registrar nuevos Docentes.
           </p>
 
           <p class="col s12" style="padding: 10px 1px 1px 1px;">

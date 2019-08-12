@@ -474,6 +474,21 @@ class CDocente extends Database{
 		return $result;
 	}
 
+	public function desbloquearUsuario(){
+		$this->conectarBD();
+		$sql = 'UPDATE "TUsuarios" 
+		SET 
+		status=true
+		WHERE 
+		usuario = :usuario';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':usuario', $this->usuario);
+		$result = $this->stmt->execute();
+		$this->desconectarBD();
+		return $result;
+	}
+
 	public function modificarPerfil(){
 		$this->conectarBD();
 		$sql = 'UPDATE "TDocentes" 
@@ -528,29 +543,40 @@ class CDocente extends Database{
 	}
 
 	public function cambiarClavePerfil(){
-
-		$pass_encript = password_hash($this->clave, PASSWORD_DEFAULT);
 		$this->conectarBD();
-		$sql = 'UPDATE "TUsuarios" 
-		SET 
-		"clave" = :clave_nueva
-		WHERE 
-		"cedDoc" = :cedDoc
-		AND
-		"clave" = :clave_vieja'
-		;
-
+		$sql = 'SELECT clave FROM "TUsuarios" AS U WHERE U."cedDoc" = :cedDoc';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
-
-		$this->stmt->bindParam(':clave_nueva', $pass_encript);
-		$this->stmt->bindParam(':clave_vieja', $this->clave['clave_vieja']);
 		$this->stmt->execute(); 
-		$clave = $this->stmt->rowCount();
+		$result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+		$password = $result['clave'];
+		if (password_verify($this->clave['clave_vieja'], $password)) {
+			$comprobacion = true;
+		}
+		if(isset($comprobacion)){
+				$pass_encript = password_hash($this->clave['clave_nueva'], PASSWORD_DEFAULT);
+				$this->conectarBD();
+				$sql = 'UPDATE "TUsuarios" 
+				SET 
+				"clave" = :clave_nueva
+				WHERE 
+				"cedDoc" = :cedDoc'
+				;
 
-		if ( $clave == 0 ) {
+				$this->stmt = $this->conn->prepare($sql);
+				$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+
+				$this->stmt->bindParam(':clave_nueva', $pass_encript);
+				$this->stmt->execute(); 
+				$clave = $this->stmt->rowCount();
+
+				return [
+					"operacion" =>true,
+					"data" => $result
+				];
 
 			$this->desconectarBD();
+		}else{
 			return [ 
 
 				"operacion" => false,
@@ -560,10 +586,6 @@ class CDocente extends Database{
 		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
 		$this->desconectarBD();
 
-		return [
-			"operacion" =>true,
-			"data" => $result
-		];
 	}
 
 

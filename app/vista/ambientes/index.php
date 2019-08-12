@@ -21,7 +21,7 @@
       <div class="card ">
         
         <div class="center-align purple tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
-          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/classroom.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta"  >AMBIENTES</p>
         </div>
         <div class="card-content row">

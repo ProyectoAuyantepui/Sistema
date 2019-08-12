@@ -136,12 +136,14 @@ function actualizarClave( cedDoc, claveVieja, claveNueva ){
             
         }   
         else{
+        $("#modalCambiarClave").modal("close")
           Materialize.toast(
 
                 'Hemos actualizado su contraseña!',
                 
                 2200
             );
+
         }   
     })
 }

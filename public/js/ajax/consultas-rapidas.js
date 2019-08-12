@@ -10,7 +10,6 @@ function mostrarHorarioDocente( cedDoc ){
     data: { "cedDoc" : cedDoc }
   })
   .done(function(respuesta){
-
     var ambiente = ""
 
     $.each( respuesta.data , function (i,item) {
@@ -248,7 +247,7 @@ function realizarConsultaDisponibilidad( fase ){
           }
       })
       .done(function(respuesta){
-
+console.log(respuesta)
         if (respuesta.data.length>0) {
           var arrayBloquesChecked = []
           $("input[name=switchConsultarBloques]:checked").each(function(i,item){
