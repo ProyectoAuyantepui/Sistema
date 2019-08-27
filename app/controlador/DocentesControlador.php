@@ -287,5 +287,15 @@ require_once "app/modelo/CDocente.php";
 		}
 			
 		break;
+
+		case 'viewImgPerfil':
+		if (isset($_FILES)) {
+			$ODocente = new CDocente();
+			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
+			$respuesta = $ODocente->viewImgPerfil();
+	 		echo json_encode(['data' => $respuesta]);
+		}
+			
+		break;
 	}
 

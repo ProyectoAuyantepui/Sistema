@@ -24,7 +24,7 @@
       <div class="col s3">
         <div class="card">
           <div class="center-align teal tarjeta" >
-            <img src="<?= 'public/img/perfil/'.$_SESSION['user']['imgPerfil'] ?>" alt="" class="responsive-img " width="90">
+            <div id="img-perfil"></div>
             <p class="titulo-tarjeta" ><?= $_SESSION['user']['nombre'] ?></p>
           </div>
           <div class="card-content" style="padding: 0px;" >
@@ -398,10 +398,12 @@
           contentType:false,
           processData:false
         }).done(function(respuesta){
+            viewImgPerfil()
             Materialize.toast(
               'Hemos actualizado su Imagen de Perfil!',    
               2200
-            );  
+            );
+        $("#modalCambiarImgPerfil").modal("close")
         })
 
       })

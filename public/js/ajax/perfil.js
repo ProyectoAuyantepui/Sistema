@@ -1,6 +1,6 @@
 $(function(){
   var OUser = JSON.parse( sessionStorage.getItem( 'user' ) )
- 
+  viewImgPerfil()
   $.getJSON('?controlador=categorias&actividad=listar',function(respuesta){
 
     $.each( respuesta.data, function( i , item ){
@@ -32,6 +32,24 @@ $(function(){
   comisionesDelDocente()
 })
 
+function viewImgPerfil(){
+    var OUser = JSON.parse( sessionStorage.getItem( 'user' ) )
+    var datos = new FormData();
+    datos.append("cedDoc",OUser.cedDoc);
+    $.ajax({    
+        dataType : 'json' , 
+        type:'POST' , 
+        url:'index.php?controlador=docentes&actividad=viewImgPerfil' ,
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false
+    })
+    .done(function(respuesta){
+      $("#img-perfil").empty()
+      $("#img-perfil").append( `<img src="public/img/perfil/${respuesta.data.imgPerfil}" alt="" class="responsive-img " width="90">` )
+    })
+}
 
 
 function comisionesDelDocente(){

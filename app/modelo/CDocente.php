@@ -542,6 +542,19 @@ class CDocente extends Database{
 		return $result;
 	}
 
+	public function viewImgPerfil(){
+		$this->conectarBD();
+		$sql = 'SELECT "imgPerfil" FROM "TUsuarios" u WHERE u."cedDoc" = :cedDoc';
+
+		$this->stmt = $this->conn->prepare($sql);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
+		$this->stmt->execute(); 
+		$result = $this->stmt->fetch(PDO::FETCH_OBJ);
+		$this->desconectarBD();
+
+		return $result;
+	}
+
 	public function cambiarClavePerfil(){
 		$this->conectarBD();
 		$sql = 'SELECT clave FROM "TUsuarios" AS U WHERE U."cedDoc" = :cedDoc';
