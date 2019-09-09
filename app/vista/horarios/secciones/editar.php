@@ -293,7 +293,7 @@
     .done(function(respuesta){
       $("select#docente").html("")
         $.each( respuesta.data , function( i,item ){
-          $("select#docente").append(`<option value="${ item.cedDoc } ">${ item.nombre }</option>`)
+          $("select#docente").append(`<option value="${ item.cedDoc }">${ item.nombre }</option>`)
         })
       $("select#docente").material_select()
       $(".div-botones").hide()
@@ -382,7 +382,7 @@
 
   function asignarDocente(){
 
-    var cedDoc = $("select#docente option:selected").val( )
+    var cedDoc = $("select#docente option:selected").val()
     var uc_seleccionada = JSON.parse( sessionStorage.getItem( 'uc_seleccionada' ) )
     var seccion_seleccionada = JSON.parse( sessionStorage.getItem( 'seccion_seleccionada' ) )
   

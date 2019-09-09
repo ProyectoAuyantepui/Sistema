@@ -421,8 +421,7 @@ class CDocente extends Database{
 		SET 
 		"cedDoc"=:cedDoc, "codCatDoc"=:codCatDoc, nombre=:nombre, apellido=:apellido, 
 		"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion, "fecIng"=:fecIng, 
-		"fecCon"=:fecCon, "codDed"=:codDed, condicion=:condicion, estado=:estado, 
-		"avatar"=:avatar
+		"fecCon"=:fecCon, "codDed"=:codDed, condicion=:condicion, estado=:estado
 		WHERE 
 		"cedDoc" = :cedDoc';
 
@@ -441,7 +440,6 @@ class CDocente extends Database{
 		$this->stmt->bindParam(':codDed',$this->codDed);
 		$this->stmt->bindParam(':condicion',$this->condicion);
 		$this->stmt->bindParam(':estado',$this->estado);
-		$this->stmt->bindParam(':avatar',$this->imgPerfil);
 		$result = $this->stmt->execute();
 		$sqlUser = 'UPDATE "TUsuarios" 
 		SET 

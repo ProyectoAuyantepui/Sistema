@@ -18,8 +18,8 @@
        
      	<div class="card panel-bitacora">
        
-       <div class="center-align purple tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
-         <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+       <div class="center-align cyan tarjeta" style="padding: 24px 0px 2px 0px;margin: 0px;">
+         <img src="public/img/binnacle.png" alt="" class="responsive-img " width="90">
          <p class="titulo-tarjeta"  >BITACORA</p>
        </div>
        <div class="card-content row">

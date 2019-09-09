@@ -22,7 +22,7 @@
     <div class="col s3">
       <div class="card">
         <div class="center-align teal tarjeta" id="avatar-de-usuario">
-          <img src="#" alt="" class="responsive-img " width="90">
+          <img src="public/img/teacher.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" ></p>
         </div>
         <div class="card-content" style="padding: 0px;" >
@@ -334,41 +334,6 @@
                   data-tooltip="Indique cual será su usuario para poder igresar al sistema" required 
                 >
                 <label data-success="Correcto..."  for="usuario" >Usuario</label>
-              </div>
-              <div class="col s4 input-field">
-                <select id="avatar" name="avatar" required>
-                  <option value="" disabled selected>Seleccione un avatar de usuario</option>
-                  
-                  <option value="public/img/avatar/user01.png" 
-                    data-icon="public/img/avatar/user01.png" >     
-                    Avatar 01
-                  </option>
-
-                  <option value="public/img/avatar/user02.png" 
-                    data-icon="public/img/avatar/user02.png" >     
-                    Avatar 02
-                  </option>
-
-                  <option value="public/img/avatar/user03.png" 
-                    data-icon="public/img/avatar/user03.png" >     
-                    Avatar 03
-                  </option>
-
-                  <option value="public/img/avatar/user04.png" 
-                    data-icon="public/img/avatar/user04.png" >     
-                    Avatar 04
-                  </option>
-
-                  <option value="public/img/avatar/user05.png" 
-                    data-icon="public/img/avatar/user05.png" >     
-                    Avatar 05
-                  </option>
-
-                  <option value="public/img/avatar/user06.png" 
-                    data-icon="public/img/avatar/user06.png" >     
-                    Avatar 06
-                  </option>
-                </select>
               </div>
             </div>
             <div class="row">

@@ -586,7 +586,9 @@ WHERE
               h.\"codTie\" IN(
                 $this->codTie
               )
-            )";
+            )
+              AND d.\"estado\"='t'"
+            ;
 
     $this->stmt = $this->conn->prepare($sql);
     $this->stmt->execute(); 

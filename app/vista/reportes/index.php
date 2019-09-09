@@ -23,7 +23,7 @@
       <div class="card ">
 
         <div class="center-align cyan tarjeta" >
-          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/horario1.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIO DE DOCENTE</p>
         </div>
 
@@ -49,7 +49,7 @@
       <div class="card ">
 
         <div class="center-align green  tarjeta" >
-          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/horario2.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIO DE SECCION</p>
         </div>
 
@@ -73,7 +73,7 @@
 
       <div class="card ">
         <div class="center-align deep-orange tarjeta" >
-          <img src="public/img/institution.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/horario3.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIO DE AMBIENTE</p>
         </div>
 
@@ -101,7 +101,7 @@
       <div class="card ">
 
         <div class="center-align cyan tarjeta" >
-          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/teacher.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >Docentes</p>
         </div>
 
@@ -127,7 +127,7 @@
       <div class="card ">
 
         <div class="center-align cyan tarjeta" >
-          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/dependencies.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >Dependencias</p>
         </div>
 
@@ -151,7 +151,7 @@
 
       <div class="card ">
         <div class="center-align deep-orange tarjeta" >
-          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/comission.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >Comisiones de docentes</p>
         </div>
 
@@ -215,7 +215,7 @@
     <div class="col s12 m3">
       <div class="card ">
         <div class="center-align blue darken-4 tarjeta" >
-          <img src="public/img/section.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/uniCur.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >Unidades Curriculares</p>
         </div>
 

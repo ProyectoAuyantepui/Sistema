@@ -47,7 +47,7 @@
       <div class="card ">
 
         <div class="center-align cyan tarjeta" >
-          <img src="public/img/avatar/user05.png" alt="" class="responsive-img " width="90">
+          <img src="public/img/teacher.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIOS DE DOCENTES</p>
         </div>
 
