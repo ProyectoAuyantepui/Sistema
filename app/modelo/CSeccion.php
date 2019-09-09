@@ -98,7 +98,7 @@ class CSeccion extends Database{
 
 		$this->conectarBD();
 		
-		$sql = 'SELECT * FROM "TSecciones"';
+		$sql = 'SELECT * FROM "TSecciones" WHERE estado=\'t\'';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->execute(); 
 		$num_rows = $this->stmt->rowCount();

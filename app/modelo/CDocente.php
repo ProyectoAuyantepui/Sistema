@@ -978,7 +978,6 @@ function unlinkDataImgSte($img){
 	}
 
 	public function comparedPass($claveUser){
-
 		if (password_verify($this->clave, $claveUser['clave'])) {
 			$comprobacion = true;
 		} else {

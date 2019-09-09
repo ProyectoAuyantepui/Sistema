@@ -98,7 +98,7 @@ function editar( codSec, nombreImg){
                 
         $(".formEditarSeccion #editar_trayecto").val( respuesta.data.trayecto );
 
-        $(".formEditarSeccion select#editar_pnf").val( respuesta.data.pnf );
+        $(".formEditarSeccion #editar_pnf").val( respuesta.data.pnf );
 
         $(".formEditarSeccion #editar_matricula").val( respuesta.data.matricula )
         $(".formEditarSeccion #editar_turno").val( respuesta.data.turno )

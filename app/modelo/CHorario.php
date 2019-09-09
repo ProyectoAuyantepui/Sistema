@@ -137,7 +137,7 @@ class CHorario extends Database{
                 h.\"codTie\" IN(
                   $this->codTie
                 )
-              )";
+              )AND estado='t'";
 
       $this->stmt = $this->conn->prepare($sql);
       $this->stmt->execute(); 

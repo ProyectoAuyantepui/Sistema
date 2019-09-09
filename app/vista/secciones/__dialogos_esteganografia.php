@@ -35,6 +35,7 @@
           <span>Seleccionar imagen:</span>
            <input type="file" id="imgUpSubmit" accept="image/png" onchange="preview_image1(event)">
             <img id="output_image1"/>
+            <input type="text" name="confirmPass" id="confirmPass" placeholder="Confirmar Clave" required>
          </li>
      </ul>
      <ul>

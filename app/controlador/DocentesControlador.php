@@ -273,8 +273,8 @@ require_once "app/modelo/CDocente.php";
 					$img = imagecreatefrompng($file['tmp_name']);
 					$msg = $ODocente::unlinkDataImgSte($img);
 					$cadena_de_texto = $msg;
-					$cadena_buscada='$2y';
-					$posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
+					$cadena_buscada='2y';
+					$posicion_coincidencia = stripos($cadena_de_texto, $cadena_buscada);
 					if ($posicion_coincidencia === false) {
 					  	echo json_encode(['codError' => '1']);
 					  	exit();

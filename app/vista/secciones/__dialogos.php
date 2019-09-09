@@ -267,3 +267,34 @@
 
 <?php require_once "app/vista/plantilla/__scripts.php";  ?> 
 <script src="public/js/ajax/esteganografia.js"></script>
+
+<script type="text/javascript">
+
+$(function(){ 
+  cargarComboPnf()
+})
+  function cargarComboPnf(){
+    $(".formEditarSeccion select#editar_pnf").html("")
+    
+    $.ajax({
+
+        url:'?controlador=pnf&actividad=listar',
+        type:'POST',
+        dataType:'json'
+    })
+
+    .done(function(respuesta){
+       
+        var contenidoHTML = $("")        
+        $.each( respuesta.data, function(i,item){
+
+            contenidoHTML += `<option value="${item.codPnf}">
+                                    ${item.codPnf}
+                                </option>`
+        }) 
+        
+        $(".formEditarSeccion select#editar_pnf").html(contenidoHTML)  
+        $('select').material_select()    
+    })
+  }
+</script>

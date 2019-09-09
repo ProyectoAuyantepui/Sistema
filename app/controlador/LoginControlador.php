@@ -1,5 +1,6 @@
 <?php 
 require_once "app/modelo/CCatDoc.php";
+require_once "app/modelo/CPnf.php";
 require_once "app/modelo/CRol.php";
 require_once "app/modelo/CDocente.php";
 
@@ -59,10 +60,8 @@ require_once "app/modelo/CDocente.php";
 					'apellido' => $ODocente->getApellido(),
 					'usuario' => $ODocente->getUsuario(),
 					'correo' => $ODocente->getCorreo(),
-
 					'rol' =>  $ORol->consultarRol( ),
 					'categoria' =>  $OCatDoc->consultarCatDoc( ),
-					
 					'comisiones' =>   $ODocente->comisiones( ),
 					'dependencias' =>   $ODocente->dependencias( ),
 					'fecNac' => $ODocente->getFecNac(), 
@@ -118,6 +117,7 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCedDoc($respuesta['data']['cedDoc'] );
 						
 			$OCatDoc = new CCatDoc();
+			$OPnf = new CPnf();
 			$ORol = new CRol();
 
 			$OCatDoc->setCodCatDoc( $respuesta['data']['codCatDoc'] );
@@ -134,6 +134,7 @@ require_once "app/modelo/CDocente.php";
 				'comisiones' =>   $ODocente->comisiones( ),
 				'dependencias' =>   $ODocente->dependencias( ),
 				'categoria' =>  $OCatDoc->consultarCatDoc( ),
+				//'pnf' =>  $OPnf->consultarPnfDoc( ),
 				'fecNac' => $respuesta['data']['fecNac'], 
 				'sexo' => $respuesta['data']['sexo'], 
 				'telefono' => $respuesta['data']['telefono'], 

@@ -102,7 +102,7 @@
 
     <div class="col s12 m4 offset-m4">
 
-      <a href="index.php?controlador=login&actividad=registro" class="btn btn-floating pulse right btn-large waves-effect waves-light cyan tooltipped" data-position="right"  data-tooltip="<p >Si eres docente de nuestra institucion , <br>te invitamos a que te registres en el sistema  <br>para llevar un mejor seguimientod de tu horario <br></p>">
+      <a href="index.php?controlador=login&actividad=registro" class="btn btn-floating pulse right btn-large waves-effect waves-light cyan tooltipped" data-position="right"  data-tooltip="<p >Si eres docente de nuestra institucion , <br> te invitamos a que te registres en el sistema </p>">
         <i class="material-icons">person_add</i>
       </a>
 
@@ -114,11 +114,11 @@
         <i class="material-icons ">info</i>
       </a> 
 
-      <a class="btn btn-floating  btn-small waves-effect waves-light blue darken-4 tooltipped" data-position="top"  data-tooltip="Acerca de nuestra institucion y <br> del grupo de desarrollo ">
+      <a class="btn btn-floating  btn-small waves-effect waves-light blue darken-4 tooltipped" data-position="top"  data-tooltip="Acerca de nuestra institución" href="http://uptaeb.edu.ve/site/index.php" target="_blank">
         <i class="material-icons ">account_balance</i>
       </a>
 
-      <a class="btn btn-floating  btn-small waves-effect waves-light blue-grey  tooltipped" data-position="top"  data-tooltip="El sistema Auyantepui esta basado en  <br>las libertades del software libre  <br>presione aqui para conocer mas sobre <br> el desarrollo del sistema">  
+      <a class="btn btn-floating  btn-small waves-effect waves-light blue-grey  tooltipped" data-position="top"  data-tooltip="El sistema Auyantepui esta basado en  <br>las libertades del software libre  <br>presione aqui para conocer más sobre <br> el desarrollo del sistema">  
         <i class="material-icons ">code</i>
       </a>
         

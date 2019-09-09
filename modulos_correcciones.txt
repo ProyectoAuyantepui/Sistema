@@ -6,3 +6,24 @@ validacion de duplicados a :
 
 SECCIONES , UC , AMBIENTES , DOCENTES , ROLES 
 
+Se actualizaron todos los Iconos del sistema
+
+se mejoraron el 100 % de las consultas y subConsultas
+
+se agrega un AboutPage
+
+actualizada la libreria de correos
+
+mejora en la plantilla de correos
+
+se añade AUYANTEPUI I.A (Artificial Intiligence)
+
+Mejora en el Perfil
+------------------ Cosas por terminar -------------------------
+Backup Generate
+Restore Generate
+Request password Steganografy
+Ver como solucionar las dependencias en el horario
+Darle vida al módulo dedicaciones
+
+Todas las mejoras mencionadas deben estar al 100% antes del 16-09-2019
