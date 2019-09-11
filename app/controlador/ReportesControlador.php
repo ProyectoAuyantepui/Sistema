@@ -89,36 +89,6 @@ require_once "app/modelo/CTiempo.php";
 			$OPdf->generarPDF();
 		break;
 
-		case 'reporte-comisiones': 
-
-			
-			$OComision = new CComision(); 
-			$comisiones = $OComision->listarComisiones(); 
-
-			$OPdf = new PdfAuyantepui();
-			$OPdf->fecha_actual = $config["fecha_completa"];
-			$OPdf->titulo = "Listado de Comisiones";
-			$OPdf->nombre_plantilla = "comisiones";
-			$OPdf->data = $comisiones["data"];
-			$OPdf->cargarConfiguracion( 'letter', 'portrait' );
-			$OPdf->generarPDF();
-		break;
-
-		case 'reporte-dependencias': 
-
-			
-			$ODependencia = new CDependencia(); 
-			$dependencias = $ODependencia->listarDependencias(); 
-
-			$OPdf = new PdfAuyantepui();
-			$OPdf->fecha_actual = $config["fecha_completa"];
-			$OPdf->titulo = "Listado de Dependencias";
-			$OPdf->nombre_plantilla = "dependencias";
-			$OPdf->data = $dependencias["data"];
-			$OPdf->cargarConfiguracion( 'letter', 'portrait' );
-			$OPdf->generarPDF();
-		break;
-
 		case 'reporte-unidades-curriculares': 
 
 			
