@@ -5,6 +5,12 @@ $dias = [ "Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado" ];
 $meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ];
 
 
+if (isset($_SESSION['databaseRespaldo'])){
+  $dbname=$_SESSION['databaseRespaldo'];  
+}else{
+  $dbname='horarios';
+}
+
 $config = [
 
     "name_app" => "Sistema Auyantepui",
@@ -18,7 +24,7 @@ $config = [
       "driver"     => "pgsql",
       "host"     => "localhost",
       "port"     => "5432",
-      "dbname"   => "horarios",
+      "dbname"   => $dbname,
       "username" => "postgres",
       "password" => "543217"
     ],

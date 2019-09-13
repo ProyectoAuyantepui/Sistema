@@ -1,5 +1,4 @@
 $(function(){
-
     listar()
 })
 
@@ -84,13 +83,29 @@ function listar(){
     })
 }
 
-function mostrarOperaciones(item){
+$("#createBackup").on("click",function(){ 
+    var datos = new FormData();
+    datos.append("createBackup",'param');
+    $.ajax({ 
+        dataType : 'json',
+        url:'index.php?controlador=mantenimiento&actividad=createBackup',
+        method:"POST",
+        data:datos,
+        cache: false,
+        contentType:false,
+        processData:false
+    })                      
+    .done(function(respuesta){
+      listar()
+      Materialize.toast('Backup Creado Exitosamente',3000)
+      $("#modal_operaciones").modal("close")
+    })       
+})
 
+function mostrarOperaciones(item){
 $("#modal_operaciones").modal("open")
 $(".reset-backup").on("click",function(){ 
-
     var datos = new FormData();
-
     datos.append("backupR",item);
     $.ajax({ 
         dataType : 'json',
@@ -106,7 +121,6 @@ $(".reset-backup").on("click",function(){
       $("#modal_operaciones").modal("close")
     })       
 })
-
 }
 
    

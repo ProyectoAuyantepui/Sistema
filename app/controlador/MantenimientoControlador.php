@@ -22,15 +22,24 @@ require_once "app/modelo/CBitacora.php";
 
 		break;
 
+		case 'createBackup': 
+
+				$OMantenimiento = new CMantenimiento();
+	 			$mantenimiento = $OMantenimiento->createBackup();
+	 			echo json_encode( $mantenimiento );
+
+		break;
+
 		case 'resetCopyBackup': 
 
-			$OMantenimiento = new CMantenimiento();
+			$_SESSION['databaseRespaldo'] ='horarios1';
 
-			$OMantenimiento->setBackupSelected($_POST['backupR']);
-
- 			$mantenimiento = $OMantenimiento->resetCopyBackup();
-
- 			echo json_encode( $mantenimiento );
+			if (isset($_SESSION['databaseRespaldo'])) {
+				$OMantenimiento = new CMantenimiento();
+				$OMantenimiento->setBackupSelected($_POST['backupR']);
+	 			$mantenimiento = $OMantenimiento->resetCopyBackup();
+	 			echo json_encode( $mantenimiento );
+			}
 
 		break;
 

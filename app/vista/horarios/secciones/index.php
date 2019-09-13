@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.css">
     <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
@@ -24,27 +24,27 @@
               </div>
               <div class="card-content row">
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
-                  <a class="btn-floating btn pulse  waves-effect  primario">
-                    <i class="material-icons left">settings</i>
-                  </a>
+                  <span class="btn-floating primario">
+                    <i class="material-icons left ">settings</i>
+                  </span>
                   Este módulo corresponde a la gestion de Horarios de Secciones en el sistema 
                 </p>
 
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
                   
-                  <a class="btn-floating btn waves-effect  cyan">
+                  <span class="btn-floating cyan">
                     <i class="material-icons left">add</i>
-                  </a>
+                  </span>
                   Atraves de este modulo de Horarios de Secciones puede asignar actividades en al horario de la seccion
                 </p>
 
                 <p class="col s12" style="padding: 10px 1px 1px 1px;">
                   
-                  <a class="btn-floating btn waves-effect  red">
+                  <a class="btn-floating red">
                     <i class="material-icons left">delete</i> 
                   </a>
 
-                  <a class="btn-floating btn waves-effect  green">
+                  <a class="btn-floating green">
                     <i class="material-icons left">edit</i>
                   </a>
 

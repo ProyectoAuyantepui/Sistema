@@ -22,8 +22,6 @@ Mejora en el Perfil
 ------------------ Cosas por terminar -------------------------
 Backup Generate
 Restore Generate
-Request password Steganografy
-Ver como solucionar las dependencias en el horario
-Darle vida al módulo dedicaciones
+Falto ubicar el nombre de la base de datos en el sessionStorage de tal forma que cuando cambien de Database se cambie en el navegador y no en el servidor así solo afectará a un usuario y no todos los usuarios administradores
 
 Todas las mejoras mencionadas deben estar al 100% antes del 16-09-2019

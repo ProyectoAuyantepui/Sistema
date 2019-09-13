@@ -73,7 +73,6 @@ require_once "app/modelo/CDocente.php";
 			$ODocente->setCodDed( $_POST['codDed'] ); 
 			$ODocente->setCondicion( $_POST['condicion'] ); 
 			$ODocente->setUsuario( $_POST['usuario'] ); 
-			$ODocente->setImgPerfil( $_POST['avatar'] ); 
 			$ODocente->setEstado( 'FALSE' );
 			$ODocente->setObservaciones( "Usuario registrado con rol de docente" );  
 			$resultado = $ODocente->modificarDocente(); 

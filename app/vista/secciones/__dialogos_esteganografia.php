@@ -5,18 +5,10 @@
  </div>
 
  <div class="modal-content">
-     <ul class="collection">
-         <li class="collection-item avatar">
           <span>Seleccionar imagen:</span>
-           <input type="file" id="imgSteSubmit" accept="image/png" onchange="preview_image(event)">
+           <input type="file" id="imgSteSubmit" style="margin-bottom: 15px" accept="image/png" onchange="preview_image(event)">
             <img id="output_image"/>
-         </li>
-     </ul>
-     <ul>
-       <li>
-         <button type="button" class="btn btn-primary btn-block" id="submitImgSte">Subir Imagen</button>
-       </li>
-     </ul>
+         <button type="button" class="btn btn-primary btn-block" style="margin-top: 15px" id="submitImgSte">Subir Imagen</button>
  </div>
 
 </div>
@@ -30,19 +22,11 @@
  </div>
 
  <div class="modal-content">
-     <ul class="collection">
-         <li class="collection-item avatar">
           <span>Seleccionar imagen:</span>
-           <input type="file" id="imgUpSubmit" accept="image/png" onchange="preview_image1(event)">
+           <input type="file" id="imgUpSubmit" accept="image/png" style="margin-bottom: 15px" onchange="preview_image1(event)">
             <img id="output_image1"/>
-            <input type="text" name="confirmPass" id="confirmPass" placeholder="Confirmar Clave" required>
-         </li>
-     </ul>
-     <ul>
-       <li>
-         <button type="button" class="btn btn-primary btn-block" id="upImgSte">Acceder</button>
-       </li>
-     </ul>
+            <input type="text" name="confirmPass" id="confirmPass" style="margin-bottom: 15px" placeholder="Confirmar Clave" required>
+         <button type="button" class="btn btn-primary btn-block"  id="upImgSte">Acceder</button>
  </div>
 </div>
 

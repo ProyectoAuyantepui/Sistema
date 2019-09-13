@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.css">
   <link rel="icon" type="image/png" href="public/img/logo.png">
   <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
   <title>Auyantepui - <?= $titulo ?></title>
@@ -25,7 +25,7 @@
 
        <div class="card-content row">
          <p class="col s12" style="padding: 10px 1px 1px 1px;">
-           <span class="btn-floating btn waves-effect  primario">
+           <span class="btn-floating primario">
              <i class="material-icons left">settings</i>
            </span>
            Este módulo corresponde a la gestion de los Backups y Restauración del sistema 
@@ -33,7 +33,7 @@
 
          <p class="col s12" style="padding: 10px 1px 1px 1px;">
            
-           <a class="btn-floating btn waves-effect  cyan">
+           <a class="btn-floating cyan">
              <i class="material-icons left">search</i>>
            </a>
            Atraves de este modulo puede administrar los diferente Backups dentro del Sistema.
@@ -53,7 +53,7 @@
           <div class="row seleccion-de-rol">
             <div class="col s12 valign-wrapper">
               <h5 id="movimientos"> Crear Backup </h5>
-              <span class="waves-effect waves-light btn col s12 m3"> Crear <i class="material-icons right">control_point</i></span>
+              <span class="waves-effect waves-light btn col s12 m3" id="createBackup"> Crear <i class="material-icons right">control_point</i></span>
             </div>
             <section id="vistaFiltro" class="oculto">    
               <div class="col s12">

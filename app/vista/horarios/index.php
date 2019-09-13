@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.css">
     <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
@@ -53,29 +53,29 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn  waves-effect  primario">
+            <span class="btn-floating primario">
               <i class="material-icons left">settings</i>
-            </a>
+            </span>
             Este módulo corresponde a la gestion de Horarios de Docentes en el sistema. 
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
                     
-            <a class="btn-floating btn waves-effect  cyan">
+            <span class="btn-floating cyan">
               <i class="material-icons left">add</i>
-            </a>
+            </span>
             Atraves de este modulo de Horarios de Docentes puede asignar actividades administrativas en al horario del docente.
           </p>
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
                     
-            <a class="btn-floating btn waves-effect  red">
+            <span class="btn-floating red">
               <i class="material-icons left">delete</i> 
-            </a>
+            </span>
 
-            <a class="btn-floating btn waves-effect  green">
+            <span class="btn-floating green">
               <i class="material-icons left">edit</i>
-            </a>
+            </span>
 
             Así como también modificar los datos de actividades o eliminar las actividades administrativas existentes en el horario del docente.
           </p>
@@ -100,7 +100,7 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn  waves-effect  primario">
+            <a class="btn-floating primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Secciones en el sistema 
@@ -108,7 +108,7 @@
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
             
-            <a class="btn-floating btn waves-effect  cyan">
+            <a class="btn-floating cyan">
               <i class="material-icons left">add</i>
             </a>
             Atraves de este modulo de Horarios de Secciones puede asignar actividades en al horario de la seccion
@@ -116,11 +116,11 @@
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
             
-            <a class="btn-floating btn waves-effect  red">
+            <a class="btn-floating red">
               <i class="material-icons left">delete</i> 
             </a>
 
-            <a class="btn-floating btn waves-effect  green">
+            <a class="btn-floating green">
               <i class="material-icons left">edit</i>
             </a>
 
@@ -150,7 +150,7 @@
 
         <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
-            <a class="btn-floating btn  waves-effect  primario">
+            <a class="btn-floating primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Ambientes en el sistema. 
@@ -158,7 +158,7 @@
 
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
                     
-            <a class="btn-floating btn waves-effect green">
+            <a class="btn-floating green">
               <i class="material-icons left">search</i>
             </a>
             Atraves de este modulo de Horarios de Ambientes puede consultar el horario de un ambiente existente en el sistema, siempre y cuando este tenga actividades.

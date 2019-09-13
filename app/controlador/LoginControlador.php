@@ -274,5 +274,10 @@ require_once "app/modelo/CDocente.php";
 			
 		break;
 
+		case 'changeDatabase': 
+		unset($_SESSION['databaseRespaldo']);
+		header("Location: index.php?controlador=home&actividad=index");
+		break;
+
 
 	}

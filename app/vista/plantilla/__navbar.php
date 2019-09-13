@@ -124,24 +124,25 @@
       <a href="#" data-activates="slide-out" class="button-collapse show-on-large tooltipped" data-position="bottom"  data-tooltip="Menú">
         <i class="material-icons">menu</i>
       </a>
-
-      <a href="#" class="brand-logo">Auyantepui</a>
+      <a class="waves-effect waves-light" href="public/pdf/manual.php" >
+          AUYANTEPUI
+      </a>
+      <?php if (isset($_SESSION['databaseRespaldo'])): ?>
+          <span style="margin-left: 30px" class="red">Estas usando una base de datos antigua</span>
+          <a href="index.php?controlador=login&actividad=changeDatabase">
+            <span style="margin-left: 30px" class="btn btn-small blue">Volver</span>
+          </a>
+      <?php endif ?>
 
       <ul class="right hide-on-med-and-down">
-        <li>
           <?= $config["fecha_completa"] ?>
-        </li>
-        <li>
           <a class="waves-effect waves-light" href="public/pdf/manual.php" >
             <i class="material-icons ">help</i>
           </a>
-        </li>
         <!-- Dropdown Trigger -->
-        <li>
           <a class="dropdown-button waves-effect waves-light" href="#!" data-activates="dropdown1">
             <i class="material-icons ">more_vert</i>
           </a>
-        </li>
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
           <li>
@@ -167,4 +168,3 @@
     </div>
   </nav>
 </header>
-
