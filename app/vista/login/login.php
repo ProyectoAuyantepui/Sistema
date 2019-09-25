@@ -118,7 +118,7 @@
         <i class="material-icons ">account_balance</i>
       </a>
 
-      <a class="btn btn-floating  btn-small waves-effect waves-light blue-grey  tooltipped" data-position="top"  data-tooltip="El sistema Auyantepui esta basado en  <br>las libertades del software libre  <br>presione aqui para conocer más sobre <br> el desarrollo del sistema">  
+      <a class="btn btn-floating  btn-small waves-effect waves-light blue-grey  tooltipped" data-position="top"  data-tooltip="El sistema Auyantepui esta basado en  <br>las libertades del software libre  <br>presione aqui para conocer más sobre <br> el desarrollo del sistema" href="https://github.com/ProyectoAuyantepui/Sistema" target="_blank">  
         <i class="material-icons ">code</i>
       </a>
         

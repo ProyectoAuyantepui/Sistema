@@ -151,12 +151,13 @@ primary key("codSec")
 
 -- Estructura para la tabla(16) "TActiAdmi" : Almacena informacion acerca de Otras Actividades Administrativas del docente que tambien son tomadas en cuenta para su horario pero no como horas de clase
 
-create table "TActiAdmi"(
-"codActAdm" serial,
-"titulo" varchar(60),
-"observaciones" varchar(150),
-"dependencia" varchar(300),
-"tipActAdm" varchar(60),
+CREATE TABLE public."TActiAdmi" (
+    "codActAdm" integer NOT NULL,
+    titulo character varying(60),
+    observaciones character varying(150),
+    dependencia character varying(300),
+    "tipActAdm" character varying(60)
+);
 
 -- TIPOS DE ACTIVIDADES
 

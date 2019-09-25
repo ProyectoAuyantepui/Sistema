@@ -222,7 +222,7 @@
 
           <div class="row">
 
-            <a href="#" class="btn btn-lg red col s12 waves-effect">
+            <a href="index.php?controlador=reportes&actividad=index" class="btn btn-lg red col s12 waves-effect">
               Ir al Módulo
             </a>    
           </div>
