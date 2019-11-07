@@ -430,7 +430,6 @@
     })
 
     .done(function(respuesta){
-       
         var contenidoHTML = $("")        
         $.each( respuesta.data, function(i,item){
 

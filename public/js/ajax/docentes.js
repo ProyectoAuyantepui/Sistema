@@ -109,7 +109,6 @@ function cambiarEstado( estado , cedDoc ){
 
 function vistaCrear( ){ 
 
-
     $("#tarjetaDocentes").hide() 
     
     $("#registrarDocente").removeClass('oculto')

@@ -295,46 +295,55 @@ Contenido en el Section llamado en docentes.js
                   
         </div>
 
-      <div class="card-content">
+          <div class="card-content" style="padding: 0px;margin-bottom: 4%" >
+            <ul class="collection" >
               <p>En esta sección podrás registrar a un docente, asignandole toda su información personal, laboral y de usuario, a diferencia del AutoRegistro podrás añadirle el Rol desde un principio, es decir, al llevar a cabo el AutoRegistro el usuario tendrá el rol de Docente cosa que no ocurre en este caso ya que tú decidirás que rol le colocas al Usuario!</p>
 
               <p><br>Al momento de la entrega de este sistema estarán disponibles 3 Roles, los cuales son: </p>
               
-              <br><p>Docente 
-              <i class="material-icons circle green  darken-1">person</i>
-              <p>Posee Permiso para:
-                <ul>
-                  <li>. Ver su Horario</li>
-                </ul>
-                <ul>
-                  <li>. Descargar su Horario</li>
-                </ul>
-                <ul>
-                  <li>. Visualizar y Modificar su perfil</li>
-                </ul>
-              </p>
-              
 
-              <br><p>Administrador 
-              <i class="material-icons circle blue darken-1">sentiment_satisfied</i>
-
-              </p>
-              </p>
-              <p>Posee todos los permisos del usuario Docente además de:
+              <ul class="collection" >
+                <li class="collection-item avatar" style="">
+                  <i class="material-icons circle  blue darken-2">person</i>
+                  <span class="title">DOCENTE</span>
+              <p>Posee Permisos para:
                 <ul>
-                  <li>. Gestión sobre los módulos básicos del sistema</li>
+                  <li>. Generar Reporte de su Horario</li>
                 </ul>
                 <ul>
                   <li>. Generación de Reportes del sistema</li>
                 </ul>
               </p>
+                </li>
+              </ul>  
+              <ul class="collection" >
+                <li class="collection-item avatar" style="">
+                  <i class="material-icons circle  blue darken-2">supervisor_account</i>
+                  <span class="title">SUPERUSUARIO</span>
+                </li>
+              </ul>  
+              <br><p>Docente 
+              <i class="material-icons circle green  darken-1">person</i>
+              <p>Posee Permiso para:
 
-              <br><p>SuperUsuario 
-              <i class="material-icons circle red darken-1">supervisor_account</i>
-
-              </p>
-              <p>Posee permisos de control todal del sistema:
-              </p>
+              <ul class="collection" >
+                <li class="collection-item avatar" style="">
+                  <i class="material-icons circle  blue darken-2">group</i>
+                  <span class="title">Ver su Horario</span>
+                </li>
+              </ul>  
+              <ul class="collection" >
+                <li class="collection-item avatar" style="">
+                  <i class="material-icons circle  blue darken-2">group</i>
+                  <span class="title">Descargar su Horario</span>
+                </li>
+              </ul>  
+              <ul class="collection" >
+                <li class="collection-item avatar" style="">
+                  <i class="material-icons circle  blue darken-2">group</i>
+                  <span class="title">Visualizar y Modificar su perfil</span>
+                </li>
+              </ul>   
             </div>
 
       </div>
@@ -358,8 +367,8 @@ Contenido en el Section llamado en docentes.js
                 <div class="col s12 m2 ">
                   <label>Nacionalidad</label>
                     <select class="browser-default" name="nacionalidad" id="crear_nacionalidad">
-                      <option value="venezolano" >Venezolano</option>
-                      <option value="extrajero-" >Extrajero</option>
+                      <option value="V" >Venezolano</option>
+                      <option value="E" >Extrajero</option>
                     </select>
                 </div>
 

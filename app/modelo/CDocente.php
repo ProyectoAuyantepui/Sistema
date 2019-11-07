@@ -261,8 +261,6 @@ class CDocente extends Database{
 	}
 
 	public function crearDocente(){
-
-		
 		$this->conectarBD();
 		$pass_encript = password_hash($this->clave, PASSWORD_DEFAULT);
 
@@ -270,14 +268,13 @@ class CDocente extends Database{
 		(
 		"cedDoc", "codCatDoc",nombre, apellido, "fecNac", 
 		sexo, telefono, correo, direccion, "fecIng", "fecCon", "codDed", 
-		condicion, estado, avatar, observaciones
+		condicion, estado, observaciones
 		)
 		VALUES
-		(	:cedDoc, :codCatDoc, :nombre, :apellido, :fecNac, 
+		(:cedDoc, :codCatDoc, :nombre, :apellido, :fecNac, 
 		:sexo, :telefono, :correo, :direccion, :fecIng, :fecCon, :codDed, 
-		:condicion, :estado, :avatar, :observaciones
-		);
-		';
+		:condicion, :estado, :observaciones
+		);';
 
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
@@ -294,7 +291,6 @@ class CDocente extends Database{
 		$this->stmt->bindParam(':codDed',$this->codDed);
 		$this->stmt->bindParam(':condicion',$this->condicion);
 		$this->stmt->bindParam(':estado',$this->estado);
-		$this->stmt->bindParam(':avatar',$this->imgPerfil);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
 
 		$result = $this->stmt->execute();
@@ -836,6 +832,11 @@ public function cambiarRol(  ){
 public function eliminarDocente(){
 
 	$this->conectarBD();
+	$sql = 'DELETE FROM "TUsuarios" WHERE "cedDoc" = :cedDoc';
+	$this->stmt = $this->conn->prepare($sql);
+	$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+	$result = $this->stmt->execute();
+
 	$sql = 'DELETE FROM "TDocentes" WHERE "cedDoc" = :cedDoc';
 	$this->stmt = $this->conn->prepare($sql);
 	$this->stmt->bindParam(':cedDoc',$this->cedDoc);

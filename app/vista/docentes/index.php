@@ -126,7 +126,7 @@
 <div class="fixed-action-btn" id="registrar">
 
   <input type="hidden" name="item_seleccionado">
-    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
+    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped crear-docente" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
     <i class="material-icons">add</i>
   </a>
 </div>
@@ -189,6 +189,7 @@
 
 
   <?php require_once "app/vista/plantilla/__scripts.php";  ?>
+  <?php require_once "__dialogos.php"; ?>
     
     <script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
     <script src="public/vendor/jvalidate/additional-methods.min.js"></script>
@@ -380,5 +381,7 @@
       })
     </script>
 </script>
+
+    <script src="public/js/ajax/docentes.js"></script>
 </body>
 </html>

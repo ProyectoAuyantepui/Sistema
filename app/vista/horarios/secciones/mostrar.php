@@ -25,6 +25,12 @@
     border: 2px dashed #000;
   }
 
+  .unidadesCurriculares:hover {
+    cursor: pointer;
+    color: #000;
+    font-weight: 500;
+  }
+
 </style>
 </head>
 <body>

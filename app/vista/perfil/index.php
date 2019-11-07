@@ -55,9 +55,9 @@
 
         <div class="card">
 
-          <div class="card-content" style="padding: 0px;" >
-
+          <div class="card-content" style="padding: 0px;margin-bottom: 4%" >
             <ul class="collection dependencias" >
+            <h5 class="cyan-text darken-4" style="margin-left: 10px">INFORMACIÓN ACADEMICA</h5>
               <li class="collection-item avatar" style="">
                 <i class="material-icons circle brown lighten-1">person_add</i>
                 <span class="title">DEPENDENCIAS</span>
