@@ -264,41 +264,6 @@
             >
             <label data-success="Correcto..."  for="usuario" >Usuario</label>
           </div>
-          <div class="col s4 input-field">
-            <select id="avatar" name="avatar" required>
-              <option value="" disabled selected>Seleccione un avatar de usuario</option>
-              
-              <option value="public/img/avatar/user01.png" 
-                data-icon="public/img/avatar/user01.png" >     
-                Avatar 01
-              </option>
-
-              <option value="public/img/avatar/user02.png" 
-                data-icon="public/img/avatar/user02.png" >     
-                Avatar 02
-              </option>
-
-              <option value="public/img/avatar/user03.png" 
-                data-icon="public/img/avatar/user03.png" >     
-                Avatar 03
-              </option>
-
-              <option value="public/img/avatar/user04.png" 
-                data-icon="public/img/avatar/user04.png" >     
-                Avatar 04
-              </option>
-
-              <option value="public/img/avatar/user05.png" 
-                data-icon="public/img/avatar/user05.png" >     
-                Avatar 05
-              </option>
-
-              <option value="public/img/avatar/user06.png" 
-                data-icon="public/img/avatar/user06.png" >     
-                Avatar 06
-              </option>
-            </select>
-          </div>
         </div>
         <div class="row">
           <div class="col s12 input-field">

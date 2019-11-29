@@ -23,10 +23,10 @@ class CorreoAuyantepui extends PHPMailer{
 		$this->isSMTP();                             
 		$this->Host = 'smtp.gmail.com';  			 
 		$this->SMTPAuth = true;                      
-		$this->Username = 'yordyalejandro13@gmail.com'; 
-		$this->Password = 'Neflix#1!!';                
-		$this->SMTPSecure = 'tls';                   
-		$this->Port = 587;                           
+		$this->Username = 'uptaebauyantepui@gmail.com'; 
+		$this->Password = 'auyantepuiSystem2019';                
+		$this->SMTPSecure = 'tls';                 
+		$this->Port = 587;                          
 		$this->addReplyTo('uptaebauyantepui@gmail.com', 'Sistema Auyantepui');
 		$this->isHTML(true); 										
 		$this->setFrom('uptaebauyantepui@gmail.com', 'Sistema Auyantepui'); 		

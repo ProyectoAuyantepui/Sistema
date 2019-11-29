@@ -216,6 +216,7 @@ require_once "app/modelo/CDocente.php";
 				setcookie("token_recuperacion", $token, time() + (60*10) );
 			}
 
+
 			echo json_encode(
 				[ 
 					"operacion" => $respuesta["operacion"],

@@ -270,12 +270,12 @@ class CDocente extends Database{
 		(
 		"cedDoc", "codCatDoc",nombre, apellido, "fecNac", 
 		sexo, telefono, correo, direccion, "fecIng", "fecCon", "codDed", 
-		condicion, estado, avatar, observaciones
+		condicion, estado, observaciones
 		)
 		VALUES
 		(	:cedDoc, :codCatDoc, :nombre, :apellido, :fecNac, 
 		:sexo, :telefono, :correo, :direccion, :fecIng, :fecCon, :codDed, 
-		:condicion, :estado, :avatar, :observaciones
+		:condicion, :estado, :observaciones
 		);
 		';
 
@@ -294,7 +294,6 @@ class CDocente extends Database{
 		$this->stmt->bindParam(':codDed',$this->codDed);
 		$this->stmt->bindParam(':condicion',$this->condicion);
 		$this->stmt->bindParam(':estado',$this->estado);
-		$this->stmt->bindParam(':avatar',$this->imgPerfil);
 		$this->stmt->bindParam(':observaciones',$this->observaciones);
 
 		$result = $this->stmt->execute();

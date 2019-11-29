@@ -123,17 +123,12 @@
 
 </main>
 
-<div class="fixed-action-btn" id="registrar">
-
+<div class="fixed-action-btn " id="registrar">
   <input type="hidden" name="item_seleccionado">
-    <a class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
+    <a href="?controlador=docentes&actividad=vista-crear" class="btn-floating btn-large pulse waves-effect waves-light  secundario  tooltipped crear-docente" data-position="left"  data-delay="50" data-tooltip="Añadir Docente">
     <i class="material-icons">add</i>
   </a>
 </div>
-    
-
-
-
 <!-- OPERACIONES -->
 
 <div id="modal_operaciones" class="modal bottom-sheet">

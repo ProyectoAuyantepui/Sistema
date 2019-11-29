@@ -244,46 +244,6 @@
                   <input type="password" class="validate tooltipped" name="clave" data-position="bottom"  data-tooltip="Repita su clave" name="cclave" id="cclave" equalTo='#clave' placeholder="Confirmar Clave" required>
                   <label data-error="Las claves no coinciden" data-success="Correcto..."  for="clave" >Confirmar Clave</label>
                 </div>
-
-                <div class="row">
-                 <div class="input-field col s12 m12">
-                    <select class="icons" id="avatar" name="avatar" required>
-                      <option value="" disabled selected>Seleccione un avatar de usuario</option>
-                      
-                      <option value="public/img/avatar/user01.png" 
-                        data-icon="public/img/avatar/user01.png" class="circle">     
-                        Avatar 01
-                      </option>
-
-                      <option value="public/img/avatar/user02.png" 
-                        data-icon="public/img/avatar/user02.png" class="circle">     
-                        Avatar 02
-                      </option>
-
-                      <option value="public/img/avatar/user03.png" 
-                        data-icon="public/img/avatar/user03.png" class="circle">     
-                        Avatar 03
-                      </option>
-
-                      <option value="public/img/avatar/user04.png" 
-                        data-icon="public/img/avatar/user04.png" class="circle">     
-                        Avatar 04
-                      </option>
-
-                      <option value="public/img/avatar/user05.png" 
-                        data-icon="public/img/avatar/user05.png" class="circle">     
-                        Avatar 05
-                      </option>
-
-                      <option value="public/img/avatar/user06.png" 
-                        data-icon="public/img/avatar/user06.png" class="circle">     
-                        Avatar 06
-                      </option>
-                    </select>
-                    <label>Avatar de usuario</label>
-                  </div>
-                </div>
-
               </div>
 
               <div class="row">
