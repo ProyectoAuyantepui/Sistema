@@ -280,6 +280,8 @@ require_once "app/modelo/CDocente.php";
 
 		case 'changeDatabase': 
 		unset($_SESSION['databaseRespaldo']);
+		$ODocente = new CDocente();
+		$respuesta = $ODocente->breakDatabase();
 		header("Location: index.php?controlador=home&actividad=index");
 		break;
 

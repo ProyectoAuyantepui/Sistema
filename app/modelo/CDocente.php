@@ -1000,4 +1000,12 @@ function unlinkDataImgSte($img){
 		$salida = system('PGPASSWORD="'.$this->password.'"  createdb '.$this->dbname.' -U '.$this->username.';');
 		shell_exec('PGPASSWORD="'.$this->password.'" psql -d '.$this->dbname.' < /var/www/auyantepui-git/backups/prueba/horarios_empty.dump -U '.$this->username.';');
 	}
+
+
+	public function breakDatabase(){
+		$this->parameterOfConection();
+		$salida = system('PGPASSWORD="'.$this->password.'"  dropdb auyantepui_temp -U '.$this->username.';');
+		return "Success";
+
+	}
 }

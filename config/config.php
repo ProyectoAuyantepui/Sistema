@@ -8,7 +8,7 @@ $meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agos
 if (isset($_SESSION['databaseRespaldo'])){
   $dbname='auyantepui_temp';  
 }else{
-  $dbname='horarios3';
+  $dbname='horarios';
 }
 
 $config = [

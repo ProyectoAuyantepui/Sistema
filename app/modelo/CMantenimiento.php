@@ -46,9 +46,6 @@ class CMantenimiento{
 
 	public function resetCopyBackup(){
 	include "config/config.php";
-		self::$serv = $config["database"]["driver"];
-		self::$host = $config["database"]["host"];
-		self::$port = $config["database"]["port"];
 		self::$dbname = $config["database"]["dbname"];
 		self::$username = $config["database"]["username"];
 		self::$password = $config["database"]["password"];
