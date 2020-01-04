@@ -1,4 +1,8 @@
-
+<?php 
+  if (isset($_SESSION['databaseRespaldo'])) {
+    header('location:index.php?controlador=home&actividad=index');
+  }
+?>
 <?php $titulo = "CREACION DE COMISIONES DE DOCENTES";?>
 <!DOCTYPE html>
 <html>

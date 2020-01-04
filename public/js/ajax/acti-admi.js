@@ -145,7 +145,7 @@ function listar(){
                                         <td >${ respuesta.data[i].titulo }</td>
                                         <td >${ respuesta.data[i].dependencia }</td>
                                         <td >${ respuesta.data[i].tipActAdm }</td>
-                                        <td  >
+                                        <td class="disabled_for_temp_database">
                                             <a href="#" class="mostrarOperaciones">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>

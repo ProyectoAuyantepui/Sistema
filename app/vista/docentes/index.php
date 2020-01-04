@@ -98,11 +98,11 @@
                   <p><strong>Apellido</strong></p>
                 </th>
 
-                <th >
+                <th class="disabled_for_temp_database">
                   <p><strong>Estado</strong></p>
                 </th>
 
-                <th ></th>
+                <th class="disabled_for_temp_database"></th>
               </tr>
             </thead>
             <tbody>
@@ -245,7 +245,7 @@
                                           <td >${ item.cedDoc }</td>
                                           <td >${ item.nombre }</td>
                                           <td >${ item.apellido }</td>
-                                          <td >
+                                          <td class="disabled_for_temp_database">
                                               <div class="switch">
                                                   <label>
                                                       ${switche}
@@ -253,7 +253,7 @@
                                                   </label>
                                               </div>
                                           </td>
-                                          <td  >
+                                          <td  class="disabled_for_temp_database">
                                               <a href="#" class="mostrarOperaciones">
                                                   <i class="material-icons black-text">more_vert</i>
                                               </a>

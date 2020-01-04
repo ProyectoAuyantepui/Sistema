@@ -51,6 +51,19 @@ $(".form-login").on("submit",function(event){
             $("body").find("input[name='clave']").addClass("invalid").next("label").attr("data-error","Usuario Bloqueado, haga click en ¿Olvidó su contraseña?")
             
                                  
+        }else if (respuesta.operacion == false && respuesta.error == "5") {
+
+            Materialize.toast(
+                respuesta.codigo,
+                7000
+            );
+
+            if (respuesta.tipo == "1") {
+                $("#errorDatabase").removeClass('oculto')
+            }else{
+
+            }
+                                 
         }else if ( respuesta.operacion == true ){
 
             sessionStorage.setItem( 'user' , JSON.stringify( respuesta.data ) )

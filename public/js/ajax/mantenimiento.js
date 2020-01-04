@@ -64,7 +64,7 @@ function listar(){
                                 
                                 <td id="title-backup">${ item.substr(15) }</td>
                                 <td>${ item.substr(24,10) }</td>
-                                <td>
+                                <td class="disabled_for_temp_database">
                                     <a href="#" onclick="mostrarOperaciones('${item.substr(15)}')">
                                         <i class="material-icons black-text">more_vert</i>
                                     </a>

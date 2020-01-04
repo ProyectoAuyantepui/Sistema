@@ -1,3 +1,8 @@
+<?php 
+  if (isset($_SESSION['databaseRespaldo'])) {
+    header('location:index.php?controlador=home&actividad=index');
+  }
+?>
 <?php $titulo = "EDITAR INFORMACION DEL DOCENTE";?>
 <!DOCTYPE html>
 <html>

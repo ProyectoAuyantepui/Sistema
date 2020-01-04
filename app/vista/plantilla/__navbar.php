@@ -11,7 +11,7 @@
       </div>
     </li>
 
-    <li class="oculto" id="Perfil" codPer="P-02">
+    <li class="oculto disabled_for_temp_database" id="Perfil" codPer="P-02">
       <a href="?controlador=perfil&actividad=index"><i class="material-icons">edit</i>Mi perfil</a>
     </li>
     <li id="miHorario" codPer="P-71" >
@@ -132,6 +132,11 @@
           <a href="index.php?controlador=login&actividad=changeDatabase">
             <span style="margin-left: 30px" class="btn btn-small blue">Volver</span>
           </a>
+          <style type="text/css">
+            .disabled_for_temp_database{
+              display: none;
+            }
+          </style>
       <?php endif ?>
 
       <ul class="right hide-on-med-and-down">

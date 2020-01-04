@@ -54,9 +54,9 @@ class CMantenimiento{
 		self::$password = $config["database"]["password"];
 		$dbnameRespaldo=$_SESSION['databaseRespaldo'];
 	$backupName=$this->backup;
-	$salida = system('PGPASSWORD="543217"  dropdb horarios1 -U postgres;');
-	$salida = system('PGPASSWORD="543217"  createdb horarios1 -U postgres;');
-	shell_exec('PGPASSWORD="543217" psql -d horarios1 < /var/www/auyantepui-git/backups/prueba/horarios123.dump -U postgres;'); 
+	$salida = system('PGPASSWORD="'.self::$password.'"  dropdb auyantepui_temp -U '.self::$username.';');
+	$salida = system('PGPASSWORD="'.self::$password.'"  createdb auyantepui_temp -U '.self::$username.';');
+	shell_exec('PGPASSWORD="'.self::$password.'" psql -d auyantepui_temp < /var/www/auyantepui-git/backups/prueba/'.$_POST["backupR"].' -U '.self::$username.';'); 
 	return "Success";
 
 	}

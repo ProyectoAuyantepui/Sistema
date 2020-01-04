@@ -6,9 +6,9 @@ $meses = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agos
 
 
 if (isset($_SESSION['databaseRespaldo'])){
-  $dbname=$_SESSION['databaseRespaldo'];  
+  $dbname='auyantepui_temp';  
 }else{
-  $dbname='horarios';
+  $dbname='horarios3';
 }
 
 $config = [
@@ -26,7 +26,7 @@ $config = [
       "port"     => "5432",
       "dbname"   => $dbname,
       "username" => "postgres",
-      "password" => "54322018"
+      "password" => "543217"
     ],
     
     "mailer" => [

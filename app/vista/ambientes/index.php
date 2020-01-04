@@ -93,10 +93,10 @@
                 <th>
                   <p><strong>Tipo</strong></p>
                 </th>
-                <th >
+                <th class="disabled_for_temp_database">
                   <p><strong>Estado</strong></p>
                 </th>
-                <th ></th>
+                <th class="disabled_for_temp_database"></th>
               </tr>
             </thead>
             <tbody>

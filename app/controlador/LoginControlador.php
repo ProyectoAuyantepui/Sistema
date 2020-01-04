@@ -86,12 +86,15 @@ require_once "app/modelo/CDocente.php";
 
 
 		case 'iniciar-sesion': 
-		
 			$ODocente = new CDocente();
-
 			$ODocente->setUsuario( $_POST["usuario"] ); 
 	    	$ODocente->setClave( $_POST["clave"] ); 
 			$respuesta = $ODocente->validarUsuario();
+			if($respuesta["operacion"] == false && $respuesta["codigo_error"]==5){
+					echo json_encode([ "operacion" => false , "error" => 5, "codigo"=> $respuesta["error"], "tipo"=> $respuesta["tipo"]]);
+					exit();
+			}
+
 			if ( $respuesta["operacion"] == false ) {
 				if (!isset($_SESSION['intentos'] )) {
 					$_SESSION['intentos'] = 0; 
@@ -278,6 +281,12 @@ require_once "app/modelo/CDocente.php";
 		case 'changeDatabase': 
 		unset($_SESSION['databaseRespaldo']);
 		header("Location: index.php?controlador=home&actividad=index");
+		break;
+
+		case 're_generate_database':
+				$ODocente = new CDocente();
+				$respuesta = $ODocente->re_generate_database();
+				echo json_encode('success');
 		break;
 
 

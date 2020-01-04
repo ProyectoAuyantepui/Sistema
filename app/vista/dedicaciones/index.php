@@ -82,7 +82,7 @@
             </tbody>
           </table> 
           
-          <div class="row">
+          <div class="row disabled_for_temp_database">
             <div class="col s12 input-field">
               <button 
                 type="button" 

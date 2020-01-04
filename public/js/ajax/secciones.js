@@ -54,8 +54,8 @@ function listar(){
                                         <td >${ item.codSec }</td>
                                         <td >${ trayecto }</td>
                                         <td >${ turno }</td>
-                                        <td >
-                                            <div class="switch">
+                                        <td class="disabled_for_temp_database">
+                                            <div class="switch ">
                                                 <label>
                                                   ${switche}
                                                   <span class="lever"></span>
@@ -63,7 +63,7 @@ function listar(){
                                             </div>
                                         </td>
                                         <td  >
-                                            <a href="#" class="mostrarOperaciones">
+                                            <a href="#" class="mostrarOperaciones disabled_for_temp_database">
                                                 <i class="material-icons black-text">more_vert</i>
                                             </a>
                                         </td>   

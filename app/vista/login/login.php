@@ -32,7 +32,14 @@
             <img src="public/img/logo.png" alt="" class=" responsive-img " width="90px">
             <p class="titulo-proyecto">SISTEMA AUYANTEPUI</p> 
           </div>
-          
+          <section id="errorDatabase" class="oculto">
+            <h4 style="color:red" class="center">Atención</h4>
+            Lo Sentimos pero, no hemos podido encontrar la base de datos con los parámetros indicados por los desarrolladores, si lo desea puede crear la base de datos desde 0, pulse sobre el icono a la derecha y podrá ser capaz de realizar la acción, el Usuario que tendrá en principio Será Admin y la clave será developer, de allí en adelante usted puede registrar superUsuarios, Docentes y todo lo relacionado al sistema sin problemas.
+            <a class="btn btn-floating pulse right btn-large waves-effect waves-light cyan tooltipped" data-position="right"  id="re_generate_database">
+              <i class="material-icons">data_usage</i>
+            </a>
+            <span id="charge"></span>
+          </section>
           <div class="col m12">
             <form class="form-login" novalidate="novalidate">
 
@@ -135,6 +142,22 @@
 
 <script type="text/javascript">
   
+  $("#re_generate_database").on('click',function(){
+    $('#charge').html('<div><img src="public/img/giphy.gif"/>Cargando...</div>');
+    $.ajax({ 
+      dataType : 'json',
+      type:'POST',
+      processData:true,
+      url:'index.php?controlador=login&actividad=re_generate_database'
+    })                      
+    .done(function(respuesta){
+      $("#charge").html('')
+      $("#usuario").val('Admin')
+      $("#clave").val('developer')
+      $("#acceder").trigger("click");
+    })
+  })
+
   function clickOlvidoPass(){
 
     $(".form-login").hide()

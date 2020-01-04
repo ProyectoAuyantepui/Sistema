@@ -91,7 +91,7 @@
                           <th >
                             <p ><strong>Fecha &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</strong></p>
                           </th>
-                          <th >
+                          <th class="disabled_for_temp_database">
                             <p ><strong> Acción</strong></p>
                           </th>
                         </tr>

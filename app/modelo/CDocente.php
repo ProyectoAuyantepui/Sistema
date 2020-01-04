@@ -321,6 +321,15 @@ class CDocente extends Database{
 
 	public function validarUsuario(){	
 		$this->conectarBD();
+		if ($this->error!='-') { 
+			$this->desconectarBD();
+			return [ 
+				"operacion" => false,
+				"codigo_error" => "5",
+				"error"=> $this->error,
+				"tipo"=> $this->tipoError
+			];   
+		}
 		$sql = 'SELECT * FROM "TUsuarios" WHERE usuario = :usuario';
 		$this->stmt = $this->conn->prepare($sql);
 		$this->stmt->bindParam(':usuario', $this->usuario);
@@ -983,5 +992,12 @@ function unlinkDataImgSte($img){
 			$comprobacion = false;
 		}
 		return $comprobacion;
+	}
+
+	public function re_generate_database(){
+		$this->parameterOfConection();
+		$salida = system('PGPASSWORD="'.$this->password.'"  dropdb '.$this->dbname.' -U '.$this->username.';');
+		$salida = system('PGPASSWORD="'.$this->password.'"  createdb '.$this->dbname.' -U '.$this->username.';');
+		shell_exec('PGPASSWORD="'.$this->password.'" psql -d '.$this->dbname.' < /var/www/auyantepui-git/backups/prueba/horarios_empty.dump -U '.$this->username.';');
 	}
 }
