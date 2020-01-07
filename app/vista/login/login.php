@@ -44,7 +44,7 @@
             <form class="form-login" novalidate="novalidate">
 
 
-              <div class="row" >
+              <div class="row">
                 <div class="input-field col m12 tooltipped" data-position="right"  data-tooltip="Ingrese su usuario para ingresar al sistema ">
                   <i class="material-icons prefix">account_circle</i>
                   <input  id="usuario" name="usuario" type="text" class="validate" required aria-required="true">
@@ -52,7 +52,7 @@
                 </div>
               </div>
 
-              <div class="row" >
+              <div class="row">
                 <div class="input-field col m12  tooltipped" data-position="right"  data-tooltip="Ingrese su contraseña para el ingreso al sistema">
                   <i class="material-icons prefix">lock_outline</i>
                   <input id="clave" name="clave" type="password" class="validate" required aria-required="true">
@@ -81,7 +81,7 @@
             <form class="form-correo oculto" novalidate="novalidate" >
 
 
-              <div class="row" >
+              <div class="row">
                 <div class="input-field col s12 ">
                   <i class="material-icons prefix">email</i>
                                   

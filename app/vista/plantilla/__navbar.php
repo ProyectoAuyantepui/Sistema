@@ -75,6 +75,9 @@
             <li class="oculto"  id="UnidCurr" codPer="P-40">
               <a  href="index.php?controlador=unidCurr&actividad=index" class="waves-effect waves-light" ><i class="material-icons">settings</i> Unidades Curriculares</a>
             </li>
+            <li class="oculto"  id="UnidCurr" codPer="P-40">
+              <a  href="index.php?controlador=horas&actividad=index" class="waves-effect waves-light" ><i class="material-icons">access_time</i> Gestión De Horas</a>
+            </li>
           </ul>
         </div>
       </li>
