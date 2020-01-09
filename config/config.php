@@ -26,7 +26,7 @@ $config = [
       "port"     => "5432",
       "dbname"   => $dbname,
       "username" => "postgres",
-      "password" => "54322018"
+      "password" => "543217"
     ],
     
     "mailer" => [

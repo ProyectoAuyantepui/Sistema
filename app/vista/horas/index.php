@@ -4,13 +4,24 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="public/vendor/materialize/icons/material-icons.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/materialize/css/timepicker.css">
     <link rel="icon" type="image/png" href="public/img/logo.png">
     <link rel="stylesheet" type="text/css" href="public/css/mejoras-materialize.css">
     <title>Auyantepui - <?= $titulo ?></title>
 </head>
 <body>
-<?php require_once "app/vista/plantilla/__navbar.php";  ?>
+
+
+          <div class="row ">
+            <div class="col s12 m12 input-field">
+              <a href="index.php?controlador=home&actividad=index">
+                <button type="button" class="btn btn-large waves-effect waves-light primario"> INICIO
+                  <i class="material-icons right">keyboard_arrow_left</i>
+                </button>
+              </a>
+            </div>
+          </div>
+
 <main>
   <section class="row" id="tarjetaDedicaciones">
    <div class="col s12 m3">
@@ -242,11 +253,22 @@
           </table> 
           
           <div class="row disabled_for_temp_database">
-            <div class="col s12 input-field">
-              <button type="button" class="btn btn-large waves-effect waves-light primario"> Guardar configuracion
+            <div class="col s6 input-field">
+              <button type="button" class="btn btn-large waves-effect waves-light success"> Guardar configuracion
                 <i class="material-icons right">check</i>
               </button>
             </div>
+
+
+            <div class="col s6  input-field">
+              <a href="index.php?controlador=home&actividad=index">
+                <button type="button" class="btn btn-large waves-effect waves-light primario"> VOLVER AL INICIO
+                  <i class="material-icons right">keyboard_arrow_left</i>
+                </button>
+              </a>
+            </div>
+
+
           </div>
 
         </div>
@@ -257,16 +279,14 @@
 
 </main>
 
-
-<?php require_once "app/vista/plantilla/__scripts.php";  ?> 
-<script src="public/vendor/jvalidate/jquery.validate.min.js"></script>
-<script src="public/vendor/jvalidate/additional-methods.min.js"></script>
-<script src="public/js/validaciones/config-default.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="public/js/ajax/menu.js"></script>
+<script src="public/vendor/materialize/js/timepicker.min.js"></script>
 <script type="text/javascript">
   
 $(function(){ 
     listarHoras() 
+    $('.timepicker').timepicker();
 })
 
 function listarHoras() {

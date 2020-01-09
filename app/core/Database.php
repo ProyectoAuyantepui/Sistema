@@ -37,14 +37,17 @@ abstract class Database
 
 			$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}catch(PDOException $e){
+			$codigoDeError=$e->getMessage();
+			$passForUserDontExist = array('password', 'authentication failed');
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-			    echo 'Este un servidor usando Windows!';
+				foreach($passForUserDontExist as $v){
+				    if(strpos($codigoDeError, $v) !== false){
+						$this->error= "No Existe el Usuario: ".self::$username." en el gestor de base de datos o la contraseña del mismo es erronea";
+						$this->tipoError=2;
+				    }
+				}
 			} else {
-				// var_dump($e);
-				// exit();
-				$codigoDeError=$e->getMessage();
 				$database = array('database', 'does not exist');
-				$passForUserDontExist = array('password', 'authentication failed');
 				foreach($database as $v){
 				    if(strpos($codigoDeError, $v) !== false){
 						$this->error= "No Existe la base de datos: ".self::$dbname." en el gestor de base de datos";

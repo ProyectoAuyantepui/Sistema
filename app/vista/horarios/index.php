@@ -44,14 +44,14 @@
 
     <div class="col s12 m4">
 
-      <div class="card " style="min-width: 550px; min-height: 550px">
+      <div class="card ">
 
         <div class="center-align cyan tarjeta" >
           <img src="public/img/teacher.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIOS DE DOCENTES</p>
         </div>
 
-        <div class="card-content row" style="padding: 0px;" >
+        <div class="card-content row" style="padding: 0px;">
           <p class="col s12" style="padding: 30px 30px 1px 30px;">
             <span class="btn-floating primario">
               <i class="material-icons left">settings</i>
@@ -92,7 +92,7 @@
     </div>
 
     <div class="col s12 m4">
-      <div class="card " style="min-width: 550px; min-height: 550px">
+      <div class="card ">
         <div class="center-align green  tarjeta" >
           <img src="public/img/section.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIOS DE SECCIONES</p>
@@ -142,21 +142,21 @@
 
     <div class="col s12 m4">
 
-      <div class="card " >
+      <div class="card ">
         <div class="center-align deep-orange tarjeta" >
           <img src="public/img/institution.png" alt="" class="responsive-img " width="90">
           <p class="titulo-tarjeta" >HORARIOS DE AMBIENTES</p>
         </div>
 
         <div class="card-content row" style="padding: 0px;">
-          <p class="col s12" style="padding: 70px 30px 1px 30px;">
+          <p class="col s12" style="padding: 30px 30px 1px 30px;">
             <a class="btn-floating primario">
               <i class="material-icons left">settings</i>
             </a>
             Este módulo corresponde a la gestion de Horarios de Ambientes en el sistema. 
           </p>
 
-          <p class="col s12" style="padding: 70px 30px 1px 30px;">
+          <p class="col s12" style="padding: 30px 30px 1px 30px;">
                     
             <a class="btn-floating green">
               <i class="material-icons left">search</i>

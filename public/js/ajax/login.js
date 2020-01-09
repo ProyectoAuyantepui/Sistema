@@ -12,6 +12,7 @@ $(".form-login").on("submit",function(event){
         } 
     })                      
     .done(function(respuesta){
+        console.log(respuesta)
         if (respuesta.operacion == false && respuesta.error == "1") {
 
 
