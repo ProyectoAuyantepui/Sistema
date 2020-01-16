@@ -127,7 +127,7 @@
       <a href="#" data-activates="slide-out" class="button-collapse show-on-large tooltipped" data-position="bottom"  data-tooltip="Menú">
         <i class="material-icons">menu</i>
       </a>
-      <a class="waves-effect waves-light" href="public/pdf/manual.php" >
+      <a class="waves-effect waves-light" href="public/pdf/manual.php" target="_blank">
           AUYANTEPUI
       </a>
       <?php if (isset($_SESSION['databaseRespaldo'])): ?>

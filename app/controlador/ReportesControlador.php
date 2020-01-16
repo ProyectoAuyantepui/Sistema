@@ -3,6 +3,7 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 
 require_once "app/core/PdfAuyantepui.php";
+require_once "app/core/ExcelAuyantepui.php";
 require_once "app/modelo/CSeccion.php";
 require_once "app/modelo/CDocente.php";
 require_once "app/modelo/CAmbiente.php";
@@ -60,6 +61,22 @@ require_once "app/modelo/CTiempo.php";
 			$OPdf->data = $docentes["data"];
 			$OPdf->cargarConfiguracion( 'letter', 'landscape' );
 			$OPdf->generarPDF();
+		break;
+
+		case 'reporte-docentes-excel': 
+
+			
+			$ODocente = new CDocente(); 
+			$docentes = $ODocente->listarDocentes(); 
+
+			require_once "public/excel/docentes.php";
+			//$OPdf = new ExcelAuyantepui();
+			// $OPdf->fecha_actual = $config["fecha_completa"];
+			// $OPdf->titulo = "Listado de Docentes";
+			// $OPdf->nombre_plantilla = "docentes";
+			// $OPdf->data = $docentes["data"];
+			// $OPdf->cargarConfiguracion( 'letter', 'landscape' );
+			// $OPdf->generarPDF();
 		break;
 
 		case 'reporte-docente': 
