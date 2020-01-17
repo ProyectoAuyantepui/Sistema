@@ -64,19 +64,7 @@ require_once "app/modelo/CTiempo.php";
 		break;
 
 		case 'reporte-docentes-excel': 
-
-			
-			$ODocente = new CDocente(); 
-			$docentes = $ODocente->listarDocentes(); 
-
 			require_once "public/excel/docentes.php";
-			//$OPdf = new ExcelAuyantepui();
-			// $OPdf->fecha_actual = $config["fecha_completa"];
-			// $OPdf->titulo = "Listado de Docentes";
-			// $OPdf->nombre_plantilla = "docentes";
-			// $OPdf->data = $docentes["data"];
-			// $OPdf->cargarConfiguracion( 'letter', 'landscape' );
-			// $OPdf->generarPDF();
 		break;
 
 		case 'reporte-docente': 

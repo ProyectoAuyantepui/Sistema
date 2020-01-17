@@ -13,8 +13,15 @@ if ($helper->isCli()) {
 
     return;
 }
+
+
+require_once "app/modelo/CDocente.php";
+
+
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet();
+$ODocente = new CDocente(); 
+$docentes = $ODocente->listarDocentes(); 
 
 // Set document properties
 $spreadsheet->getProperties()->setCreator('Maarten Balliauw')
@@ -35,10 +42,15 @@ $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('F1', 'TELEFONO');
 
 
-// Miscellaneous glyphs, UTF-8
-$spreadsheet->setActiveSheetIndex(0)
-    ->setCellValue('A4', 'Miscellaneous glyphs')
-    ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+    // Miscellaneous glyphs, UTF-8
+    $spreadsheet->setActiveSheetIndex(0);
+    // ->setCellValue('A4', 'Miscellaneous glyphs')
+    // ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+    foreach ($docentes as $cantidad => $data) {
+        var_dump($cantidad['data']);
+        exit();
+       $spreadsheet->setCellValue('A'.$data, 'Miscellaneous glyphs');
+    }
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Docentes');
