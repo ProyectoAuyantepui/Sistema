@@ -6,22 +6,14 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 require_once __DIR__ . '../../../libs/vendor/phpoffice/phpspreadsheet/src/Bootstrap.php';
 
-
 $helper = new Sample();
 if ($helper->isCli()) {
     $helper->log('This example should only be run from a Web Browser' . PHP_EOL);
 
     return;
 }
-
-
-require_once "app/modelo/CDocente.php";
-
-
 // Create new Spreadsheet object
 $spreadsheet = new Spreadsheet();
-$ODocente = new CDocente(); 
-$docentes = $ODocente->listarDocentes(); 
 
 // Set document properties
 $spreadsheet->getProperties()->setCreator('Maarten Balliauw')
@@ -31,6 +23,15 @@ $spreadsheet->getProperties()->setCreator('Maarten Balliauw')
     ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
     ->setKeywords('office 2007 openxml php')
     ->setCategory('Test result file');
+
+
+require_once "app/modelo/CDocente.php";
+
+
+// Create new Spreadsheet object
+$spreadsheet = new Spreadsheet();
+$ODocente = new CDocente(); 
+$docentes = $ODocente->listarDocentes(); 
 
 // Add some data
 $spreadsheet->setActiveSheetIndex(0)
@@ -42,26 +43,32 @@ $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('F1', 'TELEFONO');
 
 
-    // Miscellaneous glyphs, UTF-8
-    $spreadsheet->setActiveSheetIndex(0);
-    // ->setCellValue('A4', 'Miscellaneous glyphs')
-    // ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
-    foreach ($docentes as $cantidad => $data) {
-        var_dump($cantidad['data']);
+    $spreadsheet->setActiveSheetIndex(0)
+    ->setCellValue("A2", "Miscellaneous glyphs")
+    ->setCellValue("A2", "éàèùâêîôûëïüÿäöüç");
+
+    //Miscellaneous glyphs, UTF-8
+    foreach ($docentes['data'] as $data ) {
+        var_dump($data);
         exit();
-       $spreadsheet->setCellValue('A'.$data, 'Miscellaneous glyphs');
+    //     echo '
+    // $spreadsheet->setActiveSheetIndex(0)
+    // ->setCellValue("A2", "Miscellaneous glyphs")
+    // ->setCellValue("A2", "éàèùâêîôûëïüÿäöüç");
+    // ';
     }
 
 // Rename worksheet
-$spreadsheet->getActiveSheet()->setTitle('Docentes');
+$spreadsheet->getActiveSheet()->setTitle('Simple');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $spreadsheet->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Xlsx)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="Docentes.xlsx"');
+header('Content-Disposition: attachment;filename="01simple.xlsx"');
 header('Cache-Control: max-age=0');
+// If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
 
 // If you're serving to IE over SSL, then the following may be needed
@@ -73,3 +80,11 @@ header('Pragma: public'); // HTTP/1.0
 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 $writer->save('php://output');
 exit;
+
+
+
+
+
+
+
+

@@ -391,7 +391,6 @@ class CDocente extends Database{
 		$num_rows = $this->stmt->rowCount();
 		$data = $this->stmt->fetchAll(PDO::FETCH_OBJ);
 		$this->desconectarBD();
-
 		return [ "cantidad" => $num_rows , "data" => $data ];
 	}
 
@@ -844,6 +843,10 @@ public function cambiarRol(  ){
 public function eliminarDocente(){
 
 	$this->conectarBD();
+	$sql = 'DELETE FROM "TUsuarios" WHERE "cedDoc" = :cedDoc';
+	$this->stmt = $this->conn->prepare($sql);
+	$this->stmt->bindParam(':cedDoc',$this->cedDoc);
+	$result = $this->stmt->execute();
 	$sql = 'DELETE FROM "TDocentes" WHERE "cedDoc" = :cedDoc';
 	$this->stmt = $this->conn->prepare($sql);
 	$this->stmt->bindParam(':cedDoc',$this->cedDoc);

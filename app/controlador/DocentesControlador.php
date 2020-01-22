@@ -1,6 +1,7 @@
 <?php 
 
 require_once "app/modelo/CDocente.php";
+require_once "app/modelo/CBitacora.php";
 
 	switch($actividad){
 
@@ -47,6 +48,9 @@ require_once "app/modelo/CDocente.php";
 			
 			if ($resultado) {
 				echo json_encode( ['operacion' => true] );
+				$OBitacora = new CBitacora();
+				$OBitacora->setAccion("Registró al docente : " . $_POST['nombre'] ." ".$_POST['apellido']. " de cédula: ".$_POST['cedDoc'] );
+				$OBitacora->guardarTransaccion(); 
 			}else{
 
 
@@ -78,6 +82,10 @@ require_once "app/modelo/CDocente.php";
 			
 			if ($resultado) {
 
+				$OBitacora = new CBitacora();
+				$OBitacora->setAccion("Modificó al docente : " . $_POST['nombre'] ." ".$_POST['apellido']. " de cédula: ".$_POST['cedDoc'] );
+				$OBitacora->guardarTransaccion(); 
+			
 				echo json_encode( ['operacion' => true] );
 			}else{
 
@@ -90,6 +98,9 @@ require_once "app/modelo/CDocente.php";
 			
 			$docentes = new CDocente();
 			$docentes->setCedDoc( $_POST['cedDoc'] );
+			$OBitacora = new CBitacora();
+			$OBitacora->setAccion("Eliminó al docente : " . $_POST['nombre'] ." ".$_POST['apellido']. " de cédula: ".$_POST['cedDoc'] );
+			$OBitacora->guardarTransaccion(); 
 			$resultado = $docentes->eliminarDocente(); 
 
 			if ($resultado) {
