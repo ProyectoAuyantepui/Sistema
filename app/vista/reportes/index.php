@@ -30,11 +30,10 @@
           </p>
         </div>
         <div class="card-action">
-          <div class="row">
-            <a href="?controlador=reportes&actividad=reporte-docentes" target="__blank" class="btn btn-lg cyan lighten-2 col s12 waves-effect"><i class="material-icons left">picture_as_pdf</i>  Generar Reporte</a>  
-            <!-- <a href="?controlador=reportes&actividad=reporte-docentes" target="__blank" class="btn btn-lg red col s12 m5 waves-effect"><i class="material-icons">picture_as_pdf</i>  PDF</a> 
+          <div class="row"> 
+            <a href="?controlador=reportes&actividad=reporte-docentes" target="__blank" class="btn btn-lg red col s12 m5 waves-effect"><i class="material-icons">picture_as_pdf</i>  PDF</a> 
             <span class="col s1 m1"></span>
-            <a href="?controlador=reportes&actividad=reporte-docentes-excel" target="__blank" class="btn btn-lg green col s12 m5 waves-effect"><i class="material-icons">picture_as_pdf</i>  EXCEL</a>  -->  
+            <a href="?controlador=reportes&actividad=reporte-docentes-excel" target="__blank" class="btn btn-lg green col s12 m5 waves-effect"><i class="material-icons">picture_as_pdf</i>  EXCEL</a>   
           </div>      
         </div>
       </div>

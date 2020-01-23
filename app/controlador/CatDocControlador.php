@@ -1,8 +1,6 @@
 <?php 
-
-
-
 require_once "app/modelo/CCatDoc.php";
+require_once "app/modelo/CBitacora.php";
 
 	switch($actividad){
 

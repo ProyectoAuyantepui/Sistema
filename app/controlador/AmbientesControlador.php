@@ -2,6 +2,7 @@
 if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=index"); }
 
 require_once "app/modelo/CAmbiente.php";
+require_once "app/modelo/CBitacora.php";
 
 	switch($actividad){
 

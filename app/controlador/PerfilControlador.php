@@ -51,7 +51,6 @@ if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=inde
 			$OPerfil->setCorreo( $_POST['correo'] );
 			$OPerfil->setDireccion( $_POST['direccion'] );
 			$OPerfil->setUsuario( $_POST['usuario'] );
-	    	$OPerfil->setImgPerfil($_POST['avatar']); 
 			$resultado = $OPerfil->modificarPerfil(); 
 			
 			if ($resultado) {

@@ -497,9 +497,8 @@ class CDocente extends Database{
 	public function modificarPerfil(){
 		$this->conectarBD();
 		$sql = 'UPDATE "TDocentes" 
-		SET 
-		"cedDoc"=:cedDoc, nombre=:nombre, apellido=:apellido, 
-		"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion, "avatar"=:avatar
+		SET  nombre=:nombre, apellido=:apellido, 
+		"fecNac"=:fecNac, sexo=:sexo, telefono=:telefono, correo=:correo, direccion=:direccion
 		WHERE 
 		"cedDoc" = :cedDoc';
 
@@ -512,7 +511,6 @@ class CDocente extends Database{
 		$this->stmt->bindParam(':telefono',$this->telefono);
 		$this->stmt->bindParam(':correo',$this->correo);
 		$this->stmt->bindParam(':direccion',$this->direccion);
-		$this->stmt->bindParam(':avatar',$this->imgPerfil);
 		$result = $this->stmt->execute();
 		$sqlUser = 'UPDATE "TUsuarios" 
 		SET 
@@ -520,6 +518,7 @@ class CDocente extends Database{
 		WHERE 
 		"cedDoc" = :cedDoc';
 		$this->stmt = $this->conn->prepare($sqlUser);
+		$this->stmt->bindParam(':cedDoc', $this->cedDoc);
 		$this->stmt->bindParam(':usuario',$this->usuario);
 		$this->stmt->bindParam(':codRol',$this->codRol);
 		$result2 = $this->stmt->execute();

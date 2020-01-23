@@ -4,6 +4,7 @@ require_once "app/modelo/CHorario.php";
 require_once "app/modelo/CDocente.php";
 require_once "app/modelo/CSeccion.php";
 require_once "app/modelo/CAmbiente.php";
+require_once "app/modelo/CBitacora.php";
   switch($actividad){
 
     case 'index': 

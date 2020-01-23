@@ -1,5 +1,4 @@
 <?php 
-
 require_once "app/modelo/CDocente.php";
 require_once "app/modelo/CBitacora.php";
 
@@ -27,13 +26,13 @@ require_once "app/modelo/CBitacora.php";
 			$ODocente->setCedDoc( $cedula ); 
 			$ODocente->setCodCatDoc( $_POST['codCatDoc'] ); 
 			$ODocente->setCodRol( $_POST["codRol"] ); 
-			$ODocente->setNombre( $_POST['nombre'] ); 
-			$ODocente->setApellido( $_POST['apellido'] ); 
+			$ODocente->setNombre( strtoupper($_POST['nombre']) ); 
+			$ODocente->setApellido( strtoupper($_POST['apellido']) ); 
 			$ODocente->setFecNac( $_POST['fecNac'] ); 
 			$ODocente->setSexo( $_POST['sexo'] ); 
 			$ODocente->setTelefono( $_POST['telefono'] ); 
 			$ODocente->setCorreo( $_POST['correo'] ); 
-			$ODocente->setDireccion( $_POST['direccion'] ); 
+			$ODocente->setDireccion( strtoupper($_POST['direccion')] ); 
 			$ODocente->setFecIng( $_POST['fecIng'] ); 
 			$ODocente->setFecCon( $_POST['fecCon']); 
 			$ODocente->setCodDed( $_POST['codDed'] ); 
@@ -95,13 +94,14 @@ require_once "app/modelo/CBitacora.php";
 		break;
 
 		case 'eliminar': 
-			
-			$docentes = new CDocente();
-			$docentes->setCedDoc( $_POST['cedDoc'] );
+
+			$ODocente = new CDocente();
+			$ODocente->setCedDoc( $_POST["cedDoc"] ); 
+	 		$result = $ODocente->consultarDocente(); 
 			$OBitacora = new CBitacora();
-			$OBitacora->setAccion("Eliminó al docente : " . $_POST['nombre'] ." ".$_POST['apellido']. " de cédula: ".$_POST['cedDoc'] );
+			$OBitacora->setAccion("Eliminó al docente : " . $result->nombre ." ".$result->apellido. " de cédula: ".$_POST['cedDoc'] );
 			$OBitacora->guardarTransaccion(); 
-			$resultado = $docentes->eliminarDocente(); 
+			$resultado = $ODocente->eliminarDocente(); 
 
 			if ($resultado) {
 

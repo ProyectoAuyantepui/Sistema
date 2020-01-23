@@ -3,6 +3,7 @@ if ( !$_SESSION ) { header("location: index.php?controlador=login&actividad=inde
 
 require_once "app/modelo/CHorario.php";
 require_once 'app/modelo/CActiAdmi.php';
+require_once "app/modelo/CBitacora.php";
 
 	switch($actividad){
 

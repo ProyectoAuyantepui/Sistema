@@ -43,20 +43,26 @@ $spreadsheet->setActiveSheetIndex(0)
     ->setCellValue('F1', 'TELEFONO');
 
 
-    $spreadsheet->setActiveSheetIndex(0)
-    ->setCellValue("A2", "Miscellaneous glyphs")
-    ->setCellValue("A2", "éàèùâêîôûëïüÿäöüç");
-
-    //Miscellaneous glyphs, UTF-8
-    foreach ($docentes['data'] as $data ) {
-        var_dump($data);
-        exit();
-    //     echo '
-    // $spreadsheet->setActiveSheetIndex(0)
-    // ->setCellValue("A2", "Miscellaneous glyphs")
-    // ->setCellValue("A2", "éàèùâêîôûëïüÿäöüç");
-    // ';
+// //Miscellaneous glyphs, UTF-8
+    foreach ($docentes['data'] as $posicion => $data ) {
+    $posicionNew=$posicion+2;
+    if ($data->sexo==1) {
+        $sexo='FEMENINO';
+    }else{
+        $sexo='MASCULINO';
     }
+    $spreadsheet->setActiveSheetIndex(0)
+    ->setCellValue("A$posicionNew" , "$data->cedDoc")
+    ->setCellValue("B$posicionNew" , strtoupper("$data->nombre"))
+    ->setCellValue("C$posicionNew" , strtoupper("$data->apellido"))
+    ->setCellValue("D$posicionNew" , "$data->fecNac")
+    ->setCellValue("E$posicionNew" , "$sexo")
+    ->setCellValue("F$posicionNew" , "$data->telefono");
+    
+    }
+
+
+    
 
 // Rename worksheet
 $spreadsheet->getActiveSheet()->setTitle('Simple');
